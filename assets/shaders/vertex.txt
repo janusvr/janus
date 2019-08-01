@@ -1,0 +1,139 @@
+#version 330 core
+#define MAX_JOINTS 128
+
+uniform sampler2D iTexture0; // Albedo
+uniform sampler2D iTexture1; // Specular
+uniform sampler2D iTexture2; // Smoothness
+uniform sampler2D iTexture3; // Normal
+uniform sampler2D iTexture4; // Height
+uniform sampler2D iTexture5; // Occulusion
+uniform sampler2D iTexture6; // Emission
+uniform sampler2D iTexture7; // Detail Mask
+uniform sampler2D iTexture8; // Detail Albedo
+uniform sampler2D iTexture9; // Detail Normal
+uniform samplerCube iCubeTexture0; // Skybox
+uniform samplerCube iCubeTexture1; // Skybox Radiance
+uniform samplerCube iCubeTexture2; // Skybox Irradiance
+
+uniform vec4 iLeftEye;
+uniform vec4 iMouse;
+uniform vec4 iResolution;
+uniform vec4 iGlobalTime;
+
+uniform mat4 iMiscRoomData;
+uniform vec4 iPlayerPosition;
+uniform vec4 iUseClipPlane;
+uniform vec4 iClipPlane;
+uniform vec4 iFogEnabled;
+uniform vec4 iFogMode;
+uniform vec4 iFogDensity;
+uniform vec4 iFogStart;
+uniform vec4 iFogEnd;
+uniform vec4 iFogCol;
+uniform mat4 iRoomMatrix;
+uniform vec4 iLightmapScale;
+
+uniform mat4 iMiscObjectData;
+uniform vec4 iConstColour;
+uniform vec4 iChromaKeyColour;
+uniform vec4 iUseLighting;
+uniform vec4 iObjectPickID;
+uniform mat4 iModelMatrix;
+uniform mat4 iViewMatrix;
+uniform mat4 iProjectionMatrix;
+uniform mat4 iInverseViewMatrix;
+uniform mat4 iModelViewMatrix;
+uniform mat4 iModelViewProjectionMatrix;
+uniform mat4 iTransposeInverseModelMatrix;
+uniform mat4 iTransposeInverseModelViewMatrix;
+uniform vec4 iBlend;
+uniform vec4 iUseSkelAnim;
+uniform mat4 iSkelAnimJoints[MAX_JOINTS];
+
+uniform vec4 iAmbient;
+uniform vec4 iDiffuse;
+uniform vec4 iSpecular;
+uniform vec4 iShininess;
+uniform vec4 iUseTexture[4];
+uniform vec4 iTiling;
+
+
+// Vertex Shader Inputs/Attributes
+layout(location = 0) in vec3 aPosition;
+layout(location = 1) in vec3 aNormal;
+layout(location = 2) in vec2 aTexCoord0;
+layout(location = 3) in vec2 aTexCoord1;
+layout(location = 4) in vec4 aColor;
+layout(location = 11) in uvec4 aSkelAnimIndexes;
+layout(location = 12) in vec4 aSkelAnimWeights;
+
+// Vertex Shader Ouputs
+smooth out vec3 iPosition;
+smooth out vec3 iPositionWorld;
+smooth out vec3 iPositionCamera;
+smooth out vec3 iNormal;
+smooth out vec3 iNormalWorld;
+smooth out vec3 iNormalCamera;
+smooth out vec2 iTexCoord0;
+smooth out vec2 iTexCoord1;
+smooth out vec4 iColor;
+
+void main(void) 
+{
+	vec4 position = vec4(aPosition, 1.0);
+	vec3 blend_pos = vec3(0.0);
+	vec3 blend_norm = vec3(0.0);
+
+	//skeletal animation
+	if (iUseSkelAnim.x == 1.0)
+	{   
+		if (aSkelAnimIndexes.x <= 128u)
+		{
+			blend_pos += (iSkelAnimJoints[aSkelAnimIndexes.x] * position).xyz * aSkelAnimWeights.x;
+			blend_norm += (iSkelAnimJoints[aSkelAnimIndexes.x] * vec4(aNormal, 0.0)).xyz * aSkelAnimWeights.x;
+		}
+		
+		if (aSkelAnimIndexes.y <= 128u)
+		{
+			blend_pos += (iSkelAnimJoints[aSkelAnimIndexes.y] * position).xyz * aSkelAnimWeights.y;
+			blend_norm += (iSkelAnimJoints[aSkelAnimIndexes.y] * vec4(aNormal, 0.0)).xyz * aSkelAnimWeights.y;
+		}
+		
+		if (aSkelAnimIndexes.z <= 128u)
+		{
+			blend_pos += (iSkelAnimJoints[aSkelAnimIndexes.z] * position).xyz * aSkelAnimWeights.z;
+			blend_norm += (iSkelAnimJoints[aSkelAnimIndexes.z] * vec4(aNormal, 0.0)).xyz * aSkelAnimWeights.z;
+		}
+		
+		if (aSkelAnimIndexes.w <= 128u)
+		{
+			blend_pos += (iSkelAnimJoints[aSkelAnimIndexes.w] * position).xyz * aSkelAnimWeights.w;
+			blend_norm += (iSkelAnimJoints[aSkelAnimIndexes.w] * vec4(aNormal, 0.0)).xyz * aSkelAnimWeights.w;
+		}
+	}
+	else
+	{
+		blend_pos = position.xyz;
+		blend_norm = aNormal;
+	}
+
+	iPosition = blend_pos.xyz;
+	iNormal = normalize(blend_norm);
+	iPositionWorld = (iModelMatrix * vec4(blend_pos, 1)).xyz;  
+	iPositionCamera = (iModelViewMatrix * vec4(blend_pos, 1)).xyz;   
+	iNormalWorld = (iTransposeInverseModelMatrix * vec4(iNormal, 0.0)).xyz;  
+	iNormalCamera = (iTransposeInverseModelViewMatrix * vec4(iNormal, 0.0)).xyz; 
+	float ty0 = ((iUseTexture[0].x == 3.0 || iUseTexture[0].x == 4.0) ? aTexCoord0.y : 1.0 - aTexCoord0.y);
+	float ty1 = ((iUseTexture[0].x == 3.0 || iUseTexture[0].x == 4.0) ? aTexCoord1.y : 1.0 - aTexCoord1.y);
+	iTexCoord0 = vec2(aTexCoord0.x, ty0);
+	iTexCoord0.xy *= iTiling.xy;
+	iTexCoord0.xy += iTiling.zw;
+	iTexCoord1 = vec2(aTexCoord1.x, ty1);
+	iTexCoord1.y = 1 - iTexCoord1.y;
+	iTexCoord1.xy *= iLightmapScale.xy;
+	iTexCoord1.xy += iLightmapScale.zw;
+	iTexCoord1.y = 1 - iTexCoord1.y;
+	iColor = aColor;
+	gl_Position = iModelViewProjectionMatrix * vec4(blend_pos, 1);
+	gl_ClipDistance[0] = (iUseClipPlane.x == 1.0) ? dot(iPositionWorld, vec3(iClipPlane.xyz)) - iClipPlane.w : 1.0;
+}

@@ -1,0 +1,1 @@
+registerApp('inventory');

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Asset Previewer</title>
+    <meta name="description" content="JanusVR Interface Settings Menu">
+    <meta name="author" content="JanusVR Inc.">
+    <script src="../../scripts/tabs.js"></script>
+    <script src="../../scripts/winlib.js"></script>
+    <script src="lib/jquery-3.0.0.min.js"></script>
+    <script src="lib/jquery.form.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../../skins/emerald/emeraldgenericwindow.css">
+
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+      }
+
+      .windowarea, .windowcontainer {
+        width: 100%;
+        height: 100%;
+        background: black;
+        border: none;
+        overflow: hidden;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: 0px;
+      }
+
+    </style>
+    <script type='text/javascript'>
+
+      var assetData = null;
+
+      var baseurl = 'http://ipfs.io/ipfs/';
+      var assetURL;
+      var winid = null;
+      var isInited = false;
+
+      var listeners = [];
+      window.onMessage = function(cb) {
+        listeners.push(cb);
+      }
+
+      window.addEventListener('message', function(ev) {
+        var data = ev.data;
+        if (data.cmd == 'asset') {
+          assetData = data.data;
+        }
+      }, false);
+
+
+      function loadViaFrame(url, cb) {
+        var id = 'f' + Math.floor(Math.random() * 100000000);
+        if (url.search(/\?/) == -1) {
+          url += '?iframe=' + id;
+        } else {
+          url += '&iframe=' + id;
+        }
+
+        frameIDs[id] = cb;
+
+        var frame = $('<iframe/>');
+        frame.attr('src', url);
+        frame.attr('id', id);
+        frame.appendTo('body');
+      }
+
+
+
+      window.onJanusWinReady(function() {
+        function displayError(error) {
+          error = error || 'Error';
+          $('.windowarea').html('<h1>' + error + '</h1>')
+        }
+
+        var type = assetData.filetype;//params['filetype'];
+
+        if (type.substr(type.length-3,3) == '.gz')
+          type = type.substr(0,type.length-3);
+
+        if (!type)
+          return displayError('Missing filetype');
+
+
+        assetURL = baseurl + assetData.hash;//params['hash'];
+
+        include('previewers/' + type + '.js');
+      });
+    </script>
+
+  </head>
+  <body>
+    <div class="windowcontainer">
+      <div class="windowarea unselectable" id="windowarea">
+
+      </div>
+    </div>
+  </body>
+</html>

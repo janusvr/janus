@@ -1,0 +1,414 @@
+
+{
+	"buildFiles" : 
+	[
+		"C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/CMakeLists.txt",
+		"C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/utils/alsoft-config/CMakeLists.txt"
+	],
+	"cFileExtensions" : [ "c" ],
+	"cleanCommands" : 
+	[
+		"C:/Android/sdk/cmake/3.6.3155560/bin/cmake.exe --build C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2 --target clean"
+	],
+	"libraries" : 
+	{
+		"altonegen-RelWithDebInfo-x86_64" : 
+		{
+			"abi" : "x86_64",
+			"artifactName" : "altonegen",
+			"buildCommand" : "C:/Android/sdk/cmake/3.6.3155560/bin/cmake.exe --build C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2 --target altonegen",
+			"buildType" : "relwithdebinfo",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -D_LARGEFILE_SOURCE -D_LARGE_FILES -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIE   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/examples/altonegen.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				}
+			],
+			"output" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/altonegen",
+			"toolchain" : "2250425553"
+		},
+		"bsincgen-RelWithDebInfo-x86_64" : 
+		{
+			"abi" : "x86_64",
+			"artifactName" : "bsincgen",
+			"buildCommand" : "C:/Android/sdk/cmake/3.6.3155560/bin/cmake.exe --build C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2 --target bsincgen",
+			"buildType" : "relwithdebinfo",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -D_LARGEFILE_SOURCE -D_LARGE_FILES -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIE   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/utils/bsincgen.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				}
+			],
+			"output" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/bsincgen",
+			"toolchain" : "2250425553"
+		},
+		"common-RelWithDebInfo-x86_64" : 
+		{
+			"abi" : "x86_64",
+			"artifactName" : "common",
+			"buildCommand" : "C:/Android/sdk/cmake/3.6.3155560/bin/cmake.exe --build C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2 --target common",
+			"buildType" : "relwithdebinfo",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -D_LARGEFILE_SOURCE -D_LARGE_FILES -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/common/atomic.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -D_LARGEFILE_SOURCE -D_LARGE_FILES -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/common/rwlock.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -D_LARGEFILE_SOURCE -D_LARGE_FILES -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/common/threads.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -D_LARGEFILE_SOURCE -D_LARGE_FILES -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/common/uintmap.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				}
+			],
+			"output" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/libcommon.a",
+			"toolchain" : "2250425553"
+		},
+		"makehrtf-RelWithDebInfo-x86_64" : 
+		{
+			"abi" : "x86_64",
+			"artifactName" : "makehrtf",
+			"buildCommand" : "C:/Android/sdk/cmake/3.6.3155560/bin/cmake.exe --build C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2 --target makehrtf",
+			"buildType" : "relwithdebinfo",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -D_LARGEFILE_SOURCE -D_LARGE_FILES -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIE   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/utils/makehrtf.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				}
+			],
+			"output" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/makehrtf",
+			"toolchain" : "2250425553"
+		},
+		"openal-RelWithDebInfo-x86_64" : 
+		{
+			"abi" : "x86_64",
+			"artifactName" : "openal",
+			"buildCommand" : "C:/Android/sdk/cmake/3.6.3155560/bin/cmake.exe --build C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2 --target openal",
+			"buildType" : "relwithdebinfo",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/OpenAL32/alAuxEffectSlot.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/OpenAL32/alBuffer.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/OpenAL32/alEffect.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/OpenAL32/alError.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/OpenAL32/alExtension.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/OpenAL32/alFilter.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/OpenAL32/alListener.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/OpenAL32/alSource.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/OpenAL32/alState.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/OpenAL32/alThunk.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/OpenAL32/sample_cvt.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/ALc.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/ALu.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/alcConfig.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/alcRing.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/bs2b.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/effects/autowah.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/effects/chorus.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/effects/compressor.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/effects/dedicated.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/effects/distortion.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/effects/echo.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/effects/equalizer.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/effects/flanger.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/effects/modulator.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/effects/null.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/effects/reverb.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/helpers.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/bsinc.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/hrtf.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/panning.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/mixer.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/mixer_c.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread -msse    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/mixer_sse.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread -msse2    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/mixer_sse2.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread -msse3    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/mixer_sse3.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread -msse4.1    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/mixer_sse41.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/backends/base.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/backends/loopback.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/backends/null.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/backends/opensl.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				},
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -DAL_ALEXT_PROTOTYPES -DAL_BUILD_LIBRARY -D_LARGEFILE_SOURCE -D_LARGE_FILES -Dopenal_EXPORTS -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2 -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\OpenAL32\\Include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\Alc  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/Alc/backends/wave.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				}
+			],
+			"output" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/android/libs/x86_64/libopenal.so",
+			"toolchain" : "2250425553"
+		},
+		"openal-info-RelWithDebInfo-x86_64" : 
+		{
+			"abi" : "x86_64",
+			"artifactName" : "openal-info",
+			"buildCommand" : "C:/Android/sdk/cmake/3.6.3155560/bin/cmake.exe --build C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2 --target openal-info",
+			"buildType" : "relwithdebinfo",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -D_LARGEFILE_SOURCE -D_LARGE_FILES -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIE   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/utils/openal-info.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				}
+			],
+			"output" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/openal-info",
+			"toolchain" : "2250425553"
+		},
+		"test-common-RelWithDebInfo-x86_64" : 
+		{
+			"abi" : "x86_64",
+			"artifactName" : "test-common",
+			"buildCommand" : "C:/Android/sdk/cmake/3.6.3155560/bin/cmake.exe --build C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2 --target test-common",
+			"buildType" : "relwithdebinfo",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/android-ndk-r16b/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/android-ndk-r16b/sysroot -D_LARGEFILE_SOURCE -D_LARGE_FILES -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2\\include -IC:\\Users\\Joseph\\Documents\\JanusVR\\janus-vr\\resources\\openal-soft-1.17.2  -std=c11 -isystem C:/android-ndk-r16b/sysroot/usr/include/x86_64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -O2 -g -D_DEBUG -fPIC   -Winline -Wall -Wextra -fvisibility=hidden -pthread    -c ",
+					"src" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/examples/common/alhelpers.c",
+					"workingDirectory" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2"
+				}
+			],
+			"output" : "C:/Users/Joseph/Documents/JanusVR/janus-vr/resources/openal-soft-1.17.2/libtest-common.a",
+			"toolchain" : "2250425553"
+		}
+	},
+	"toolchains" : 
+	{
+		"2250425553" : 
+		{
+			"cCompilerExecutable" : "C:/android-ndk-r16b/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
+			"cppCompilerExecutable" : "C:/android-ndk-r16b/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
+		}
+	}
+}

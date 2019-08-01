@@ -1,0 +1,121 @@
+#version 330 core
+
+uniform mat4 iModelMatrix;
+uniform mat4 iModelViewMatrix;
+uniform mat4 iModelViewProjectionMatrix;
+uniform mat4 iTransposeInverseModelMatrix;
+uniform mat4 iTransposeInverseModelViewMatrix;
+uniform mat4 iViewMatrix;
+uniform mat4 iViewMatrixInverse;
+uniform mat4 iProjectionMatrix;
+
+uniform int iUseTexture0;
+uniform int iUseTexture1;
+uniform int iUseTexture2;
+uniform int iUseTexture3;
+uniform sampler2D iTexture0;
+uniform sampler2D iTexture1;
+uniform sampler2D iTexture2;
+uniform sampler2D iTexture3;
+uniform samplerCube iCubeTexture0;
+uniform int iUseClipPlane;
+uniform int iUseLighting;
+uniform int iIllum;
+uniform vec4 iClipPlane;   
+uniform vec4 iConstColour;                                 
+uniform float iBlend0;
+uniform float iBlend1;
+uniform float iBlend2;
+uniform float iBlend3;
+//GPU-based skeletal animation support
+const int MAX_JOINTS = 128;
+uniform int iUseSkelAnim;
+uniform mat4 iSkelAnimJoints[MAX_JOINTS];
+
+// Vertex Shader Inputs/Attributes
+layout(location = 0)  in vec3 aPosition;
+layout(location = 1)  in vec3 aNormal;
+layout(location = 2)  in vec3 aTangent;
+layout(location = 3)  in vec2 aTexCoord0;
+layout(location = 4)  in vec2 aTexCoord1;
+layout(location = 5)  in vec2 aTexCoord2;
+layout(location = 6)  in vec2 aTexCoord3;
+layout(location = 7)  in vec3 aBlendV0;
+layout(location = 8)  in vec3 aBlendV1;
+layout(location = 9)  in vec3 aBlendV2;
+layout(location = 10) in vec3 aBlendN0;
+layout(location = 11) in vec3 aBlendN1;
+layout(location = 12) in vec3 aBlendN2;
+layout(location = 13) in vec4 aSkelAnimIndexes;
+layout(location = 14) in vec4 aSkelAnimWeights;
+
+// Vertex Shader Ouputs
+smooth out vec3 iPosition;
+smooth out vec3 iPositionWorld;
+smooth out vec3 iPositionCamera;
+smooth out vec3 iNormal;
+smooth out vec3 iNormalWorld;
+smooth out vec3 iNormalCamera;
+smooth out vec3 iTangent;
+smooth out vec3 iBitangent;
+smooth out vec2 iTexCoord0;
+smooth out vec2 iTexCoord1;
+smooth out vec2 iTexCoord2;
+smooth out vec2 iTexCoord3;
+
+void main(void) 
+{
+	vec4 position = vec4(aPosition, 1.0);
+	vec3 blend_pos = position.xyz;
+	vec3 blend_norm = aNormal;
+	//skeletal animation
+	if (iUseSkelAnim == 1)
+	{
+		int index = int(aSkelAnimIndexes.x);     
+		if (index >= 0)
+		{
+			blend_pos = (iSkelAnimJoints[index] * position).xyz * aSkelAnimWeights.x;
+			blend_norm = (iSkelAnimJoints[index] * vec4(aNormal, 0.0)).xyz * aSkelAnimWeights.x;
+		}
+       
+		index = int(aSkelAnimIndexes.y);        
+		if (index >= 0) {
+			blend_pos += (iSkelAnimJoints[index] * position).xyz * aSkelAnimWeights.y;
+			blend_norm += (iSkelAnimJoints[index] * vec4(aNormal, 0.0)).xyz * aSkelAnimWeights.y;
+		}
+		
+		index = int(aSkelAnimIndexes.z);        
+		if (index >= 0) {
+			blend_pos += (iSkelAnimJoints[index] * position).xyz * aSkelAnimWeights.z;
+			blend_norm += (iSkelAnimJoints[index] * vec4(aNormal, 0.0)).xyz * aSkelAnimWeights.z;
+		}
+    
+		index = int(aSkelAnimIndexes.w);        
+		if (index >= 0) {
+			blend_pos += (iSkelAnimJoints[index] * position).xyz * aSkelAnimWeights.w;
+			blend_norm += (iSkelAnimJoints[index] * vec4(aNormal, 0.0)).xyz * aSkelAnimWeights.w;
+		}
+	}
+	else
+	{    
+		blend_pos += (aBlendV0 - position.xyz) * iBlend0;
+		blend_norm += (aBlendN0 - aNormal.xyz) * iBlend0;
+		blend_pos += (aBlendV1 - position.xyz) * iBlend1;
+		blend_norm += (aBlendN1 - aNormal.xyz) * iBlend1;
+		blend_pos += (aBlendV2 - position.xyz) * iBlend2;
+		blend_norm += (aBlendN2 - aNormal.xyz) * iBlend2;
+	} 
+	iPosition = blend_pos.xyz;
+	iNormal = normalize(blend_norm);
+	iPositionWorld = (iModelMatrix * vec4(blend_pos, 1)).xyz;  
+	iPositionCamera = (iModelViewMatrix * vec4(blend_pos, 1)).xyz;   
+	iNormalWorld = (iTransposeInverseModelMatrix * vec4(iNormal, 0.0)).xyz;  
+	iNormalCamera = (iTransposeInverseModelViewMatrix * vec4(iNormal, 0.0)).xyz; 
+	iTangent = aTangent.xyz;
+	iBitangent = cross(iNormal, iTangent); //w component of input tangent stores orientation scaling value
+	iTexCoord0 = vec2(aTexCoord0.x, 1.0-aTexCoord0.y);
+	iTexCoord1 = vec2(aTexCoord1.x, 1.0-aTexCoord1.y);
+	iTexCoord2 = vec2(aTexCoord2.x, 1.0-aTexCoord2.y);
+	iTexCoord3 = vec2(aTexCoord3.x, 1.0-aTexCoord3.y);
+	gl_Position = iModelViewProjectionMatrix * vec4(blend_pos, 1);  
+}

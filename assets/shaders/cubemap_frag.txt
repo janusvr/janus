@@ -1,0 +1,83 @@
+#version 330 core
+#define MAX_JOINTS 128
+
+uniform sampler2D iTexture0; // Albedo
+uniform sampler2D iTexture1; // Specular
+uniform sampler2D iTexture2; // Smoothness
+uniform sampler2D iTexture3; // Normal
+uniform sampler2D iTexture4; // Height
+uniform sampler2D iTexture5; // Occulusion
+uniform sampler2D iTexture6; // Emission
+uniform sampler2D iTexture7; // Detail Mask
+uniform sampler2D iTexture8; // Detail Albedo
+uniform sampler2D iTexture9; // Detail Normal
+uniform samplerCube iCubeTexture0; // Skybox
+uniform samplerCube iCubeTexture1; // Skybox Radiance
+uniform samplerCube iCubeTexture2; // Skybox Irradiance
+
+uniform vec4 iLeftEye;
+uniform vec4 iMouse;
+uniform vec4 iResolution;
+uniform vec4 iGlobalTime;
+
+uniform mat4 iMiscRoomData;
+uniform vec4 iPlayerPosition;
+uniform vec4 iUseClipPlane;
+uniform vec4 iClipPlane;
+uniform vec4 iFogEnabled;
+uniform vec4 iFogMode;
+uniform vec4 iFogDensity;
+uniform vec4 iFogStart;
+uniform vec4 iFogEnd;
+uniform vec4 iFogCol;
+uniform mat4 iRoomMatrix;
+
+uniform mat4 iMiscObjectData;
+uniform vec4 iConstColour;
+uniform vec4 iChromaKeyColour;
+uniform vec4 iUseLighting;
+uniform vec4 iObjectPickID;
+uniform mat4 iModelMatrix;
+uniform mat4 iViewMatrix;
+uniform mat4 iProjectionMatrix;
+uniform mat4 iInverseViewMatrix;
+uniform mat4 iModelViewMatrix;
+uniform mat4 iModelViewProjectionMatrix;
+uniform mat4 iTransposeInverseModelMatrix;
+uniform mat4 iTransposeInverseModelViewMatrix;
+uniform vec4 iBlend;
+uniform vec4 iUseSkelAnim;
+uniform mat4 iSkelAnimJoints[MAX_JOINTS];
+
+uniform vec4 iAmbient;
+uniform vec4 iDiffuse;
+uniform vec4 iSpecular;
+uniform vec4 iShininess;
+uniform vec4 iUseTexture[4];
+
+// Fragment Shader Inputs
+smooth in vec3 iTexCoord0;
+
+// Fragment Shader outputs
+layout(location = 0) out vec4 out_color;
+
+void main (void) 
+{
+	if (iUseTexture[2].z == 1.0)
+	{
+		out_color = vec4(texture(iCubeTexture0, normalize(iTexCoord0)).rgb, 1.0);
+	}
+	else
+	{
+		out_color = vec4(0.0,0.0,0.0, 1.0);
+	}
+	if (iFogEnabled.x == 1.0)
+	{
+		// Fog is blended on top before output
+		out_color.rgb *= iFogCol.rgb;	
+	}
+	
+	// iUseLighting is repurposed here to tell us if we are using reversed floating point depth buffers or not
+	// reversed floating point depth requires a 0 clear vs the standard 1 clear.
+	gl_FragDepth = (iUseLighting.x == 1.0) ? 0.0f : 1.0f;
+}

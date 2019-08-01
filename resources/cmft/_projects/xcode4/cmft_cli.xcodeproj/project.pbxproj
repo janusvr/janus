@@ -1,0 +1,490 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3BBF3CD043FB4CBB37711F0F /* allocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25833D2B2CBA707E03145D52 /* allocator.cpp */; };
+		7F7976157BC112A3678B4F32 /* clcontext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 130B20137D4F4E3D3E3D309B /* clcontext.cpp */; };
+		280115056138713A285C3433 /* print.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3F1C3378565D7923027350DA /* print.cpp */; };
+		0DF7675B57BD62574F7E31D4 /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454D3F8C271C5FF817667DF0 /* stb_image.cpp */; };
+		0DE81DD7260D65A6002E758B /* cubemapfilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 68DB2FE7274B0FF80FDF3EB2 /* cubemapfilter.cpp */; };
+		1B0116283FAD5A634AD02A46 /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48BB402374F070A542B8464D /* image.cpp */; };
+		5D73375B7A17110B7EAF1D12 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D7825737434555E73A12B68 /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		17DA61ED399D084A66072CF7 /* allocator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "allocator.h"; path = "../../include/cmft/allocator.h"; sourceTree = "<group>"; };
+		307E62E950706C8651D936A5 /* clcontext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "clcontext.h"; path = "../../include/cmft/clcontext.h"; sourceTree = "<group>"; };
+		4CB57EC64AFA45E830984B40 /* cubemapfilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "cubemapfilter.h"; path = "../../include/cmft/cubemapfilter.h"; sourceTree = "<group>"; };
+		39BC66A810FC7AA05B14464F /* image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "image.h"; path = "../../include/cmft/image.h"; sourceTree = "<group>"; };
+		68A25E3F3B311E29334B313B /* print.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "print.h"; path = "../../include/cmft/print.h"; sourceTree = "<group>"; };
+		25833D2B2CBA707E03145D52 /* allocator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "allocator.cpp"; path = "../../src/cmft/allocator.cpp"; sourceTree = "<group>"; };
+		130B20137D4F4E3D3E3D309B /* clcontext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "clcontext.cpp"; path = "../../src/cmft/clcontext.cpp"; sourceTree = "<group>"; };
+		0BD305F9532167EE74D74398 /* clcontext_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "clcontext_internal.h"; path = "../../src/cmft/clcontext_internal.h"; sourceTree = "<group>"; };
+		1FEE469840A963EA1354781B /* cl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "cl.h"; path = "../../src/cmft/common/cl.h"; sourceTree = "<group>"; };
+		02F92660182E0049749D566B /* commandline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "commandline.h"; path = "../../src/cmft/common/commandline.h"; sourceTree = "<group>"; };
+		30E474174C812CA506BA340D /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "config.h"; path = "../../src/cmft/common/config.h"; sourceTree = "<group>"; };
+		7BD8128E3A064EFA7A7C2EDE /* fpumath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "fpumath.h"; path = "../../src/cmft/common/fpumath.h"; sourceTree = "<group>"; };
+		1292105E4939135652FA5412 /* halffloat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "halffloat.h"; path = "../../src/cmft/common/halffloat.h"; sourceTree = "<group>"; };
+		173072E91AAB57D956D32DFF /* handlealloc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "handlealloc.h"; path = "../../src/cmft/common/handlealloc.h"; sourceTree = "<group>"; };
+		4FF459CD545F68235A1648FD /* os.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "os.h"; path = "../../src/cmft/common/os.h"; sourceTree = "<group>"; };
+		3E8E0AFB3D140B0F37A043CF /* platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "platform.h"; path = "../../src/cmft/common/platform.h"; sourceTree = "<group>"; };
+		3F1C3378565D7923027350DA /* print.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "print.cpp"; path = "../../src/cmft/common/print.cpp"; sourceTree = "<group>"; };
+		454D3F8C271C5FF817667DF0 /* stb_image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "stb_image.cpp"; path = "../../src/cmft/common/stb_image.cpp"; sourceTree = "<group>"; };
+		2B540E0D3CCF6868191D7470 /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "stb_image.h"; path = "../../src/cmft/common/stb_image.h"; sourceTree = "<group>"; };
+		2C37583A27E90295515D2A5C /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "timer.h"; path = "../../src/cmft/common/timer.h"; sourceTree = "<group>"; };
+		536F795F3F6234A76A9967BE /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "utils.h"; path = "../../src/cmft/common/utils.h"; sourceTree = "<group>"; };
+		68DB2FE7274B0FF80FDF3EB2 /* cubemapfilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "cubemapfilter.cpp"; path = "../../src/cmft/cubemapfilter.cpp"; sourceTree = "<group>"; };
+		177B2B830399544B13EB1CB6 /* cubemaputils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "cubemaputils.h"; path = "../../src/cmft/cubemaputils.h"; sourceTree = "<group>"; };
+		48BB402374F070A542B8464D /* image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "image.cpp"; path = "../../src/cmft/image.cpp"; sourceTree = "<group>"; };
+		422233AB5A2E696E43A36A0E /* radiance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "radiance.h"; path = "../../src/cmft/radiance.h"; sourceTree = "<group>"; };
+		43BA4EAF3397475322FA4783 /* cmft_cli.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "cmft_cli.h"; path = "../../src/cmft_cli/cmft_cli.h"; sourceTree = "<group>"; };
+		1F47775C60885EF451C02B58 /* tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "tests.h"; path = "../../src/cmft_tests/tests.h"; sourceTree = "<group>"; };
+		093B13E35F03636A7D5222A7 /* tokenize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "tokenize.h"; path = "../../src/cmft_tests/tokenize.h"; sourceTree = "<group>"; };
+		4D7825737434555E73A12B68 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "main.cpp"; path = "../../src/main.cpp"; sourceTree = "<group>"; };
+		3CB32D7A17A20A2160925CB3 /* cmftDebug */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "cmftDebug"; path = "cmftDebug"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		57C026E10FE851D837EC0E98 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2CED1454793331D1004673D3 /* cmft_cli */ = {
+			isa = PBXGroup;
+			children = (
+				361045BB40E4746B35536E01 /* include */,
+				37D84B261329717653707930 /* src */,
+				588E62B908C860363BB36523 /* Products */,
+			);
+			name = "cmft_cli";
+			sourceTree = "<group>";
+		};
+		361045BB40E4746B35536E01 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				032B74E13587550B760919AE /* cmft */,
+			);
+			name = "include";
+			sourceTree = "<group>";
+		};
+		032B74E13587550B760919AE /* cmft */ = {
+			isa = PBXGroup;
+			children = (
+				17DA61ED399D084A66072CF7 /* allocator.h */,
+				307E62E950706C8651D936A5 /* clcontext.h */,
+				4CB57EC64AFA45E830984B40 /* cubemapfilter.h */,
+				39BC66A810FC7AA05B14464F /* image.h */,
+				68A25E3F3B311E29334B313B /* print.h */,
+			);
+			name = "cmft";
+			sourceTree = "<group>";
+		};
+		37D84B261329717653707930 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				1E6D03EF5C1A6EDD70762DF3 /* cmft */,
+				2820518C07E54E2E37330814 /* cmft_cli */,
+				64096BB607A758F95C5B4A60 /* cmft_tests */,
+				4D7825737434555E73A12B68 /* main.cpp */,
+			);
+			name = "src";
+			sourceTree = "<group>";
+		};
+		1E6D03EF5C1A6EDD70762DF3 /* cmft */ = {
+			isa = PBXGroup;
+			children = (
+				25833D2B2CBA707E03145D52 /* allocator.cpp */,
+				130B20137D4F4E3D3E3D309B /* clcontext.cpp */,
+				0BD305F9532167EE74D74398 /* clcontext_internal.h */,
+				15E11A5B00C4429C0AD903D9 /* common */,
+				68DB2FE7274B0FF80FDF3EB2 /* cubemapfilter.cpp */,
+				177B2B830399544B13EB1CB6 /* cubemaputils.h */,
+				48BB402374F070A542B8464D /* image.cpp */,
+				422233AB5A2E696E43A36A0E /* radiance.h */,
+			);
+			name = "cmft";
+			sourceTree = "<group>";
+		};
+		15E11A5B00C4429C0AD903D9 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				1FEE469840A963EA1354781B /* cl.h */,
+				02F92660182E0049749D566B /* commandline.h */,
+				30E474174C812CA506BA340D /* config.h */,
+				7BD8128E3A064EFA7A7C2EDE /* fpumath.h */,
+				1292105E4939135652FA5412 /* halffloat.h */,
+				173072E91AAB57D956D32DFF /* handlealloc.h */,
+				4FF459CD545F68235A1648FD /* os.h */,
+				3E8E0AFB3D140B0F37A043CF /* platform.h */,
+				3F1C3378565D7923027350DA /* print.cpp */,
+				454D3F8C271C5FF817667DF0 /* stb_image.cpp */,
+				2B540E0D3CCF6868191D7470 /* stb_image.h */,
+				2C37583A27E90295515D2A5C /* timer.h */,
+				536F795F3F6234A76A9967BE /* utils.h */,
+			);
+			name = "common";
+			sourceTree = "<group>";
+		};
+		2820518C07E54E2E37330814 /* cmft_cli */ = {
+			isa = PBXGroup;
+			children = (
+				43BA4EAF3397475322FA4783 /* cmft_cli.h */,
+			);
+			name = "cmft_cli";
+			sourceTree = "<group>";
+		};
+		64096BB607A758F95C5B4A60 /* cmft_tests */ = {
+			isa = PBXGroup;
+			children = (
+				1F47775C60885EF451C02B58 /* tests.h */,
+				093B13E35F03636A7D5222A7 /* tokenize.h */,
+			);
+			name = "cmft_tests";
+			sourceTree = "<group>";
+		};
+		588E62B908C860363BB36523 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3CB32D7A17A20A2160925CB3 /* cmftDebug */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5C107944129E10524BF06B61 /* cmft_cli */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2A965AFA5C800B1E39EF2E41 /* Build configuration list for PBXNativeTarget "cmft_cli" */;
+			buildPhases = (
+				3677432B4225157B26963F78 /* Resources */,
+				3823740E64EB2C57496D588C /* Sources */,
+				57C026E10FE851D837EC0E98 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "cmft_cli";
+			productInstallPath = "$(HOME)/bin";
+			productName = "cmft_cli";
+			productReference = 3CB32D7A17A20A2160925CB3 /* cmftDebug */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "cmft_cli" */;
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 1;
+			mainGroup = 2CED1454793331D1004673D3 /* cmft_cli */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5C107944129E10524BF06B61 /* cmftDebug */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3677432B4225157B26963F78 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3823740E64EB2C57496D588C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BBF3CD043FB4CBB37711F0F /* allocator.cpp in Sources */,
+				7F7976157BC112A3678B4F32 /* clcontext.cpp in Sources */,
+				280115056138713A285C3433 /* print.cpp in Sources */,
+				0DF7675B57BD62574F7E31D4 /* stb_image.cpp in Sources */,
+				0DE81DD7260D65A6002E758B /* cubemapfilter.cpp in Sources */,
+				1B0116283FAD5A634AD02A46 /* image.cpp in Sources */,
+				5D73375B7A17110B7EAF1D12 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1A69431F41991CA070EE6ABB /* Debug Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../_build/osx32_xcode4/bin;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "cmftDebug";
+			};
+			name = "Debug Native 32-bit";
+		};
+		301E13D4720D42BD24263DFE /* Debug Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../_build/osx64_xcode4/bin;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "cmftDebug";
+			};
+			name = "Debug Native 64-bit";
+		};
+		45754D113E5A6F972D1D0EC0 /* Release Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../_build/osx32_xcode4/bin;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "cmftRelease";
+			};
+			name = "Release Native 32-bit";
+		};
+		6BE31FEF70700419735A2833 /* Release Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../_build/osx64_xcode4/bin;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "cmftRelease";
+			};
+			name = "Release Native 64-bit";
+		};
+		3BC82DA11836536A37C378C8 /* Debug Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "i386";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__STDC_LIMIT_MACROS",
+					"__STDC_FORMAT_MACROS",
+					"__STDC_CONSTANT_MACROS",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../dependency/bx/include/compat/osx",
+					"../../dependency",
+					"../../src/cmft",
+					"../../src",
+					"../../include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../dependency/lib/osx32_xcode4",
+				);
+				OBJROOT = "../../_build/osx32_xcode4/obj/x32/Debug/cmft_cli";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-stdlib=libc++",
+					"-m32",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../_build/osx32_xcode4/bin";
+			};
+			name = "Debug Native 32-bit";
+		};
+		2E1F190404E46BF27AA0043E /* Debug Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "x86_64";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__STDC_LIMIT_MACROS",
+					"__STDC_FORMAT_MACROS",
+					"__STDC_CONSTANT_MACROS",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../dependency/bx/include/compat/osx",
+					"../../dependency",
+					"../../src/cmft",
+					"../../src",
+					"../../include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../dependency/lib/osx64_xcode4",
+				);
+				OBJROOT = "../../_build/osx64_xcode4/obj/x64/Debug/cmft_cli";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-stdlib=libc++",
+					"-m64",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../_build/osx64_xcode4/bin";
+			};
+			name = "Debug Native 64-bit";
+		};
+		3F8E478651E00128642642CE /* Release Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "i386";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__STDC_LIMIT_MACROS",
+					"__STDC_FORMAT_MACROS",
+					"__STDC_CONSTANT_MACROS",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../dependency/bx/include/compat/osx",
+					"../../dependency",
+					"../../src/cmft",
+					"../../src",
+					"../../include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../dependency/lib/osx32_xcode4",
+				);
+				OBJROOT = "../../_build/osx32_xcode4/obj/x32/Release/cmft_cli";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-stdlib=libc++",
+					"-m32",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../_build/osx32_xcode4/bin";
+			};
+			name = "Release Native 32-bit";
+		};
+		7CE223783C086EEF6635602E /* Release Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "x86_64";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__STDC_LIMIT_MACROS",
+					"__STDC_FORMAT_MACROS",
+					"__STDC_CONSTANT_MACROS",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../dependency/bx/include/compat/osx",
+					"../../dependency",
+					"../../src/cmft",
+					"../../src",
+					"../../include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../dependency/lib/osx64_xcode4",
+				);
+				OBJROOT = "../../_build/osx64_xcode4/obj/x64/Release/cmft_cli";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-stdlib=libc++",
+					"-m64",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../_build/osx64_xcode4/bin";
+			};
+			name = "Release Native 64-bit";
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2A965AFA5C800B1E39EF2E41 /* Build configuration list for PBXNativeTarget "cmftDebug" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A69431F41991CA070EE6ABB /* Debug Native 32-bit */,
+				301E13D4720D42BD24263DFE /* Debug Native 64-bit */,
+				45754D113E5A6F972D1D0EC0 /* Release Native 32-bit */,
+				6BE31FEF70700419735A2833 /* Release Native 64-bit */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug Native 32-bit";
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "cmft_cli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BC82DA11836536A37C378C8 /* Debug Native 32-bit */,
+				2E1F190404E46BF27AA0043E /* Debug Native 64-bit */,
+				3F8E478651E00128642642CE /* Release Native 32-bit */,
+				7CE223783C086EEF6635602E /* Release Native 64-bit */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug Native 32-bit";
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

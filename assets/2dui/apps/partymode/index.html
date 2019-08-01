@@ -1,0 +1,110 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>JanusVR Interface</title>
+  <meta name="description" content="JanusVR Interface">
+  <meta name="author" content="JanusVR Inc.">
+  <script src="../../scripts/tabs.js"></script>
+  <script src="../../skins/theme.js"></script>
+  <script src="../../scripts/partylistgen.js"></script>
+ 
+  <script>
+  
+
+  
+   window.onload = function () {
+  initializeAppTheme("../../")
+  tabSelect("maintabcontainer","maintabbutton")
+  window.onresize()
+  
+           setInterval(
+        function(){
+        document.getElementById("partytoggle").checked = parent.window.janus.getsetting('partymode');
+        },500);
+  
+
+
+  setRegularPartyUpdate(document.getElementById("partycontainer"),"partymode",5000,1); //create a party list based on certain data to a certain container
+
+  }
+  </script>
+  
+
+  
+</head>
+
+<body >
+
+<div class="windowcontainer" style="height:calc(100% - 36px);">
+
+<div class="tabrow unselectable" id="tabrow">
+
+
+	<div class="tabbutton" id="maintabbutton" onmousedown="tabSelect('maintabcontainer','maintabbutton')">LIVE</div></li>
+
+
+
+</div>
+
+
+<div class="windowarea unselectable" id="windowarea" style="background-image: url(../../backgrounds/stars.png);background-size:cover;background-attachment:fixed;background-position:center;" >
+		
+					
+					
+
+
+				<div class="tabcontainer" id="maintabcontainer" >	
+						
+						
+							<div id="partycontainer"> 							
+							</div>			
+							
+					<div class='item' style="position:absolute;bottom:-2px;width:100%;padding-left:4px;" >
+							<span>
+								<input style="float:left;" class="myCheckbox" id="partytoggle" type='checkbox' onchange="window.janus.setsetting('partymode', this.checked); " > 
+								<label for="partytoggle" class="css-label">Host a Party at Active URL</label>		
+
+							</span>
+							<br>
+					</div>
+		
+				</div>							
+					
+	
+					
+					
+		</div>			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+</div>
+
+
+
+</body>
+</html>

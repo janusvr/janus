@@ -1,0 +1,8 @@
+cxx_library(
+  name = 'libovrplatform_headers',
+  header_namespace = '',
+  exported_headers = glob([
+    ('*.h'),
+  ]),
+  visibility=['PUBLIC'],
+)

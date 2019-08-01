@@ -1,0 +1,627 @@
+#version 330 core
+#define PI 3.1415926535897932384626433832795
+#define MAX_JOINTS 128
+
+// BEGIN --- Spherical Harmonics ---
+	const float C1 = 0.429043;
+	const float C2 = 0.511664;
+	const float C3 = 0.743125;
+	const float C4 = 0.886227;
+	const float C5 = 0.247708;
+	const vec3 L00 = vec3(0.32, 0.31, 0.35);
+	const vec3 L1m1 = vec3(0.37, 0.37, 0.43);
+	const vec3 L10 = vec3(0.0, 0.0, 0.0);
+	const vec3 L11 = vec3(-0.01, -0.01, -0.01);
+	const vec3 L2m2 = vec3(-0.1, -0.01, -0.01);
+	const vec3 L2m1 = vec3(-0.02, -0.02, -0.03);
+	const vec3 L20 = vec3(-0.28, -0.28, -0.32);
+	const vec3 L21 = vec3(0.0, 0.0, 0.0);
+	const vec3 L22 = vec3(-0.24, -0.24, -0.28);
+
+	vec3 SphericalHarmonicLighting(vec3 fragmentNormalWorldSpace)
+	{ 
+		return  C1 * L22 *(fragmentNormalWorldSpace.x * fragmentNormalWorldSpace.x - fragmentNormalWorldSpace.y * fragmentNormalWorldSpace.y) +
+				C3 * L20 * fragmentNormalWorldSpace.z * fragmentNormalWorldSpace.z +
+				C4 * L00 -
+				C5 * L20 +
+				2.0 * C1 * L2m2 * fragmentNormalWorldSpace.x * fragmentNormalWorldSpace.y +
+				2.0 * C1 * L21 * fragmentNormalWorldSpace.x * fragmentNormalWorldSpace.z +
+				2.0 * C1 * L2m1 * fragmentNormalWorldSpace.y * fragmentNormalWorldSpace.z +
+				2.0 * C2 * L11 * fragmentNormalWorldSpace.x +
+				2.0 * C2 * L1m1 * fragmentNormalWorldSpace.y +
+				2.0 * C2 * L10 * fragmentNormalWorldSpace.z;
+	}
+// END --- Spherical Harmonics ---
+
+// BEGIN --- Seamless Cubemap Filtering ---
+	// This is intended to be used with cubemaps generated with the "Stretch" mode of ModifiedCubemapGen,
+	// but it can also work with the "Warp" method as well.
+	vec3 fix_cube_lookup(vec3 v, float exp2MipMapIndex, float baseMipMapSize)
+	{ 
+		float scale = 1.0 - exp2MipMapIndex / baseMipMapSize;
+		float M = max(max(abs(v.x), abs(v.y)), abs(v.z));
+		if (abs(v.x) != M) v.x *= scale;
+		if (abs(v.y) != M) v.y *= scale;
+		if (abs(v.z) != M) v.z *= scale;
+		return v;
+	}
+	
+	float cubeMipFromRoughness(float linearRoughness, float roughestMip)
+	{
+		return linearRoughness * roughestMip;
+	}
+// END --- Seamless Cubemap Filtering
+
+// BEGIN --- PBR Helper Functions ---
+	// BEGIN --- Analytic Lights ---
+		vec3 LambertianDiffuse(vec3 albedo)
+		{
+			return albedo / PI;
+		}
+		
+		float D_GGX(float NdotH, float linearRoughness)
+		{
+			float linearRoughness2 = linearRoughness * linearRoughness;
+			float d = (NdotH * linearRoughness2 - NdotH) * NdotH + 1;
+			return linearRoughness2 / (PI * d * d);
+		}
+
+		float G_SchlickSmith(float NdotV, float NdotL, float linearRoughness)
+		{
+			float k = linearRoughness * 0.5;
+			float visV = NdotV * (1 - k) + k;
+			float visL = NdotL * (1 - k) + k;
+			return 0.25 / (visV + visL);
+		}
+
+		vec3 F_Schlick(vec3 specularColor, float u)
+		{
+			float fresnelFactor = pow(1 - u, 5);
+			return  clamp( 50.0 * specularColor.g, 0.0, 1.0) * fresnelFactor + (1 - fresnelFactor) * specularColor;
+		}
+	// END --- Analytic Lights ---
+	
+	// BEGIN --- Evironment Lights ---
+		vec3 EnvBRDFApprox(vec3 specularColor, float linearRoughness, float NdotV)
+		{
+			vec4 c0 = vec4(-1.0, -0.0275, -0.572, 0.022);
+			vec4 c1 = vec4( 1.0, 0.0425, 1.04, -0.04);
+			vec4 r = linearRoughness * c0 + c1;
+			float a004 = min( r.x * r.x, exp2( -9.28 * NdotV ) ) * r.x + r.y;
+			vec2 AB = vec2( -1.04, 1.04 ) * a004 + r.zw;
+			AB.y *= clamp(50.0 * specularColor.g, 0.0, 1.0);
+			return specularColor * AB.x + AB.y;
+		}
+		
+		vec3 EnvBRDFApproxNonmetal(float linearRoughness, float NdotV)
+		{
+			const vec2 c0 = vec2(-1.0, -0.0275);
+			const vec2 c1 = vec2(1.0, 0.0425);
+			vec2 r = vec2(linearRoughness * c0 + c1);
+			return vec3(min( r.x * r.x, exp2( -9.28 * NdotV ) ) * r.x + r.y);
+		}
+	// END --- Evironment Lights ---
+	
+	// BEGIN --- Tonemap and Gamma correction ---
+		const float shoulderStrength = 0.22;
+		const float linearStrength = 0.30;
+		const float linearAngle = 0.10;
+		const float toeStrength = 0.20;
+		const float toeNumerator = 0.01;
+		const float toeDenominator = 0.30;
+		const float linearWhitePointValue = 11.2;
+		vec3 toneMap(vec3 linearColor)
+		{
+			return ((linearColor * (shoulderStrength * linearColor + linearAngle * linearStrength) +  toeStrength * toeNumerator) / (linearColor * (shoulderStrength * linearColor + linearStrength) + toeStrength * toeDenominator)) - toeNumerator / toeDenominator;
+		}
+	
+		vec3 tonemapAndGammaCorrect(vec3 linearColor)
+		{	
+			vec3 linearWhite = vec3(linearWhitePointValue);
+			vec3 finalColor = toneMap(linearColor) / toneMap(linearWhite);
+			return finalColor;
+		}
+		
+		vec4 linearTosRGB(vec4 linear)
+		{
+			bvec4 cutoff = lessThan(linear, vec4(0.0031308));
+			vec4 higher = vec4(1.055) * pow(linear, vec4(1.0 / 2.4)) - vec4(0.055);
+			vec4 lower = linear * vec4(12.92);
+			return mix(higher, lower, cutoff);
+		}
+		
+		vec4 sRGBToLinear(vec4 sRGB)
+		{
+			bvec4 cutoff = lessThan(sRGB, vec4(0.04045));
+			vec4 higher = pow((sRGB + vec4(0.055)) / vec4(1.055), vec4(2.4));
+			vec4 lower = sRGB / vec4(12.92);
+			return mix(higher, lower, cutoff);
+		}
+	// END --- Tonemap and Gamma correction ---
+// END --- PBR Helper Functions ---
+
+// BEGIN --- Normal Encode ---
+	vec4 encodeNormal(vec3 viewSpaceNormal)
+	{
+		const float scale_rcp = 1.0 / 1.7777;
+		vec2 encodedNormal = viewSpaceNormal.xy / (viewSpaceNormal.z + 1);
+		encodedNormal *= scale_rcp;
+		encodedNormal = encodedNormal * 0.5 + 0.5;
+		return vec4(encodedNormal, 0.0, 1.0);
+	}
+	
+	// Credit: http://www.thetenthplanet.de/archives/1180
+	vec3 tangentSpaceToObjectSpaceNormal(vec3 position, vec2 UV, vec3 objectSpaceNormal, vec3 tangentSpaceNormal)
+	{
+		vec3 dFdx_pos = dFdx(position);
+		vec3 dFdy_pos = dFdy(position);
+		vec2 dFdx_UV = dFdx(UV);
+		vec2 dFdy_UV = dFdy(UV);
+
+		// solve the linear system
+		vec3 dp2perp = cross(dFdy_pos, objectSpaceNormal);
+		vec3 dp1perp = cross(objectSpaceNormal, dFdx_pos);
+		vec3 tangent = dp2perp * dFdx_UV.x + dp1perp * dFdy_UV.x;
+		vec3 biTangent = dp2perp * dFdx_UV.y + dp1perp * dFdy_UV.y;
+
+		// construct a scale-invariant frame 
+		float invmax = inversesqrt(max(dot(tangent, tangent), dot(biTangent, biTangent)));
+		mat3 TBN = mat3(tangent * invmax, biTangent * invmax, objectSpaceNormal);
+		
+		return normalize(TBN * tangentSpaceNormal);
+	}
+// END --- Normal Encode --- 
+
+// BEGIN --- Textures --- 
+	uniform sampler2D iTexture0; // Albedo
+	uniform sampler2D iTexture1; // Specular
+	uniform sampler2D iTexture2; // Smoothness
+	uniform sampler2D iTexture3; // Normal
+	uniform sampler2D iTexture4; // Height
+	uniform sampler2D iTexture5; // Occlusion
+	uniform sampler2D iTexture6; // Emission
+	uniform sampler2D iTexture7; // Detail Mask
+	uniform sampler2D iTexture8; // Detail Albedo
+	uniform sampler2D iTexture9; // Detail Normal
+	uniform samplerCube iCubeTexture0; // Skybox
+	uniform samplerCube iCubeTexture1; // Skybox Radiance
+	uniform samplerCube iCubeTexture2; // Skybox Irradiance
+// END --- Textures --- 
+
+// BEGIN --- Uniforms --- 
+
+	// BEGIN --- Frame --- 
+		uniform vec4 iLeftEye;
+		uniform vec4 iMouse;
+		uniform vec4 iResolution;
+		uniform vec4 iGlobalTime;
+	// END --- Frame --- 
+	
+	// BEGIN --- Room --- 
+		uniform mat4 iMiscRoomData;
+		uniform vec4 iPlayerPosition;
+		uniform vec4 iUseClipPlane;
+		uniform vec4 iClipPlane;
+		uniform vec4 iFogEnabled;
+		uniform vec4 iFogMode;
+		uniform vec4 iFogDensity;
+		uniform vec4 iFogStart;
+		uniform vec4 iFogEnd;
+		uniform vec4 iFogCol;
+		uniform mat4 iRoomMatrix;
+		uniform vec4 iLightmapScale;
+	// END --- Room --- 
+	
+	// BEGIN --- Object --- 
+		uniform mat4 iMiscObjectData;
+		uniform vec4 iConstColour;
+		uniform vec4 iChromaKeyColour;
+		uniform vec4 iUseLighting;
+		uniform vec4 iObjectPickID;
+		uniform mat4 iModelMatrix;
+		uniform mat4 iViewMatrix;
+		uniform mat4 iProjectionMatrix;
+		uniform mat4 iInverseViewMatrix;
+		uniform mat4 iModelViewMatrix;
+		uniform mat4 iModelViewProjectionMatrix;
+		uniform mat4 iTransposeInverseModelMatrix;
+		uniform mat4 iTransposeInverseModelViewMatrix;
+		uniform vec4 iBlend;
+		uniform vec4 iUseSkelAnim;
+		uniform mat4 iSkelAnimJoints[MAX_JOINTS];
+	// END --- Object --- 
+	
+	// BEGIN --- Material --- 
+	uniform vec4 iAmbient;
+	uniform vec4 iDiffuse;
+	uniform vec4 iSpecular;
+	uniform vec4 iShininess;
+	uniform vec4 iEmission;
+	uniform vec4 iUseTexture[4];
+	uniform vec4 iTiling;
+	// BEGIN --- Material --- 
+	
+// END --- Uniforms --- 
+
+// BEGIN --- UBOs ---
+	#define MAX_LIGHTS 64
+	struct Light
+	{
+		vec4 col_angle;
+		vec4 pos_range;
+		vec4 dir_exponent;
+	};
+
+	layout(std140) uniform LightUBO
+	{
+		// This UBO will contain stuff like iGlobalTime
+		Light lights[MAX_LIGHTS];
+	};
+// END --- UBOs ---
+
+// BEGIN --- Input Interpolants --- 
+	smooth in vec3 iPosition;
+	smooth in vec3 iPositionWorld;
+	smooth in vec3 iPositionCamera;
+	smooth in vec3 iNormal;
+	smooth in vec3 iNormalWorld;
+	smooth in vec3 iNormalCamera;
+	smooth in vec2 iTexCoord0;
+	smooth in vec2 iTexCoord1;
+	smooth in vec4 iColor;
+// END --- Input Interpolants --- 
+
+// BEGIN --- Framebuffer Outputs --- 
+	layout(location = 0) out vec4 out_color;
+// END --- Framebuffer Outputs --- 
+
+void main(void)
+{	
+	// BEGIN --- Conditional Discards ---
+		vec4 albedoTexel = (iUseTexture[0].x > 0) ? texture(iTexture0, iTexCoord0) : vec4(1.0, 1.0, 1.0, 1.0);
+	// END --- Chroma key test ---
+	
+	// BEGIN --- Emissive ---
+		vec4 emission = iEmission;
+		if (iUseTexture[1].z == 1.0)
+		{
+			emission += vec4((texture(iTexture6, iTexCoord0)).rgb, 0.0);
+		}
+	// END --- Emissive ---
+	
+	// BEGIN --- Occlusion ---
+		vec4 occlusion = (iUseTexture[1].y == 1.0) ? texture(iTexture5, iTexCoord1) : iAmbient;
+	// END --- Occlusion ---
+
+	// BEGIN --- Lighting ---		
+		// BEGIN --- Common Lighting variables ---
+			float roughness = 0.0;
+			float linearRoughness = 0.0;
+			float roughnessFactorGeometric = 0.0;
+			float roughnessFactorTexture = 0.0;
+			float mipMapIndex = 0;
+			vec3 fixedLookup = vec3(0.0);
+			vec3 indirectDiffuseLight = vec3(0.0);
+			vec3 indirectSpecularLight = vec3(0.0);
+			vec3 f0 = vec3(0.0);
+			vec3 envBRDF = vec3(0.0);
+			vec3 diffuse = vec3(0.0);
+			vec3 specular = vec3(0.0);
+			float D = 0.0;
+			float G = 0.0;
+			vec3 F = vec3(0.0);
+			vec3 indirectDiffuse = vec3(0.0);
+			vec3 indirectSpecular = vec3(0.0);
+			vec3 fragToLightViewSpace = vec3(0.0);
+			float lightDistance = 0.0;
+			float lightDistanceSquared = 0.0;
+			float distanceAttenuation = 0.0;
+			float coneAttenuation = 0.0;
+			vec3 normalizedViewNormal = vec3(0.0);
+			float normalLength = 0.0;
+			vec3 N = vec3(0.0); // normalizedWorldNormal, shorthand
+			vec3 L = vec3(0.0);
+			vec3 V = vec3(0.0);
+			vec3 H = vec3(0.0);
+			float NdotL = 0.0;
+			float NdotV = 0.0;
+			float NdotH = 0.0;
+			float VdotH = 0.0;
+			float normalizedMipMapIndex = 0.0;
+			vec3 objectSpaceNormal = vec3(0.0);
+			vec3 normalizedNormalTexel = vec3(0.0);
+		// END --- Common Lighting variables ---
+			
+		// BEGIN --- Normal mapping ---
+			// If we have a normal map
+			if (iUseTexture[0].w == 1.0)
+			{
+				// Fetch object space normal [0.0,1.0] range per channel
+				vec3 normalTexel = texture(iTexture3, iTexCoord0).rgb;
+				// Store the length for roughness modulation then normalize it
+				normalLength = length(normalTexel);
+				normalizedNormalTexel = normalTexel / normalLength;
+				// Convert normal into [-1.0, 1.0] range per channel
+				normalizedNormalTexel = normalTexel * 255.0 / 127.0 - 128.0 / 127.0;
+				// Convert normal into object-space
+				objectSpaceNormal = tangentSpaceToObjectSpaceNormal(iPosition, iTexCoord0, iNormal, normalizedNormalTexel);
+				//mat3 tbnMatrix = mat3(normalize(iTangent), normalize(iBitangent), normalize(iNormal));
+				//mat3 tbnMatrix = mat3(vec3(0.0, 0.0, 1.0), vec3(0.0, 1.0, 0.0), normalize(iNormal));
+				//objectSpaceNormal = tbnMatrix * normalizedNormalTexel;
+				// Convert normal into view-space
+				normalizedViewNormal = normalize(mat3(iTransposeInverseModelViewMatrix) * objectSpaceNormal);
+				N = normalize(mat3(iInverseViewMatrix) * normalizedViewNormal);
+			}
+			else
+			{
+				// Store the length for roughness modulation then normalize
+				normalLength = length(iNormalCamera);
+				normalizedViewNormal = iNormalCamera / normalLength;
+				N = normalize(iNormalWorld);
+			}
+			vec3 ddx = dFdx(normalizedViewNormal);
+			vec3 ddy = dFdy(normalizedViewNormal);
+			roughnessFactorGeometric = pow(clamp(max(dot(ddx, ddx), dot(ddy, ddy)), 0.0, 1.0), 0.66);
+		// END --- Normal mapping ---	
+			
+		// BEGIN --- Lightmap Albedo ---
+		vec4 lmapAlbedo = (iUseTexture[2].r > 0) ? texture(iTexture8, iTexCoord1) : vec4(1.0, 1.0, 1.0, 1.0);
+		vec4 iColor_disasosiated = vec4(iColor.rgb / iColor.aaa, iColor.a);
+		vec4 albedoTexel_disasosiated = vec4(albedoTexel.rgb / albedoTexel.aaa, albedoTexel.a);
+		vec4 albedo = albedoTexel_disasosiated * iConstColour * iDiffuse * iColor_disasosiated;
+		vec3 diffuse_lighting_modulator = lmapAlbedo.rgb * occlusion.rgb;
+		vec3 specular_lighting_modulator = vec3(lmapAlbedo.a * occlusion.a);
+
+		// END --- Lightmap Albedo ---
+		
+		vec4 accumulatedLight_diffuse = vec4(0.0, 0.0, 0.0, albedo.a);
+		vec4 accumulatedLight_specular = vec4(0.0, 0.0, 0.0, 0.0);
+		if (iUseLighting.x == 1.0)
+		{
+		// BEGIN --- Roughness mapping ---
+			// Roughness2, roughness squared, (Perceptually linear)
+			// If we have a smoothness map
+			if (iUseTexture[0].z == 1.0)
+			{
+				// Convert from [0,1] smoothness stored in the texture
+				roughness = 1.0 - texture(iTexture2, iTexCoord0).r;
+			}
+			else
+			{
+				if (iShininess.r < 511.0)
+				{
+					// Remap [1,511] into [4,2044] then to [2,2042] then map that into [0,1] smoothness
+					roughness = (log2(clamp(4 * iShininess.r - 2, 2, 2048)) - 1.0) * 0.1;
+					// Convert from [0,1] smoothness to roughness
+					roughness = 1.0 - roughness;
+				}
+				else
+				{
+					roughness = 0.0;
+				}
+			}
+			// Make surfaces rougher in areas of high normal variance to mitigate specular aliasing
+			// This is interpolated in so that it is stronger on less rough surfaces that are more 
+			// likely to exibit geometric aliasing.
+			roughnessFactorGeometric = pow(roughnessFactorGeometric, roughness + 0.66);
+			roughness = mix(roughness + roughnessFactorGeometric, roughness, roughness);
+			// Square the roughness to make it perceptually linear
+			linearRoughness = roughness * roughness;
+			// Clamp roughness to a min of 0.001 to avoid tiny subpixel highlights which alias badly
+			roughness = clamp(roughness, 0.001, 1.0);
+			linearRoughness = clamp(linearRoughness, 0.001, 1.0);
+		// END --- Roughness mapping ---
+			
+		// BEGIN --- Specular ---
+			f0.rgb = (iUseTexture[0].y == 1.0) ? texture(iTexture1, iTexCoord0).rgb : iSpecular.rgb;
+		// END --- Specular ---
+		
+		// BEGIN --- Light Accumulation ---
+			V = mat3(iInverseViewMatrix) * normalize(-iPositionCamera);
+			NdotV = clamp(dot(N, V), 0.0, 1.0);
+			// BEGIN --- SURFACE LIGHTING LOOP ---
+				for (int light_index = 0; light_index < MAX_LIGHTS; ++light_index)
+				{							
+					// BEGIN --- EARLY OUT FOR DISABLED LIGHTS ---
+						if (lights[light_index].col_angle.w == -1.0)
+						{
+							break;
+						}
+					// END --- EARLY OUT FOR DISABLED LIGHTS ---
+									
+					vec3 attenuatedLight = lights[light_index].col_angle.rgb;		
+					
+					// BEGIN --- Distance Based Light Attenuation ---
+						if (lights[light_index].col_angle.w != 1.0)
+						{
+							vec3 lightWorldSpacePosition = lights[light_index].pos_range.xyz;
+							vec3 fragToLightWorldSpace = lightWorldSpacePosition - iPositionWorld;
+							lightDistance = length(fragToLightWorldSpace);
+							lightDistanceSquared = lightDistance * lightDistance;
+							if (lightDistanceSquared > lights[light_index].pos_range.w)
+							{
+								//  We skip this light if fragment is outside the light's range
+								continue;
+							}
+							lightDistanceSquared = lightDistance * lightDistance;
+							// L is the direction from the fragment to the light in world space
+							L = fragToLightWorldSpace / lightDistance;
+							distanceAttenuation = 1 / (lightDistanceSquared + 1);
+							attenuatedLight *= distanceAttenuation;
+						}
+					// END --- Distance Based  Attenuation ---
+					
+					// BEGIN --- Directional Light Attenuation ---
+						if (lights[light_index].col_angle.w == 1.0)
+						{
+							L = -lights[light_index].dir_exponent.xyz;
+						}
+					// END --- Directional Light Attenuation---
+					
+					NdotL = clamp(dot(N, L), 0.0, 1.0);
+					
+					// BEGIN --- Cone Based Light Attenuation ---
+						if (lights[light_index].col_angle.w > 0.0 && lights[light_index].col_angle.w < 1.0)
+						{
+							// How simliar is the cone direction compared to the light to frag vector
+							vec3 lightWorldSpaceConeDirection = lights[light_index].dir_exponent.xyz;
+							float dir_dot_L = dot(-L, lightWorldSpaceConeDirection);
+							
+							//  We skip this light the fragment is outside the cone's area of influence
+							if (dir_dot_L < lights[light_index].col_angle.w)
+							{
+								continue;
+							}
+							else
+							{
+								attenuatedLight *= pow(dir_dot_L, lights[light_index].dir_exponent.w);
+							}	
+						}
+					// END --- Cone Based Light Attenuation ---
+				
+					// START --- Surface Lighting ---
+						H = normalize(V + L);
+						attenuatedLight *= NdotL;
+						diffuse += attenuatedLight;
+						NdotH = clamp(dot(N, H), 0.0, 1.0);
+						VdotH = clamp(dot(V, H), 0.0, 1.0);
+						D = D_GGX(NdotH, linearRoughness);
+						G = G_SchlickSmith(NdotV, NdotL, linearRoughness);
+						F = F_Schlick(f0, VdotH);
+						specular += D * G * F * attenuatedLight;
+					// END --- Surface Lighting ---
+				}
+			// END --- SURFACE LIGHTING LOOP ---
+			diffuse *= LambertianDiffuse(albedo.rgb);
+			accumulatedLight_diffuse.rgb += diffuse;
+			accumulatedLight_specular.rgb += specular_lighting_modulator * specular;
+			//accumulatedLight.rgb += occlusion.a * (diffuse + specular);
+		// END --- Light Accumulation ---
+			
+		// BEGIN --- Indirect Lighting ---
+			// Lightmaps contain per-texel indirect diffuse information so using the env probe is redundant
+			if (iUseTexture[2].r == 0.0)
+			{
+				// BEGIN --- Indirect Diffuse ---
+					vec3 roomSpaceNormal = inverse(mat3(iRoomMatrix)) * N;
+					vec3 fixedLookup;
+					if(iUseTexture[3].x == 0.0)
+					{
+						indirectDiffuseLight = max(SphericalHarmonicLighting(normalize(roomSpaceNormal)).ggg, vec3(0.10, 0.10, 0.10));
+					}
+					else
+					{
+						fixedLookup = roomSpaceNormal;
+						fixedLookup.z = -fixedLookup.z;
+						indirectDiffuseLight = (textureLod(iCubeTexture2, fixedLookup, 0.0)).rgb;
+					}
+					indirectDiffuse = albedo.rgb * indirectDiffuseLight;
+					accumulatedLight_diffuse.rgb += diffuse_lighting_modulator * indirectDiffuse;
+				// END --- Indirect Diffuse ---
+			}
+			else
+			{
+				accumulatedLight_diffuse.rgb += albedo.rgb * diffuse_lighting_modulator.rgb;
+			}
+			
+			// BEGIN --- Indirect Specular ---
+				float NUM_MIP_LEVELS = 9.0;
+				float BASE_MIP_SIZE = 256.0;
+				float mipMapIndex = cubeMipFromRoughness(roughness, NUM_MIP_LEVELS - 1);
+				mipMapIndex = clamp(mipMapIndex, 1.0, NUM_MIP_LEVELS - 1);
+				vec3 worldSpaceReflection = reflect(-V, N);
+				vec3 roomSpaceReflection = inverse(mat3(iRoomMatrix)) * worldSpaceReflection;
+				vec3 fixedLookup = roomSpaceReflection;
+				fixedLookup.z = -fixedLookup.z;
+				if(iUseTexture[2].w == 0.0)
+				{
+					indirectSpecularLight = max(SphericalHarmonicLighting(roomSpaceReflection).ggg, vec3(0.05, 0.05, 0.05));
+				}
+				else
+				{
+					if (linearRoughness == 0.001)
+					{
+						indirectSpecularLight = (textureLod(iCubeTexture1, fixedLookup, 0.0)).rgb;
+					}
+					else
+					{
+						indirectSpecularLight = (textureLod(iCubeTexture1, fixedLookup, mipMapIndex)).rgb;
+					}
+				}
+				envBRDF = EnvBRDFApprox(f0, linearRoughness, NdotV);
+				indirectSpecular = envBRDF * indirectSpecularLight;
+				accumulatedLight_specular.rgb += specular_lighting_modulator * indirectSpecular;
+			// END --- Indirect Specular ---
+		// END --- Indirect Lighting ---
+		}
+		else
+		{
+			accumulatedLight_diffuse.rgb += albedo.rgb * diffuse_lighting_modulator.rgb;
+		}	
+	// END --- Lighting ---
+
+	// BEGIN --- Lighting Composition ---
+		//vec4 lightingResult = (iUseLighting.x == 1.0) ? accumulatedLight : albedo * occlusion;	
+	// END --- Lighting Composition  ---
+	
+	// BEGIN --- Fog ---
+		vec4 fog_color = vec4(1.0,1.0,1.0,1.0);
+		if (iFogEnabled.x == 1.0)
+		{
+			//compute length from eye to fragment
+			float fragDistance = length(iPositionCamera);   
+			//compute blend value
+			float fogInterpolator;
+			if (iFogMode.x == 0.0)
+			{
+				fogInterpolator = (iFogEnd.x - fragDistance) / (iFogEnd.x - iFogStart.x);
+			}
+			else if (iFogMode.x == 1.0)
+			{
+				fogInterpolator = exp(-iFogDensity.x * fragDistance);
+			}
+			else
+			{
+				fogInterpolator = exp(-(iFogDensity.x * fragDistance)*(iFogDensity.x * fragDistance));
+			}
+			fogInterpolator = clamp(fogInterpolator, 0.0, 1.0);
+			fog_color = mix(iFogCol.rgba, vec4(1.0,1.0,1.0,1.0), fogInterpolator);
+		}
+	// END --- Fog ---
+	
+	// BEGIN --- Temporal Noise --- Disabled until I find a better noise generator
+		/*vec3 dither = vec3(dot(vec2(171.0, 231.0), gl_FragCoord.xy + iGlobalTime.xy));
+		dither = fract(dither / vec3(103.0, 71.0, 97.0)) - vec3(0.5, 0.5, 0.5);
+		dither *= 0.0375;
+		lightingResult += vec4(dither, 0.0);*/
+	// END --- Temporal Noise ---
+	
+	// START --- Fragment Shader Outputs ---
+		out_color = accumulatedLight_diffuse;
+
+		// Assosiate the color with it's alpha so that the result is composited correctly by the pre-multiplied blendfunc.
+		out_color.rgb *= accumulatedLight_diffuse.a;
+		
+		// Add the emissive component to the pre-multiplied result, this will cause it to blend additively in the framebuffer
+		out_color.rgb += accumulatedLight_specular.rgb + emission.rgb;
+		
+		// Fog is blended on top before output
+		out_color.rgb *= fog_color.rgb;
+
+		/*if ((gl_FragCoord.y / iResolution.y) <= 0.25)
+		{
+			out_color.rgb = vec3(roughness);
+		}
+		else if((gl_FragCoord.y/ iResolution.y)  <= 0.5)
+		{
+			out_color.rgb = vec3(1.0 - texture(iTexture2, iTexCoord0.xy).r);
+		}*/
+		/*else if((gl_FragCoord.y/ iResolution.y)  <= 0.75)
+		{
+			out_color.rgb = vec3(roughness + roughnessFactorGeometric);
+		}*/
+		/*out_color.r = 0.5;
+		out_color.g = 0.0;
+		out_color.b = 0.0;*/
+	// END --- Fragment Shader Outputs ---
+}

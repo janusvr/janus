@@ -1,0 +1,1 @@
+addToQuickbar('spyduckappbutton', 'Avatar Selection', 'spyduckapp', "toggleWindow(this,250,400,'Avatar Selection','apps/avatar/old.html','1vw','8vh', Anchor.BottomRight, true)", './skins/emerald/icons/glyph-01.png');

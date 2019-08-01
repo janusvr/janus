@@ -1,0 +1,9 @@
+﻿  Building Custom Rule C:/Users/jm777/Desktop/janusvr/bullet3/src/Bullet3Collision/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/jm777/Desktop/janusvr/bullet3/src/Bullet3Collision/CMakeFiles/generate.stamp is up-to-date.
+  b3DynamicBvh.cpp
+  b3DynamicBvhBroadphase.cpp
+  b3OverlappingPairCache.cpp
+  b3ConvexUtility.cpp
+  b3CpuNarrowPhase.cpp
+  Generating Code...
+  Bullet3Collision.vcxproj -> C:\Users\jm777\Desktop\janusvr\bullet3\lib\Release\Bullet3Collision.lib

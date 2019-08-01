@@ -1,0 +1,1123 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>JanusVR Interface Settings Menu</title>
+  <meta name="description" content="JanusVR Interface Settings Menu">
+  <meta name="author" content="JanusVR Inc.">
+  <script src="../../scripts/tabs.js"></script>
+  <script src="../../skins/theme.js"></script>
+
+
+  <!--Avatars Related-->
+ 	<link rel="stylesheet" type="text/css" href="../../skins/oneironaut/app.css" />
+	<script src="../../scripts/spyduck.js"></script>
+	<script src="avatar/main.js"></script>
+
+
+
+  <style>
+
+  </style>
+
+
+
+ <script>
+
+
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+    .substr(1)
+        .split("&")
+        .forEach(function (item) {
+        tmp = item.split("=");
+        if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+    });
+    return result;
+}
+
+  function roundToTwo(num) {
+    return +(Math.round(num + "e+2")  + "e-2");
+}
+
+  function setDefaults() {
+
+  if (findGetParameter("dashboard") == "true")
+  {
+  document.getElementsByTagName("body")[0].style.zoom = "200%";
+   document.getElementsByTagName("body")[0].style.marginLeft = "14%";
+    document.getElementsByTagName("body")[0].style.marginRight = "14%";
+  document.getElementById("windowarea").style.textAlign = "center";
+  document.getElementById("windowarea").style.backgroundColor = "rgba(0,0,0,0)";
+
+	  // this gets all h4 tags
+	var myList = document.getElementsByClassName("item"); // get all p elements
+
+	// this loops through them until it finds one with the class 'icontitle' then it assigns the style to it
+	var i = 0;
+	while(i < myList.length) {
+
+			myList[i].style.backgroundColor="#2F363B";
+			myList[i].style.borderRadius = "5px"
+			myList[i].style.margin = "5px 75px";
+
+		i++;
+	}
+
+	var myList = document.getElementsByClassName("header"); // get all p elements
+
+	// this loops through them until it finds one with the class 'icontitle' then it assigns the style to it
+	var i = 0;
+	while(i < myList.length) {
+
+			myList[i].style.textAlign="center";
+
+
+		i++;
+	}
+
+
+
+  }
+
+
+  //set all the default booleans
+  document.getElementById("multiplayertoggle").checked = parent.window.janus.getsetting('multiplayer');
+
+
+
+
+
+  document.getElementById("selfavatartoggle").checked =  parent.window.janus.getsetting('selfavatar');
+
+  document.getElementById("invertpitchtoggle").checked =  parent.window.janus.getsetting('invertpitch');
+  document.getElementById("mousepitchtoggle").checked =  parent.window.janus.getsetting('mousepitch');
+  document.getElementById("gamepadtoggle").checked =  parent.window.janus.getsetting('gamepad');
+  document.getElementById("portalhotkeystoggle").checked =  parent.window.janus.getsetting('portalhotkeys');
+  document.getElementById("decoupleheadtoggle").checked =  parent.window.janus.getsetting('decouplehead');
+  document.getElementById("comfortmodetoggle").checked =  parent.window.janus.getsetting('comfortmode');
+  document.getElementById("leapmotionhmdtoggle").checked =  parent.window.janus.getsetting('leapmotionhmd');
+  document.getElementById("antialiasingtoggle").checked =  parent.window.janus.getsetting('antialiasing');
+
+  document.getElementById("assetshaderstoggle").checked =  parent.window.janus.getsetting('assetshaders');
+  document.getElementById("crosshairtoggle").checked =  parent.window.janus.getsetting('crosshair');
+  document.getElementById("soundstoggle").checked =  parent.window.janus.getsetting('sounds');
+  document.getElementById("editmodetoggle").checked =  parent.window.janus.getsetting('editmode');
+  document.getElementById("downloadcachetoggle").checked =  parent.window.janus.getsetting('downloadcache');
+  document.getElementById("jsdebuggertoggle").checked =  parent.window.janus.getsetting('jsdebugger');
+  document.getElementById("avatarlightingtoggle").checked = parent.window.janus.avatarlighting;
+  document.getElementById("hidemenutoggle").checked = parent.window.janus.getsetting('hidemenu');
+  document.getElementById("positionalenvtoggle").checked = parent.window.janus.getsetting('positionalenv');
+  document.getElementById("positionalvoiptoggle").checked = parent.window.janus.getsetting('positionalvoip');
+  document.getElementById("micalwaysontoggle").checked =  parent.window.janus.getsetting('micalwayson');
+  document.getElementById("editmodeiconstoggle").checked =  parent.window.janus.getsetting('editmodeicons');
+
+  
+  
+  
+   document.getElementById("tutorialmodetoggle").checked =  parent.window.janus.getsetting('tutorialmode');
+
+
+   document.getElementById("performanceloggingtoggle").checked = parent.window.janus.getsetting('perflog');
+
+
+    document.getElementById("hapticstoggle").checked = parent.window.janus.getsetting('haptics');
+
+
+
+
+
+
+  //set all the default values
+  document.getElementById("displaynameform").value =  parent.window.janus.userid;
+
+  document.getElementById("fovslider").value =  parent.window.janus.getsetting('fov');
+  document.getElementById("fovslidernumber").innerHTML =  parent.window.janus.getsetting('fov');
+
+  document.getElementById("maxmemoryslider").value =  parent.window.janus.getsetting('maxmemory');
+  document.getElementById("maxmemoryslidernumber").innerHTML =  parent.window.janus.getsetting('maxmemory')+"MB";
+
+
+  document.getElementById("rotationspeedslider").value =  parent.window.janus.getsetting('rotationspeed');
+  document.getElementById("rotationspeedslidernumber").innerHTML =  parent.window.janus.getsetting('rotationspeed');
+
+
+  document.getElementById("volumeenvslider").value =  parent.window.janus.getsetting('volumeenv');
+  document.getElementById("volumeenvslidernumber").innerHTML =  parent.window.janus.getsetting('volumeenv');
+
+
+  document.getElementById("volumevoipslider").value =  parent.window.janus.getsetting('volumevoip');
+  document.getElementById("volumevoipslidernumber").innerHTML =  parent.window.janus.getsetting('volumevoip');
+
+
+  document.getElementById("volumemicslider").value =  parent.window.janus.getsetting('volumemic');
+  document.getElementById("volumemicslidernumber").innerHTML =  parent.window.janus.getsetting('volumemic');
+
+  document.getElementById("playbackdevice").innerHTML =  parent.window.janus.getsetting('playbackdevice') + "&#9660;";
+  document.getElementById("capturedevice").innerHTML =  parent.window.janus.getsetting('capturedevice') + "&#9660;";
+  document.getElementById("secondarycapturedevice").innerHTML =  parent.window.janus.getsetting('secondarycapturedevice') + "&#9660;";
+  document.getElementById("playbackdevicelist").style.display = "none";
+  document.getElementById("capturedevicelist").style.display = "none";
+  document.getElementById("secondarycapturedevicelist").style.display = "none";
+
+    document.getElementById("tutorialurlform").value =  parent.window.janus.getsetting('tutorialurl');
+
+  document.getElementById("micsensitivityslider").value =  parent.window.janus.getsetting('micsensitivity');
+  document.getElementById("micsensitivityslidernumber").innerHTML =  parent.window.janus.getsetting('micsensitivity');
+
+
+
+
+  var list = document.getElementById('playback_list');
+  for (i = 0; i < parent.window.janus.playbackdevices.length; i++){
+	var itemli = document.createElement('li');
+	var itemdiv = document.createElement('div');
+	var text = document.createTextNode(parent.window.janus.playbackdevices[i]);
+	itemdiv.appendChild(text);
+	itemdiv.setAttribute('onclick', 'setDevice("playbackdevice",this.innerHTML);');
+	itemli.appendChild(itemdiv);
+	list.appendChild(itemli);
+  }
+  var list = document.getElementById('capture_list');
+  for (i = 0; i < parent.window.janus.capturedevices.length; i++){
+	var itemli = document.createElement('li');
+	var itemdiv = document.createElement('div');
+	var text = document.createTextNode(parent.window.janus.capturedevices[i]);
+	itemdiv.appendChild(text);
+	itemdiv.setAttribute('onclick', 'setDevice("capturedevice",this.innerHTML);');
+	itemli.appendChild(itemdiv);
+	list.appendChild(itemli);
+  }
+  var list = document.getElementById('secondary_capture_list');
+  if (parent.window.janus.capturedevices.length > 3){
+	  document.getElementById('capturedevicel').innerHTML = " L";
+	  for (i = 0; i < parent.window.janus.capturedevices.length; i++){
+		var itemli = document.createElement('li');
+		var itemdiv = document.createElement('div');
+		var text = document.createTextNode(parent.window.janus.capturedevices[i]);
+		itemdiv.appendChild(text);
+		itemdiv.setAttribute('onclick', 'setDevice("secondarycapturedevice",this.innerHTML);');
+		itemli.appendChild(itemdiv);
+		list.appendChild(itemli);
+	  }
+  }
+  else{
+	document.getElementById("secondarycapturedevice_div").style.display = "none";
+  }
+
+
+  document.getElementById("landingpageform").value =  parent.window.janus.getsetting('launchurl');
+
+
+    document.getElementById("serverform").value =  parent.window.janus.getsetting('server');
+	document.getElementById("rateform").value =  parent.window.janus.getsetting('rate');
+	document.getElementById("portform").value =  parent.window.janus.getsetting('port');
+
+  	document.getElementById("ipdslider").value =  roundToTwo(parent.window.janus.getsetting('ipd')*1000);
+    document.getElementById("ipdslidernumber").innerHTML =  (roundToTwo(parent.window.janus.getsetting('ipd')*1000))+"mm";
+
+
+  }
+
+  function setDevice(id, device){
+	if (id == "capturedevice" && device == "No device"){
+		parent.window.janus.setsetting(id, device);
+		parent.window.janus.setsetting("secondarycapturedevice", device);
+		document.getElementById(id).innerHTML = device + "&#9650;";
+		document.getElementById("secondarycapturedevice").innerHTML = device + "&#9650;";
+	}
+	else if ((device == "No device") || (device == "Default device") || (id == "capturedevice" && parent.window.janus.getsetting("secondarycapturedevice") != device) || (id == "secondarycapturedevice" && parent.window.janus.getsetting("capturedevice") != device) || (id != "capturedevice" && id != "secondarycapturedevice")){
+		parent.window.janus.setsetting(id, device);
+		document.getElementById(id).innerHTML = device + "&#9650;";
+	}
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  window.onload = function () {
+  initializeAppTheme("../../")
+  dashboardSetup()
+  tabSelect("avatartabcontainer","avatartabbutton")
+  window.onresize()
+  setDefaults()
+
+  populatelist()
+  }
+
+
+
+   window.onresize = function(event) { //make sure the window area stays a consistent size
+
+
+
+ if (document.getElementById("tabrow").offsetWidth >= 200) //if you change the 200 here, also change the min-width of the window containing it. this is to prevent flicker when vertically resizing a minimally (width) sized window
+ {
+document.getElementById("windowarea").style.height = "calc(100% - "+(document.getElementsByClassName("tabrow")[0].offsetHeight+3)+"px)";
+ }
+};
+
+
+
+  function changename(caller) {
+
+  window.janus.userid=caller.value;
+
+  }
+
+
+    </script>
+
+
+</head>
+
+<body >
+
+<div class="windowcontainer">
+
+<div class="tabrow unselectable" id="tabrow">
+
+	<div class="tabbutton" id="avatartabbutton" onmousedown="tabSelect('avatartabcontainer','avatartabbutton')">USER</div></li>
+	<div class="tabbutton" id="avatarstabbutton" onmousedown="tabSelect('avatarscontainer','avatarstabbutton')">AVATARS</div></li>
+	<div class="tabbutton" id="servertabbutton" onmousedown="tabSelect('servertabcontainer','servertabbutton')">SERVER</div></li>
+	<div class="tabbutton" id="inputtabbutton" onmousedown="tabSelect('inputtabcontainer','inputtabbutton')" >INPUT</div></li>
+	<div class="tabbutton" id="graphicstabbutton" onmousedown="tabSelect('graphicstabcontainer','graphicstabbutton')" >GRAPHICS</div></li>
+	<div class="tabbutton" id="interfacetabbutton" onmousedown="tabSelect('interfacetabcontainer','interfacetabbutton')" >INTERFACE</div></li>
+	<div class="tabbutton" id="developertabbutton" onmousedown="tabSelect('developertabcontainer','developertabbutton')" >DEVELOPER</div></li>
+	<div class="tabbutton" id="vrtabbutton" onmousedown="tabSelect('vrtabcontainer','vrtabbutton')" >VR</div></li>
+
+
+</div>
+
+
+<div class="windowarea unselectable" id="windowarea">
+
+
+		<div  class="tabcontainer" id="avatarscontainer">
+
+
+			<div class="avatarlist" >
+				<div id="avatar_list" >
+				</div>
+			</div>
+
+
+			<div style="text-align:left;">
+
+				<div onclick="togglePreview();" class="bottombutton previewbutton"></div>
+				<div onclick="save_avatar();" class="bottombutton savebutton"></div>
+
+			</div>
+
+		</div>
+
+
+
+
+
+
+
+	<div class="tabcontainer" id="servertabcontainer">
+
+					<div class='header'>HOMEPAGE</div>
+
+					<div class='item' >
+					<span>
+					URL:<br>
+					<input  type='text' class="longerinput" id="landingpageform"  onchange="window.janus.setsetting('launchurl', this.value);"  >
+
+					</span>
+
+					</div>
+
+
+					<div class='header' > PRESENCE</div>
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" id="multiplayertoggle" type='checkbox' onchange="window.janus.setsetting('multiplayer', this.checked); " >
+					<label for="multiplayertoggle" class="css-label">Multiplayer</label>
+
+					</span>
+					<br>
+					</div>
+
+					<div class='item' >
+					<span>
+					Fallback Server:<br>
+					<input  type='text' class="longerinput" id="serverform"  onchange="window.janus.setsetting('server', this.value);"  >
+
+					</span>
+
+					</div>
+
+
+					<div class='item' >
+					<span>
+					Fallback Server Port:<br>
+					<input  type='text' class="longerinput"  id="portform"  onchange="window.janus.setsetting('port', this.value);"  >
+
+					</span>
+
+					</div>
+
+
+
+					<div class='item' >
+					<span>
+					Fallback Server Polling Rate:<br>
+					<input  type='text'  id="rateform" class="longerinput"  onchange="window.janus.setsetting('rate', this.value);"  >
+
+					</span>
+
+					</div>
+
+
+					<div class='header'>ANALYTICS</div>
+
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="performanceloggingtoggle" onchange="window.janus.setsetting('perflog', this.checked); "   >
+					<label for="performanceloggingtoggle" class="css-label">Log Performance</label>
+					 - Helps the developers improve JanusVR by uploading anonymous usage statistics like FPS.
+
+					</span>
+					<br>
+					</div>
+
+					</div>
+
+
+
+
+
+
+
+				<div class="tabcontainer" id="avatartabcontainer">
+					<div class='header'>VISUAL</div>
+
+					<div class='item' >
+					<span>
+					Display Name:<br>
+					<input  type='text' class="longerinput" id="displaynameform"  onchange="changename(this)"  >
+
+					</span>
+
+					</div>
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="avatarlightingtoggle" onchange="window.janus.avatarlighting=this.checked;"  >
+					<label for="avatarlightingtoggle" class="css-label">Avatar Lighting</label>
+
+					</span>
+					<br>
+					</div>
+
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="selfavatartoggle" onchange="window.janus.setsetting('selfavatar', this.checked); "  >
+					<label for="selfavatartoggle" class="css-label">First Person Avatar</label>
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+
+
+				<!--
+					<div class='item' >
+					<span>
+					Avatar Scale
+					<input  type='text'  value='1 1 1'>
+
+					</span>
+
+					</div>
+
+
+
+
+
+
+
+					<div class='header'>RESOURCES</div>
+
+
+
+					<div class='item' >
+					<span>
+					Avatar URL
+					<input class="longerinput" type='text'  value='http://janusvr.com/default.dae'>
+
+					</span>
+
+					</div>
+
+
+
+
+					<div class='item' >
+					<span>
+					Avatar .mtl URL
+					<input class="longerinput" type='text'  value='http://janusvr.com/default.mtl'>
+
+					</span>
+
+					</div>
+
+					-->
+
+					<div class='header'>MISC</div>
+
+
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="tutorialmodetoggle"   onchange="window.janus.setsetting('tutorialmode', this.checked); " >
+					<label for="tutorialmodetoggle" class="css-label">Tutorial Mode</label>
+
+
+					</span>
+					<br>
+					</div>
+
+					<div class='item' >
+					<span>
+					Tutorial URL:<br>
+					<input  type='text' class="longerinput"  id="tutorialurlform"  onchange="window.janus.setsetting('tutorialurl', this.value);"  >
+
+					</span>
+
+					</div>
+
+
+
+					<div class='item' >
+
+					<div class="resetavatarbutton" onclick="parent.window.janus.resetavatar()" >RESET AVATAR</div>
+
+					</div>
+
+
+
+
+				</div>
+
+
+
+
+				<div class="tabcontainer" id="inputtabcontainer">
+					<div class='header'>DEVICE</div>
+
+
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="invertpitchtoggle"   onchange="window.janus.setsetting('invertpitch', this.checked); " >
+					<label for="invertpitchtoggle" class="css-label">Invert Pitch</label>
+
+
+					</span>
+					<br>
+					</div>
+
+
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox'  id="mousepitchtoggle" onchange="window.janus.setsetting('mousepitch', this.checked); "  >
+					<label for="mousepitchtoggle" class="css-label">Vertical Mouselook</label>
+
+					</span>
+					<br>
+					</div>
+
+
+
+					<div class='item' >
+					<span>
+					Rotation Speed: <span id="rotationspeedslidernumber"></span><br>
+					<input class="myslider" type='range' id="rotationspeedslider" min="10" max="100" onchange="window.janus.setsetting('rotationspeed', this.value); document.getElementById('rotationspeedslidernumber').innerHTML=this.value;" >
+
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="gamepadtoggle" onchange="window.janus.setsetting('gamepad', this.checked); "  >
+					<label for="gamepadtoggle" class="css-label">Gamepad</label>
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+
+
+					<div class='header'>KEY BINDINGS</div>
+
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="portalhotkeystoggle" onchange="window.janus.setsetting('portalhotkeys', this.checked); "  >
+					<label for="portalhotkeystoggle" class="css-label">Advanced Hotkeys</label>
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- This will come in the future!
+					<div class='item' >
+					<span>
+					Jump
+					<input  type='text'  value='SPACE'>
+
+					</span>
+					<br>
+					</div>
+
+					<div class='item' >
+					<span>
+					Walk Forwards
+					<input  type='text'  value='W'>
+
+					</span>
+					<br>
+					</div>
+
+					<div class='item' >
+					<span>
+					Walk Backwards
+					<input  type='text'  value='S'>
+
+					</span>
+					<br>
+					</div>
+
+					<div class='item' >
+					<span>
+					Walk Left
+					<input  type='text'  value='A'>
+
+					</span>
+					<br>
+					</div>
+
+					<div class='item' >
+					<span>
+					Walk Right
+					<input  type='text'  value='D'>
+
+					</span>
+					<br>
+					</div>
+
+					<div class='item' >
+					<span>
+					Run
+					<input  type='text'  value='SHIFT'>
+
+					</span>
+					<br>
+					</div>
+
+					<div class='item' >
+					<span>
+					Spawn Portal
+					<input  type='text'  value='TAB'>
+
+					</span>
+					<br>
+					</div>
+
+					<div class='item' >
+					<span>
+					???
+					<input  type='text'  value='G'>
+
+					</span>
+					<br>
+					</div>
+
+					-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</div>
+
+
+				<div class="tabcontainer" id="vrtabcontainer">
+
+
+
+
+
+					<div class='header'>INPUT</div>
+
+
+						<div class='item' >
+						<span>
+						<input class="myCheckbox" type='checkbox' id="decoupleheadtoggle" onchange="window.janus.setsetting('decouplehead', this.checked); " >
+						<label for="decoupleheadtoggle" class="css-label">Decouple Head</label>
+
+						</span>
+						<br>
+						</div>
+
+						<div class='item' >
+						<span>
+						<input class="myCheckbox" type='checkbox' id="hapticstoggle" onchange="window.janus.setsetting('haptics', this.checked); " >
+						<label for="hapticstoggle" class="css-label">Haptics</label>
+
+						</span>
+						<br>
+						</div>
+
+						<div class='item' >
+						<span>
+						<input class="myCheckbox" type='checkbox' id="comfortmodetoggle" onchange="window.janus.setsetting('comfortmode', this.checked); "  >
+						<label for="comfortmodetoggle" class="css-label">Comfort Mode</label>
+
+						</span>
+						<br>
+						</div>
+
+
+
+						<div class='item' >
+						<span>
+						<input class="myCheckbox" type='checkbox' id="leapmotionhmdtoggle" onchange="window.janus.setsetting('leapmotionhmd', this.checked); " >
+						<label for="leapmotionhmdtoggle" class="css-label">Leap Motion on HMD</label>
+
+						</span>
+						<br>
+						</div>
+
+					<div class='header'>GRAPHICS</div>
+						<div class='item' >
+						<span>
+
+						Interpupillary Distance: <span id="ipdslidernumber"></span><br>
+						<input step="0.1" class="myslider" type='range' id="ipdslider" min="54" max="74" oninput="window.janus.setsetting('ipd', this.value/1000); document.getElementById('ipdslidernumber').innerHTML=this.value+'mm';" >
+
+
+						</span>
+						<br>
+						</div>
+
+
+
+				</div>
+
+
+
+
+
+				<div class="tabcontainer" id="graphicstabcontainer">
+					<div class='header'>RENDERING</div>
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="antialiasingtoggle" onchange="window.janus.setsetting('antialiasing', this.checked); " >
+					<label for="antialiasingtoggle" class="css-label">Antialiasing (4xMSAA)</label>
+
+					</span>
+					<br>
+					</div>
+
+					<div class='item' >
+					<span>
+
+					Field of View: <span id="fovslidernumber"></span><br>
+					<input class="myslider" type='range' id="fovslider" min="50" max="120" oninput="window.janus.setsetting('fov', this.value); document.getElementById('fovslidernumber').innerHTML=this.value;" >
+
+
+					</span>
+					<br>
+					</div>
+
+
+					<div class='header'>CONTENT</div>
+
+
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="assetshaderstoggle" onchange="window.janus.setsetting('assetshaders', this.checked); "  >
+					<label for="assetshaderstoggle" class="css-label">Custom Room Shaders</label>
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+
+				</div>
+
+
+
+
+				<div class="tabcontainer" id="interfacetabcontainer">
+					<div class='header'>VISUAL</div>
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="crosshairtoggle" onchange="window.janus.setsetting('crosshair', this.checked); "  >
+					<label for="crosshairtoggle" class="css-label">Crosshair</label>
+
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="hidemenutoggle" onchange="window.janus.setsetting('hidemenu', this.checked); "  >
+					<label for="hidemenutoggle" class="css-label">Hide UI on Unfocus</label>
+
+					</span>
+					<br>
+					</div>
+
+
+					
+					
+					
+					
+
+
+					<div class='header'>AUDIO</div>
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="soundstoggle" onchange="window.janus.setsetting('sounds', this.checked); " >
+					<label for="soundstoggle" class="css-label">Interaction Sounds</label>
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+					<div class='item' >
+					<span>
+
+					Environment Volume: <span id="volumeenvslidernumber"></span><br>
+					<input class="myslider" type='range' id="volumeenvslider" min="0" max="100" onchange="window.janus.setsetting('volumeenv', this.value); document.getElementById('volumeenvslidernumber').innerHTML=this.value;" >
+
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="positionalenvtoggle" onchange="window.janus.setsetting('positionalenv', this.checked); "  >
+					<label for="positionalenvtoggle" class="css-label">Environment Positional Audio</label>
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+					<div class='item' >
+					<span>
+					Voice Chat Volume: <span id="volumevoipslidernumber"></span><br>
+					<input class="myslider" type='range' id="volumevoipslider" min="0" max="100" onchange="window.janus.setsetting('volumevoip', this.value); document.getElementById('volumevoipslidernumber').innerHTML=this.value;" >
+
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="positionalvoiptoggle" onchange="window.janus.setsetting('positionalvoip', this.checked); "  >
+					<label for="positionalvoiptoggle" class="css-label">Voice Positional Audio</label>
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+					<div class='item' >
+					<span>
+
+					Mic Volume: <span id="volumemicslidernumber"></span><br>
+					<input class="myslider" type='range' id="volumemicslider" min="0" max="100" onchange="window.janus.setsetting('volumemic', this.value); document.getElementById('volumemicslidernumber').innerHTML=this.value;" >
+
+
+					</span>
+					<br>
+					</div>
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="micalwaysontoggle" onchange="window.janus.setsetting('micalwayson', this.checked); "  >
+					<label for="micalwaysontoggle" class="css-label">Mic Always On</label>
+
+					</span>
+					<br>
+					</div>
+
+					<div class='item' >
+					<span>
+
+					Mic Sensitivity (dB): <span id="micsensitivityslidernumber"></span><br>
+					<input class="myslider" type='range' id="micsensitivityslider" min="-100" max="0" onchange="window.janus.setsetting('micsensitivity', this.value); document.getElementById('micsensitivityslidernumber').innerHTML=this.value;" >
+
+					</span>
+					<br>
+					</div>
+
+
+					<div class='item' >
+					<span>
+
+					Playback Device: <div class="device" id="playbackdevice" onclick="var arrow = (document.getElementById('playbackdevicelist').style.display == 'block')?'&#9660;':'&#9650;'; document.getElementById('playbackdevice').innerHTML = parent.window.janus.getsetting('playbackdevice') + arrow; document.getElementById('playbackdevicelist').style.display = (document.getElementById('playbackdevicelist').style.display == 'block')?'none':'block';"></div>
+					<div class="devicelist" id="playbackdevicelist" onclick="var arrow = (document.getElementById('playbackdevicelist').style.display == 'block')?'&#9660;':'&#9650;'; document.getElementById('playbackdevice').innerHTML = parent.window.janus.getsetting('playbackdevice') + arrow; document.getElementById('playbackdevicelist').style.display = (document.getElementById('playbackdevicelist').style.display == 'block')?'none':'block';">
+						<div class="device_list" id="playback_list" >
+						</div>
+					</div>
+
+					</span>
+					<br>
+					</div>
+
+
+
+					<div class='item' >
+					<span>
+
+					Capture Device<span id="capturedevicel"></span>: <div id="capturedevice" class="device" onclick="var arrow = (document.getElementById('capturedevicelist').style.display == 'block')?'&#9660;':'&#9650;'; document.getElementById('capturedevice').innerHTML = parent.window.janus.getsetting('capturedevice') + arrow; document.getElementById('capturedevicelist').style.display = (document.getElementById('capturedevicelist').style.display == 'block')?'none':'block';"></div>
+					<div class="devicelist" id="capturedevicelist"  onclick="var arrow = (document.getElementById('capturedevicelist').style.display == 'block')?'&#9660;':'&#9650;'; document.getElementById('capturedevice').innerHTML = parent.window.janus.getsetting('capturedevice') + arrow; document.getElementById('capturedevicelist').style.display = (document.getElementById('capturedevicelist').style.display == 'block')?'none':'block';">
+						<div class="device_list" id="capture_list">
+						</div>
+					</div>
+
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+					<div style="display:none;" class='item' id="secondarycapturedevice_div">
+					<span>
+
+					Capture Device R: <div class="device" id="secondarycapturedevice" onclick="var arrow = (document.getElementById('secondarycapturedevicelist').style.display == 'block')?'&#9660;':'&#9650;'; document.getElementById('secondarycapturedevice').innerHTML = parent.window.janus.getsetting('secondarycapturedevice') + arrow; document.getElementById('secondarycapturedevicelist').style.display = (document.getElementById('secondarycapturedevicelist').style.display == 'block')?'none':'block';"></div>
+					<div class="devicelist" id="secondarycapturedevicelist" onclick="var arrow = (document.getElementById('secondarycapturedevicelist').style.display == 'block')?'&#9660;':'&#9650;'; document.getElementById('secondarycapturedevice').innerHTML = parent.window.janus.getsetting('secondarycapturedevice') + arrow; document.getElementById('secondarycapturedevicelist').style.display = (document.getElementById('secondarycapturedevicelist').style.display == 'block')?'none':'block';">
+						<div class="device_list" id="secondary_capture_list">
+						</div>
+					</div>
+
+
+					</span>
+					<br>
+					</div>
+
+
+
+				</div>
+
+
+
+
+				<div class="tabcontainer" id="developertabcontainer">
+					<div class='header'>BUILDING</div>
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="editmodetoggle" onchange="window.janus.setsetting('editmode', this.checked); "  >
+					<label for="editmodetoggle" class="css-label">Edit Mode</label>
+
+					</span>
+					<br>
+					</div>
+
+					
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="editmodeiconstoggle" onchange="window.janus.setsetting('editmodeicons', this.checked); "  >
+					<label for="editmodeiconstoggle" class="css-label">Edit Mode Icons</label>
+
+					</span>
+					<br>
+					</div>					
+					
+					
+					
+					
+					<div class='header'>SYSTEM</div>
+
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="downloadcachetoggle" onchange="window.janus.setsetting('downloadcache', this.checked); "  >
+					<label for="downloadcachetoggle" class="css-label">Cache Content</label>
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+					<div class='item' >
+					<span>
+
+					Maximum Memory Usage: <span id="maxmemoryslidernumber"></span><br>
+					<input class="myslider" type='range' id="maxmemoryslider" min="1024" max="8192" oninput="window.janus.setsetting('maxmemory', this.value); document.getElementById('maxmemoryslidernumber').innerHTML=this.value+'MB';" >
+
+
+					</span>
+					<br>
+					</div>
+
+
+
+
+
+					<div class='header'>SCRIPTING</div>
+
+					<div class='item' >
+					<span>
+					<input class="myCheckbox" type='checkbox' id="jsdebuggertoggle" onchange="window.janus.setsetting('jsdebugger', this.checked); " >
+					<label for="jsdebuggertoggle" class="css-label">Javascript Debugger</label>
+
+
+
+					</span>
+					<br>
+					</div>
+
+
+
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+</body>
+</html>

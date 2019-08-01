@@ -1,0 +1,35 @@
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>JanusVR Inventory Settings</title>
+  <meta name="description" content="JanusVR Inventory Settings">
+  <meta name="author" content="JanusVR Inc.">
+  <script src="../../scripts/tabs.js"></script>
+  <script src="../../skins/theme.js"></script>
+  <link rel="stylesheet" type="text/css" href="../../skins/oneironaut/app.css" />
+
+
+  <style>
+
+  </style>
+  
+
+
+ <script>
+  function load() {
+    document.getElementById("invserverform").value = parent.window.janus.getsetting('inventoryservers');
+  }
+ </script>
+</head>
+<body onLoad="load()" >
+<div class='item' >
+<span>
+Inventory servers (comma separated):<br>
+<textarea cols="54" rows="3" type='text' id="invserverform" oninput="window.janus.setsetting('inventoryservers', this.value);"  ></textarea>
+</span>
+
+</div>	
+</body>
+</html>

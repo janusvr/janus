@@ -1,0 +1,103 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>JanusVR Interface</title>
+  <meta name="description" content="JanusVR Interface">
+  <meta name="author" content="JanusVR Inc.">
+  <script src="../../scripts/tabs.js"></script>
+  <script src="../../skins/theme.js"></script>
+  <script src="../../scripts/partylistgen.js"></script>
+ 
+  <script>
+  
+
+  
+   window.onload = function () {
+  initializeAppTheme("../../")
+  tabSelect("maintabcontainer","maintabbutton")
+  window.onresize()
+
+  setRegularPartyUpdate(document.getElementById("partycontainer"),"bookmarks",5000,0); //create a party list based on certain data to a certain container
+  setRegularPartyUpdate(document.getElementById("workspacecontainer"),"workspaces",10000,0); //create a party list based on certain data to a certain container
+
+  }
+  </script>
+  
+
+  
+</head>
+
+<body >
+
+<div class="windowcontainer" style="height:calc(100% - 36px);">
+
+<div class="tabrow unselectable" id="tabrow">
+
+
+	<div class="tabbutton" id="maintabbutton" onmousedown="tabSelect('maintabcontainer','maintabbutton')">ONLINE</div></li>
+
+	<div class="tabbutton" id="workspacetabbutton" onmousedown="tabSelect('workspacetabcontainer','workspacetabbutton')">LOCAL</div></li>
+
+
+</div>
+
+
+<div class="windowarea unselectable" id="windowarea" style="background-image: url(../../backgrounds/stars.png);background-size:cover;background-attachment:fixed;background-position:center;" >
+		
+					
+					
+
+
+				<div class="tabcontainer" id="maintabcontainer" >	
+						
+						
+							<div id="partycontainer"> 							
+							</div>			
+
+				</div>							
+					
+
+				<div class="tabcontainer" id="workspacetabcontainer" >	
+						
+						
+							<div id="workspacecontainer"> 							
+							</div>			
+
+				</div>		
+					
+					
+		</div>			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+</div>
+
+
+
+</body>
+</html>

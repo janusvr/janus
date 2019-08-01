@@ -1,0 +1,1 @@
+include('previewers/jpg.js');

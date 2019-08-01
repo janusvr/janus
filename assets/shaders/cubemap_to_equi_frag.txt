@@ -1,0 +1,83 @@
+#version 330 core
+#define MAX_JOINTS 128
+
+uniform sampler2D iTexture0; // Albedo
+uniform sampler2D iTexture1; // Specular
+uniform sampler2D iTexture2; // Smoothness
+uniform sampler2D iTexture3; // Normal
+uniform sampler2D iTexture4; // Height
+uniform sampler2D iTexture5; // Occulusion
+uniform sampler2D iTexture6; // Emission
+uniform sampler2D iTexture7; // Detail Mask
+uniform sampler2D iTexture8; // Detail Albedo
+uniform sampler2D iTexture9; // Detail Normal
+uniform samplerCube iCubeTexture0; // Skybox
+uniform samplerCube iCubeTexture1; // Skybox Radiance
+uniform samplerCube iCubeTexture2; // Skybox Irradiance
+
+uniform vec4 iLeftEye;
+uniform vec4 iMouse;
+uniform vec4 iResolution;
+uniform vec4 iGlobalTime;
+
+uniform mat4 iMiscRoomData;
+uniform vec4 iPlayerPosition;
+uniform vec4 iUseClipPlane;
+uniform vec4 iClipPlane;
+uniform vec4 iFogEnabled;
+uniform vec4 iFogMode;
+uniform vec4 iFogDensity;
+uniform vec4 iFogStart;
+uniform vec4 iFogEnd;
+uniform vec4 iFogCol;
+uniform mat4 iRoomMatrix;
+
+uniform mat4 iMiscObjectData;
+uniform vec4 iConstColour;
+uniform vec4 iChromaKeyColour;
+uniform vec4 iUseLighting;
+uniform vec4 iObjectPickID;
+uniform mat4 iModelMatrix;
+uniform mat4 iViewMatrix;
+uniform mat4 iProjectionMatrix;
+uniform mat4 iInverseViewMatrix;
+uniform mat4 iModelViewMatrix;
+uniform mat4 iModelViewProjectionMatrix;
+uniform mat4 iTransposeInverseModelMatrix;
+uniform mat4 iTransposeInverseModelViewMatrix;
+uniform vec4 iBlend;
+uniform vec4 iUseSkelAnim;
+uniform mat4 iSkelAnimJoints[MAX_JOINTS];
+
+uniform vec4 iAmbient;
+uniform vec4 iDiffuse;
+uniform vec4 iSpecular;
+uniform vec4 iShininess;
+uniform vec4 iUseTexture[4];
+
+// Fragment Shader Inputs
+smooth in vec3 iPosition;
+smooth in vec3 iPositionWorld;
+smooth in vec3 iPositionCamera;
+smooth in vec3 iNormal;
+smooth in vec3 iNormalWorld;
+smooth in vec3 iNormalCamera;
+smooth in vec3 iTangent;
+smooth in vec3 iBitangent;
+smooth in vec2 iTexCoord0;
+smooth in vec2 iTexCoord1;
+smooth in vec2 iTexCoord2;
+smooth in vec2 iTexCoord3;
+
+layout(location = 0) out vec4 out_color;
+
+void main()
+{
+    //use fragment position to compute a theta, phi for sampling from the cubemap
+    float theta = 6.28318-gl_FragCoord.x/8192.0*6.28318;
+    float phi = 3.14159-gl_FragCoord.y/4096.0*3.14159;
+ 
+    vec3 v = vec3(sin(phi) * cos(theta), cos(phi), sin(phi) * sin(theta));
+    vec4 color = vec4(texture(iCubeTexture0, v));
+    out_color = clamp(color,0.0,1.0);
+}

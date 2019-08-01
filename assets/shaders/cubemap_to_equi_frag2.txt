@@ -1,0 +1,39 @@
+#version 330 core
+
+uniform sampler2D iTexture0; // Albedo
+uniform sampler2D iTexture1; // Specular
+uniform sampler2D iTexture2; // Smoothness
+uniform sampler2D iTexture3; // Normal
+uniform sampler2D iTexture4; // Height
+uniform sampler2D iTexture5; // Occulusion
+uniform sampler2D iTexture6; // Emission
+uniform sampler2D iTexture7; // Detail Mask
+uniform sampler2D iTexture8; // Detail Albedo
+uniform sampler2D iTexture9; // Detail Normal
+uniform samplerCube iCubeTexture0; // Skybox
+uniform samplerCube iCubeTexture1; // Skybox Radiance
+uniform samplerCube iCubeTexture2; // Skybox Irradiance
+uniform samplerCube iCubeTexture3; // Equi
+
+uniform vec4 iResolution;
+
+// Fragment Shader outputs
+layout(location = 0) out vec4 out_color;
+
+#define PI  3.141592653589793
+#define TAU 6.283185307179587
+
+void main()
+{
+	//use fragment position to compute a theta, phi for sampling from the cubemap
+	vec2 tex_coords = vec2(PI + gl_FragCoord.x / iResolution.z * TAU, gl_FragCoord.y / iResolution.w * PI);
+	float theta = tex_coords.y;
+	float phi = tex_coords.x;
+	vec3 unit = vec3(0.0, 0.0, 0.0);
+
+	unit.x = sin(phi) * sin(theta) * -1.0;
+	unit.y = cos(theta);
+	unit.z = cos(phi) * sin(theta) * -1.0;
+
+    out_color = vec4(texture(iCubeTexture3, unit).rgb, 1.0);
+}

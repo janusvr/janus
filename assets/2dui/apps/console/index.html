@@ -1,0 +1,343 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>JanusVR Interface Settings Menu</title>
+  <meta name="description" content="JanusVR Interface Settings Menu">
+  <meta name="author" content="JanusVR Inc.">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script src="../../scripts/tabs.js"></script>
+  <script src="../../skins/theme.js"></script>
+  <script src="../../scripts/cookiemanagement.js"></script>
+  <script>
+
+  function setDefaults() {
+
+
+  //set all the default booleans
+
+  //set all the default values
+
+  
+  
+  }
+  
+  
+  
+  
+  function generateRandomNumber(start,limit) {
+  return Math.floor(Math.random() * limit) + start; 
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  function printSessionQuote() {
+  var d = new Date();
+  var n = d.getHours();
+  
+  if ((n >= 12) && (n < 18)) //If time is after/equal to NOON or before to 6PM
+  {
+	  var sessionquotes = [
+	  "Remember to get up, stretch, and go outside.",":)","A million tiny steps lead to something big.",
+	  ":D","Hmm...","Keep up the good work.","Thank you.",":p","","Don't be afraid to ask for help.","Can't wait to see what you're working on :p","Hehe...","Let's get started!",
+	  "Hope you're well today!","How's the weather outside?","","","","","",""
+	  ]
+  }
+   if ((n >= 18)) //If time is after/equal 6PM 
+  {
+	  var sessionquotes = ["Hope you're having a good night.",":p","What phase is the moon tonight?","Can you see the stars tonight?",
+	  "Can't wait to see what you're working on :p","Hehe...","Let's get started!","A million tiny steps lead to something big.",
+	  "How is the weather tonight?",":)","","","","","",""
+	  
+	  ]
+  } 
+  
+   if ((n <= 4)) //If time is before/equal to 4AM
+  {
+	  var sessionquotes = [
+	  "Don't mind me... I'm just snoozing...","You're still up?","With plenty of rest the solution will arise.","","","","","Don't wear yourself out.","It's "+n+" in the morning, you should rest.",":)",":p",":D","","zZz...",
+	  "Hope you're feeling well.","u_u... zZzZzZz...","","","","","",""
+	  
+	  ]
+  }   
+  
+  if ((n > 4) && (n < 12)) //If time is before NOON and after 4 AM
+  {
+	  var sessionquotes = [
+	  "The sun is rising soon!","I hope you're having a good morning.",":p",":)","Have you had breakfast?","Good morning!","Have a wonderful morning.","(yawn...) Oh, good morning.","I'm in the mood for bacon and eggs...",
+	  "I could go for some coffee.","Do you drink coffee?","Either you woke up early or haven't slept yet... hehe.","Morning :p","Good morrow.","Yo!",";D","c:","","How're things?","","","","","",""
+	  ]
+  }  
+  
+  
+  var myquote = sessionquotes[generateRandomNumber(0,sessionquotes.length)];
+
+  if (myquote.length > 0)
+  {
+	parent.logToConsole("<b>"+myquote+"</b>")
+  }
+  
+  }
+  
+  
+  
+  
+  
+  window.onload = function () {
+  setCookie("consoledata","","100000000")	
+   initializeAppTheme("../../");
+  tabSelect("logtabcontainer","logtabbutton")
+  window.onresize()
+  setDefaults() 
+  printSessionQuote();
+  }
+
+  
+  
+   window.onresize = function(event) { //make sure the window area stays a consistent size
+
+
+ 
+ if (document.getElementById("tabrow").offsetWidth >= 200) //if you change the 200 here, also change the min-width of the window containing it. this is to prevent flicker when vertically resizing a minimally (width) sized window
+ {
+document.getElementById("windowarea").style.height = "calc(100% - "+(document.getElementsByClassName("tabrow")[0].offsetHeight+3)+"px)";	
+ }
+};
+
+
+
+var logging = 1; 
+function toggleLogging() {
+	if (logging == 1)
+	{
+	
+		logging = 0;
+		document.getElementById("logtext").setAttribute("style","-webkit-filter:hue-rotate(180deg);")
+		parent.logToConsole("===-LOGGING CEASED-===")
+		updateConsole();
+	}
+	else
+	{
+		logging = 1;
+		document.getElementById("logtext").setAttribute("style","")
+	parent.logToConsole("===+LOGGING ENABLED+===")
+	}
+	
+}
+
+  
+ function updateConsole() {
+ 
+
+ 		 if (parent.getCookie("consoledata") != "")
+		 {
+		 document.getElementById("logtext").innerHTML += "<br>*"+parent.getCookie("consoledata");
+		 parent.setCookie("consoledata","","100000000")	
+		 var objDiv = document.getElementById("logtabcontainer");
+		 objDiv.scrollTop = objDiv.scrollHeight;
+		 }
+
+ }
+
+
+  
+  
+   setInterval(function() {
+		 
+		if (logging == 1)
+		{		 
+		updateConsole();
+		}
+		else
+		{
+		parent.setCookie("consoledata","","100000000")	
+		}
+	 
+
+   //update variables
+   document.getElementById("networkstatus").innerHTML = "Network Status: "+parent.window.janus.networkstatus;
+   //update variables
+   document.getElementById("networkerror").innerHTML = "Network Error: "+parent.window.janus.networkerror;
+    //update variables
+   document.getElementById("progressstatus").innerHTML = "Room Load Progress: "+parent.window.janus.roomprogress();
+           
+     document.getElementById("currentkey").innerHTML = "Current Key Pressed: "+parent.window.janus.currentkey;
+
+           
+     document.getElementById("uifocus").innerHTML = "UI focus: "+parent.window.janus.hasFocus();
+        
+	     document.getElementById("active").innerHTML = "Active Element: "+parent.document.activeElement.tagName;
+         
+		 
+
+		 
+   }, 100); 
+
+  
+    </script>
+  
+<style>
+
+#logtext {
+
+
+padding:16px 16px 16px 16px;
+color:#61BE6C;
+font-family: "Open Sans";
+}
+
+#logtext b {
+color:#6C8F87;
+}
+
+#logtabcontainer 
+{
+height: calc(100% - 43px) !important;
+background-color:#0F161B;
+height:100%;
+
+
+
+ overflow: auto;
+    user-select: auto;
+	-webkit-user-select: auto;
+}
+::selection {
+  background: #61BE6C;
+  color:#0F161B;
+}
+</style>
+  
+</head>
+
+<body >
+
+<div class="windowcontainer">
+
+<div class="tabrow unselectable" id="tabrow">
+	<div class="tabbutton" id="logtabbutton" onmousedown="tabSelect('logtabcontainer','logtabbutton')">LOG</div></li>
+	<div class="tabbutton" id="maintabbutton" onmousedown="tabSelect('maintabcontainer','maintabbutton')">NETWORK</div></li>
+	<div class="tabbutton" id="roomtabbutton" onmousedown="tabSelect('roomtabcontainer','roomtabbutton')">ROOM</div></li>
+	<div class="tabbutton" id="misctabbutton" onmousedown="tabSelect('misctabcontainer','misctabbutton')">MISC</div></li>
+
+</div>
+
+
+<div class="windowarea unselectable" id="windowarea">
+
+
+					
+					
+				<div class="tabcontainer" id="logtabcontainer">
+				<div id="logtext">
+				* JanusVR Console v0.1 has begun listening to the client!<br>
+				You can safely close the console without losing data.<br>
+				</div>
+				<div id="bottombar" class="bottombar">
+				
+				<div class="button" style="float:right;" onmousedown="toggleLogging()">
+				ON/OFF
+				</div>
+
+							
+				</div>
+				</div>
+					
+								
+					
+					
+					
+				<div class="tabcontainer" id="maintabcontainer">
+					<div class='header'>STATUS</div>
+
+					<div class='item' id="networkstatus" >
+					</div>	
+
+					<div class='item' id="networkerror" >
+					</div>						
+
+				</div>
+					
+			
+
+				<div class="tabcontainer" id="roomtabcontainer">
+					<div class='header'>STATUS</div>
+
+					<div class='item' id="progressstatus" >
+					</div>	
+
+						
+
+				</div>
+					
+								
+					
+				<div class="tabcontainer" id="misctabcontainer">
+					<div class='header'>STATUS</div>
+
+					<div class='item' >Splines: Reticulated
+					</div>	
+
+					<div class='item' id="currentkey" >
+					</div>								
+
+					<div class='item' id="uifocus" >
+					</div>
+
+					<div class='item' id="active" >
+					</div>							
+										
+					
+				</div>
+					
+												
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		</div>			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+</div>
+
+
+
+</body>
+</html>

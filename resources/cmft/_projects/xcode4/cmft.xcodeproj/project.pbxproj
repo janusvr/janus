@@ -1,0 +1,467 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22FF276F2BAB62962320344A /* allocator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 42F91F507011500635B11A47 /* allocator.cpp */; };
+		7AAF09811BF867380EAD2190 /* clcontext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 456229317C20109528F95BA3 /* clcontext.cpp */; };
+		58E80E7A39532711298B4D79 /* print.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CCB252463823123177310B1 /* print.cpp */; };
+		23A92E8963FF3F101644770D /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6BA61E56676A49A7144A32D3 /* stb_image.cpp */; };
+		69A8497C477D4DA7088C5DC2 /* cubemapfilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4F695C2B04A936D425D218F4 /* cubemapfilter.cpp */; };
+		433570691E3A7FFD72590EBF /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E0D6FE1643C14E727CD54C7 /* image.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		60D3026E24A245416DF321DC /* allocator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "allocator.h"; path = "../../include/cmft/allocator.h"; sourceTree = "<group>"; };
+		50171B6706AF37CA4DF61542 /* clcontext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "clcontext.h"; path = "../../include/cmft/clcontext.h"; sourceTree = "<group>"; };
+		11D72C360D0C16602A3652F9 /* cubemapfilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "cubemapfilter.h"; path = "../../include/cmft/cubemapfilter.h"; sourceTree = "<group>"; };
+		71BE11633F967BB1089F62CC /* image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "image.h"; path = "../../include/cmft/image.h"; sourceTree = "<group>"; };
+		061047D64B327FC75F826A1A /* print.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "print.h"; path = "../../include/cmft/print.h"; sourceTree = "<group>"; };
+		42F91F507011500635B11A47 /* allocator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "allocator.cpp"; path = "../../src/cmft/allocator.cpp"; sourceTree = "<group>"; };
+		456229317C20109528F95BA3 /* clcontext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "clcontext.cpp"; path = "../../src/cmft/clcontext.cpp"; sourceTree = "<group>"; };
+		41B435B4773F3798636B04B8 /* clcontext_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "clcontext_internal.h"; path = "../../src/cmft/clcontext_internal.h"; sourceTree = "<group>"; };
+		05CB196B012931777C01244A /* cl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "cl.h"; path = "../../src/cmft/common/cl.h"; sourceTree = "<group>"; };
+		65C241644D7C61E351F97675 /* commandline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "commandline.h"; path = "../../src/cmft/common/commandline.h"; sourceTree = "<group>"; };
+		3D864CA97FF6597F33E10EA3 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "config.h"; path = "../../src/cmft/common/config.h"; sourceTree = "<group>"; };
+		7B0F75964458724F2D2E27C4 /* fpumath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "fpumath.h"; path = "../../src/cmft/common/fpumath.h"; sourceTree = "<group>"; };
+		770728A14E291B1014254495 /* halffloat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "halffloat.h"; path = "../../src/cmft/common/halffloat.h"; sourceTree = "<group>"; };
+		74CA19F15E0075F44B685A02 /* handlealloc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "handlealloc.h"; path = "../../src/cmft/common/handlealloc.h"; sourceTree = "<group>"; };
+		1A3F312B1B6767BB130E6D60 /* os.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "os.h"; path = "../../src/cmft/common/os.h"; sourceTree = "<group>"; };
+		5E3050943A0A5E272A146DEC /* platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "platform.h"; path = "../../src/cmft/common/platform.h"; sourceTree = "<group>"; };
+		6CCB252463823123177310B1 /* print.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "print.cpp"; path = "../../src/cmft/common/print.cpp"; sourceTree = "<group>"; };
+		6BA61E56676A49A7144A32D3 /* stb_image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "stb_image.cpp"; path = "../../src/cmft/common/stb_image.cpp"; sourceTree = "<group>"; };
+		2C71747547A2667B529C71B6 /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "stb_image.h"; path = "../../src/cmft/common/stb_image.h"; sourceTree = "<group>"; };
+		54683F6716DA37EB708B2E4D /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "timer.h"; path = "../../src/cmft/common/timer.h"; sourceTree = "<group>"; };
+		489C49733CC801F070856653 /* utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "utils.h"; path = "../../src/cmft/common/utils.h"; sourceTree = "<group>"; };
+		4F695C2B04A936D425D218F4 /* cubemapfilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "cubemapfilter.cpp"; path = "../../src/cmft/cubemapfilter.cpp"; sourceTree = "<group>"; };
+		44B434FD52380C561B7924D4 /* cubemaputils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "cubemaputils.h"; path = "../../src/cmft/cubemaputils.h"; sourceTree = "<group>"; };
+		7E0D6FE1643C14E727CD54C7 /* image.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "image.cpp"; path = "../../src/cmft/image.cpp"; sourceTree = "<group>"; };
+		665041C36AEB6AFA789710BE /* radiance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "radiance.h"; path = "../../src/cmft/radiance.h"; sourceTree = "<group>"; };
+		74DD46E63DD3619B7F5A5983 /* libcmftDebug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libcmftDebug.a"; path = "libcmftDebug.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		063A3D696F7371252863680B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5E3F77CA04897DFF45ED5B5D /* cmft */ = {
+			isa = PBXGroup;
+			children = (
+				672D6C9C09F2773B23350A5F /* include */,
+				608840556C88052B05975A7C /* src */,
+				03EE623F5A3A4B6B2FE662C6 /* Products */,
+			);
+			name = "cmft";
+			sourceTree = "<group>";
+		};
+		672D6C9C09F2773B23350A5F /* include */ = {
+			isa = PBXGroup;
+			children = (
+				3F36686679B617AC1EE860C1 /* cmft */,
+			);
+			name = "include";
+			sourceTree = "<group>";
+		};
+		3F36686679B617AC1EE860C1 /* cmft */ = {
+			isa = PBXGroup;
+			children = (
+				60D3026E24A245416DF321DC /* allocator.h */,
+				50171B6706AF37CA4DF61542 /* clcontext.h */,
+				11D72C360D0C16602A3652F9 /* cubemapfilter.h */,
+				71BE11633F967BB1089F62CC /* image.h */,
+				061047D64B327FC75F826A1A /* print.h */,
+			);
+			name = "cmft";
+			sourceTree = "<group>";
+		};
+		608840556C88052B05975A7C /* src */ = {
+			isa = PBXGroup;
+			children = (
+				270755AE75E32DB70D7943DA /* cmft */,
+			);
+			name = "src";
+			sourceTree = "<group>";
+		};
+		270755AE75E32DB70D7943DA /* cmft */ = {
+			isa = PBXGroup;
+			children = (
+				42F91F507011500635B11A47 /* allocator.cpp */,
+				456229317C20109528F95BA3 /* clcontext.cpp */,
+				41B435B4773F3798636B04B8 /* clcontext_internal.h */,
+				7B72266524096B84766B59BA /* common */,
+				4F695C2B04A936D425D218F4 /* cubemapfilter.cpp */,
+				44B434FD52380C561B7924D4 /* cubemaputils.h */,
+				7E0D6FE1643C14E727CD54C7 /* image.cpp */,
+				665041C36AEB6AFA789710BE /* radiance.h */,
+			);
+			name = "cmft";
+			sourceTree = "<group>";
+		};
+		7B72266524096B84766B59BA /* common */ = {
+			isa = PBXGroup;
+			children = (
+				05CB196B012931777C01244A /* cl.h */,
+				65C241644D7C61E351F97675 /* commandline.h */,
+				3D864CA97FF6597F33E10EA3 /* config.h */,
+				7B0F75964458724F2D2E27C4 /* fpumath.h */,
+				770728A14E291B1014254495 /* halffloat.h */,
+				74CA19F15E0075F44B685A02 /* handlealloc.h */,
+				1A3F312B1B6767BB130E6D60 /* os.h */,
+				5E3050943A0A5E272A146DEC /* platform.h */,
+				6CCB252463823123177310B1 /* print.cpp */,
+				6BA61E56676A49A7144A32D3 /* stb_image.cpp */,
+				2C71747547A2667B529C71B6 /* stb_image.h */,
+				54683F6716DA37EB708B2E4D /* timer.h */,
+				489C49733CC801F070856653 /* utils.h */,
+			);
+			name = "common";
+			sourceTree = "<group>";
+		};
+		03EE623F5A3A4B6B2FE662C6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				74DD46E63DD3619B7F5A5983 /* libcmftDebug.a */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		52703A1C2A21600C50654FF7 /* cmft */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 292E749B17C47B6600F2333E /* Build configuration list for PBXNativeTarget "cmft" */;
+			buildPhases = (
+				203B7EFF2320047713E74AED /* Resources */,
+				593F571C3B57777A57192DB0 /* Sources */,
+				063A3D696F7371252863680B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "cmft";
+			productName = "cmft";
+			productReference = 74DD46E63DD3619B7F5A5983 /* libcmftDebug.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "cmft" */;
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 1;
+			mainGroup = 5E3F77CA04897DFF45ED5B5D /* cmft */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				52703A1C2A21600C50654FF7 /* libcmftDebug.a */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		203B7EFF2320047713E74AED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		593F571C3B57777A57192DB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22FF276F2BAB62962320344A /* allocator.cpp in Sources */,
+				7AAF09811BF867380EAD2190 /* clcontext.cpp in Sources */,
+				58E80E7A39532711298B4D79 /* print.cpp in Sources */,
+				23A92E8963FF3F101644770D /* stb_image.cpp in Sources */,
+				69A8497C477D4DA7088C5DC2 /* cubemapfilter.cpp in Sources */,
+				433570691E3A7FFD72590EBF /* image.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6EEA107B715177B370B12D04 /* Debug Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../_build/osx32_xcode4/bin;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "cmftDebug";
+			};
+			name = "Debug Native 32-bit";
+		};
+		67995CDE051A29BF72592BB0 /* Debug Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../_build/osx64_xcode4/bin;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "cmftDebug";
+			};
+			name = "Debug Native 64-bit";
+		};
+		26AF2E94100E3698006C47FA /* Release Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../_build/osx32_xcode4/bin;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "cmftRelease";
+			};
+			name = "Release Native 32-bit";
+		};
+		638643E1646E6B857D390AD5 /* Release Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../_build/osx64_xcode4/bin;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = "cmftRelease";
+			};
+			name = "Release Native 64-bit";
+		};
+		5CD71B4707FF3958266641EE /* Debug Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "i386";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__STDC_LIMIT_MACROS",
+					"__STDC_FORMAT_MACROS",
+					"__STDC_CONSTANT_MACROS",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../dependency/bx/include/compat/osx",
+					"../../dependency",
+					"../../include",
+					"../../src/cmft",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../dependency/lib/osx32_xcode4",
+				);
+				OBJROOT = "../../_build/osx32_xcode4/obj/x32/Debug/cmft";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-stdlib=libc++",
+					"-m32",
+					"-Waddress -Wc++11-compat -Wchar-subscripts -Wcomment -Wformat -Wmissing-braces -Wnonnull -Wparentheses -Wreorder -Wreturn-type -Wsequence-point -Wsign-compare -Wstrict-aliasing -Wstrict-overflow=1 -Wswitch -Wtrigraphs -Wuninitialized -Wunknown-pragmas -Wunused-function -Wunused-label -Wunused-value -Wunused-variable -Wvolatile-register-var -Wempty-body -Wignored-qualifiers -Wmissing-field-initializers -Wsign-compare -Wtype-limits -Wuninitialized -Wunused-parameter -Wcast-qual -Wdisabled-optimization -Wdiv-by-zero -Wendif-labels -Wformat-extra-args -Wformat-security -Wformat-y2k -Wimport -Winit-self -Winvalid-pch -Werror=missing-braces -Wmissing-include-dirs -Wmultichar -Wpacked -Wpointer-arith -Wreturn-type -Wsequence-point -Wsign-compare -Wstrict-aliasing -Wstrict-aliasing=2 -Wshadow -Wwrite-strings -Werror=declaration-after-statement -Werror=implicit-function-declaration -Werror=nested-externs -Werror=old-style-definition -Werror=strict-prototypes -Wno-cast-align -Wno-enum-compare -Wno-unused-function -Wno-variadic-macros -Wno-missing-format-attribute -Wno-inline",
+					"-Wuninitialized -Wconsumed -Wunused-parameter",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../_build/osx32_xcode4/bin";
+			};
+			name = "Debug Native 32-bit";
+		};
+		69372A7C1FBF4E2256D4692D /* Debug Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "x86_64";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__STDC_LIMIT_MACROS",
+					"__STDC_FORMAT_MACROS",
+					"__STDC_CONSTANT_MACROS",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../dependency/bx/include/compat/osx",
+					"../../dependency",
+					"../../include",
+					"../../src/cmft",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../dependency/lib/osx64_xcode4",
+				);
+				OBJROOT = "../../_build/osx64_xcode4/obj/x64/Debug/cmft";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-stdlib=libc++",
+					"-m64",
+					"-Waddress -Wc++11-compat -Wchar-subscripts -Wcomment -Wformat -Wmissing-braces -Wnonnull -Wparentheses -Wreorder -Wreturn-type -Wsequence-point -Wsign-compare -Wstrict-aliasing -Wstrict-overflow=1 -Wswitch -Wtrigraphs -Wuninitialized -Wunknown-pragmas -Wunused-function -Wunused-label -Wunused-value -Wunused-variable -Wvolatile-register-var -Wempty-body -Wignored-qualifiers -Wmissing-field-initializers -Wsign-compare -Wtype-limits -Wuninitialized -Wunused-parameter -Wcast-qual -Wdisabled-optimization -Wdiv-by-zero -Wendif-labels -Wformat-extra-args -Wformat-security -Wformat-y2k -Wimport -Winit-self -Winvalid-pch -Werror=missing-braces -Wmissing-include-dirs -Wmultichar -Wpacked -Wpointer-arith -Wreturn-type -Wsequence-point -Wsign-compare -Wstrict-aliasing -Wstrict-aliasing=2 -Wshadow -Wwrite-strings -Werror=declaration-after-statement -Werror=implicit-function-declaration -Werror=nested-externs -Werror=old-style-definition -Werror=strict-prototypes -Wno-cast-align -Wno-enum-compare -Wno-unused-function -Wno-variadic-macros -Wno-missing-format-attribute -Wno-inline",
+					"-Wuninitialized -Wconsumed -Wunused-parameter",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../_build/osx64_xcode4/bin";
+			};
+			name = "Debug Native 64-bit";
+		};
+		45306F5758753681670A4927 /* Release Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "i386";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__STDC_LIMIT_MACROS",
+					"__STDC_FORMAT_MACROS",
+					"__STDC_CONSTANT_MACROS",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../dependency/bx/include/compat/osx",
+					"../../dependency",
+					"../../include",
+					"../../src/cmft",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../dependency/lib/osx32_xcode4",
+				);
+				OBJROOT = "../../_build/osx32_xcode4/obj/x32/Release/cmft";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-stdlib=libc++",
+					"-m32",
+					"-Waddress -Wc++11-compat -Wchar-subscripts -Wcomment -Wformat -Wmissing-braces -Wnonnull -Wparentheses -Wreorder -Wreturn-type -Wsequence-point -Wsign-compare -Wstrict-aliasing -Wstrict-overflow=1 -Wswitch -Wtrigraphs -Wuninitialized -Wunknown-pragmas -Wunused-function -Wunused-label -Wunused-value -Wunused-variable -Wvolatile-register-var -Wempty-body -Wignored-qualifiers -Wmissing-field-initializers -Wsign-compare -Wtype-limits -Wuninitialized -Wunused-parameter -Wcast-qual -Wdisabled-optimization -Wdiv-by-zero -Wendif-labels -Wformat-extra-args -Wformat-security -Wformat-y2k -Wimport -Winit-self -Winvalid-pch -Werror=missing-braces -Wmissing-include-dirs -Wmultichar -Wpacked -Wpointer-arith -Wreturn-type -Wsequence-point -Wsign-compare -Wstrict-aliasing -Wstrict-aliasing=2 -Wshadow -Wwrite-strings -Werror=declaration-after-statement -Werror=implicit-function-declaration -Werror=nested-externs -Werror=old-style-definition -Werror=strict-prototypes -Wno-cast-align -Wno-enum-compare -Wno-unused-function -Wno-variadic-macros -Wno-missing-format-attribute -Wno-inline",
+					"-Wuninitialized -Wconsumed -Wunused-parameter",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../_build/osx32_xcode4/bin";
+			};
+			name = "Release Native 32-bit";
+		};
+		2D7464D367B3328E0E925A0C /* Release Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "x86_64";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__STDC_LIMIT_MACROS",
+					"__STDC_FORMAT_MACROS",
+					"__STDC_CONSTANT_MACROS",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../dependency/bx/include/compat/osx",
+					"../../dependency",
+					"../../include",
+					"../../src/cmft",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../dependency/lib/osx64_xcode4",
+				);
+				OBJROOT = "../../_build/osx64_xcode4/obj/x64/Release/cmft";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-Wfatal-errors",
+					"-msse2",
+					"-Wunused-value",
+					"-Wundef",
+					"-stdlib=libc++",
+					"-m64",
+					"-Waddress -Wc++11-compat -Wchar-subscripts -Wcomment -Wformat -Wmissing-braces -Wnonnull -Wparentheses -Wreorder -Wreturn-type -Wsequence-point -Wsign-compare -Wstrict-aliasing -Wstrict-overflow=1 -Wswitch -Wtrigraphs -Wuninitialized -Wunknown-pragmas -Wunused-function -Wunused-label -Wunused-value -Wunused-variable -Wvolatile-register-var -Wempty-body -Wignored-qualifiers -Wmissing-field-initializers -Wsign-compare -Wtype-limits -Wuninitialized -Wunused-parameter -Wcast-qual -Wdisabled-optimization -Wdiv-by-zero -Wendif-labels -Wformat-extra-args -Wformat-security -Wformat-y2k -Wimport -Winit-self -Winvalid-pch -Werror=missing-braces -Wmissing-include-dirs -Wmultichar -Wpacked -Wpointer-arith -Wreturn-type -Wsequence-point -Wsign-compare -Wstrict-aliasing -Wstrict-aliasing=2 -Wshadow -Wwrite-strings -Werror=declaration-after-statement -Werror=implicit-function-declaration -Werror=nested-externs -Werror=old-style-definition -Werror=strict-prototypes -Wno-cast-align -Wno-enum-compare -Wno-unused-function -Wno-variadic-macros -Wno-missing-format-attribute -Wno-inline",
+					"-Wuninitialized -Wconsumed -Wunused-parameter",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../../_build/osx64_xcode4/bin";
+			};
+			name = "Release Native 64-bit";
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		292E749B17C47B6600F2333E /* Build configuration list for PBXNativeTarget "libcmftDebug.a" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EEA107B715177B370B12D04 /* Debug Native 32-bit */,
+				67995CDE051A29BF72592BB0 /* Debug Native 64-bit */,
+				26AF2E94100E3698006C47FA /* Release Native 32-bit */,
+				638643E1646E6B857D390AD5 /* Release Native 64-bit */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug Native 32-bit";
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "cmft" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CD71B4707FF3958266641EE /* Debug Native 32-bit */,
+				69372A7C1FBF4E2256D4692D /* Debug Native 64-bit */,
+				45306F5758753681670A4927 /* Release Native 32-bit */,
+				2D7464D367B3328E0E925A0C /* Release Native 64-bit */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug Native 32-bit";
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

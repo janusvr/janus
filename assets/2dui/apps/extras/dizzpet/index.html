@@ -1,0 +1,543 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Dizzpet</title>
+  <meta name="description" content="JanusVR Interface Settings Menu">
+  <meta name="author" content="JanusVR Inc.">
+  <script src="../../../scripts/tabs.js"></script>
+  <script src="../../../skins/theme.js"></script>
+  <script>
+  function clickSound() {
+  document.getElementById('sound1').play();
+  }
+    function levelSound() {
+  document.getElementById('sound2').play();
+  }
+     
+ function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+
+    var usernumber=0; //in the future maybe make it so people can have multiple dizzpets
+	
+	
+ function savePet() {
+  
+  setCookie(usernumber+"exp",exp,"100000000")
+  setCookie(usernumber+"love",love,"100000000")  
+  setCookie(usernumber+"level",level,"100000000")    
+
+  }
+  
+  function loadPet() {
+  
+  if ( getCookie(usernumber+"love") != "")
+  {
+  love =  parseInt(getCookie(usernumber+"love"), 10);
+  }
+  
+  if ( getCookie(usernumber+"level") != "")
+  {
+  level = parseInt( getCookie(usernumber+"level"), 10);
+  }
+  
+  if ( getCookie(usernumber+"exp") != "")
+  {
+  exp = parseInt( getCookie(usernumber+"exp"), 10);
+  }
+  
+	
+  }
+
+  
+  
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+	var chatphrases = [
+	"ZzZzZz...",//0 start sleep*********
+	"ZzZzZzZz", //1
+	"zZzZzZzZ", //2 stop sleep%%%%%%%%%
+	"c:", //3 start happy chatfatigue faces*********
+	":D", //4 
+	"uwu", //5 
+	"o u o", //6
+	"^_^", //7 
+	":)", //8 
+	"ou~", //9 stop happy chat fatigue faces%%%%%%%%%
+	":|", //10 start meh faces*********
+	"o_o", //11
+	"o_ o", //12
+	"o _o", //13 
+	"u_u", //14 stop meh faces%%%%%%%%%
+	"¬_¬", //15 start wow nice job loser faces*********
+	"T_T", //16 stop wow nice job loser faces%%%%%%%%%
+	"I'm feeling pretty good today...", //17 start happiness*********
+	"I'm happy!", //18
+	"I'm pretty decent right now.", //19
+	"Who made this room? It looks nice.",//20
+	"La la laaaa~", //21
+	"I'm having a good time today.", //22
+	"I'm honestly feeling really nice right now.", //23
+	"I'm doing well! How are you?", //24 stop happiness%%%%%%%%%
+	"Let's do something!", //25 start boredom*********
+	"Let's go somewhere!", //26 
+	"I want to explore...", //27 
+	"Hey, let's visit another website.", //28
+	"We've been sitting still for a while...", //29
+	"I want to do something.", //30
+	"Yawwn...", //31
+	"Hmm...", //32
+	"We gonna do anything?", //33
+	"Ah... boredom!" //34 stop boredom%%%%%%%%%
+	]
+
+  var prevusers=0;
+
+  var prevx;
+  var prevy;
+  var prevz;
+  var dizzpetname="aries"
+  var love=100;
+  var energy=100;
+  var spriteindex=1;
+  var level=0;
+  var exp=0;
+  var chatfatigue=0;
+  loadPet();
+  
+  setInterval(function(){
+
+  //check if anything has changed since the last frame
+  
+  if (( parseInt(parent.window.janus.playerlist[0].pos.x) != parseInt(prevx)) || ( parseInt(parent.window.janus.playerlist[0].pos.y) != parseInt(prevy)) || (parseInt(parent.window.janus.playerlist[0].pos.z) != parseInt(prevz)) )
+  {
+  
+  
+
+	if (exp < 200)
+	{
+	
+	if (level < 100)
+		{
+		exp += 1-(level*0.01);
+		}
+		else
+		{
+		exp += 0.01
+		}
+		
+		
+	}
+	else
+	{
+	exp = 0;
+	level +=1 ;
+	savePet();
+	levelSound();
+	}
+	//update level
+	document.getElementById("levelnumber").innerHTML = "Level: "+level;
+
+
+  if ( (energy < 0) || (parent.window.janus.playerlist[0].pos.y < prevy-5) )
+  {
+  energy = 110;
+  }
+  else
+  {
+  energy = 100;
+  }
+  
+  
+  
+  
+  
+  
+  }
+  
+  
+  
+  
+  if ( parent.window.janus.playerlist.length > prevusers )
+  {
+  energy = 110;
+  }
+  
+  
+  
+  prevx = parent.window.janus.playerlist[0].pos.x;
+  prevy = parent.window.janus.playerlist[0].pos.y;
+  prevz = parent.window.janus.playerlist[0].pos.z;
+  prevusers = parent.window.janus.playerlist.length;
+  
+  
+  //animations================================================
+  
+
+				if (energy > 100)
+				{
+						if (spriteindex != 7)
+						  {
+							spriteindex = 7;
+						  }
+						  else
+						  {
+						  spriteindex = 8;
+						  }
+				}
+				  else if (energy <= 100 && energy > 75) //if idle, do hand thing
+				  {
+				  
+				  
+					if (Math.random() > 0.5)
+					{
+						  if (spriteindex != 2)
+						  {
+							spriteindex = 2;
+						  }
+						  else
+						  {
+						  spriteindex = 1;
+						  }
+					}
+
+				  
+				  
+				  }
+				  else if ((energy < 75) && (energy > 50))
+				  {
+				  
+					if (Math.random() < 0.1)
+					{
+						  if (spriteindex != 4)
+						  {
+							spriteindex = 4;
+						  }
+						  else
+						  {
+						  spriteindex = 3;
+						  }
+					}
+					else
+						{
+
+							spriteindex = 2;
+
+
+						}
+				  
+				  
+				  }
+				   else if ((energy < 50) && (energy > 0))
+				  {
+				  
+				
+						  if (spriteindex !=4 )
+						  {
+						  if (Math.random() < 0.1)
+							{
+							spriteindex = 4;
+							}
+
+						 }
+						  else
+						  {
+						  spriteindex = 3;
+						  }
+					
+
+				  
+				  
+				  
+				  }
+				  else if (energy < 0)
+				  {
+						  if (spriteindex !=5)
+						  {
+							spriteindex = 5;
+						  }
+						  else
+						  {
+						  spriteindex = 6;
+						  }
+
+				  }
+				  
+  
+  
+  
+  //iterate stats
+  energy -= 1;
+  chatfatigue -=1;
+  
+	console.log(energy);
+  
+  //set sprite based on sprite index
+  document.getElementById("dizzpet").src = "images/"+dizzpetname+"/"+spriteindex+".png";
+    document.getElementById("myprogress").style.backgroundSize = ""+(exp)+"% 100%";
+  
+  
+  }, 500);
+  
+
+  
+    window.onload = function() {
+	
+	 initializeAppTheme("../../../")
+    document.getElementById("dizzpet").src = "images/"+dizzpetname+"/"+"1"+".png";
+  
+  //set cookies from file
+   
+  
+
+  
+  
+  
+  }
+  
+
+  
+    window.onunload  = function() {
+  savePet();
+  
+  }
+  
+  
+  
+  
+  var talkvalue="Hey!";
+  function petTalk() {
+  
+	  if (energy < 0)
+	  {
+	  talkvalue = chatphrases[getRandomInt(0, 2)];
+	  }
+  
+	  if (energy > 50 && energy < 100)
+	  {
+	  
+	  
+		if (chatfatigue < 0 )
+		{
+		talkvalue = chatphrases[getRandomInt(17, 24)];
+		chatfatigue = 10
+		}
+		else
+		{
+			talkvalue = chatphrases[getRandomInt(3, 9)];
+		}
+
+	 }
+	  
+  
+  	  if (energy > 0 && energy <= 50)
+	  {
+		if (chatfatigue < 0 )
+		{
+		talkvalue = chatphrases[getRandomInt(25, 34)];
+		chatfatigue = 10
+		}
+		else
+		{
+			talkvalue = chatphrases[getRandomInt(10, 14)];
+		}
+
+	 }
+	  
+  
+  
+  
+  
+  var myfinalstring="'s Dizzpet says: "+talkvalue;
+  console.log(myfinalstring)
+  parent.window.janus.chatsend(myfinalstring);
+  
+  }
+  
+  function slap() {
+  energy = 125;
+  parent.window.janus.chatsend("'s Dizzpet says: Help, I'm being abused...");
+  }
+  
+  
+    </script>
+
+  
+
+    
+<style>
+#dizzpet {
+padding-left: calc(50% - 64px);
+bottom: 48px;
+position:absolute;
+text-align:center;
+width:128px;
+ image-rendering:optimizeSpeed;             /* Legal fallback */
+  image-rendering:-moz-crisp-edges;          /* Firefox        */
+  image-rendering:-o-crisp-edges;            /* Opera          */
+  image-rendering:-webkit-optimize-contrast; /* Safari         */
+  image-rendering:optimize-contrast;         /* CSS3 Proposed  */
+  image-rendering:crisp-edges;               /* CSS4 Proposed  */
+  image-rendering:pixelated;                 /* CSS4 Proposed  */
+  -ms-interpolation-mode:nearest-neighbor;   /* IE8+           */
+}
+
+.windowarea {
+border-width: 0px;
+}
+
+#myprogress
+{
+background-repeat: no-repeat;
+  font-family: "Open Sans Regular";
+color: rgba(215,232,148,1);
+background-image: url('progress.png') ;
+max-width:100%;
+width:calc(100% - 148px);
+  font-size: 12px;
+
+ border-color: rgb(32,70,49);
+ border-width:1px;
+ border-style:solid;
+height:calc(100% - 0px);
+display: inline-block;
+background-color: #2B382C;
+vertical-align: middle;
+padding: 7px 8px;
+margin: 4px 4px;
+
+}
+
+body {
+background-color: rgba(215,232,148,0.25);
+}
+
+.button {
+background-color:rgb(32,70,49);
+color: rgba(215,232,148,1);
+}
+
+.button:hover {
+color:rgb(32,70,49);
+background-color: rgba(215,232,148,1);
+}
+
+
+</style>
+
+</head>
+
+<body >
+
+<div class="windowcontainer">
+
+
+
+<div class="windowarea unselectable" id="windowarea">
+			
+
+				<img id="dizzpet"  />
+				
+			
+				<div id="bottombar" class="bottombar" style="background-color:rgb(82,127,56);border-color:rgb(82,127,56);">
+				
+				<div  id="myprogress"  ><span id="levelnumber">LEVEL:0</marquee></div >
+	
+					<div class="button" style="float:left;" onmousedown="slap()">
+					SLAP
+					</div>
+					<div class="button" style="float:left;" onmousedown="petTalk()">
+					TALK
+					</div>
+				
+		
+				</div>
+									
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		</div>			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+</div>
+
+<audio id="sound1" src="..\..\..\sounds\click.wav" preload="auto"></audio>
+<audio id="sound2" src="levelup.wav" preload="auto"></audio>
+
+</body>
+</html>

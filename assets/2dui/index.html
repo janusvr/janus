@@ -1,0 +1,138 @@
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<title>JanusVR Interface</title>
+	<meta name="description" content="Interface for JanusVR">
+	<meta name="author" content="JanusVR Inc.">
+	<link rel="stylesheet" type="text/css" href="skins/oneironaut/main.css">
+	<script src="skins/theme.js"></script>
+	<script src="scripts/cookiemanagement.js"></script>
+	<script src="scripts/maininterface.js"></script>
+	
+</head>
+
+<body class="unselectable"  >
+	<div id="fader" onclick="window.janus.unfocus();" ></div>
+	<div id="urlwidthtest" ></div>
+
+	<div class="navbar unselectable" id="contain" onmouseleave="togglemenulist('true')">
+	
+	<div class="container " id="buttonscontainer" >
+	  <div >
+		<button onmousemove="showtooltip('Main Menu')" onmouseout="hidetooltip()" class="containerbutton miscbutton" onclick="togglemenulist()"></button>
+		<button onmousemove="showtooltip('Back')" onmouseout="hidetooltip()" class="containerbutton backbutton" onclick="clickBack()"></button>
+		<button onmousemove="showtooltip('Forward')" onmouseout="hidetooltip()"  class="containerbutton forwardsbutton" onclick="clickForwards()"></button>
+		<button onmousemove="showtooltip('Toggle Pocketspace')" onmouseout="hidetooltip()"  class="containerbutton pocketbutton" onclick="clickHome()" ></button>
+	  </div>
+	</div>
+	
+	<div class="urlcontainer" id="urlcontainer" >
+	  <div >
+		<input onkeydown="gotoroomenter()" onfocus="selectURLBar(this)" class="inputfield" id="progressbar" onblur="blururlBar()" type="text"  value="" spellcheck="false" />
+	  </div>
+
+	</div>
+		<div class="menulist unselectable" id="menulist" onclick="togglemenulist('true')" >
+		<ul>
+		<li class="menulisttitle"  > MAIN MENU</li>
+		
+		<li class="menulistbutton"  onclick="toggleWindow(this,600,450,'SETTINGS','apps/settings/index.html','50vw','40vh')"> SETTINGS </li>
+
+
+
+		<li class="menulistbutton" onclick="saveroom()"> SAVE </li>
+		<li class="menulistbutton" onclick="syncroom()"> SYNC PEERS </li>
+
+		<li class="menulistbutton"  onclick="toggleWindow(this,600,350,'INSPECTOR','apps/roomcode/index.html','50vw','50vh')"> INSPECTOR </li>
+		<li class="menulistbutton"  onclick="toggleWindow(this,850,350,'LEARN','http://janusvr.com/guide/keyboardcontrols/index.html','25vw','25vh')"> LEARN </li>
+
+
+	  <li class="menulistbuttonquit" onclick="quitjanus()" > QUIT </li>
+		</ul>
+		</div>
+	</div>
+
+	<div class="window" >
+	</div>
+
+	<div class="stat statisticleft unselectable" id="onlinestatus" onmouseout="hidetooltip()">
+
+	</div>
+
+	<div class="statisticleft2counter" id="playercountstatus"></div>
+
+
+	<div class="stat statisticleft2 unselectable"  id="playercountstatuscontainer"  onmouseout="hidetooltip()" >
+
+	</div>
+
+	<div class="stat statisticright2 unselectable" id="lockedstatus"  onmouseout="hidetooltip()"  >
+
+	</div>
+
+	<div class="stat statisticright unselectable" id="partystatus" onmousemove="showtooltip('Broadcasting Location')"  onmouseout="hidetooltip()"  >
+
+	</div>
+
+	<div class="quickbar unselectable" id="quickbar">
+
+
+		<button id="inventorybutton" onmousemove="showtooltip('Inventory')" onmouseout="hidetooltip()" class="quickinventory genericquickbutton" onclick="toggleWindow(this,250,400,'Inventory (Beta)','apps/inventory/index.html','1vw',pxToVh(50), Anchor.BottomRight, true)" > </button>
+
+
+		<button id="bookmarksbutton" onmousemove="showtooltip('Favourites')" onmouseout="hidetooltip()" class="quickbookmarks genericquickbutton" onclick="toggleWindow(this,500,700,'Favourites','apps/bookmarks/index.html','1vw',pxToVh(50), Anchor.TopLeft, false)" > </button>
+
+		<!-- Will come in a later update.
+		<button id="websurfacebutton" onmousemove="showtooltip('Browser')" onmouseout="hidetooltip()" class="quickbrowser genericquickbutton" onclick="toggleWindow(this,500,256,'BROWSER','apps/browser/index.html','50vw','50vh')" > </button>
+		-->
+
+		<button id="radarbutton" onmousemove="showtooltip('Radar')" onmouseout="hidetooltip()" class="quickmap genericquickbutton" onclick="toggleWindow(this,266,300,'RADAR','apps/map/index.html','1vw','0.5vh', Anchor.TopRight)" > </button>
+		<button id="chatlogbutton" onmousemove="showtooltip('Chatlog')" onmouseout="hidetooltip()" class="quickchatlog genericquickbutton" onclick="toggleWindow(this,425,200,'CHAT LOG','apps/chatlog/index.html','1vw',pxToVh(50), Anchor.BottomLeft)" ></button>
+
+		<button id="partymodebutton" onmousemove="showtooltip('Parties')" onmouseout="hidetooltip()" class="quickpartymode genericquickbutton" onclick="toggleWindow(this,500,350,'Parties','apps/partymode/index.html','67.5vw','5vh')" ></button>
+
+	</div>
+
+	<div class="notificationcontainer" id="notificationcontainer" >
+	<div class="notificationtitlebar">
+			<div class="closebutton notifbutton" style="padding-top:3px;padding-right:4px;" onclick=" removenotification()"     ></div>
+
+		
+			<div class=" notifbuttonright notifbutton" id="notifnavright" style="padding-top:3px;padding-right:4px;" onclick=" navnotification(1)"     ></div>
+			<div class="notifbuttonleft notifbutton" id="notifnavleft" style="padding-top:3px;padding-right:4px;" onclick=" navnotification(0)"     ></div>
+		
+	</div>
+	
+		<div class="notificationicon" id="notificationbg">
+			<img id="notificationimage" src="notifications/logo.png" />
+		</div>
+		
+		<div class="notification">
+
+
+			<div class="notificationtext" id="notificationtext"></div>
+		</div>
+
+
+	</div>
+
+
+		<div class="quitb"  onclick="quitjanus()"> </div>
+
+
+
+	<div class="tooltip" id="tooltip">Error.</div>
+	
+	<audio id="notifysound" src="sounds\notify.wav" preload="auto" type="audio/mpeg" autostart="0"></audio>
+	<audio id="shadesound" src="sounds\shade.wav" preload="auto" type="audio/mpeg" autostart="0"></audio>
+	<audio id="closesound" src="sounds\closewin.wav" preload="auto" type="audio/mpeg" autostart="0"></audio>
+	<audio id="pinsound" src="sounds\pinwin.wav" preload="auto" type="audio/mpeg" autostart="0"></audio>
+	<audio id="sound1" src="sounds\click.wav" preload="auto" type="audio/mpeg" autostart="0"></audio>
+	<audio id="dragon" src="sounds\dragon.wav" preload="auto" type="audio/mpeg" autostart="0"></audio>
+	<audio id="dragoff" src="sounds\dragoff.wav" preload="auto" type="audio/mpeg" autostart="0"></audio>
+
+
+</body>
+</html>

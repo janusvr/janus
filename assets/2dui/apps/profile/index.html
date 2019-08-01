@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>JanusVR Interface</title>
+  <meta name="description" content="JanusVR Interface">
+  <meta name="author" content="JanusVR Inc.">
+  <script src="../../scripts/tabs.js"></script>
+  <script src="../../skins/theme.js"></script>
+  <script>
+
+  
+  
+  
+  window.onload = function () {
+  initializeAppTheme("../../")
+  tabSelect("maintabcontainer","maintabbutton")
+  window.onresize()
+
+
+  }
+
+  
+  
+   window.onresize = function(event) { //make sure the window area stays a consistent size
+
+
+ 
+ if (document.getElementById("tabrow").offsetWidth >= 200) //if you change the 200 here, also change the min-width of the window containing it. this is to prevent flicker when vertically resizing a minimally (width) sized window
+ {
+document.getElementById("windowarea").style.height = "calc(100% - "+(document.getElementsByClassName("tabrow")[0].offsetHeight+3)+"px)";	
+ }
+};
+  
+
+
+  
+    </script>
+  
+
+  
+</head>
+
+<body >
+
+<div class="windowcontainer">
+
+<div class="tabrow unselectable" id="tabrow">
+
+	<div class="tabbutton" id="maintabbutton" onmousedown="tabSelect('maintabcontainer','maintabbutton')">MAIN</div></li>
+
+
+
+</div>
+
+
+<div class="windowarea unselectable" id="windowarea">
+		
+					
+					
+					
+				<div class="tabcontainer" id="maintabcontainer">
+					test
+				</div>					
+													
+
+					
+					
+		</div>			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+</div>
+
+
+
+</body>
+</html>

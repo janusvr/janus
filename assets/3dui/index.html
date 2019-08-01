@@ -1,0 +1,89 @@
+<!-- Hey, mod this out :D Make it your own. We all want to see what you can do with it!!! -->
+<html>
+<head>
+<title>PocketSpace</title>
+</head>
+<body>
+<FireBoxRoom>
+<Assets>
+
+<!--Pocketspace geometry.-->
+<AssetObject id="Xart" src="whiteroom.dae" />
+<assetobject id="screen" src="screen.obj"/>
+
+<!--Mirror darkness.-->
+<AssetImage id="mirror" src="mirror.png" />
+
+<!--Skyboxes.-->
+<AssetImage id="upsky" src="arctic-ice_up.png" />
+<AssetImage id="downsky" src="arctic-ice_dn.png" />
+<AssetImage id="leftsky" src="arctic-ice_lf.png" />
+<AssetImage id="rightsky" src="arctic-ice_rt.png" />
+<AssetImage id="frontsky" src="arctic-ice_ft.png" />
+<AssetImage id="backsky" src="arctic-ice_bk.png" />
+
+<!-- Flag counter -->
+<AssetImage id="flagcounter" src="http://s06.flagcounter.com/count/xVg9/bg_020d09/txt_5f9482/border_5f9482/columns_6/maxflags_30/viewers_Janus+VR+users/labels_0/pageviews_1/flags_1/" />
+
+<!--Dashboard.-->
+<assetwebsurface width="1612" height="540" show_url_bar="false" id="site" src="dashboard/index.html" />
+
+
+<!--Portals behind the user.-->
+
+<AssetImage id="socialportal" src="kportal-35.png" />
+
+
+<!--Floor outside.-->
+<AssetObject id="tronplane" src="TronTextureTestplane.dae" />
+
+<!--Lighting for scene.-->
+<AssetImage id="radiance" src="cubemap_radiance256.dds" tex_clamp="true" />
+<AssetImage id="irradiance" src="cubemap_irradiance64.dds" tex_clamp="true" />
+
+</Assets>
+<Room cubemap_radiance_id="radiance" cubemap_irradiance_id="irradiance" server="private" port="private" use_local_asset="room_plane" visible="false"  far_dist="10000"  pos="0 0 1"  skybox_right_id="rightsky" skybox_left_id="leftsky" skybox_up_id="upsky" skybox_down_id="downsky" skybox_front_id="backsky" skybox_back_id="frontsky"  >
+
+<!--Cubes outside for A E S T H E T I C.-->
+<Object id="cube"  pos="-65 0 16" xdir="0.000003 -1 0.000005" ydir="0.707106 0.000006 0.707108" zdir="-0.707108 0.000001 0.707106" scale="10 15 30" collision_id="cube" />
+<Object id="cube"  pos="66 0.5 -43" xdir="0.000001 0 1" ydir="-1 0 0.000001" zdir="0 -1 0" scale="10 15 30" collision_id="cube" />
+<Object id="cube" pos="-32 -1 -47" xdir="-1 0 0" ydir="0 0 -1" zdir="0 -1 0" scale="10 15 30" collision_id="cube" />
+<Object id="cube"  pos="-27 -1 69" xdir="-1 0 0.000001" ydir="-0.000001 0 -1" zdir="0 -1 0" scale="5 10 15" collision_id="cube" />
+<Object id="cube"  pos="111 6 -53" xdir="0.000001 0 1" ydir="-1 0 0.000001" zdir="0 -1 0" scale="5 10 15" collision_id="cube" />
+<Object id="cube"  pos="66 -1 -58" xdir="0 0 -1" ydir="0 -1 0" zdir="-1 0 0" scale="5 10 15" collision_id="cube" />
+<Object id="cube"  pos="-27 14 70" xdir="0 0 1" ydir="-1 0 0" zdir="0 -1 0" scale="5 2 8" collision_id="cube" />
+<Object id="cube"  pos="112 74 101" xdir="0.000001 0 1" ydir="-1 0 0.000001" zdir="0 -1 0" scale="5 2 8" collision_id="cube" />
+<Object id="cube"  pos="112 81 101" xdir="0.000001 0 1" ydir="-1 0 0.000001" zdir="0 -1 0" scale="5 2 2" collision_id="cube" />
+<Object id="cube"  pos="-214 2 -199" xdir="-0.866024 0 -0.500002" ydir="0.500002 0 -0.866024" zdir="0 -1 0" scale="24 6 61" collision_id="cube" />
+<Object id="cube"  pos="91 -4 -325" xdir="1 0 -0.000001" ydir="0.000001 0 1" zdir="0 -1 0" scale="3 6 30" collision_id="cube" />
+
+<!--Collision for the pocketspace interior.-->
+<Object visible="false" id="plane"  pos="5 1 0" xdir="0.000001 0 1" zdir="-1 0 0.000001" scale="13 6 1" collision_id="plane" />
+<Object visible="false" id="plane"  pos="-5 1 0" xdir="-0.000004 0 -1" zdir="1 0 -0.000004" scale="13 6 1" collision_id="plane" />
+<Object visible="false" id="plane"  pos="0 3.59 0" xdir="-1 -0 -0" ydir="0 0.000001 -1" zdir="0 -1 -0.000001" scale="14 14 3" collision_id="plane" />
+
+<!--Floor outside-->
+<Object id="tronplane"  xdir="0.000001 0 -1" zdir="1 0 0.000001" pos="0 -0.35  0" scale="4 5 4" draw_layer="-2" />
+
+<!-- Flag counter -->
+<Image scale="0.001 0.001 0.001" id="flagcounter" js_id="12" pos="-4 2.5 -4.9" lighting="false" />
+
+<!--Pocketspace geometry.-->
+<Object id="Xart"  pos="0 0 6.5" xdir="0.000001 0 -1" zdir="1 0 0.000001" scale="1 1 1" lighting="false" draw_layer="1"/>
+
+<!--Portals behind the user.-->
+<Link pos="0 0.16 -5.14" xdir="1 0 0.000002" zdir="-0.000002 0 1" scale="8 3 1" col="#40c080" thumb_id="socialportal" url="https://vesta.janusvr.com" draw_glow="false" draw_text="false" />
+
+<!--Dashboard geometry.-->
+<Object locked="true" id="screen"    pos="0 -0.04 -6.7" xdir="0 0 1" ydir="0 1 0" zdir="-1 0 0" lighting="false"  websurface_id="site"  />
+
+
+
+<!--Mirror darkness.-->
+<Object id="plane" col="#ddffffff" pos="0 1 -5.1" xdir="0 1 -0.000001" ydir="-1 0 0.000002" zdir="0.000002 -0.000001 1" scale="5 12.5 4" lighting="false" collision_id="plane" image_id="mirror" draw_layer="2" />
+<Object id="plane" col="#000000" pos="0 1 5.1" xdir="0.00001 1 0.000001" ydir="-1 0.00001 0.000005" zdir="0.000005 -0.000001 -1" scale="5 12.5 4" lighting="false" collision_id="plane"  />
+
+</Room>
+</FireBoxRoom>
+</body>
+</html>

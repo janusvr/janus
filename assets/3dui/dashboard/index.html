@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+
+
+<html>
+
+  <head>
+
+      <title>JanusVR Pocketspace</title>
+      <link rel="stylesheet" type="text/css" href="css/main.css">
+      <meta charset="UTF-8">
+      <script src="scripts/main.js"></script>
+  </head>
+
+  <body>
+
+    <main>
+      <aside class="popularPanel noselect">
+        <header>
+          <h1>Trending</h1>
+        </header>
+        <nav class="tileList" id="popularList">
+
+
+        </nav>
+        <aside class="bottomBar">
+          <button onmousedown="document.getElementById('popularList').scrollTop -= 64;" >&#x25B2;</button>
+          <button onmousedown="document.getElementById('popularList').scrollTop += 64;" >&#x25BC;</button>
+        </aside>
+      </aside>
+
+      <section class="bookmarksPanel noselect">
+        <header>
+          <h1>Bookmarks</h1>
+        </header>
+        <nav class="tileList3D" id="3DList">
+
+        </nav>
+        <aside class="bottomBar">
+          <button onmousedown="document.getElementById('3DList').scrollTop -= 64;" >&#x25B2;</button>
+          <button onmousedown="document.getElementById('3DList').scrollTop += 64;" >&#x25BC;</button>
+        </aside>
+      </section>
+
+      <aside class="partyPanel noselect">
+        <header>
+          <h1>Browse With...</h1>
+        </header>
+        <nav class="tileList" id="partiesList">
+
+
+
+        </nav>
+
+        <aside class="bottomBar">
+          <button onmousedown="document.getElementById('partiesList').scrollTop -= 64;" >&#x25B2;</button>
+          <button onmousedown="document.getElementById('partiesList').scrollTop += 64;" >&#x25BC;</button>
+        </aside>
+      </aside>
+    </main>
+
+
+  </body>
+
+</html>

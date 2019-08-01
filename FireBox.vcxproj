@@ -1,0 +1,1082 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E1753F8C-A58B-3BAF-B612-F64124EB96CA}</ProjectGuid>
+    <RootNamespace>janusvr</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <PlatformToolSet>v120</PlatformToolSet>
+    <OutputDirectory>bin\release\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>janusvr</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <PlatformToolSet>v120</PlatformToolSet>
+    <OutputDirectory>bin\debug\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>janusvr</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bin\release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">janusvr</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bin\debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">janusvr</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;resources\cmft\dependency\bx\include\compat\msvc;resources\cmft\dependency;resources\cmft\dependency\dm\include;resources\cmft\dependency\bx\include;resources\cmft\dependency\bx\3rdparty;resources\cmft\include;resources\EASTL\include;resources\gli;resources\gli\external\glm;resources\boost_1_60_0-Signals2;resources\LibOVR\Include;resources\OVRPlatformSDK_v1.8.0\Include;resources\LeapSDK\include;resources\openvr\headers;resources\OpenAL\include;resources\openssl_win64\include;resources\opus-1.1.2\include;resources\libvorbis;resources\mpg123-1.23.8\src\libmpg123;resources\mpg123-1.23.8\src\libout123;resources\bullet3\src;resources\openexr-2.2.0\build\include;..\..\..\qt\5.5\msvc2013_64\include;..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL;..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets;..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets;..\..\..\qt\5.5\msvc2013_64\include\QtWidgets;..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia;..\..\..\qt\5.5\msvc2013_64\include\QtWebKit;..\..\..\qt\5.5\msvc2013_64\include\QtGui;..\..\..\qt\5.5\msvc2013_64\include\QtANGLE;..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets;..\..\..\qt\5.5\msvc2013_64\include\QtNetwork;..\..\..\qt\5.5\msvc2013_64\include\QtXml;..\..\..\qt\5.5\msvc2013_64\include\QtScript;..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools;..\..\..\qt\5.5\msvc2013_64\include\QtCore;release;..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:strictStrings -w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;OVRPL_DISABLED;_VARIADIC_MAX=6;OPENEXR_DLL;OPENGL;QT_NO_DEBUG;QT_OPENGL_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_WEBKITWIDGETS_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_WEBKIT_LIB;QT_GUI_LIB;QT_WEBSOCKETS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_SCRIPT_LIB;QT_SCRIPTTOOLS_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>C:\qt\5.5\msvc2013_64\lib\qtmain.lib;shell32.lib;C:/qt/5.5/msvc2013_64/lib\Qt5Core.lib;C:\Dev\JanusVR\janus-vr\resources\cmft\lib\cmftRelease.lib;C:\Dev\JanusVR\janus-vr\resources\LibOVR\Lib\Windows\x64\Release\VS2013\libOVR.lib;C:\Dev\JanusVR\janus-vr\resources\OVRPlatformSDK_v1.8.0\Windows\LibOVRPlatform64_1.lib;C:\Dev\JanusVR\janus-vr\resources\LeapSDK\lib\x64\leap.lib;C:\Dev\JanusVR\janus-vr\resources\openvr\lib\win64\openvr_api.lib;C:\Dev\JanusVR\janus-vr\resources\OpenAL\libs\Win64\OpenAL32.lib;C:\Dev\JanusVR\janus-vr\resources\OpenAL\libs\Win64\EFX-Util_MT\EFX-Util.lib;C:\Dev\JanusVR\janus-vr\resources\openssl_win64\libs\libeay32.lib;C:\Dev\JanusVR\janus-vr\resources\openssl_win64\libs\ssleay32.lib;C:\Dev\JanusVR\janus-vr\resources\opus-1.1.2\lib\x64\release\opus.lib;C:\Dev\JanusVR\janus-vr\resources\libvorbis\libogg.lib;C:\Dev\JanusVR\janus-vr\resources\libvorbis\libvorbis.lib;C:\Dev\JanusVR\janus-vr\resources\libvorbis\libvorbisfile.lib;C:\Dev\JanusVR\janus-vr\resources\mpg123-1.23.8\lib\libmpg123-0.lib;C:\Dev\JanusVR\janus-vr\resources\mpg123-1.23.8\lib\libout123-0.lib;C:\Dev\JanusVR\janus-vr\resources\bullet3\lib\Release\BulletDynamics.lib;C:\Dev\JanusVR\janus-vr\resources\bullet3\lib\Release\BulletCollision.lib;C:\Dev\JanusVR\janus-vr\resources\bullet3\lib\Release\LinearMath.lib;opengl32.lib;glu32.lib;advapi32.lib;winmm.lib;half.lib;Iex-2_2.lib;IexMath-2_2.lib;IlmImf-2_2.lib;IlmImfUtil-2_2.lib;IlmThread-2_2.lib;Imath-2_2.lib;C:\qt\5.5\msvc2013_64\lib\Qt5OpenGL.lib;C:\qt\5.5\msvc2013_64\lib\Qt5MultimediaWidgets.lib;C:\qt\5.5\msvc2013_64\lib\Qt5WebKitWidgets.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Widgets.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Multimedia.lib;C:\qt\5.5\msvc2013_64\lib\Qt5WebKit.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Gui.lib;C:\qt\5.5\msvc2013_64\lib\Qt5WebSockets.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Network.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Xml.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Script.lib;C:\qt\5.5\msvc2013_64\lib\Qt5ScriptTools.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\qt\5.5\msvc2013_64\lib;C:/qt/5.5/msvc2013_64/lib;$(QTDIR)\lib;C:\Dev\JanusVR\janus-vr\resources\cmft\lib;C:\Dev\JanusVR\janus-vr\resources\LibOVR\Lib\Windows\x64\Release\VS2013;C:\Dev\JanusVR\janus-vr\resources\OVRPlatformSDK_v1.8.0\Windows;C:\Dev\JanusVR\janus-vr\resources\LeapSDK\lib\x64;C:\Dev\JanusVR\janus-vr\resources\openvr\lib\win64;C:\Dev\JanusVR\janus-vr\resources\OpenAL\libs\Win64;C:\Dev\JanusVR\janus-vr\resources\OpenAL\libs\Win64\EFX-Util_MT;C:\Dev\JanusVR\janus-vr\resources\openssl_win64\libs;C:\Dev\JanusVR\janus-vr\resources\opus-1.1.2\lib\x64\release;C:\Dev\JanusVR\janus-vr\resources\libvorbis;C:\Dev\JanusVR\janus-vr\resources\mpg123-1.23.8\lib;C:\Dev\JanusVR\janus-vr\resources\bullet3\lib\Release;C:\Dev\JanusVR\janus-vr\resources\openexr-2.2.0\build\win;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OptimizeReferences>true</OptimizeReferences>
+      <OutputFile>$(OutDir)\janusvr.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;OVRPL_DISABLED;_VARIADIC_MAX=6;OPENEXR_DLL;OPENGL;QT_NO_DEBUG;QT_OPENGL_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_WEBKITWIDGETS_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_WEBKIT_LIB;QT_GUI_LIB;QT_WEBSOCKETS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_SCRIPT_LIB;QT_SCRIPTTOOLS_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;resources\cmft\dependency\bx\include\compat\msvc;resources\cmft\dependency;resources\cmft\dependency\dm\include;resources\cmft\dependency\bx\include;resources\cmft\dependency\bx\3rdparty;resources\cmft\include;resources\EASTL\include;resources\gli;resources\gli\external\glm;resources\boost_1_60_0-Signals2;resources\LibOVR\Include;resources\OVRPlatformSDK_v1.8.0\Include;resources\LeapSDK\include;resources\openvr\headers;resources\OpenAL\include;resources\openssl_win64\include;resources\opus-1.1.2\include;resources\libvorbis;resources\mpg123-1.23.8\src\libmpg123;resources\mpg123-1.23.8\src\libout123;resources\bullet3\src;resources\openexr-2.2.0\build\include;..\..\..\qt\5.5\msvc2013_64\include;..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL;..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets;..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets;..\..\..\qt\5.5\msvc2013_64\include\QtWidgets;..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia;..\..\..\qt\5.5\msvc2013_64\include\QtWebKit;..\..\..\qt\5.5\msvc2013_64\include\QtGui;..\..\..\qt\5.5\msvc2013_64\include\QtANGLE;..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets;..\..\..\qt\5.5\msvc2013_64\include\QtNetwork;..\..\..\qt\5.5\msvc2013_64\include\QtXml;..\..\..\qt\5.5\msvc2013_64\include\QtScript;..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools;..\..\..\qt\5.5\msvc2013_64\include\QtCore;debug;..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;OVRPL_DISABLED;EASTL_DEBUG;_VARIADIC_MAX=6;OPENEXR_DLL;OPENGL;QT_OPENGL_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_WEBKITWIDGETS_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_WEBKIT_LIB;QT_GUI_LIB;QT_WEBSOCKETS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_SCRIPT_LIB;QT_SCRIPTTOOLS_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>C:\qt\5.5\msvc2013_64\lib\qtmaind.lib;shell32.lib;C:/qt/5.5/msvc2013_64/lib\Qt5Cored.lib;C:\Dev\JanusVR\janus-vr\resources\cmft\lib\cmftDebug.lib;C:\Dev\JanusVR\janus-vr\resources\LibOVR\Lib\Windows\x64\Debug\VS2013\libOVR.lib;C:\Dev\JanusVR\janus-vr\resources\OVRPlatformSDK_v1.8.0\Windows\LibOVRPlatform64_1.lib;C:\Dev\JanusVR\janus-vr\resources\LeapSDK\lib\x64\leap.lib;C:\Dev\JanusVR\janus-vr\resources\openvr\lib\win64\openvr_api.lib;C:\Dev\JanusVR\janus-vr\resources\OpenAL\libs\Win64\OpenAL32.lib;C:\Dev\JanusVR\janus-vr\resources\OpenAL\libs\Win64\EFX-Util_MT\EFX-Util.lib;C:\Dev\JanusVR\janus-vr\resources\openssl_win64\libs\libeay32.lib;C:\Dev\JanusVR\janus-vr\resources\openssl_win64\libs\ssleay32.lib;C:\Dev\JanusVR\janus-vr\resources\opus-1.1.2\lib\x64\debug\opus.lib;C:\Dev\JanusVR\janus-vr\resources\libvorbis\libogg.lib;C:\Dev\JanusVR\janus-vr\resources\libvorbis\libvorbis.lib;C:\Dev\JanusVR\janus-vr\resources\libvorbis\libvorbisfile.lib;C:\Dev\JanusVR\janus-vr\resources\mpg123-1.23.8\lib\libmpg123-0.lib;C:\Dev\JanusVR\janus-vr\resources\mpg123-1.23.8\lib\libout123-0.lib;C:\Dev\JanusVR\janus-vr\resources\bullet3\lib\Debug\BulletDynamics_Debug.lib;C:\Dev\JanusVR\janus-vr\resources\bullet3\lib\Debug\BulletCollision_Debug.lib;C:\Dev\JanusVR\janus-vr\resources\bullet3\lib\Debug\LinearMath_Debug.lib;opengl32.lib;glu32.lib;advapi32.lib;winmm.lib;half.lib;Iex-2_2.lib;IexMath-2_2.lib;IlmImf-2_2.lib;IlmImfUtil-2_2.lib;IlmThread-2_2.lib;Imath-2_2.lib;C:\qt\5.5\msvc2013_64\lib\Qt5OpenGLd.lib;C:\qt\5.5\msvc2013_64\lib\Qt5MultimediaWidgetsd.lib;C:\qt\5.5\msvc2013_64\lib\Qt5WebKitWidgetsd.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Widgetsd.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Multimediad.lib;C:\qt\5.5\msvc2013_64\lib\Qt5WebKitd.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Guid.lib;C:\qt\5.5\msvc2013_64\lib\Qt5WebSocketsd.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Networkd.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Xmld.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Scriptd.lib;C:\qt\5.5\msvc2013_64\lib\Qt5ScriptToolsd.lib;C:\qt\5.5\msvc2013_64\lib\Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\qt\5.5\msvc2013_64\lib;C:/qt/5.5/msvc2013_64/lib;$(QTDIR)\lib;C:\Dev\JanusVR\janus-vr\resources\cmft\lib;C:\Dev\JanusVR\janus-vr\resources\LibOVR\Lib\Windows\x64\Debug\VS2013;C:\Dev\JanusVR\janus-vr\resources\OVRPlatformSDK_v1.8.0\Windows;C:\Dev\JanusVR\janus-vr\resources\LeapSDK\lib\x64;C:\Dev\JanusVR\janus-vr\resources\openvr\lib\win64;C:\Dev\JanusVR\janus-vr\resources\OpenAL\libs\Win64;C:\Dev\JanusVR\janus-vr\resources\OpenAL\libs\Win64\EFX-Util_MT;C:\Dev\JanusVR\janus-vr\resources\openssl_win64\libs;C:\Dev\JanusVR\janus-vr\resources\opus-1.1.2\lib\x64\debug;C:\Dev\JanusVR\janus-vr\resources\libvorbis;C:\Dev\JanusVR\janus-vr\resources\mpg123-1.23.8\lib;C:\Dev\JanusVR\janus-vr\resources\bullet3\lib\Debug;C:\Dev\JanusVR\janus-vr\resources\openexr-2.2.0\build\win;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\janusvr.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;OVRPL_DISABLED;EASTL_DEBUG;_VARIADIC_MAX=6;OPENEXR_DLL;OPENGL;QT_OPENGL_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_WEBKITWIDGETS_LIB;QT_WIDGETS_LIB;QT_MULTIMEDIA_LIB;QT_WEBKIT_LIB;QT_GUI_LIB;QT_WEBSOCKETS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_SCRIPT_LIB;QT_SCRIPTTOOLS_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Debug\moc_analytics.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_asset.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_assetghost.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_assetimage.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_assetobject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_assetscript.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_assetshader.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_assetsound.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_assetwebsurface.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_assetwebsurface_experimental.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_ChildProcessCookieJar.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_cookiejar.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_domnode.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_game.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_hierarchywindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_htmlpage.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_mainwindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_menu.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_multiplayermanager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_objectproperties.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_offscreenwebsurface.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_player.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_playerproperties.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_portal.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_propertieswindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_room.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_roomproperties.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_scriptablevector.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_webasset.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_webview.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_analytics.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_asset.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_assetghost.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_assetimage.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_assetobject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_assetscript.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_assetshader.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_assetsound.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_assetwebsurface.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_assetwebsurface_experimental.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_ChildProcessCookieJar.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_cookiejar.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_domnode.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_game.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_hierarchywindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_htmlpage.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_mainwindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_menu.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_multiplayermanager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_objectproperties.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_offscreenwebsurface.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_player.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_playerproperties.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_portal.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_propertieswindow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_room.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_roomproperties.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_scriptablevector.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_webasset.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Release\moc_webview.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="resources\OVRPlatformSDK_v1.11.0\Windows\OVR_PlatformLoader.cpp" />
+    <ClCompile Include="abstracthmdmanager.cpp" />
+    <ClCompile Include="abstractrenderer.cpp" />
+    <ClCompile Include="abstractwebsurface.cpp" />
+    <ClCompile Include="resources\EASTL\src\allocator_eastl.cpp" />
+    <ClCompile Include="allocatordefault.cpp" />
+    <ClCompile Include="analytics.cpp" />
+    <ClCompile Include="resources\EASTL\src\assert.cpp" />
+    <ClCompile Include="asset.cpp" />
+    <ClCompile Include="assetghost.cpp" />
+    <ClCompile Include="assetimage.cpp" />
+    <ClCompile Include="assetimagedata.cpp" />
+    <ClCompile Include="assetimagedataq.cpp" />
+    <ClCompile Include="assetmanager.cpp" />
+    <ClCompile Include="assetobject.cpp" />
+    <ClCompile Include="assetscript.cpp" />
+    <ClCompile Include="assetshader.cpp" />
+    <ClCompile Include="assetskybox.cpp" />
+    <ClCompile Include="assetsound.cpp" />
+    <ClCompile Include="assetvideo.cpp" />
+    <ClCompile Include="assetwebsurface.cpp" />
+    <ClCompile Include="assetwebsurface_experimental.cpp" />
+    <ClCompile Include="audioutil.cpp" />
+    <ClCompile Include="baseassetdata.cpp" />
+    <ClCompile Include="bookmarkmanager.cpp" />
+    <ClCompile Include="childprocesscookiejar.cpp" />
+    <ClCompile Include="contentimporter.cpp" />
+    <ClCompile Include="controllermanager.cpp" />
+    <ClCompile Include="cookiejar.cpp" />
+    <ClCompile Include="debugrenderer.cpp" />
+    <ClCompile Include="domnode.cpp" />
+    <ClCompile Include="environment.cpp" />
+    <ClCompile Include="filteredcubemapmanager.cpp" />
+    <ClCompile Include="resources\EASTL\src\fixed_pool.cpp" />
+    <ClCompile Include="framebuffermanager.cpp" />
+    <ClCompile Include="frustumcullingmanager.cpp" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="gamepad_new\gamepad.c" />
+    <ClCompile Include="geom.cpp" />
+    <ClCompile Include="geomcollada.cpp" />
+    <ClCompile Include="geomfbx.cpp" />
+    <ClCompile Include="geomobj.cpp" />
+    <ClCompile Include="geomply.cpp" />
+    <ClCompile Include="resources\EASTL\src\hashtable.cpp" />
+    <ClCompile Include="hierarchywindow.cpp" />
+    <ClCompile Include="htmlpage.cpp" />
+    <ClCompile Include="resources\EASTL\src\intrusive_list.cpp" />
+    <ClCompile Include="leaphands.cpp" />
+    <ClCompile Include="lightmanager.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="mathutil.cpp" />
+    <ClCompile Include="mem_istream.cpp" />
+    <ClCompile Include="menu.cpp" />
+    <ClCompile Include="multiplayermanager.cpp" />
+    <ClCompile Include="resources\EASTL\src\numeric_limits.cpp" />
+    <ClCompile Include="objectproperties.cpp" />
+    <ClCompile Include="objecttype.cpp" />
+    <ClCompile Include="offscreenwebsurface.cpp" />
+    <ClCompile Include="particlesystem.cpp" />
+    <ClCompile Include="performancelogger.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="playerproperties.cpp" />
+    <ClCompile Include="portal.cpp" />
+    <ClCompile Include="propertieswindow.cpp" />
+    <ClCompile Include="resources\EASTL\src\red_black_tree.cpp" />
+    <ClCompile Include="renderer.cpp" />
+    <ClCompile Include="renderergl33.cpp" />
+    <ClCompile Include="renderergl44.cpp" />
+    <ClCompile Include="renderergl44_viewportinstancing.cpp" />
+    <ClCompile Include="riftmanager.cpp" />
+    <ClCompile Include="room.cpp" />
+    <ClCompile Include="roomobject.cpp" />
+    <ClCompile Include="roomphysics.cpp" />
+    <ClCompile Include="roomproperties.cpp" />
+    <ClCompile Include="roomtemplate.cpp" />
+    <ClCompile Include="scriptablevector.cpp" />
+    <ClCompile Include="scriptbuiltins.cpp" />
+    <ClCompile Include="scriptvalueconversions.cpp" />
+    <ClCompile Include="soundmanager.cpp" />
+    <ClCompile Include="spinanimation.cpp" />
+    <ClCompile Include="resources\EASTL\src\string.cpp" />
+    <ClCompile Include="textgeom.cpp" />
+    <ClCompile Include="textureimporterexr.cpp" />
+    <ClCompile Include="textureimportergli.cpp" />
+    <ClCompile Include="textureimporterqimage.cpp" />
+    <ClCompile Include="texturemanager.cpp" />
+    <ClCompile Include="resources\EASTL\src\thread_support.cpp" />
+    <ClCompile Include="unittests.cpp" />
+    <ClCompile Include="videosurface.cpp" />
+    <ClCompile Include="virtualkeyboard.cpp" />
+    <ClCompile Include="vivemanager.cpp" />
+    <ClCompile Include="webasset.cpp" />
+    <ClCompile Include="webview.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="ChildProcessCookieJar.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing ChildProcessCookieJar.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing ChildProcessCookieJar.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="abstracthmdmanager.h" />
+    <ClInclude Include="abstractrenderer.h" />
+    <ClInclude Include="abstractwebsurface.h" />
+    <ClInclude Include="allocatordefault.h" />
+    <CustomBuild Include="analytics.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing analytics.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing analytics.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="asset.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing asset.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing asset.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="assetghost.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing assetghost.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing assetghost.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="assetimage.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing assetimage.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing assetimage.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="assetimagedata.h" />
+    <ClInclude Include="assetimagedataq.h" />
+    <ClInclude Include="assetmanager.h" />
+    <CustomBuild Include="assetobject.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing assetobject.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing assetobject.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="assetscript.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing assetscript.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing assetscript.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="assetshader.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing assetshader.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing assetshader.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="assetskybox.h" />
+    <CustomBuild Include="assetsound.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing assetsound.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing assetsound.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="assetvideo.h" />
+    <CustomBuild Include="assetwebsurface.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing assetwebsurface.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing assetwebsurface.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="assetwebsurface_experimental.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing assetwebsurface_experimental.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing assetwebsurface_experimental.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="audioutil.h" />
+    <ClInclude Include="baseassetdata.h" />
+    <ClInclude Include="bookmarkmanager.h" />
+    <ClInclude Include="contentimporter.h" />
+    <ClInclude Include="controllermanager.h" />
+    <CustomBuild Include="cookiejar.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing cookiejar.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing cookiejar.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="debugrenderer.h" />
+    <CustomBuild Include="domnode.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing domnode.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing domnode.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="environment.h" />
+    <ClInclude Include="filteredcubemapmanager.h" />
+    <ClInclude Include="framebuffermanager.h" />
+    <ClInclude Include="frustumcullingmanager.h" />
+    <CustomBuild Include="game.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing game.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing game.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="gamepad_new\gamepad.h" />
+    <ClInclude Include="geom.h" />
+    <ClInclude Include="geomcollada.h" />
+    <ClInclude Include="geomfbx.h" />
+    <ClInclude Include="geomobj.h" />
+    <ClInclude Include="geomply.h" />
+    <CustomBuild Include="hierarchywindow.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing hierarchywindow.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing hierarchywindow.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="htmlpage.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing htmlpage.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing htmlpage.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="leaphands.h" />
+    <ClInclude Include="lightmanager.h" />
+    <CustomBuild Include="mainwindow.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing mainwindow.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing mainwindow.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="mathutil.h" />
+    <ClInclude Include="mem_istream.h" />
+    <CustomBuild Include="menu.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing menu.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing menu.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="multiplayermanager.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing multiplayermanager.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing multiplayermanager.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="objectproperties.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing objectproperties.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing objectproperties.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="objecttype.h" />
+    <CustomBuild Include="offscreenwebsurface.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing offscreenwebsurface.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing offscreenwebsurface.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="particlesystem.h" />
+    <ClInclude Include="performancelogger.h" />
+    <CustomBuild Include="player.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing player.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing player.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="playerproperties.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing playerproperties.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing playerproperties.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="portal.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing portal.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing portal.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="propertieswindow.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing propertieswindow.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing propertieswindow.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="renderer.h" />
+    <ClInclude Include="renderergl33.h" />
+    <ClInclude Include="renderergl44.h" />
+    <ClInclude Include="renderergl44_viewportinstancing.h" />
+    <ClInclude Include="riftmanager.h" />
+    <CustomBuild Include="room.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing room.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing room.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="roomobject.h" />
+    <ClInclude Include="roomphysics.h" />
+    <CustomBuild Include="roomproperties.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing roomproperties.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing roomproperties.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="roomtemplate.h" />
+    <CustomBuild Include="scriptablevector.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing scriptablevector.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing scriptablevector.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="scriptbuiltins.h" />
+    <ClInclude Include="scriptvalueconversions.h" />
+    <ClInclude Include="soundmanager.h" />
+    <ClInclude Include="spinanimation.h" />
+    <ClInclude Include="textgeom.h" />
+    <ClInclude Include="textureimporterexr.h" />
+    <ClInclude Include="textureimportergli.h" />
+    <ClInclude Include="textureimporterqimage.h" />
+    <ClInclude Include="texturemanager.h" />
+    <ClInclude Include="unittests.h" />
+    <ClInclude Include="videosurface.h" />
+    <ClInclude Include="virtualkeyboard.h" />
+    <ClInclude Include="vivemanager.h" />
+    <CustomBuild Include="webasset.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing webasset.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing webasset.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="webview.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB -DNDEBUG "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\release" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing webview.h...</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+if errorlevel 1 goto VCEnd
+
+if errorlevel 1 goto VCEnd
+endlocal
+"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o "$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DWIN64 -DOVRPL_DISABLED -DEASTL_DEBUG -D_VARIADIC_MAX=6 -DOPENEXR_DLL -DOPENGL -DQT_OPENGL_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WEBKITWIDGETS_LIB -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_WEBSOCKETS_LIB -DQT_NETWORK_LIB -DQT_XML_LIB -DQT_SCRIPT_LIB -DQT_SCRIPTTOOLS_LIB -DQT_CORE_LIB "-I." "-I.\resources\cmft\dependency\bx\include\compat\msvc" "-I.\resources\cmft\dependency" "-I.\resources\cmft\dependency\dm\include" "-I.\resources\cmft\dependency\bx\include" "-I.\resources\cmft\dependency\bx\3rdparty" "-I.\resources\cmft\include" "-I.\resources\EASTL\include" "-I.\resources\gli" "-I.\resources\gli\external\glm" "-I.\resources\boost_1_60_0-Signals2" "-I.\resources\LibOVR\Include" "-I.\resources\OVRPlatformSDK_v1.8.0\Include" "-I.\resources\LeapSDK\include" "-I.\resources\openvr\headers" "-I.\resources\OpenAL\include" "-I.\resources\openssl_win64\include" "-I.\resources\opus-1.1.2\include" "-I.\resources\libvorbis" "-I.\resources\mpg123-1.23.8\src\libmpg123" "-I.\resources\mpg123-1.23.8\src\libout123" "-I.\resources\bullet3\src" "-I.\resources\openexr-2.2.0\build\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtOpenGL" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimediaWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKitWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWidgets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtMultimedia" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebKit" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtGui" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtANGLE" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtWebSockets" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtNetwork" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtXml" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScript" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtScriptTools" "-I.\..\..\..\qt\5.5\msvc2013_64\include\QtCore" "-I.\debug" "-I.\..\..\..\qt\5.5\msvc2013_64\mkspecs\win32-msvc2013"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing webview.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="janusvr.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" Qt5Version_x0020_x64="Qt5.5 MSVC2013 64" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

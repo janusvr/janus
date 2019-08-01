@@ -1,0 +1,393 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+  background: #2d2d2d;
+  font-family: 'Open Sans Regular', sans-serif;
+  color: white;
+}
+
+.windowarea {
+  max-height: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  height: 100%;
+  border-spacing: 0;
+  table-layout:fixed
+}
+
+table tr.bar {
+  height: 0px;
+}
+
+input, button {
+  font-family: 'Open Sans Regular', sans-serif;
+  border: 1px outset;
+  border-radius: 0px;
+  height: 20px;
+  padding: 0 5px;
+  margin: 0;
+  width: 33.3%;
+}
+
+.assets-container {
+  width: 100%;
+  height: 100%;
+  padding : 4px 0 0 0px;
+  /*background: black;*/
+  color: white;
+  font-size: 14px;
+  /*font-weight: bold;*/
+  overflow: auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.assets-container .filename {
+}
+
+.assets-container ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.assets-container li {
+  position: relative;
+  padding-left: 20px;
+  min-height: 17px;
+  padding-top: 1px;
+}
+
+.assets-container li > ul {
+  display: none;
+}
+
+.assets-container li.expanded > ul {
+  display: block;
+}
+
+.entry-display {
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  padding-left: 24px;
+
+  height: 25px;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+
+}
+
+.entry.dropinto::before {
+  content: '';
+  height: 100%;
+  width: 2px;
+  background: #308e59;
+  position: absolute;
+  left: 0;
+  top: 0px;
+}
+
+.entry.dropabove::before {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: #308e59;
+  position: absolute;
+  left: 0;
+  top: -2px;
+}
+
+.entry.dropbelow::before {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: #308e59;
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+}
+
+
+.drag-proxy {
+  position: absolute;
+  z-index:123;
+  opacity: 0.5;
+}
+
+.assets-container .entry-display.active {
+  outline: 1px solid #325d35;
+  background: rgb(32,70,49);
+}
+
+.assets-container .entry-display.active {
+  outline: 1px solid #325d35;
+  background: rgb(32,70,49);
+}
+
+.assets-container .entry-display.renaming input {
+  background: #042714;
+  color: white;
+  border: 1px solid #325d35;
+
+  width: 100%;
+  height: 100%;
+}
+
+.assets-container .entry-display.renaming .filename {
+  display: none;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+
+  left: auto;
+  float: none;
+
+  background-image: url('../images/icons/icon-79.png');
+  border: none;
+  background-color: transparent;
+  background-size: cover;
+  visibility: visible;
+}
+
+.dropdown-menu ul {
+
+  border-style: solid;
+  border-color: #E4E4E4;
+  border-width: 1px;
+
+  top: 32px;
+  right: 0px;
+  padding: 0px;
+  margin: 0px;
+  background: #555;
+  list-style: none;
+  position: absolute;
+  z-index: 10;
+  width: 120px;
+
+  font-family: 'Open Sans Regular', sans-serif;
+  color: #CCC;
+  display:none;
+}
+.dropdown-menu.active ul {
+
+  display: block;
+}
+
+.dropdown-menu ul li {
+  width: 100%;
+  box-sizing: border-box;
+
+}
+
+.windowcontainer:not(.connected) .dropdown-menu ul li {
+  color: gray;
+}
+
+
+.top-bar {
+  height: 32px;
+  background: #444444;
+}
+
+.bottom-bar {
+  height: 32px;
+  background: #444444;
+}
+
+.menu-icon {
+  width: 32px;
+  height: 32px;
+  background-position: center;
+  background-size: 100%;
+  -webkit-filter: brightness(0.85);
+}
+
+
+.menu-icon:hover {
+  -webkit-filter: brightness(1);
+}
+
+.menu-icon:active {
+  -webkit-filter: brightness(0.65);
+}
+
+.menu-icon.disabled,
+.menu-icon.disabled:hover,
+.menu-icon.disabled:active {
+  -webkit-filter: brightness(0.2);
+}
+
+
+.menu-icon-rez {
+  background-image: url('../images/icons/icon-rez.png');
+}
+
+.menu-icon-copyselected {
+  background-image: url('../images/icons/icon-take.png');
+}
+
+.menu-icon-createfolder {
+  background-image: url('../images/icons/icon-newfolder.png');
+}
+
+.menu-icon-geturl {
+  background-image: url('../images/icons/icon-geturl.png');
+}
+
+.menu-icon-trash {
+  background-image: url('../images/icons/icon-trash.png');
+}
+
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.ipfs-status {
+  margin-left: 10px;
+}
+
+.ipfs-status::after {
+  content: 'Disconnected';
+  font-family: 'Open Sans Regular', sans-serif;
+  color: white;
+  text-transform: uppercase;
+  font-size: 12px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 3px;
+}
+
+.connected .ipfs-status::after {
+  content: 'Connected';
+}
+.connected.syncing .ipfs-status::after {
+  content: 'Connected - Syncing';
+}
+
+.ipfs-status::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  background-image: url(../images/icons/icon-83.png);
+  background-size: 300%;
+  background-position: center;
+  /*box-shadow: inset -4px -4px 10px red, inset 0 0 10px red, inset 0 0 10px red;*/
+}
+
+.connected .ipfs-status::before {
+  background-image: url(../images/icons/icon-82.png);
+  /*box-shadow: inset -4px -4px 10px green, inset 0 0 10px green, inset 0 0 10px green;*/
+}
+
+.icon {
+  background: url('../images/icons/icon-unknown.png');
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  background-position: -64px 0px;
+  background-size: 100%;
+  background-position: center;
+  background-size: 150%;
+}
+
+.active .icon {
+  /*background-position-y: 16px;*/
+}
+
+.assets-container li::before:hover, .assets-container li::after:hover {
+  /*background-position-y: -16px;*/
+}
+
+.icon-file {
+  /*background-image: url(../images/icons/icon-folder.png);*/
+}
+
+.icon-dir {
+  background-image: url(../images/icons/icon-folder.png);
+}
+
+.expanded > * > .icon-dir {
+  background-image: url(../images/icons/icon-folderopen.png);
+  image-rendering: pixelated;
+}
+
+.icon-image,
+.icon-jpg,
+.icon-gif,
+.icon-png {
+  background-image: url(../images/icons/icon-image.png);
+}
+
+.icon-document {
+
+}
+
+.icon-txt {
+  background-image: url(../images/icons/icon-txt.png);
+}
+.icon-js {
+  background-image: url(../images/icons/icon-js.png);
+}
+
+.icon-xml {
+  background-image: url(../images/icons/icon-xml.png);
+}
+
+.icon-model,
+.icon-fbx,
+.icon-obj,
+.icon-dae,
+.icon-collada {
+  background-image: url(../images/icons/icon-model.png);
+  top: 4px;
+}
+
+.icon-audio,
+.icon-mp3,
+.icon-ogg,
+.icon-wav {
+  background-image: url(../images/icons/icon-audio.png);
+}
+
+
+.expander {
+  cursor: pointer;
+  left: 0px;
+  background-image: url(../images/icons/icon-collapsed.png);
+  background-size: 268%;
+  top: 3px;
+}
+.expanded > .expander {
+  background-image: url(../images/icons/icon-expanded.png);
+}

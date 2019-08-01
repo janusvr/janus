@@ -1,0 +1,404 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>JanusVR Interface Settings Menu</title>
+	<meta name="description" content="JanusVR Interface Settings Menu">
+	<meta name="author" content="JanusVR Inc.">
+	<script src="../../scripts/spyduck.js"></script>
+	<script src="../../scripts/tabs.js"></script>
+	<script src="../../skins/theme.js"></script>
+	<script>
+
+
+function strip(html)
+{
+	var tmp = document.createElement("DIV");
+	tmp.innerHTML = html;
+	return tmp.textContent || tmp.innerText;
+}
+
+
+
+
+function clickSound() {
+	document.getElementById('sound1').play();
+}
+
+window.onload = function () {
+	initializeAppTheme("../../")
+	setScale(7)
+	tabSelect("maptabcontainer","maptabbutton")
+	window.onresize()
+
+}
+
+
+
+window.onresize = function(event) { //make sure the window area stays a consistent size
+
+	console.log("calc(100% - "+document.getElementById("tabrow").offsetHeight+"px)"	);
+
+
+	if (document.getElementById("tabrow").offsetWidth >= 200) //if you change the 200 here, also change the min-width of the window containing it. this is to prevent flicker when vertically resizing a minimally (width) sized window
+	{
+		document.getElementById("windowarea").style.height = "calc(100% - "+(document.getElementsByClassName("tabrow")[0].offsetHeight+3)+"px)";	
+	}
+
+};
+
+
+var previousplayerlength;
+
+function updatePlayers() {
+
+}
+
+var scale= 10;
+var xview=0;
+var zview=0;
+
+
+
+var lastlocation = "";
+var lastmapbackground = "";
+var mapbackground = "";
+var currentroomsmaplocation = "";
+var update_tick = 0;
+//update map
+setInterval(function() {
+
+
+
+	//if a new player enters the room, create a dot for them
+
+	document.getElementById("scalereader").innerHTML = "("+scale+"0%)";
+
+	
+	var i;
+	for (i=0;i<window.janus.playerlist.length;i++)
+	{
+
+		var mywidth= (4*scale);
+		var myheight= (4*scale);
+
+
+		//if this id exists, position it
+		if (document.getElementById("player"+i)) 
+		{
+			
+
+			var posx= (window.janus.playerlist[i].pos.x)*scale ;
+			var posz= (window.janus.playerlist[i].pos.z)*scale ;
+			
+			
+			if (i ==0)
+			{
+				
+				//center of the view is player's position plus half the width of the div
+				xview = (posx)+((document.getElementById("map").offsetWidth-mywidth)*0.5);
+				zview = (posz)+((document.getElementById("map").offsetHeight-myheight)*0.5);
+
+				//alert(window.janus.playerlist[i].pos.x+"is where you are and the div size is"+document.getElementById("map").offsetWidth)
+			}
+			else
+			{
+				//apply username if not main player
+				//trim long userids
+				var useridstring =  window.janus.playerlist[i].userid;
+				var useridstringlength = 16;
+				var trimmedString = useridstring.length > useridstringlength ? 
+				useridstring.substring(0, useridstringlength - 3) + "..." : 
+				useridstring;	 
+				
+				
+				//update namecard with userid
+				document.getElementById("playername"+i).innerHTML = strip(trimmedString);
+				
+			}
+
+
+			
+			document.getElementById("player"+i).style.width = mywidth+"px";
+			document.getElementById("player"+i).style.height = myheight+"px";
+			
+			//set specific player's position 
+			document.getElementById("player"+i).style.left = (-((posx)-xview))+"px";
+			document.getElementById("player"+i).style.top = (-((posz)-zview))+"px";
+			//and their namecard
+			document.getElementById("playername"+i).style.left = (-((posx)-xview))+"px";
+			document.getElementById("playername"+i).style.top = ((-((posz)-zview))-16)+"px";
+			
+
+
+			var angle = Math.atan2(parent.window.janus.playerlist[i].zdir.z,parent.window.janus.playerlist[i].zdir.x) * 180.0 / Math.PI;
+
+			document.getElementById("player"+i).style.webkitTransform = "rotate("+angle+"deg)";
+
+
+			
+			
+			//alert(document.getElementById("player"+i).style.left+"   "+document.getElementById("player"+i).style.top)
+
+		}
+		else   //else create it
+		{
+			
+			//create marker
+			if (i ==0)
+			{
+				var div2 = document.createElement("div");
+				div2.className  = "mapicon mapuser";
+				div2.id = "player"+i
+				document.getElementById("map").appendChild(div2);
+			}
+			else
+			{
+				var div2 = document.createElement("div");
+				div2.className  = "mapiconother mapuser";
+				div2.id = "player"+i
+				document.getElementById("map").appendChild(div2);	
+			}
+			//create name
+			var div3 = document.createElement("div");
+			div3.className  = "mapiconname";
+			div3.id = "playername"+i
+			div3.innerHTML = "";
+			document.getElementById("map").appendChild(div3);
+			
+			
+			
+		}
+		
+
+
+		
+	}
+	
+	var fullurl = parent.window.janus.currenturl();
+
+	if (update_tick == 0 || lastlocation != fullurl)
+	{
+		var results = GetRoomText()
+		currentroomsmaplocation = "";
+		for (var index in results)
+		{
+			if (results[index][0] == 'JanusVRMapUI_URL')
+			{
+				currentroomsmaplocation = results[index][1];
+				break;
+			}
+		}
+		if (currentroomsmaplocation == '')
+		{
+			if (fullurl.charAt(fullurl.lastIndexOf('/')-1) != '/') //If the last instance of a slash isn't the http:// bit of the url and if you're not in an unclosed path (no extension)
+			{
+				currentroomsmaplocation = fullurl.substring(0, fullurl.lastIndexOf('/')+1);
+			}
+			else
+			{
+				currentroomsmaplocation = fullurl+"/";
+			}
+			currentroomsmaplocation = currentroomsmaplocation+"indexmap.png";
+		}
+		mapbackground= " url("+currentroomsmaplocation+"),url('../../backgrounds/grid.png')";
+	}
+	update_tick = (update_tick + 1) % 10;
+	
+	
+	
+	var mapsizex=2*scale;
+	var mapsizey=2*scale;
+	
+	//custom images
+	//var mapsizex=565*(scale*0.1);
+	//var mapsizey=450*(scale*0.1);
+	
+	if (lastmapbackground != mapbackground)
+	{
+		document.getElementById("map").style.background = mapbackground;
+		lastmapbackground = mapbackground;
+		lastlocation = fullurl;
+	}
+	//set background scale and position
+	document.getElementById("map").style.backgroundPosition  = (-(((mapsizex*50)-xview-(2*scale)))+"px "+(-(((mapsizey*50)-zview-(2*scale)))+"px"))+","+(-(((0)-xview))+"px "+(-(((0)-zview))+"px"));
+
+	document.getElementById("map").style.backgroundSize  = (mapsizex*100)+"px "+(mapsizey*100)+"px,"+(mapsizex)+"px "+(mapsizey)+"px";
+	document.getElementById("map").style.backgroundAttachment = "fixed";
+	document.getElementById("map").style.backgroundRepeat = "no-repeat,repeat";
+	
+	
+	//scan through all the map icons and make sure there's a player correlated with it. if there isn't, delete it.
+	var mpiconz = document.getElementsByClassName("mapuser")
+	
+	var it;
+	
+	for (it=0;it<document.getElementsByClassName("mapuser").length;it++) //iterate through all map icons
+	{
+		
+		var currentcheck = document.getElementsByClassName("mapuser")[it] //current map icon we're iterating through
+
+		// alert(window.janus.playerlist.length)
+
+		if (window.janus.playerlist[currentcheck.id.match(/\d+/g)] == null) //if this player doesn't exist
+		{
+			//delete their market
+			//alert("removing "+currentcheck.id.match(/\d+/g))
+			currentcheck.remove();
+			
+			var numofname = currentcheck.id.replace(/\D/g, '');
+			
+			document.getElementById("playername"+numofname).remove();
+			
+		}
+		
+		
+	}
+	
+	//make sure map always stays circular
+	
+	
+
+	document.getElementById("map").style.maxWidth = document.getElementById("map").offsetHeight+"px";
+	document.getElementById("map").style.minWidth = document.getElementById("map").offsetHeight+"px";
+	
+	
+	
+	
+	//css transform the whole map based on player position
+	var angle = Math.atan2(parent.window.janus.playerlist[0].zdir.z,parent.window.janus.playerlist[0].zdir.x) * 180.0 / Math.PI;
+
+	document.getElementById("map").style.webkitTransform = "rotate("+(-(angle-90))+"deg)";
+	
+	
+
+
+
+}, 20)
+
+
+
+function setScale(value) {
+
+	scale = value;
+}
+
+
+
+
+
+
+	</script>
+</head>
+
+<body >
+
+<div class="windowcontainer">
+
+<div class="tabrow unselectable" id="tabrow"  style="z-index:3;display:none;">
+
+	<div class="tabbutton" id="maptabbutton" onmousedown="tabSelect('maptabcontainer','maptabbutton')">MAP</div>
+	<!--<div class="tabbutton" id="historytabbutton" onmousedown="tabSelect('historytabcontainer','historytabbutton')">HISTORY</div>-->
+
+</div>
+
+
+<div class="windowarea unselectable" id="windowarea" style="background-color:transparent;border-top-style:none;">
+
+
+
+
+
+		<div class="tabcontainer" id="maptabcontainer" style="overflow:hidden;">
+			
+			<span class="subtleinfo" id="scalereader" style="right:0px;position:absolute;"></span>
+			
+			
+			<div class="map" id="map" >
+			
+			
+			</div>
+				
+							<div id="bottombar" class="bottombar" style="background-color:rgba(0,0,0,0);border-top-width:0;border-bottom-width:0;margin-bottom:16px;margin-left:16px;width:calc(100% - 32px)">
+				
+
+				
+<input type="range" class="myslider" id="myRange" value="10" style="width:100% !important;" onChange="setScale(this.value)" min="1" max="15">
+		</div>
+		
+		
+		
+		
+		
+		
+					
+		<div class="tabcontainer" id="historytabcontainer">
+				
+
+		</div>
+					
+										
+		
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		</div>			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+</div>
+
+<audio id="sound1" src="..\..\sounds\click.wav" preload="auto"></audio>
+
+</body>
+</html>

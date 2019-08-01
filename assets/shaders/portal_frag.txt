@@ -1,0 +1,188 @@
+#version 330 core
+#define MAX_JOINTS 128
+
+// BEGIN --- Textures --- 
+	uniform sampler2D iTexture0; // Albedo
+	uniform sampler2D iTexture1; // Specular
+	uniform sampler2D iTexture2; // Smoothness
+	uniform sampler2D iTexture3; // Normal
+	uniform sampler2D iTexture4; // Height
+	uniform sampler2D iTexture5; // Occlusion
+	uniform sampler2D iTexture6; // Emission
+	uniform sampler2D iTexture7; // Detail Mask
+	uniform sampler2D iTexture8; // Detail Albedo
+	uniform sampler2D iTexture9; // Detail Normal
+	uniform samplerCube iCubeTexture0; // Skybox
+	uniform samplerCube iCubeTexture1; // Skybox Radiance
+	uniform samplerCube iCubeTexture2; // Skybox Irradiance
+// END --- Textures --- 
+
+// BEGIN --- Uniforms --- 
+
+	// BEGIN --- Frame --- 
+		uniform vec4 iLeftEye;
+		uniform vec4 iMouse;
+		uniform vec4 iResolution;
+		uniform vec4 iGlobalTime;
+	// END --- Frame --- 
+	
+	// BEGIN --- Room --- 
+		uniform mat4 iMiscRoomData;
+		uniform vec4 iPlayerPosition;
+		uniform vec4 iUseClipPlane;
+		uniform vec4 iClipPlane;
+		uniform vec4 iFogEnabled;
+		uniform vec4 iFogMode;
+		uniform vec4 iFogDensity;
+		uniform vec4 iFogStart;
+		uniform vec4 iFogEnd;
+		uniform vec4 iFogCol;
+		uniform mat4 iRoomMatrix;
+	// END --- Room --- 
+	
+	// BEGIN --- Object --- 
+		uniform mat4 iMiscObjectData;
+		uniform vec4 iConstColour;
+		uniform vec4 iChromaKeyColour;
+		uniform vec4 iUseLighting;
+		uniform vec4 iObjectPickID;
+		uniform mat4 iModelMatrix;
+		uniform mat4 iViewMatrix;
+		uniform mat4 iProjectionMatrix;
+		uniform mat4 iInverseViewMatrix;
+		uniform mat4 iModelViewMatrix;
+		uniform mat4 iModelViewProjectionMatrix;
+		uniform mat4 iTransposeInverseModelMatrix;
+		uniform mat4 iTransposeInverseModelViewMatrix;
+		uniform vec4 iBlend;
+		uniform vec4 iUseSkelAnim;
+		uniform mat4 iSkelAnimJoints[MAX_JOINTS];
+	// END --- Object --- 
+	
+	// BEGIN --- Material --- 
+	uniform vec4 iAmbient;
+	uniform vec4 iDiffuse;
+	uniform vec4 iSpecular;
+	uniform vec4 iShininess;
+	uniform vec4 iEmission;
+	uniform vec4 iUseTexture[4];
+	// BEGIN --- Material --- 
+	
+// END --- Uniforms --- 
+
+// BEGIN --- Input Interpolants --- 
+	smooth in vec3 iPosition;
+	smooth in vec3 iPositionWorld;
+	smooth in vec3 iPositionCamera;
+	smooth in vec3 iNormal;
+	smooth in vec3 iNormalWorld;
+	smooth in vec3 iNormalCamera;
+	smooth in vec2 iTexCoord0;
+	smooth in vec2 iTexCoord1;
+// END --- Input Interpolants --- 
+
+// BEGIN --- Framebuffer Outputs --- 
+	layout(location = 0) out vec4 out_color;
+// END --- Framebuffer Outputs --- 
+
+// BEGIN --- Normal Encode ---
+	vec4 encodeNormal(vec3 viewSpaceNormal)
+	{
+		const float scale_rcp = 1.0 / 1.7777;
+		vec2 encodedNormal = viewSpaceNormal.xy / (viewSpaceNormal.z + 1);
+		encodedNormal *= scale_rcp;
+		encodedNormal = encodedNormal * 0.5 + 0.5;
+		return vec4(encodedNormal, 0.0, 1.0);
+	}
+	
+	// Credit: http://www.thetenthplanet.de/archives/1180
+	vec3 tangentSpaceToObjectSpaceNormal(vec3 position, vec2 UV, vec3 objectSpaceNormal, vec3 tangentSpaceNormal)
+	{
+		vec3 dFdx_pos = dFdx(position);
+		vec3 dFdy_pos = dFdy(position);
+		vec2 dFdx_UV = dFdx(UV);
+		vec2 dFdy_UV = dFdy(UV);
+
+		// solve the linear system
+		vec3 dp2perp = cross(dFdy_pos, objectSpaceNormal);
+		vec3 dp1perp = cross(objectSpaceNormal, dFdx_pos);
+		vec3 tangent = dp2perp * dFdx_UV.x + dp1perp * dFdy_UV.x;
+		vec3 biTangent = dp2perp * dFdx_UV.y + dp1perp * dFdy_UV.y;
+
+		// construct a scale-invariant frame 
+		float invmax = inversesqrt(max(dot(tangent, tangent), dot(biTangent, biTangent)));
+		mat3 TBN = mat3(tangent * invmax, biTangent * invmax, objectSpaceNormal);
+		
+		return normalize(TBN * tangentSpaceNormal);
+	}
+// END --- Normal Encode --- 
+
+vec4 sRGBToLinear(vec4 sRGB)
+{
+	bvec4 cutoff = lessThan(sRGB, vec4(0.04045));
+	vec4 higher = pow((sRGB + vec4(0.055)) / vec4(1.055), vec4(2.4));
+	vec4 lower = sRGB / vec4(12.92);
+	return vec4(mix(higher, lower, cutoff).rgb, sRGB.a);
+}
+
+void main(void)
+{
+	if (iUseTexture[0].x == 1)
+	{
+		out_color = iConstColour * texture(iTexture0, iTexCoord0.xy);
+	}
+	else
+	{
+		float pow_val = 0;
+	vec2 uv = iTexCoord0.st;    
+	vec2 p = mod(uv*6.28318, 6.28318)-250.0;
+	vec2 i = vec2(p);
+	float c = 1.0;
+	float inten = .005;
+		int MAX_ITER = 6;
+		for (int n = 0; n < MAX_ITER; n++) 
+		{
+			float t = iGlobalTime.x * (1.0 - (3.5 / float(n+1)));
+			i = p + vec2(cos(t - i.x) + sin(t + i.y), sin(t - i.y) + cos(t + i.x));
+			c += 1.0/length(vec2(p.x / (sin(i.x+t)/inten),p.y / (cos(i.y+t)/inten)));
+		}
+		c /= float(MAX_ITER);
+		c = 1.17-pow(c, 1.4);
+
+		pow_val = pow(abs(c), (sin(iGlobalTime.x)+1.0)*4.0+8.0) + 0.5;
+		out_color = vec4(pow_val, pow_val, pow_val, pow_val);
+		out_color *= iConstColour;
+	}
+
+	if (iUseTexture[0].y == 1)
+	{
+		out_color.a *= texture(iTexture1, iTexCoord0.xy).a;
+	}
+	
+	vec4 fog_color = vec4(1.0, 1.0, 1.0, 1.0);
+	if (iFogEnabled.x == 1.0)
+	{
+		//compute length from eye to fragment
+		float fragDistance = length(iPositionCamera);   
+		//compute blend value
+		float fogInterpolator;
+		if (iFogMode.x == 0.0)
+		{
+			fogInterpolator = (iFogEnd.x - fragDistance) / (iFogEnd.x - iFogStart.x);
+		}
+		else if (iFogMode.x == 1.0)
+		{
+			fogInterpolator = exp(-iFogDensity.x * fragDistance);
+		}
+		else
+		{
+			fogInterpolator = exp(-(iFogDensity.x * fragDistance)*(iFogDensity.x * fragDistance));
+		}
+		fogInterpolator = clamp(fogInterpolator, 0.0, 1.0);
+		fog_color = mix(iFogCol.rgba, vec4(1.0,1.0,1.0,1.0), fogInterpolator);
+	}
+	
+	out_color.rgb *= fog_color.rgb;
+	
+	out_color.rgb *= out_color.a;
+}

@@ -1,0 +1,70 @@
+/*This CSS is only activated when JanusVR is in VR mode.*/
+.titlebar {
+line-height:48px;
+}
+
+.titlebar.collapsed{
+min-height: 48px;
+}
+
+.titlebar .wind {
+min-width:300px;
+}
+.titlebar iframe {
+min-width:300px;
+}
+
+.shadebutton {
+height:25px;
+width:33px;
+padding-top:12px;
+}
+.pinbutton {
+height:25px;
+width:33px;
+padding-top:12px;
+}
+.pinbuttonactive {
+height:25px;
+width:33px;
+padding-top:12px;
+}
+.closebutton {
+height:25px;
+width:33px;
+padding-top:12px;
+}
+
+.resizehandle {
+height:40px;
+width:40px;
+border-width:12px;
+transform: translate(5px);
+-webkit-transform: translate(5px);
+border-radius:15px;
+}
+
+
+
+.stat {
+width:42px;
+height:42px;
+}
+
+.statisticleft2 {
+left:64px;
+}
+.statisticleft2counter {
+left:88px;
+padding-top:11.5px;
+padding-bottom:11.5px;
+}
+
+.statisticright {
+right:64px;
+}
+
+
+.notificationcontainer {
+top:70px;
+}

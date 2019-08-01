@@ -1,0 +1,1042 @@
+
+  body {
+
+  padding:0 0;
+  margin: 0 0;
+  overflow:hidden;
+  }
+
+ @font-face {
+    font-family: "Montserrat";
+    src: url('Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url('OpenSans-Regular.ttf');
+}
+
+  
+
+
+.top-bar {
+  font-size: 28px;
+  height: 32px;
+  background: #181818;
+}
+
+
+.name-input {
+ display:inline;
+}
+.menu-icon {
+  display:inline-block;
+  width: 28px;
+  height: 28px;
+  background-position: center;
+  background-size: 100%;
+  border-style: hidden;
+  -webkit-filter: brightness(0.85);
+}
+
+.menu-image {
+  width: 28px;
+  height: 28px;
+  display:inline-block;
+}
+
+.menu-icon:hover {
+  -webkit-filter: brightness(1);
+}
+
+.menu-icon:active {
+  -webkit-filter: brightness(0.65);
+}
+	
+.menu-icon-trash {
+  background-image: url('../inventory/images/icons/icon-trash.png');
+}
+.inline {
+  display:inline-block;
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+
+.avatarlist {
+height:calc(100% - 38px);
+background-color:#242A2D;
+overflow-y:scroll;
+}
+
+
+	.bottombutton {
+	width:32px;
+	height:32px;
+	background-size:cover;
+	display:inline-block;
+	background-position:middle;
+
+	}
+	.previewbutton {
+	background-image: url('icons/icon-preview.png');
+
+	}
+	.previewbutton:hover {
+	background-image: url('icons/icon-previewhover.png');
+	background-color: white;
+	}	
+
+	.savebutton {
+	background-image: url('icons/icon-save.png');
+
+	}
+	.savebutton:hover {
+	background-image: url('icons/icon-savehover.png');
+	background-color: white;
+	}	
+
+	.shirticon {
+	background-image: url('icons/icon-shirt.png');
+	padding: 8px 8px 8px 8px;
+	background-size:cover;
+	position:relative;
+	display:inline-block;
+	background-position:middle;
+	margin-right:8px;
+	}
+	
+	.shirticon:hover {
+	background-image: url('icons/icon-shirthover.png');
+
+	}	
+	
+#avatar_list li {
+  list-style-type: none;
+  width: calc(100% - 8px);
+  padding-left: 8px;
+  padding-top:8px;
+  padding-bottom:8px;
+  text-align:left;
+  max-height:32px;
+  font-family: 'Open Sans';
+  color:white;
+  display:block;
+}
+
+#avatar_list li:hover {
+background-color:#343A3D;
+}
+
+.device_list li {
+  list-style-type: none;
+  width: calc(100% - 8px);
+  padding-left: 8px;
+  padding-top:8px;
+  padding-bottom:8px;
+  text-align:left;
+  max-height:32px;
+  font-family: 'Open Sans';
+  background-color:#242A2D;
+  color:white;
+  display:block;
+}
+
+.device_list li:hover {
+background-color:#343A3D;
+}
+
+.device {
+  list-style-type: none;
+  width: calc(100% - 8px);
+  text-align:left;
+  max-height:32px;
+  font-family: 'Open Sans';
+  color:white;
+}
+
+.device:hover {
+background-color:#343A3D;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+}
+
+
+
+.partyitem {
+
+		background-image: url("bg.png");
+		background-size:cover;
+		
+font-family: "Open Sans";
+
+color:white;
+text-align:center;
+border-bottom-style:solid;
+border-bottom-color:white;
+padding-top:32px;
+border-width:1px;
+padding-bottom:32px;
+font-size:12px;
+ word-wrap:break-word;
+break-inside: avoid-column;
+-webkit-column-break-inside: avoid;
+
+
+/* Safari, Opera, and Chrome */
+display:-webkit-box;
+-webkit-box-pack:center;
+-webkit-box-align:center;
+
+/* W3C */
+display:box;
+box-pack:center;
+box-align:center;
+}
+
+.partyitem .partytext {
+
+}
+
+#partycontainer {
+    -webkit-column-gap: 0px; /* Chrome, Safari, Opera */
+    -moz-column-gap: 0px; /* Firefox */
+    column-gap: 0px;
+
+}
+
+@media screen and (min-width: 400px) {
+    #partycontainer {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+
+    }
+	
+	.partyitem {
+	border-right-style: solid;
+	border-right-color:white;
+	border-left-color: white;
+	border-left-style: solid;
+		height:64px;
+		padding: 8px;
+		overflow:hidden;
+
+	}
+}
+
+
+@media screen and (min-width: 625px) {
+    #partycontainer {
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+    }
+}
+
+
+@media screen and (min-width: 825px) {
+    #partycontainer {
+    -webkit-column-count: 4; /* Chrome, Safari, Opera */
+    -moz-column-count: 4; /* Firefox */
+    column-count: 4;
+    }
+}
+
+@media screen and (min-width: 1125px) {
+    #partycontainer {
+    -webkit-column-count: 5; /* Chrome, Safari, Opera */
+    -moz-column-count: 5; /* Firefox */
+    column-count: 5;
+    }
+}
+
+.partyitem b {
+color: 61BE6C;
+
+}
+
+.partynobody {
+
+}
+
+.partyitem:hover {
+background-color:white !important;
+color:#545454;
+cursor:pointer;
+background-image: none !important;
+
+}
+
+
+
+.partyitem:hover b{
+background-color:white;
+color:#545454;
+cursor:pointer;
+}
+
+
+
+
+li {
+    float: left;
+}
+
+  .item span input {
+  float:right;
+
+  }
+
+  .myslider {
+  background-color: #B3B3B3;
+  width: 50% !important;
+  }
+
+ .longerinput
+ {
+ width: 50% !important;
+
+ }
+
+.subtleinfo
+{
+font-family:"Montserrat";
+color:#848484;
+
+}
+
+#entryform {
+width:100%;
+background-color: rgba(0,0,0,0.1);
+border-style: none;
+text-decoration:none;
+  font-family: "Open Sans";
+  color:white;
+}
+
+#entryform:focus{
+outline-color:white;
+
+}
+
+
+
+ p {
+   font-family: "Open Sans";
+  color:white;
+
+
+ }
+
+       .entryform {
+  position:fixed;
+  font-family: "Open Sans";
+  width: 100%;
+  bottom: 0px;
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+  	 font-size:14px;
+
+
+  }
+
+
+.rightimage {
+      width: 50%;
+    float: right;
+
+   height:100%;
+   background-size:contain;
+      background-position: center;
+	  max-width:300px;
+	    background-repeat: no-repeat;
+}
+
+.mousehand {
+cursor:hand;
+
+}
+
+.left {
+    float: none; /* not needed, just for clarification */
+
+    /* the next props are meant to keep this block independent from the other floated one */
+    width: auto;
+    overflow: hidden;
+}​​
+
+  textarea {
+resize: none;
+
+}
+
+
+ .textinput{
+ width:100%;
+ height:100%; border-style: none !important;
+ position:fixed;
+  resize: none;
+  background-color: rgba(0,0,0,0);
+  color:white;
+   font-family: "Open Sans";
+   text-decoration: none !important;
+ 	 font-size:14px;
+
+ }
+
+ .mainwindowframe{
+ height:calc(100% - 0px);
+ width: calc(100% - 0px);
+
+ border-style:none;
+ margin: 0 0 0 0;
+ padding: 0 0 0 0;
+
+ }
+
+
+.messagecontainer {
+overflow:auto;
+height:calc(100% - 23px);
+word-wrap:break-word;
+    -webkit-hyphens: auto;
+       -moz-hyphens: auto;
+        -ms-hyphens: auto;
+            hyphens: auto;
+}
+
+.windowarea {
+height: calc(100% - 38px);
+border-color: #E4E4E4;
+border-top-style: solid;
+  overflow:auto;
+background-color: #2F363B;
+}
+
+
+.lightup:hover {
+
+background-color: #5F5F5F;
+
+}
+
+
+.litup {
+background-color:white;
+color: #545454 !important;
+
+}
+
+
+.windowpreview {
+ height:0px;
+	-webkit-transition: height 0.4s;
+	-moz-transition: height 0.4s;
+	transition: height 0.4s;
+background-size: cover;
+border-top-style:solid;
+border-bottom-style:solid;
+border-color: white;
+background-position: center; 
+border-width: 2px;
+}
+
+
+.bookmarkstopbar {
+width:100%;
+background-color: #242A2D;
+position:fixed;
+
+
+
+}
+
+.tastysandwichicon {
+height:32px;
+width:32px;
+background-image: url('icons/tastysandwich.png');
+cursor:pointer;
+float:right;
+background-size: contain;
+}
+
+ .menulist ul {
+display:inline-block;
+ margin: 0px 0px;
+ padding: 0px 0px;
+ 	width:100%;
+
+ }
+ 
+ .menulist ul li {
+  	float:initial;
+
+ }
+
+  .menulist {
+	text-align:center;
+  z-Index:2222222222;
+  width:256px;
+  background-color:#3F3F3F;
+
+  position:absolute;
+  width: 150px;
+  border-style: solid;
+  border-color: #E4E4E4;
+  border-width:1px;
+    font-family: "Montserrat";
+  color: white;
+visibility:hidden;
+  }
+
+  .menulistbutton {
+    display: block;
+
+    text-align: center;
+
+    text-decoration: none;
+	  font-family: "Montserrat";
+
+
+	  font-size: 12px;
+
+
+  color: #E4E4E4;
+  font-family: "Montserrat";
+  padding: 10px 10px;
+
+
+
+	  background-color:#4F4F4F;
+
+
+
+}
+
+.menulistbutton:hover {
+
+cursor:pointer;
+background-color:#7F7F7F ;
+}
+
+  .unselectable {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+								  cursor:default;
+}
+
+.header {
+border-bottom-color: #3F3F3F;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-top-color: #3F3F3F;
+border-top-style: none;
+border-top-width: 2px;
+
+font-family: "Montserrat";
+color: white;
+
+padding: 8px 8px;
+text-align:left;
+
+}
+
+.tabcontainer {
+
+display: none;
+
+}
+
+.tabrow {
+
+white-space: nowrap;
+overflow:hidden;
+}
+
+.partyhideurl {
+display:none;
+}
+
+
+
+.tabbutton {
+    display: inline-block;
+	float:left;
+    text-align: center;
+
+    text-decoration: none;
+	  font-family: "Montserrat";
+
+
+	  font-size: 12px;
+
+ border-style:none;
+  color: #E4E4E4;
+  font-family: "Montserrat";
+  padding: 10px 10px;
+
+  margin-right:0vw;
+  overflow:hidden;
+
+
+
+}
+
+
+/* Change the link color to #111 (black) on hover */
+.tabbutton:hover {
+    background-color: #6C8F87;
+	color: #242A2D;
+	cursor:hand;
+}
+
+.tabbutton:focus {
+
+ outline:0;
+
+}
+
+
+.inputminiurl {
+
+  font-family: "Open Sans";
+  color:white;
+
+max-width:100%;
+width:calc(100% - 132px);
+  font-size: 12px;
+ background-color:#455947;
+ border-color:grey;
+ border-width:1px;
+ border-style:solid;
+height:calc(100% - 0px);
+
+vertical-align: middle;
+padding: 6px 8px;
+margin: 4px 4px;
+
+}
+
+
+
+
+.button {
+
+  font-family: "Montserrat";
+  color:white;
+max-width:64px;
+  font-size: 12px;
+ background-color:#545454;
+height:calc(100% - 0px);
+text-align: center;
+vertical-align: middle;
+padding: 8px 8px;
+margin: 4px 4px;
+margin-left: 2px;
+}
+
+
+
+
+.button:hover {
+
+    background-color: #7F7F7F;
+	cursor:hand;
+
+}
+
+.button:active {
+
+ background-color:#8F8F8F;
+
+}
+
+
+
+
+
+.resetavatarbutton {
+
+  font-family: "Montserrat";
+  color:white;
+
+
+ background-color:#6F6F6F;
+
+
+border-radius:5px;
+text-align: center;
+vertical-align: middle;
+padding-top:16px;
+padding-bottom:16px;
+border-color: #3F3F3F;
+border-style: NONE;
+border-width:2px;
+margin-left:30%;
+margin-right:30%;
+margin-top:4px;
+margin-bottom:4px;
+}
+
+
+
+
+.resetavatarbutton:hover {
+
+    background-color: #7F7F7F;
+	cursor:hand;
+
+}
+
+.resetavatarbutton:active {
+
+ background-color:#8F8F8F;
+
+}
+
+
+
+
+
+.bottombar {
+
+bottom:0;
+position:absolute;
+background-color:#242A2D;
+width:100%;
+border-top-style:solid;
+border-top-width:2px;
+border-top-color:#242A2D;
+
+border-bottom-style:solid;
+border-bottom-width:2px;
+border-bottom-color:#242A2D;
+
+
+}
+
+
+.bottombarrelative {
+
+bottom:0;
+
+background-color:white;
+color:#545454;
+width:100%;
+
+
+}
+
+.mapiconname {
+text-align:center;
+font-family: "Open Sans";
+color:white;
+    text-shadow: -1px 0 #545454, 0 1px #545454, 1px 0 #545454, 0 -1px #545454;
+bottom:24px;
+position:absolute;
+font-weight: bold;
+}
+
+.footstepsicon {
+height:32px;
+width:32px;
+background-image: url('icons/footsteps.png');
+cursor:pointer;
+background-size: contain;
+}
+
+.footstepsicon:hover {
+height:32px;
+width:32px;
+background-image: url('icons/footstepshover.png');
+cursor:pointer;
+background-size: contain;
+}
+
+
+.item {
+
+
+	 font-size:14px;
+
+padding: 8px 8px;
+ font-family: "Open Sans";
+ color: #CCCCCC;
+}
+
+.itemchat {
+
+
+	 font-size:14px;
+
+padding: 8px 8px;
+ font-family: "Open Sans";
+ color: #CCCCCC;
+}
+
+.itemchat b {
+
+color: #61BE6C;
+
+}
+
+
+form {
+margin-bottom: 0;
+
+}
+
+
+
+input {
+
+background-color: #242A2D;
+border-style:none;
+
+color:white;
+border-radius:2px;
+margin-top:4px;
+padding-left:4px;
+padding-top:4px;
+padding-bottom:4px;
+padding-right:4px;
+}
+
+
+li .selected {
+
+  background-color: #E4E4E4;
+   color: #545454;
+
+
+
+}
+
+
+
+
+.mapicon {
+z-index:222;
+border-color:white;
+background-image: url("mapicon1.png");
+background-position: center;
+background-size:cover;
+position:absolute;
+text-align:center;
+}
+
+.mapiconother {
+
+border-color:white;
+background-image: url("mapicon2.png");
+background-position: center;
+background-size:cover;
+position:absolute;
+text-align:center;
+}
+
+.inventoryimage {
+display: absolute;
+height:100%;
+}
+
+.bookmarkitemcontainer {
+height:64px;
+
+}
+
+.inventorytext {
+float:left;
+}
+
+.map {
+width:100%;
+height:100%;
+border-radius:100%;
+}
+
+
+
+
+
+
+
+
+
+
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #B3B3B3;
+  border-radius: 1px;
+  border: 0px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000031;
+  border: 0px solid #00001E;
+  height: 26px;
+  width: 26px;
+  border-radius: 15px;
+  background: #FFFFFF;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -10px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #B3B3B3;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #B3B3B3;
+  border-radius: 1px;
+  border: 0px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000031;
+  border: 0px solid #00001E;
+  height: 26px;
+  width: 26px;
+  border-radius: 15px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #B3B3B3;
+  border: 0px solid #010101;
+  border-radius: 2px;
+  box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-fill-upper {
+  background: #B3B3B3;
+  border: 0px solid #010101;
+  border-radius: 2px;
+  box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 0px #000031;
+  border: 0px solid #00001E;
+  height: 26px;
+  width: 26px;
+  border-radius: 15px;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #B3B3B3;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #B3B3B3;
+}
+  .item {
+  padding-left:16px;
+  }
+  
+input[type=checkbox].myCheckbox {
+							position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+						}
+
+						input[type=checkbox].myCheckbox + label.css-label {
+							padding-left:30px;
+							height:25px; 
+							display:inline-block;
+							line-height:21px;
+							background-repeat:no-repeat;
+							background-position: 0 0;
+							color:#0ee05a;
+							vertical-align:middle;
+							cursor:pointer;
+
+						}
+						
+						input[type=checkbox].myCheckbox + label.css-label:hover {
+						color:#6cf19c;
+						}
+						
+						input[type=checkbox].myCheckbox:checked + label.css-label {
+							background-position: 0 -25px;
+						}
+						label.css-label {
+				background-image:url('checks.png');
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			
+			
+			
+input[type=radio].myCheckbox {
+							position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+						}
+
+						input[type=radio].myCheckbox + label.css-label-radio {
+							padding-left:30px;
+							height:25px; 
+							display:inline-block;
+							line-height:21px;
+							background-repeat:no-repeat;
+							background-position: 0 0;
+
+							vertical-align:middle;
+							cursor:pointer;
+
+						}
+
+						input[type=radio].myCheckbox:checked + label.css-label-radio {
+							background-position: 0 -25px;
+														color:#0ee05a;
+						}
+						label.css-label-radio {
+				background-image:url('radios.png');
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}			
+			
+  .item span input {
+  float:none; !important;
+  }

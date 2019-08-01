@@ -1,0 +1,280 @@
+<html>
+<head>
+
+<script>
+
+var speed= -200;
+var screenx=0;
+
+
+
+	setInterval(function(){ 
+
+	
+	screenx += speed;
+
+
+	document.getElementById("layer1").style.backgroundPosition = (screenx*0.05)+"px 0"
+	document.getElementById("layer2").style.backgroundPosition = (screenx*0.1)+"px 0"
+	document.getElementById("layer3").style.backgroundPosition = (screenx*0.3)+"px 0"
+	document.getElementById("layer4").style.backgroundPosition = (screenx*0.5)+"px 0"
+	document.getElementById("layer5").style.backgroundPosition = (screenx*0.7)+"px 0"
+	document.getElementById("layer6").style.backgroundPosition = (screenx*1)+"px 0"
+	document.getElementById("layer7").style.backgroundPosition = (screenx*1.2)+"px 0"
+	document.getElementById("layer8").style.backgroundPosition = (screenx*1.4)+"px 0"
+	document.getElementById("layer9").style.backgroundPosition = (screenx*1.6)+"px 0"
+	document.getElementById("layer10").style.backgroundPosition = (screenx*1.7)+"px 0"
+	document.getElementById("layer11").style.backgroundPosition = (screenx*1.7)+"px 0"
+
+
+
+
+
+	 }, 1000);
+
+
+
+</script>
+
+<style>
+
+@font-face {
+    font-family: "Open Sans Regular";
+    src: url(OpenSans-Regular.ttf);
+}
+
+  
+  
+body {
+
+background-color: #002A15;
+margin: 0;
+
+overflow: hidden;
+}
+
+
+.cloudlayer {
+
+background-image: url('background/clouds.png');
+height:160px;
+width: 100vw;
+top: 15vh;
+background-size: auto;
+image-rendering:pixelated;
+position:absolute;
+
+
+ -webkit-transition:background-position 1000ms linear;  
+    -moz-transition:background-position 1000ms linear;  
+    -o-transition:background-position 1000ms linear;  
+    transition:background-position 1000ms linear; 
+}
+
+.mountainlayer {
+
+background-image: url('background/mountains.png');
+height:80px;
+width: 100vw;
+top: 25vh;
+background-size: auto;
+image-rendering:pixelated;
+position:absolute;
+
+ -webkit-transition:background-position 1000ms linear;  
+    -moz-transition:background-position 1000ms linear;  
+    -o-transition:background-position 1000ms linear;  
+    transition:background-position 1000ms linear; 
+}
+
+.shrublayer {
+
+background-image: url('background/shrub.png');
+height:160px;
+width: 100vw;
+top: 28vh;
+background-size: auto;
+image-rendering:pixelated;
+position:absolute;
+
+ -webkit-transition:background-position 1000ms linear;  
+    -moz-transition:background-position 1000ms linear;  
+    -o-transition:background-position 1000ms linear;  
+    transition:background-position 1000ms linear; 
+}
+
+.shrublayer2 {
+
+background-image: url('background/shrub2.png');
+height:160px;
+width: 100vw;
+top: 33vh;
+background-size: auto;
+image-rendering:pixelated;
+position:absolute;
+
+
+ -webkit-transition:background-position 1000ms linear;  
+    -moz-transition:background-position 1000ms linear;  
+    -o-transition:background-position 1000ms linear;  
+    transition:background-position 1000ms linear; 
+}
+
+.staticshrub{
+
+background-image: url('background/staticshrub.png');
+height:160px;
+width: 100vw;
+top: 35vh;
+background-size: auto;
+image-rendering:pixelated;
+position:absolute;
+
+
+ -webkit-transition:background-position 1000ms linear;  
+    -moz-transition:background-position 1000ms linear;  
+    -o-transition:background-position 1000ms linear;  
+    transition:background-position 1000ms linear; 
+}
+
+.staticshrub2{
+
+background-image: url('background/staticshrub2.png');
+height:160px;
+width: 100vw;
+top: 38vh;
+background-size: auto;
+image-rendering:pixelated;
+position:absolute;
+
+
+ -webkit-transition:background-position 1000ms linear;  
+    -moz-transition:background-position 1000ms linear;  
+    -o-transition:background-position 1000ms linear;  
+    transition:background-position 1000ms linear; 
+}
+
+.staticshrub3{
+
+background-image: url('background/staticshrub3.png');
+height:160px;
+width: 100vw;
+top: 51vh;
+background-size: auto;
+image-rendering:pixelated;
+position:absolute;
+
+
+ -webkit-transition:background-position 1000ms linear;  
+    -moz-transition:background-position 1000ms linear;  
+    -o-transition:background-position 1000ms linear;  
+    transition:background-position 1000ms linear; 
+}
+
+.staticshrub4{
+
+background-image: url('background/staticshrub4.png');
+height:160px;
+width: 100vw;
+top: 55vh;
+background-size: auto;
+image-rendering:pixelated;
+position:absolute;
+
+
+ -webkit-transition:background-position 1000ms linear;  
+    -moz-transition:background-position 1000ms linear;  
+    -o-transition:background-position 1000ms linear;  
+    transition:background-position 1000ms linear; 
+}
+
+
+.ground{
+
+background-image: url('background/ground.png');
+height:80px;
+width: 100vw;
+top: 62vh;
+background-size: auto;
+image-rendering:pixelated;
+position:absolute;
+
+
+ -webkit-transition:background-position 1000ms linear;  
+    -moz-transition:background-position 1000ms linear;  
+    -o-transition:background-position 1000ms linear;  
+    transition:background-position 1000ms linear; 
+}
+
+
+.finalground {
+
+background-image: url('background/ground2.png');
+height:calc(100vh - 62vh);
+width: 100vw;
+top: calc(62vh + 80px);
+background-size: auto;
+image-rendering:pixelated;
+position:absolute;
+
+
+ -webkit-transition:background-position 1000ms linear;  
+    -moz-transition:background-position 1000ms linear;  
+    -o-transition:background-position 1000ms linear;  
+    transition:background-position 1000ms linear; 
+}
+
+.logoimage
+{
+position:absolute;
+image-rendering:pixelated;
+left:32px;
+top:32px;
+cursor:hand;
+}
+
+.awesomemarquee {
+color:white;
+font-size:16px;
+font-family:"Open Sans Regular";
+position:absolute;
+bottom:0px;
+background-color: #002A15;
+width:100%;
+}
+
+
+
+</style>
+
+</head>
+
+<body >
+
+<div><img class="logoimage" src="images/logo.png" />
+
+</div>
+
+
+<div class="cloudlayer" id="layer1"></div>
+<div class="mountainlayer" id="layer2"></div>
+<div class="shrublayer" id="layer3"></div>
+<div class="shrublayer2" id="layer4"></div>
+<div class="staticshrub" id="layer5"></div>
+<div class="staticshrub2" id="layer6"></div>
+<div class="staticshrub3" id="layer7"></div>
+<div class="staticshrub4" id="layer8"></div>
+<div class="staticshrub5" id="layer9"></div>
+<div class="ground" id="layer10"></div>
+
+<div class="finalground" id="layer11"></div>
+
+<marquee scrollamount="7" class="awesomemarquee"> JanusVR is... James and Karan...  Aussie, Firefox, Alain, Devlin, Dizzket, Gunpig, Lucas, Joseph... and probably many more by the time this easter egg is updated! Keep up the good work, Team. The community that has come around JanusVR has been absolutely amazing, and I want to thank all of you for sticking with us and trying to realize the virtual internet.
+ If you've made your way to this credits section, awesome! You probably found it through messing with the UI, or someone told you about it? Feel free to modify that thing. We're really looking forwards to what people do with it! It's fun to actually take a little break from working hard and make little things like this. Did you know
+ that we have a Mumble channel where we hang out and develop stuff? Or maybe the year is like, 2025 and it's dead by now... but it's babylon.vrsites.com if you're still living in the caveman days like we are. </marquee>
+
+
+</body>
+
+
+</html>

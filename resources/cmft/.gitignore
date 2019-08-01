@@ -1,0 +1,7 @@
+_build/
+# _projects/
+.svn/
+tags
+.DS_Store
+.vim
+make.log

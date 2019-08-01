@@ -1,0 +1,141 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>JanusVR Interface Chatlog</title>
+  <meta name="description" content="Chatlog Interface for JanusVR">
+  <meta name="author" content="JanusVR Inc.">
+ <script src="../../skins/theme.js"></script>
+  
+  <script>
+  
+  window.onload = function() {
+    initializeAppTheme("../../");
+  }
+  
+  function strip(html)
+{
+var tmp = document.createElement("DIV");
+tmp.innerHTML = html;
+return tmp.textContent || tmp.innerText;
+}
+  
+  <!-- When enter is pressed -->
+ function sendmessagewithenter() {
+ 
+ 
+  var keyPressed = event.keyCode || event.which;
+
+         if(keyPressed==13)
+        {
+
+		<!--unfocus field-->
+		
+		
+		if (document.getElementById("entryform").value != "")
+		{
+		var message = document.getElementById("entryform").value;
+		
+		var checkslashme = message.charAt(0)+message.charAt(1)+message.charAt(2);
+		
+			if (  checkslashme != "/me" && message.charAt(0) != "#")
+			{
+				var finalmessage = " : "+message;
+			}
+			else if (checkslashme == "/me")
+			{
+			finalmessage = message.substr(3, message.length);
+			}
+			else if (message.charAt(0) == "#")
+			{
+			finalmessage = message.substr(0, message.length);
+			}
+		
+		window.janus.chatsend(finalmessage); //send chat message value
+		}
+		
+		document.getElementById("entryform").value=""; //blank out entry form
+		document.getElementById("entryform").blur();
+			
+			
+		parent.window.janus.unfocus()	
+        }
+		
+
+		
+ }
+  
+
+  
+
+  //populate the chatlog
+  var chatlength = 0;
+  
+  setInterval(
+  function() {
+
+
+  if (window.janus.chat.length != chatlength) //if the length of the janus chatlog array is larger than the last known array size
+   {
+    var chtlog = document.getElementById("messagecontainer"); //grab the element we're going to be appending this new message to
+	
+	
+	while(window.janus.chat.length > chatlength)
+	{
+	//create main message container
+   	var msgcontainer = document.createElement("div"); //initialize a new message
+	msgcontainer.className  = "itemchat"; //set the class name 
+	msgcontainer.setAttribute('id', "message"+chatlength); //set the message id to message plus the current iteration
+	
+	var msgtosend = strip(window.janus.chat[chatlength]);
+	
+	msgcontainer.innerHTML = "<b>"+msgtosend.slice(0, msgtosend.indexOf(" "))+"</b> "+msgtosend.slice(msgtosend.indexOf(" ")+1,msgtosend.length );
+	chtlog.appendChild(msgcontainer); //append this message to the chatlog container
+    
+    chtlog.scrollTop = chtlog.scrollHeight;
+    chatlength += 1;
+
+	}
+
+
+
+
+
+  }
+  
+  
+  
+  }
+  ,100
+  
+  );
+  
+window.onresize = function(event) {
+   document.getElementById("messagecontainer").scrollTop = document.getElementById("messagecontainer").scrollHeight;
+};
+  
+    </script>
+  
+  
+
+</head>
+
+<body>
+
+<div class="entryform"   ><input onkeydown="sendmessagewithenter()" id="entryform" maxlength="245" type="text" placeholder="Click here or press T to chat." > </input>  </div>
+
+
+<div class="chatlog" id="chatlog"> 
+
+	<div class="messagecontainer" id="messagecontainer">
+
+
+	</div>
+
+
+</div>
+
+
+<audio id="sound1" src="../../sounds/chat.wav" preload="auto"></audio>
+</body>
+</html>

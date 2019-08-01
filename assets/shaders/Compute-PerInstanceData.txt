@@ -1,0 +1,53 @@
+#version 440 core
+
+struct Per_object_data
+{
+    vec4  iConstColour;
+    vec4  iChromaKeyColour;
+    vec4 iUseFlags;
+};
+layout(std430, binding = 1) buffer per_object_data
+{
+    Per_object_data per_object_data_array[];
+};
+
+struct Per_instance_data
+{
+	ivec4 m_obj_cam_mat_indices;
+	mat4  iModelMatrix;
+	mat4  iTransposeInverseModelMatrix;
+	mat4  iModelViewMatrix;
+    mat4  iModelViewProjectionMatrix;
+    mat4  iTransposeInverseModelViewMatrix;
+};
+layout(std430, binding = 2) buffer per_instance_data
+{
+    Per_instance_data per_instance_data_array[];
+};
+
+struct Per_camera_data
+{
+    mat4 iViewMatrix;
+    mat4 iProjectionMatrix;
+    mat4 iInverseViewMatrix;
+};
+layout(std430, binding = 3) buffer per_camera_data
+{
+    Per_camera_data per_camera_data_array[];
+};
+
+layout( local_size_x = 32, local_size_y = 1, local_size_z = 1 ) in;
+void main()
+{
+	// Compute iTransposeInverseModelMatrix
+	per_instance_data_array[gl_GlobalInvocationID.x].iTransposeInverseModelMatrix = transpose(inverse(per_instance_data_array[gl_GlobalInvocationID.x].iModelMatrix));
+	
+	// Compute iModelViewMatrix
+	per_instance_data_array[gl_GlobalInvocationID.x].iModelViewMatrix = per_camera_data_array[per_instance_data_array[gl_GlobalInvocationID.x].m_obj_cam_mat_indices.y].iViewMatrix * per_instance_data_array[gl_GlobalInvocationID.x].iModelMatrix;
+	
+	// Compute iTransposeInverseModelViewMatrix
+	per_instance_data_array[gl_GlobalInvocationID.x].iTransposeInverseModelViewMatrix = transpose(inverse(per_instance_data_array[gl_GlobalInvocationID.x].iModelViewMatrix));
+	
+	// Compute iModelViewProjectionMatrix
+	per_instance_data_array[gl_GlobalInvocationID.x].iModelViewProjectionMatrix = per_camera_data_array[per_instance_data_array[gl_GlobalInvocationID.x].m_obj_cam_mat_indices.y].iProjectionMatrix * per_instance_data_array[gl_GlobalInvocationID.x].iModelViewMatrix;
+}

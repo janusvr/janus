@@ -1,0 +1,1 @@
+﻿C:\Users\James\Desktop\janusvr\janus-vr\resources\LibOVR_v1.24.0\Projects\Windows\VS2015\LibOVR.vcxproj(143,5): error MSB4019: The imported project "C:\Users\James\Desktop\janusvr\janus-vr\resources\OVRRootPath.props" was not found. Confirm that the path in the <Import> declaration is correct, and that the file exists on disk.
