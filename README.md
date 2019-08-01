@@ -7,9 +7,8 @@ https://www.gnu.org/licenses/gpl.html
 Additional deployment notes:
 
 - Before building, copy and rename the following: riftid.txt.sample
-to riftid.txt and gearid.txt.sample to gearid.txt. Update these files
-with specific app IDs where necessary (for publishing to platforms
-like Oculus Store).
+to riftid.txt. Update these files with specific app IDs (for publishing 
+to platforms like Oculus Store).
 
 Building for Windows
 ===================
