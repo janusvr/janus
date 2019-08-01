@@ -71,7 +71,19 @@ Building for Linux (Ubuntu 18.04 LTS)
 For now, to compile manually please read the instructions found in the automated build script that
 is located in the root of the source repository (`build-janusvr-linux.sh`).
 
-(Optional, for reference) Build and install OpenEXR:
+(Optional, for reference) You may need to install a collection of packages for Qt5 development, assimp, 
+bullet3, etc:
+
+   - sudo apt-get install build-essential
+   - sudo apt-get install qtcreator
+   - sudo apt-get install qt5-default
+   - sudo apt-get install libqt5websockets5-dev
+   - sudo apt-get install libqt5webengine5-dev
+   - sudo apt-get install libassimp-dev libassimp4
+   - sudo apt-get install libbullet-dev libbullet2.87
+   - sudo apt-get install libopus
+
+Then, compile Janus with:
 
    - qmake -makefile
    - make
