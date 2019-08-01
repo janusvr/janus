@@ -31,12 +31,9 @@ Building for Windows
 
    (At this point, the project should build successfully.)
 
-5) Download and install the latest Janus release from janusvr.com.
-   Go to the install location (e.g. C:\Program Files\Janus VR) and
-   copy the assets and other plugin folders. Copy the .dll files in 
-   the janus-vr repo in dependencies\windows. Also copy 
-   janusvr_websurface.exe.  Paste the things you copied in your build 
-   folder (where the janusvr.exe that you built is located). 
+5) Copy the assets and dependencies/windows/* to your build folder, 
+   (as specified in Qt Creator project settings), where the generated 
+   janusvr.exe is located.
 
    - If your build is a release build, you should now be able to run your 
      executable.
