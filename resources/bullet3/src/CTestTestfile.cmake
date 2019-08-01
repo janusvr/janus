@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
-# Source directory: C:/Users/jm777/Desktop/janusvr/bullet3/src
-# Build directory: C:/Users/jm777/Desktop/janusvr/bullet3/src
+# Source directory: C:/Users/user/Downloads/bullet3-master/bullet3-master/src
+# Build directory: C:/Users/user/Downloads/bullet3-master/bullet3-master/src
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.

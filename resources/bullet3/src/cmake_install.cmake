@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/jm777/Desktop/janusvr/bullet3/src
+# Install script for directory: C:/Users/user/Downloads/bullet3-master/bullet3-master/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,17 +34,17 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/jm777/Desktop/janusvr/bullet3/src/Bullet3OpenCL/cmake_install.cmake")
-  include("C:/Users/jm777/Desktop/janusvr/bullet3/src/Bullet3Serialize/Bullet2FileLoader/cmake_install.cmake")
-  include("C:/Users/jm777/Desktop/janusvr/bullet3/src/Bullet3Dynamics/cmake_install.cmake")
-  include("C:/Users/jm777/Desktop/janusvr/bullet3/src/Bullet3Collision/cmake_install.cmake")
-  include("C:/Users/jm777/Desktop/janusvr/bullet3/src/Bullet3Geometry/cmake_install.cmake")
-  include("C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletInverseDynamics/cmake_install.cmake")
-  include("C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletSoftBody/cmake_install.cmake")
-  include("C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletCollision/cmake_install.cmake")
-  include("C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/cmake_install.cmake")
-  include("C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/cmake_install.cmake")
-  include("C:/Users/jm777/Desktop/janusvr/bullet3/src/Bullet3Common/cmake_install.cmake")
+  include("C:/Users/user/Downloads/bullet3-master/bullet3-master/src/Bullet3OpenCL/cmake_install.cmake")
+  include("C:/Users/user/Downloads/bullet3-master/bullet3-master/src/Bullet3Serialize/Bullet2FileLoader/cmake_install.cmake")
+  include("C:/Users/user/Downloads/bullet3-master/bullet3-master/src/Bullet3Dynamics/cmake_install.cmake")
+  include("C:/Users/user/Downloads/bullet3-master/bullet3-master/src/Bullet3Collision/cmake_install.cmake")
+  include("C:/Users/user/Downloads/bullet3-master/bullet3-master/src/Bullet3Geometry/cmake_install.cmake")
+  include("C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletInverseDynamics/cmake_install.cmake")
+  include("C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletSoftBody/cmake_install.cmake")
+  include("C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletCollision/cmake_install.cmake")
+  include("C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletDynamics/cmake_install.cmake")
+  include("C:/Users/user/Downloads/bullet3-master/bullet3-master/src/LinearMath/cmake_install.cmake")
+  include("C:/Users/user/Downloads/bullet3-master/bullet3-master/src/Bullet3Common/cmake_install.cmake")
 
 endif()
 

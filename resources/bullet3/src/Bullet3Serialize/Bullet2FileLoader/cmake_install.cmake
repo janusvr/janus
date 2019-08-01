@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/jm777/Desktop/janusvr/bullet3/src/Bullet3Serialize/Bullet2FileLoader
+# Install script for directory: C:/Users/user/Downloads/bullet3-master/bullet3-master/src/Bullet3Serialize/Bullet2FileLoader
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

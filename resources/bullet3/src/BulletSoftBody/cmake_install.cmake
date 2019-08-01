@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletSoftBody
+# Install script for directory: C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletSoftBody
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

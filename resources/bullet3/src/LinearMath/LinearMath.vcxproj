@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1E5044A3-4630-3127-A28B-E077FD21D99B}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{95CDCC14-3623-3A13-9731-50784017EDEE}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>Win32</Platform>
     <ProjectName>LinearMath</ProjectName>
@@ -56,27 +56,27 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\lib\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\lib\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">LinearMath.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">LinearMath_Debug</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\lib\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\lib\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">LinearMath.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">LinearMath</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\lib\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\lib\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">LinearMath.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">LinearMath_MinsizeRel</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\lib\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\lib\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">LinearMath.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">LinearMath_RelWithDebugInfo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -91,16 +91,17 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
+      <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_DEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -113,8 +114,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
@@ -127,6 +128,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
+      <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -135,10 +137,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -151,8 +153,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
@@ -165,6 +167,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
+      <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -173,10 +176,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -189,8 +192,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
@@ -204,16 +207,17 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
+      <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -225,10 +229,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/CMakeLists.txt</Message>
+    <CustomBuild Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/user/Downloads/bullet3-master/bullet3-master/src/LinearMath/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/jm777/Desktop/janusvr/bullet3 -BC:/Users/jm777/Desktop/janusvr/bullet3 --check-stamp-file C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/Downloads/bullet3-master/bullet3-master -BC:/Users/user/Downloads/bullet3-master/bullet3-master --check-stamp-file C:/Users/user/Downloads/bullet3-master/bullet3-master/src/LinearMath/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -236,12 +240,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/user/Downloads/bullet3-master/bullet3-master/src/LinearMath/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/jm777/Desktop/janusvr/bullet3 -BC:/Users/jm777/Desktop/janusvr/bullet3 --check-stamp-file C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/Downloads/bullet3-master/bullet3-master -BC:/Users/user/Downloads/bullet3-master/bullet3-master --check-stamp-file C:/Users/user/Downloads/bullet3-master/bullet3-master/src/LinearMath/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -249,12 +253,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/user/Downloads/bullet3-master/bullet3-master/src/LinearMath/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/jm777/Desktop/janusvr/bullet3 -BC:/Users/jm777/Desktop/janusvr/bullet3 --check-stamp-file C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/Downloads/bullet3-master/bullet3-master -BC:/Users/user/Downloads/bullet3-master/bullet3-master --check-stamp-file C:/Users/user/Downloads/bullet3-master/bullet3-master/src/LinearMath/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -262,12 +266,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/user/Downloads/bullet3-master/bullet3-master/src/LinearMath/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/jm777/Desktop/janusvr/bullet3 -BC:/Users/jm777/Desktop/janusvr/bullet3 --check-stamp-file C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/Downloads/bullet3-master/bullet3-master -BC:/Users/user/Downloads/bullet3-master/bullet3-master --check-stamp-file C:/Users/user/Downloads/bullet3-master/bullet3-master/src/LinearMath/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -275,58 +279,60 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/jm777/Desktop/janusvr/bullet3/src/LinearMath/CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btAlignedAllocator.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btConvexHull.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btConvexHullComputer.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btGeometryUtil.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btPolarDecomposition.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btQuickprof.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btSerializer.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btSerializer64.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btThreads.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btVector3.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\TaskScheduler\btTaskScheduler.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\TaskScheduler\btThreadSupportPosix.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\TaskScheduler\btThreadSupportWin32.cpp" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btAabbUtil2.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btAlignedAllocator.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btAlignedObjectArray.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btConvexHull.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btConvexHullComputer.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btDefaultMotionState.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btGeometryUtil.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btGrahamScan2dConvexHull.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btHashMap.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btIDebugDraw.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btList.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btMatrix3x3.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btMinMax.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btMotionState.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btPolarDecomposition.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btPoolAllocator.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btQuadWord.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btQuaternion.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btQuickprof.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btRandom.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btScalar.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btSerializer.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btStackAlloc.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btThreads.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btTransform.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btTransformUtil.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\btVector3.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\LinearMath\TaskScheduler\btThreadSupportInterface.h" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btAlignedAllocator.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btConvexHull.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btConvexHullComputer.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btGeometryUtil.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btPolarDecomposition.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btQuickprof.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btSerializer.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btSerializer64.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btThreads.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btVector3.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\TaskScheduler\btTaskScheduler.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\TaskScheduler\btThreadSupportPosix.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\TaskScheduler\btThreadSupportWin32.cpp" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btAabbUtil2.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btAlignedAllocator.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btAlignedObjectArray.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btConvexHull.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btConvexHullComputer.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btDefaultMotionState.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btGeometryUtil.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btGrahamScan2dConvexHull.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btHashMap.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btIDebugDraw.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btList.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btMatrix3x3.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btMinMax.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btMotionState.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btPolarDecomposition.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btPoolAllocator.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btQuadWord.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btQuaternion.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btQuickprof.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btRandom.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btScalar.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btSerializer.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btStackAlloc.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btThreads.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btTransform.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btTransformUtil.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\btVector3.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\LinearMath\TaskScheduler\btThreadSupportInterface.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\jm777\Desktop\janusvr\bullet3\ZERO_CHECK.vcxproj">
-      <Project>{A41F54AD-2FB5-3A41-8B7B-48DB50F2CBF4}</Project>
+    <ProjectReference Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\ZERO_CHECK.vcxproj">
+      <Project>{D6ACCB01-6B9B-362B-B6AD-C2D583973A4A}</Project>
       <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

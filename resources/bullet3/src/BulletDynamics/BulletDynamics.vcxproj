@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C8A75913-CAD5-3A19-AB4A-57430C3BE08E}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{7DDBD09B-18A7-322F-A1A1-5631183358C9}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>Win32</Platform>
     <ProjectName>BulletDynamics</ProjectName>
@@ -56,27 +56,27 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\lib\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\lib\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">BulletDynamics.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">BulletDynamics_Debug</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\lib\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\lib\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">BulletDynamics.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">BulletDynamics</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\lib\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\lib\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">BulletDynamics.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">BulletDynamics_MinsizeRel</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\lib\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\lib\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">BulletDynamics.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">BulletDynamics_RelWithDebugInfo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -91,16 +91,17 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
+      <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_DEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -113,8 +114,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
@@ -127,6 +128,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
+      <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -135,10 +137,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -151,8 +153,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
@@ -165,6 +167,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
+      <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -173,10 +176,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -189,8 +192,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4244;4267</DisableSpecificWarnings>
@@ -204,16 +207,17 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
+      <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;USE_GRAPHICAL_BENCHMARK;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\jm777\Desktop\janusvr\bullet3\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Downloads\bullet3-master\bullet3-master\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -225,10 +229,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/CMakeLists.txt</Message>
+    <CustomBuild Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletDynamics/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/jm777/Desktop/janusvr/bullet3 -BC:/Users/jm777/Desktop/janusvr/bullet3 --check-stamp-file C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/Downloads/bullet3-master/bullet3-master -BC:/Users/user/Downloads/bullet3-master/bullet3-master --check-stamp-file C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletDynamics/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -236,12 +240,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletDynamics/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/jm777/Desktop/janusvr/bullet3 -BC:/Users/jm777/Desktop/janusvr/bullet3 --check-stamp-file C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/Downloads/bullet3-master/bullet3-master -BC:/Users/user/Downloads/bullet3-master/bullet3-master --check-stamp-file C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletDynamics/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -249,12 +253,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletDynamics/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/jm777/Desktop/janusvr/bullet3 -BC:/Users/jm777/Desktop/janusvr/bullet3 --check-stamp-file C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/Downloads/bullet3-master/bullet3-master -BC:/Users/user/Downloads/bullet3-master/bullet3-master --check-stamp-file C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletDynamics/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -262,12 +266,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletDynamics/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -HC:/Users/jm777/Desktop/janusvr/bullet3 -BC:/Users/jm777/Desktop/janusvr/bullet3 --check-stamp-file C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/user/Downloads/bullet3-master/bullet3-master -BC:/Users/user/Downloads/bullet3-master/bullet3-master --check-stamp-file C:/Users/user/Downloads/bullet3-master/bullet3-master/src/BulletDynamics/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -275,116 +279,118 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/jm777/Desktop/janusvr/bullet3/src/BulletDynamics/CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeLists.txt;C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Character\btKinematicCharacterController.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btConeTwistConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btContactConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btFixedConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btGearConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btGeneric6DofConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btGeneric6DofSpringConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btGeneric6DofSpring2Constraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btHinge2Constraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btHingeConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btPoint2PointConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolver.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolverMt.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btBatchedConstraints.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btNNCGConstraintSolver.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btSliderConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btSolve2LinearConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btTypedConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btUniversalConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Dynamics\btDiscreteDynamicsWorld.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Dynamics\btDiscreteDynamicsWorldMt.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Dynamics\btSimulationIslandManagerMt.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Dynamics\btRigidBody.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Dynamics\btSimpleDynamicsWorld.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Vehicle\btRaycastVehicle.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Vehicle\btWheelInfo.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBody.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyConstraintSolver.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyDynamicsWorld.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyFixedConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyGearConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyJointLimitConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyJointMotor.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyPoint2Point.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodySliderConstraint.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodySphericalJointMotor.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\MLCPSolvers\btDantzigLCP.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\MLCPSolvers\btMLCPSolver.cpp" />
-    <ClCompile Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\MLCPSolvers\btLemkeAlgorithm.cpp" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\btBulletDynamicsCommon.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\btBulletCollisionCommon.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btConeTwistConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btConstraintSolver.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btContactConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btContactSolverInfo.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btFixedConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btGearConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btGeneric6DofConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btGeneric6DofSpringConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btGeneric6DofSpring2Constraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btHinge2Constraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btHingeConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btJacobianEntry.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btPoint2PointConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolver.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolverMt.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btNNCGConstraintSolver.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btSliderConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btSolve2LinearConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btSolverBody.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btSolverConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btTypedConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\ConstraintSolver\btUniversalConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Dynamics\btActionInterface.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Dynamics\btDiscreteDynamicsWorld.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Dynamics\btDiscreteDynamicsWorldMt.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Dynamics\btSimulationIslandManagerMt.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Dynamics\btDynamicsWorld.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Dynamics\btSimpleDynamicsWorld.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Dynamics\btRigidBody.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Vehicle\btRaycastVehicle.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Vehicle\btVehicleRaycaster.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Vehicle\btWheelInfo.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Character\btCharacterControllerInterface.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Character\btKinematicCharacterController.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBody.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyConstraintSolver.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyDynamicsWorld.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyFixedConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyGearConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyJointLimitConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyJointMotor.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyLink.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyLinkCollider.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodyPoint2Point.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodySliderConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\Featherstone\btMultiBodySolverConstraint.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\MLCPSolvers\btDantzigLCP.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\MLCPSolvers\btDantzigSolver.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\MLCPSolvers\btMLCPSolver.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\MLCPSolvers\btMLCPSolverInterface.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\MLCPSolvers\btPATHSolver.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\MLCPSolvers\btSolveProjectedGaussSeidel.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\MLCPSolvers\btLemkeSolver.h" />
-    <ClInclude Include="C:\Users\jm777\Desktop\janusvr\bullet3\src\BulletDynamics\MLCPSolvers\btLemkeAlgorithm.h" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Character\btKinematicCharacterController.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btConeTwistConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btContactConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btFixedConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btGearConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btGeneric6DofConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btGeneric6DofSpringConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btGeneric6DofSpring2Constraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btHinge2Constraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btHingeConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btPoint2PointConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolver.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolverMt.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btBatchedConstraints.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btNNCGConstraintSolver.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btSliderConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btSolve2LinearConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btTypedConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btUniversalConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Dynamics\btDiscreteDynamicsWorld.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Dynamics\btDiscreteDynamicsWorldMt.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Dynamics\btSimulationIslandManagerMt.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Dynamics\btRigidBody.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Dynamics\btSimpleDynamicsWorld.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Vehicle\btRaycastVehicle.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Vehicle\btWheelInfo.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBody.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyConstraintSolver.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyDynamicsWorld.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyFixedConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyGearConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyJointLimitConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyJointMotor.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyPoint2Point.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodySliderConstraint.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodySphericalJointMotor.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\MLCPSolvers\btDantzigLCP.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\MLCPSolvers\btMLCPSolver.cpp" />
+    <ClCompile Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\MLCPSolvers\btLemkeAlgorithm.cpp" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\btBulletDynamicsCommon.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\btBulletCollisionCommon.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btConeTwistConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btConstraintSolver.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btContactConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btContactSolverInfo.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btFixedConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btGearConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btGeneric6DofConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btGeneric6DofSpringConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btGeneric6DofSpring2Constraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btHinge2Constraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btHingeConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btJacobianEntry.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btPoint2PointConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolver.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btSequentialImpulseConstraintSolverMt.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btNNCGConstraintSolver.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btSliderConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btSolve2LinearConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btSolverBody.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btSolverConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btTypedConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\ConstraintSolver\btUniversalConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Dynamics\btActionInterface.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Dynamics\btDiscreteDynamicsWorld.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Dynamics\btDiscreteDynamicsWorldMt.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Dynamics\btSimulationIslandManagerMt.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Dynamics\btDynamicsWorld.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Dynamics\btSimpleDynamicsWorld.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Dynamics\btRigidBody.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Vehicle\btRaycastVehicle.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Vehicle\btVehicleRaycaster.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Vehicle\btWheelInfo.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Character\btCharacterControllerInterface.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Character\btKinematicCharacterController.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBody.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyConstraintSolver.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyDynamicsWorld.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyFixedConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyGearConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyJointLimitConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyJointMotor.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyLink.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyLinkCollider.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyMLCPConstraintSolver.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodyPoint2Point.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodySliderConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\Featherstone\btMultiBodySolverConstraint.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\MLCPSolvers\btDantzigLCP.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\MLCPSolvers\btDantzigSolver.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\MLCPSolvers\btMLCPSolver.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\MLCPSolvers\btMLCPSolverInterface.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\MLCPSolvers\btPATHSolver.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\MLCPSolvers\btSolveProjectedGaussSeidel.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\MLCPSolvers\btLemkeSolver.h" />
+    <ClInclude Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\src\BulletDynamics\MLCPSolvers\btLemkeAlgorithm.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\jm777\Desktop\janusvr\bullet3\ZERO_CHECK.vcxproj">
-      <Project>{A41F54AD-2FB5-3A41-8B7B-48DB50F2CBF4}</Project>
+    <ProjectReference Include="C:\Users\user\Downloads\bullet3-master\bullet3-master\ZERO_CHECK.vcxproj">
+      <Project>{D6ACCB01-6B9B-362B-B6AD-C2D583973A4A}</Project>
       <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
