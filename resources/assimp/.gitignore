@@ -10,8 +10,6 @@ build
 
 # Output
 bin/
-lib/
-
 
 # Generated
 assimp.pc
@@ -56,7 +54,6 @@ test/gtest/src/gtest-stamp/Debug/gtest-patch
 *.cache
 test/gtest/src/gtest-stamp/Debug/gtest-build
 *.suo
-*.lib
 test/gtest/src/gtest-stamp/Debug/
 tools/assimp_view/assimp_viewer.vcxproj.user
 *.pyc
