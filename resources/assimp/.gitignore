@@ -18,7 +18,6 @@ assimp.pc
 revision.h
 contrib/zlib/zconf.h
 contrib/zlib/zlib.pc
-include/assimp/config.h
 
 # CMake
 CMakeCache.txt
