@@ -35,7 +35,7 @@ extern "C" {
 
 struct xml_t
 {
-    struct vlc_common_members obj;
+    VLC_COMMON_MEMBERS
 
     /* Module properties */
     module_t  *p_module;
@@ -64,7 +64,7 @@ static inline void xml_CatalogAdd( xml_t *xml, const char *type,
 
 struct xml_reader_t
 {
-    struct vlc_common_members obj;
+    VLC_COMMON_MEMBERS
 
     xml_reader_sys_t *p_sys;
     stream_t *p_stream;

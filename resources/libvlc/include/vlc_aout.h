@@ -96,6 +96,7 @@
 #define AOUT_VAR_CHAN_RIGHT         4
 #define AOUT_VAR_CHAN_DOLBYS        5
 #define AOUT_VAR_CHAN_HEADPHONES    6
+#define AOUT_VAR_CHAN_MONO          7
 
 /*****************************************************************************
  * Main audio output structures
@@ -113,7 +114,7 @@
 /** Audio output object */
 struct audio_output
 {
-    struct vlc_common_members obj;
+    VLC_COMMON_MEMBERS
 
     struct aout_sys_t *sys; /**< Private data for callbacks */
 

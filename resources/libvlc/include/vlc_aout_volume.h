@@ -44,7 +44,7 @@ typedef struct audio_volume audio_volume_t;
  */
 struct audio_volume
 {
-    struct vlc_common_members obj;
+    VLC_COMMON_MEMBERS
 
     vlc_fourcc_t format; /**< Audio samples format */
     void (*amplify)(audio_volume_t *, block_t *, float); /**< Amplifier */

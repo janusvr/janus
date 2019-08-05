@@ -45,7 +45,7 @@ extern "C" {
 
 struct stream_t
 {
-    struct vlc_common_members obj;
+    VLC_COMMON_MEMBERS
 
     /* Module properties for stream filter */
     module_t    *p_module;
@@ -57,7 +57,7 @@ struct stream_t
     bool         b_preparsing; /**< True if this access is used to preparse */
 
     /* Stream source for stream filter */
-    stream_t    *s;
+    stream_t *p_source;
 
     /**
      * Read data.

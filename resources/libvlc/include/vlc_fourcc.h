@@ -304,6 +304,8 @@
 #define VLC_CODEC_V210            VLC_FOURCC('v','2','1','0')
 /* I420 packed for RTP (RFC 4175) */
 #define VLC_CODEC_R420            VLC_FOURCC('r','4','2','0')
+/* Packed YUV 4:4:4 V:U:Y:A */
+#define VLC_CODEC_VUYA            VLC_FOURCC('V','U','Y','A')
 
 
 /* RGB */
@@ -328,6 +330,10 @@
 #define VLC_CODEC_ARGB            VLC_FOURCC('A','R','G','B')
 /* 32 bits BGRA */
 #define VLC_CODEC_BGRA            VLC_FOURCC('B','G','R','A')
+/* 32 bits BGRA 10:10:10:2 */
+#define VLC_CODEC_RGBA10          VLC_FOURCC('R','G','A','0')
+/* 64 bits RGBA */
+#define VLC_CODEC_RGBA64          VLC_FOURCC('R','G','A','4')
 
 /* Planar GBR 4:4:4 8 bits */
 #define VLC_CODEC_GBR_PLANAR      VLC_FOURCC('G','B','R','8')
@@ -373,6 +379,7 @@
 #define VLC_CODEC_CVPX_UYVY       VLC_FOURCC('C','V','P','Y')
 #define VLC_CODEC_CVPX_I420       VLC_FOURCC('C','V','P','I')
 #define VLC_CODEC_CVPX_BGRA       VLC_FOURCC('C','V','P','B')
+#define VLC_CODEC_CVPX_P010       VLC_FOURCC('C','V','P','P')
 
 /* Image codec (video) */
 #define VLC_CODEC_PNG             VLC_FOURCC('p','n','g',' ')
@@ -530,7 +537,6 @@
 #define VLC_CODEC_USF       VLC_FOURCC('u','s','f',' ')
 #define VLC_CODEC_OGT       VLC_FOURCC('o','g','t',' ')
 #define VLC_CODEC_CVD       VLC_FOURCC('c','v','d',' ')
-#define VLC_CODEC_QTXT      VLC_FOURCC('q','t','x','t')
 #define VLC_CODEC_TX3G      VLC_FOURCC('t','x','3','g')
 #define VLC_CODEC_ARIB_A    VLC_FOURCC('a','r','b','a')
 #define VLC_CODEC_ARIB_C    VLC_FOURCC('a','r','b','c')

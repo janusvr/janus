@@ -6,7 +6,9 @@
 #include <QtConcurrent/QtConcurrent>
 #include <QGLWidget>
 
+#define ssize_t SSIZE_T
 #include <vlc/vlc.h>
+
 #include <AL/al.h>
 #include <AL/alc.h>
 
@@ -153,6 +155,8 @@ private:
     void DrawInterfaceOverlay(MediaContext * ctx, QImage & img);
     void UpdateTexture(MediaContext * ctx);
     void UpdateLeftRightTextures(MediaContext * ctx);
+
+    void log_cb(void *logdata, int level, const libvlc_log_t *ctx, const char *fmt, va_list args);
 
     static int buffer_pool_size;
 

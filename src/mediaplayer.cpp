@@ -13,9 +13,15 @@ MediaPlayer::MediaPlayer() :
         const char * const vlc_args[] = {
             "--intf=dummy", // Don't use any interface
             "--quiet",
-            //"--ignore-config",        // Don't use VLC's config
-            //"--extraintf=logger", // Don't use any interface
-            "--verbose=0",  // Be verbose
+//            "--ignore-config",        // Don't use VLC's config
+//            "--extraintf=logger", // Don't use any interface
+//            "--verbose=0",  // Be verbose
+//            "--v=0",
+//            "--file-logging",
+//            "--logfile=vlc_log.txt",
+//            "--logmode=text",
+//            "--log-verbose=1",
+//            "-q",
             "--no-ts-trust-pcr" // Fixes playback for some .m3u8 files
         };
 
@@ -101,15 +107,13 @@ void MediaPlayer::SetupOutput(MediaContext * ctx, QString vid_url, const bool lo
             if (vlcInstance) {
                 ctx->media = libvlc_media_new_location(vlcInstance, ctx->src.simplified().toUtf8().constData());
                 ctx->media_player = libvlc_media_player_new_from_media(ctx->media);
-                libvlc_event_manager_t* eventManager = libvlc_media_player_event_manager(ctx->media_player);
-                //libvlc_event_attach(eventManager, libvlc_MediaPlayerEncounteredError, &MediaPlayer::handleEvent, ctx);
+                libvlc_event_manager_t* eventManager = libvlc_media_player_event_manager(ctx->media_player);                
                 libvlc_event_attach(eventManager, libvlc_MediaPlayerEndReached, &MediaPlayer::handleEvent, ctx);
                 libvlc_video_set_callbacks(ctx->media_player,
                                            &MediaPlayer::lock,
                                            &MediaPlayer::unlock,
                                            &MediaPlayer::display,
                                            ctx);                
-//                libvlc_video_set_format(ctx->media_player, "RV32", 1080, 720, 1080*4);
                 libvlc_video_set_format(ctx->media_player, "RGBA", 1080, 720, 1080*4);
                 libvlc_audio_set_callbacks(ctx->media_player,
                                            &MediaPlayer::play,
@@ -779,3 +783,8 @@ void MediaPlayer::drain(void *data)
 {
     (void) data;
 }
+
+ void MediaPlayer::log_cb(void *logdata, int level, const libvlc_log_t *ctx, const char *fmt, va_list args)
+ {
+    //Do nothing
+ }

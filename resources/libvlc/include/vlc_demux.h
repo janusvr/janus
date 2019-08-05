@@ -42,16 +42,16 @@
 
 struct demux_t
 {
-    struct vlc_common_members obj;
+    VLC_COMMON_MEMBERS
 
     /* Module properties */
     module_t    *p_module;
 
     /* eg informative but needed (we can have access+demux) */
-    char        *psz_name;
-    char        *psz_url;
-    const char  *psz_location;
-    char        *psz_filepath;
+    char        *psz_access;
+    char        *psz_demux;
+    char        *psz_location;
+    char        *psz_file;
 
     union {
         /**
@@ -87,8 +87,11 @@ struct demux_t
     {
         unsigned int i_update;  /* Demux sets them on change,
                                    Input removes them once take into account*/
+        /* Seekpoint/Title at demux level */
+        int          i_title;       /* idem, start from 0 (could be menu) */
+        int          i_seekpoint;   /* idem, start from 0 */
     } info;
-    void *p_sys;
+    demux_sys_t *p_sys;
 
     /* Weak link to parent input */
     input_thread_t *p_input;
@@ -108,7 +111,7 @@ struct demux_t
 /* demux_meta_t is returned by "meta reader" module to the demuxer */
 typedef struct demux_meta_t
 {
-    struct vlc_common_members obj;
+    VLC_COMMON_MEMBERS
     input_item_t *p_item; /***< the input item that is being read */
 
     vlc_meta_t *p_meta;                 /**< meta data */
@@ -215,14 +218,14 @@ enum demux_query_e
 
     /** Read the title number currently playing
      *
-     * Can fail.
+     * Can fail, in which case demux_t.info.i_title is used
      *
      * arg1= int * */
     DEMUX_GET_TITLE,            /* arg1= int*           can fail */
 
     /* Read the seekpoint/chapter currently playing
      *
-     * Can fail.
+     * Can fail, in which case demux_t.info.i_seekpoint is used
      *
      * arg1= int * */
     DEMUX_GET_SEEKPOINT,        /* arg1= int*           can fail */
@@ -368,39 +371,32 @@ static inline int demux_Control( demux_t *p_demux, int i_query, ... )
  * Miscellaneous helpers for demuxers
  *************************************************************************/
 
-#ifndef __cplusplus
-static inline void demux_UpdateTitleFromStream( demux_t *demux,
-    int *restrict titlep, int *restrict seekpointp )
+static inline void demux_UpdateTitleFromStream( demux_t *demux )
 {
     stream_t *s = demux->s;
     unsigned title, seekpoint;
 
     if( vlc_stream_Control( s, STREAM_GET_TITLE, &title ) == VLC_SUCCESS
-     && title != (unsigned)*titlep )
+     && title != (unsigned)demux->info.i_title )
     {
-        *titlep = title;
+        demux->info.i_title = title;
         demux->info.i_update |= INPUT_UPDATE_TITLE;
     }
 
     if( vlc_stream_Control( s, STREAM_GET_SEEKPOINT,
                             &seekpoint ) == VLC_SUCCESS
-     && seekpoint != (unsigned)*seekpointp )
+     && seekpoint != (unsigned)demux->info.i_seekpoint )
     {
-        *seekpointp = seekpoint;
+        demux->info.i_seekpoint = seekpoint;
         demux->info.i_update |= INPUT_UPDATE_SEEKPOINT;
     }
 }
-# define demux_UpdateTitleFromStream(demux) \
-     demux_UpdateTitleFromStream(demux, \
-         &((demux_sys_t *)((demux)->p_sys))->current_title, \
-         &((demux_sys_t *)((demux)->p_sys))->current_seekpoint)
-#endif
 
 VLC_USED
 static inline bool demux_IsPathExtension( demux_t *p_demux, const char *psz_extension )
 {
-    const char *name = (p_demux->psz_filepath != NULL) ? p_demux->psz_filepath
-                                                       : p_demux->psz_location;
+    const char *name = (p_demux->psz_file != NULL) ? p_demux->psz_file
+                                                   : p_demux->psz_location;
     const char *psz_ext = strrchr ( name, '.' );
     if( !psz_ext || strcasecmp( psz_ext, psz_extension ) )
         return false;
@@ -416,7 +412,7 @@ static inline bool demux_IsContentType(demux_t *demux, const char *type)
 VLC_USED
 static inline bool demux_IsForced( demux_t *p_demux, const char *psz_name )
 {
-   if( p_demux->psz_name == NULL || strcmp( p_demux->psz_name, psz_name ) )
+   if( !p_demux->psz_demux || strcmp( p_demux->psz_demux, psz_name ) )
         return false;
     return true;
 }

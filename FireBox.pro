@@ -287,7 +287,8 @@ LIBS += -lopus
 # VLC
 win32:INCLUDEPATH +="./resources/libvlc/include"
 win32:LIBS += -L"$$PWD/resources/libvlc/libs"
-LIBS += -lvlc
+win32:LIBS += -llibvlc -llibvlccore
+unix:LIBS += -lvlc
 
 # Bullet Physics - on Linux, this is 2.87 and installed via libbullet-dev
 win32:INCLUDEPATH +="./resources/bullet3/src"

@@ -408,6 +408,78 @@ typedef int ( * vlc_list_callback_t ) ( vlc_object_t *,      /* variable's objec
 #include "vlc_mtime.h"
 #include "vlc_threads.h"
 
+/**
+ * Common structure members
+ *****************************************************************************/
+
+/**
+ * VLC object common members
+ *
+ * Common public properties for all VLC objects.
+ * Object also have private properties maintained by the core, see
+ * \ref vlc_object_internals_t
+ */
+struct vlc_common_members
+{
+    /** Object type name
+     *
+     * A constant string identifying the type of the object (for logging)
+     */
+    const char *object_type;
+
+    /** Log messages header
+     *
+     * Human-readable header for log messages. This is not thread-safe and
+     * only used by VLM and Lua interfaces.
+     */
+    char *header;
+
+    int  flags;
+
+    /** Module probe flag
+     *
+     * A boolean during module probing when the probe is "forced".
+     * See \ref module_need().
+     */
+    bool force;
+
+    /** LibVLC instance
+     *
+     * Root VLC object of the objects tree that this object belongs in.
+     */
+    libvlc_int_t *libvlc;
+
+    /** Parent object
+     *
+     * The parent VLC object in the objects tree. For the root (the LibVLC
+     * instance) object, this is NULL.
+     */
+    vlc_object_t *parent;
+};
+
+/**
+ * Backward compatibility macro
+ */
+#define VLC_COMMON_MEMBERS struct vlc_common_members obj;
+
+/**
+ * Type-safe vlc_object_t cast
+ *
+ * This macro attempts to cast a pointer to a compound type to a
+ * \ref vlc_object_t pointer in a type-safe manner.
+ * It checks if the compound type actually starts with an embedded
+ * \ref vlc_object_t structure.
+ */
+#if !defined(__cplusplus)
+# define VLC_OBJECT(x) \
+    _Generic((x)->obj, \
+        struct vlc_common_members: (vlc_object_t *)(&(x)->obj), \
+        const struct vlc_common_members: (const vlc_object_t *)(&(x)->obj) \
+    )
+#else
+# define VLC_OBJECT( x ) ((vlc_object_t *)&(x)->obj)
+#endif
+
 /*****************************************************************************
  * Macros and inline functions
  *****************************************************************************/
@@ -484,6 +556,7 @@ static inline unsigned (ctz)(unsigned x)
 #endif
 }
 
+#if !defined(__NetBSD__)
 /** Bit weight */
 VLC_USED
 static inline unsigned (popcount)(unsigned x)
@@ -517,6 +590,7 @@ static inline int (popcountll)(unsigned long long x)
     return count;
 #endif
 }
+#endif
 
 VLC_USED
 static inline unsigned (parity)(unsigned x)
@@ -530,6 +604,7 @@ static inline unsigned (parity)(unsigned x)
 #endif
 }
 
+#if !defined(__NetBSD__)
 /** Byte swap (16 bits) */
 VLC_USED
 static inline uint16_t (bswap16)(uint16_t x)
@@ -577,6 +652,7 @@ static inline uint64_t (bswap64)(uint64_t x)
          | ((x & 0xFF00000000000000ULL) >> 56);
 #endif
 }
+#endif
 
 /* Integer overflow */
 static inline bool uadd_overflow(unsigned a, unsigned b, unsigned *res)
@@ -949,6 +1025,7 @@ VLC_API const char * VLC_Compiler( void ) VLC_USED;
 #include "vlc_messages.h"
 #include "vlc_objects.h"
 #include "vlc_variables.h"
+#include "vlc_main.h"
 #include "vlc_configuration.h"
 
 #if defined( _WIN32 ) || defined( __OS2__ )

@@ -53,7 +53,7 @@ struct services_discovery_owner_t
  */
 struct services_discovery_t
 {
-    struct vlc_common_members obj;
+    VLC_COMMON_MEMBERS
     module_t *          p_module;             /**< Loaded module */
 
     char *psz_name;                           /**< Main name of the SD */
