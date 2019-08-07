@@ -11,7 +11,7 @@
 #include "assetshader.h"
 #include "webasset.h"
 #include "mathutil.h"
-#include "rendererinterface.h"
+#include "renderer.h"
 
 #include "assetimagedata.h"
 #include "assetimagedataq.h"

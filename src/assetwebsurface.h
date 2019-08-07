@@ -9,7 +9,6 @@
 #include "mathutil.h"
 #include "cookiejar.h"
 #include "renderer.h"
-#include "rendererinterface.h"
 #include "performancelogger.h"
 #include "assetimage.h"
 

@@ -325,13 +325,13 @@ void AssetWebSurface::UpdateGL()
         update_texture = false;
 
         if (m_texture_handle == nullptr || m_texture_handle == AssetImage::null_image_tex_handle) {
-            m_texture_handle = RendererInterface::m_pimpl->CreateTextureQImage(image, true, true, false, TextureHandle::ALPHA_TYPE::BLENDED, TextureHandle::COLOR_SPACE::SRGB);
+            m_texture_handle = Renderer::m_pimpl->CreateTextureQImage(image, true, true, false, TextureHandle::ALPHA_TYPE::BLENDED, TextureHandle::COLOR_SPACE::SRGB);
         }
         else {
-            RendererInterface::m_pimpl->UpdateTextureHandleData(m_texture_handle, 0, 0, 0,
+            Renderer::m_pimpl->UpdateTextureHandleData(m_texture_handle, 0, 0, 0,
                     image.width(), image.height(), GL_BGRA, GL_UNSIGNED_BYTE,
                     (void *)image.constBits(), image.width() * image.height() * 4);
-            RendererInterface::m_pimpl->GenerateTextureHandleMipMap(m_texture_handle);
+            Renderer::m_pimpl->GenerateTextureHandleMipMap(m_texture_handle);
         }
     }
 }

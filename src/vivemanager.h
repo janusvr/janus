@@ -5,9 +5,8 @@
 #include <QtGui>
 #include <openvr.h>
 
-#include "rendererinterface.h"
-#include "mathutil.h"
 #include "abstracthmdmanager.h"
+#include "renderer.h"
 
 class ViveManager : public AbstractHMDManager
 {

@@ -230,7 +230,7 @@ void ViveManager::Update()
         m_eye_projection_matrices[vr::EVREye::Eye_Right + 2] = ident;
         m_eye_projection_matrices[vr::EVREye::Eye_Right + 2].setColumn(2,m_eye_projection_matrices[vr::EVREye::Eye_Right + 2].column(2) * QVector4D(1, -1, 1, 1));
 
-        if (RendererInterface::m_pimpl->GetIsEnhancedDepthPrecisionSupported() && RendererInterface::m_pimpl->GetIsUsingEnhancedDepthPrecision())
+        if (Renderer::m_pimpl->GetIsEnhancedDepthPrecisionSupported() && Renderer::m_pimpl->GetIsUsingEnhancedDepthPrecision())
         {
             m_eye_projection_matrices[vr::EVREye::Eye_Left]      = depth_invert_matrix * m_eye_projection_matrices[vr::EVREye::Eye_Left];
             m_eye_projection_matrices[vr::EVREye::Eye_Left + 2]  = depth_invert_matrix * m_eye_projection_matrices[vr::EVREye::Eye_Left + 2];

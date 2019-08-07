@@ -444,7 +444,7 @@ bool RoomObject::GetRaycastIntersection(const QMatrix4x4 transform, QList <QVect
                     const int mesh_count = mesh_keys.size();
 
                     // For each mesh that uses this material of this AssetObject
-                    for (unsigned int mesh_index = 0; mesh_index < mesh_count; ++mesh_index)
+                    for (int mesh_index = 0; mesh_index < mesh_count; ++mesh_index)
                     {
                         const QVector<GeomTriangle> & triangles = triangles_map[mesh_keys[mesh_index].second];
                         const GeomVBOData & vbo_data = vbo_map[mesh_keys[mesh_index].second];
@@ -1970,7 +1970,7 @@ void RoomObject::DrawCursorGL(QPointer <AssetShader> shader)
                 }
             }
 
-            RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
+            Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
 
             //draw ghost's cursor if active
             if (ghost_frame.cursor_active && cursor_arrow_obj) {
@@ -1990,7 +1990,7 @@ void RoomObject::DrawCursorGL(QPointer <AssetShader> shader)
                 shader->SetUseLighting(use_lighting);
             }
 
-            RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
+            Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
         }
     }    
 }
@@ -2014,13 +2014,13 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
 
     const QString cf = props->GetCullFace();
     if (cf == "front") {
-        RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::FRONT);
+        Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::FRONT);
     }
     else if (cf == "none") {
-        RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
+        Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
     }
     else {
-        RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);        
+        Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
     }
 //    qDebug() << "cull_face"<< this << cf;
 
@@ -2063,15 +2063,15 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
 
         if (assetimage && assetimage->GetFinished()) {
             auto tex_id = assetimage->GetTextureHandle(left_eye);
-            RendererInterface::m_pimpl->BindTextureHandle(0, tex_id);
+            Renderer::m_pimpl->BindTextureHandle(0, tex_id);
             override_texture = true;
 
             shader->SetUseTexture(0, true);
         }
 
         if (assetobject.isNull()) {
-            RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
-            RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_DISABLED);
+            Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
+            Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_DISABLED);
         }
 
         MathUtil::PushModelMatrix();
@@ -2082,14 +2082,14 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
         MathUtil::PopModelMatrix();
 
         if (assetobject.isNull()) {
-            RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
-            RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
+            Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
+            Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
         }
     }
         break;
 
     case TYPE_TEXT:
-        RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
+        Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
         textgeom->SetColour(col);
         MathUtil::PushModelMatrix();
         MathUtil::MultModelMatrix(model_matrix_local);
@@ -2109,7 +2109,7 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
         }
 
         MathUtil::PopModelMatrix();
-        RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
+        Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
         break;
 
     case TYPE_PARAGRAPH:
@@ -2128,11 +2128,11 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
             MathUtil::ModelMatrix().scale(iw, ih, 1.0f);
 
             auto tex_id = assetimage->GetTextureHandle(true);
-            RendererInterface::m_pimpl->BindTextureHandle(0, tex_id);
+            Renderer::m_pimpl->BindTextureHandle(0, tex_id);
 
             shader->UpdateObjectUniforms();
 
-            RendererInterface * renderer = RendererInterface::m_pimpl;
+            Renderer * renderer = Renderer::m_pimpl;
             AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                                     renderer->GetPlanePrimCount(),
                                     0,
@@ -2214,11 +2214,11 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
                 }
                 MathUtil::PopModelMatrix();
 
-                RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
+                Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
 
                 DrawGhostUserIDChat(shader);
 
-                RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
+                Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
 
                 //draw controllers (if present)
                 if (ghost_frame.hands.first.is_active || ghost_frame.hands.second.is_active) {
@@ -2325,18 +2325,18 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
         QPointer <AssetVideo> av = assetvideo;
 
         if (aw && (aw->GetFocus() || ai.isNull())) {
-            RendererInterface::m_pimpl->BindTextureHandle(0, aw->GetTextureHandle());
+            Renderer::m_pimpl->BindTextureHandle(0, aw->GetTextureHandle());
             override_texture = true;
         }
         else if (av && av->GetPlaying(&media_ctx) && av->GetTextureHandle(&media_ctx, left_eye)
                  && av->GetTextureHandle(&media_ctx, left_eye) != AssetImage::null_image_tex_handle) {
-            RendererInterface::m_pimpl->BindTextureHandle(0, av->GetTextureHandle(&media_ctx, left_eye));
+            Renderer::m_pimpl->BindTextureHandle(0, av->GetTextureHandle(&media_ctx, left_eye));
             override_texture = true;
             is_flipped = false;
         }
         else if (ai && ai->GetFinished()) {
             auto tex_id = ai->GetTextureHandle(left_eye);
-            RendererInterface::m_pimpl->BindTextureHandle(0, tex_id);
+            Renderer::m_pimpl->BindTextureHandle(0, tex_id);
             override_texture = true;
             is_hdr = ai->GetIsHDR();
         }
@@ -2345,18 +2345,18 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
         shader->SetUseTexture(0, override_texture, is_hdr, is_flipped);
 
         if (m_cubemap_radiance && m_cubemap_radiance->GetFinished()) {
-            RendererInterface::m_pimpl->BindTextureHandle(11, m_cubemap_radiance->GetTextureHandle(left_eye));
+            Renderer::m_pimpl->BindTextureHandle(11, m_cubemap_radiance->GetTextureHandle(left_eye));
             shader->SetUseCubeTexture1(true);
         }
 
         if (m_cubemap_irradiance && m_cubemap_irradiance->GetFinished()) {
-            RendererInterface::m_pimpl->BindTextureHandle(12, m_cubemap_irradiance->GetTextureHandle(left_eye));
+            Renderer::m_pimpl->BindTextureHandle(12, m_cubemap_irradiance->GetTextureHandle(left_eye));
             shader->SetUseCubeTexture2(true);
         }
 
         if (assetimage_lmap && assetimage_lmap->GetFinished())
         {
-            RendererInterface::m_pimpl->BindTextureHandle(8, assetimage_lmap->GetTextureHandle(left_eye));
+            Renderer::m_pimpl->BindTextureHandle(8, assetimage_lmap->GetTextureHandle(left_eye));
             shader->SetUseTexture(8, true, assetimage_lmap->GetIsHDR());
             QVector4D lmapScale = props->GetLightmapScale()->toQVector4D();
             shader->SetLightmapScale(lmapScale);
@@ -2378,7 +2378,7 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
         shader->SetOverrideLightmap(false);
 
         if (override_texture) {
-            RendererInterface::m_pimpl->BindTextureHandle(0, AssetImage::null_image_tex_handle);
+            Renderer::m_pimpl->BindTextureHandle(0, AssetImage::null_image_tex_handle);
         }
         shader->SetUseTextureAll(false);
 
@@ -2466,7 +2466,7 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
     MathUtil::PopModelMatrix();
     shader->SetUseClipPlane(clip_plane);
 
-    RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
+    Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
 
     shader->SetUseSkelAnim(false);
     shader->SetConstColour(QVector4D(1,1,1,1));
@@ -3564,7 +3564,7 @@ void RoomObject::DrawPortalGL(QPointer <AssetShader> shader)
 
         shader->UpdateObjectUniforms();
 
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                                 renderer->GetTexturedCubePrimCount(),
                                 0,
@@ -3657,8 +3657,8 @@ void RoomObject::DrawPortalBackGL(QPointer <AssetShader> shader) const
     if (use_thumb) {
         const float max_col = qMax(qMax(col.redF(), col.greenF()), col.blueF());
         shader->SetConstColour(QVector4D(max_col, max_col, max_col, 1));
-        RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
-        RendererInterface::m_pimpl->BindTextureHandle(0, portal_thumb_img->GetTextureHandle(true));
+        Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
+        Renderer::m_pimpl->BindTextureHandle(0, portal_thumb_img->GetTextureHandle(true));
     }
     else {
         shader->SetConstColour(QVector4D(col.redF(), col.greenF(), col.blueF(), 0.5f));
@@ -3669,7 +3669,7 @@ void RoomObject::DrawPortalBackGL(QPointer <AssetShader> shader) const
 
     shader->UpdateObjectUniforms();
     if (props->GetCircular()) {
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         AbstractRenderCommand a(PrimitiveType::TRIANGLE_FAN,
                                 renderer->GetDiscPrimCount(),
                                 0,
@@ -3691,7 +3691,7 @@ void RoomObject::DrawPortalBackGL(QPointer <AssetShader> shader) const
         renderer->PushAbstractRenderCommand(a);
     }
     else {        
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                                 renderer->GetPlanePrimCount(),
                                 0,
@@ -3712,7 +3712,7 @@ void RoomObject::DrawPortalBackGL(QPointer <AssetShader> shader) const
                                 renderer->GetColorMask());
         renderer->PushAbstractRenderCommand(a);
     }
-    RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_DISABLED);
+    Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_DISABLED);
     MathUtil::PopModelMatrix();
 }
 
@@ -3739,8 +3739,8 @@ void RoomObject::DrawPortalInsideGL(QPointer <AssetShader> shader) const
     if (use_thumb) {
         const float max_col = qMax(qMax(col.redF(), col.greenF()), col.blueF());
         shader->SetConstColour(QVector4D(max_col, max_col, max_col, 1));
-        RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
-        RendererInterface::m_pimpl->BindTextureHandle(0, portal_thumb_img->GetTextureHandle(true));
+        Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
+        Renderer::m_pimpl->BindTextureHandle(0, portal_thumb_img->GetTextureHandle(true));
     }
     else {
         shader->SetConstColour(QVector4D(col.redF(), col.greenF(), col.blueF(), 0.5f));
@@ -3750,7 +3750,7 @@ void RoomObject::DrawPortalInsideGL(QPointer <AssetShader> shader) const
 
     shader->UpdateObjectUniforms();        
     if (props->GetCircular()) {
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         AbstractRenderCommand a(PrimitiveType::TRIANGLE_FAN,
                                 renderer->GetDiscPrimCount(),
                                 0,
@@ -3772,7 +3772,7 @@ void RoomObject::DrawPortalInsideGL(QPointer <AssetShader> shader) const
         renderer->PushAbstractRenderCommand(a);
     }
     else {
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                                 renderer->GetPlanePrimCount(),
                                 0,
@@ -3793,7 +3793,7 @@ void RoomObject::DrawPortalInsideGL(QPointer <AssetShader> shader) const
                                 renderer->GetColorMask());
         renderer->PushAbstractRenderCommand(a);
     }
-    RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_DISABLED);
+    Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_DISABLED);
     MathUtil::PopModelMatrix();
 }
 
@@ -3810,7 +3810,7 @@ void RoomObject::DrawPortalFrameGL(QPointer <AssetShader> shader)
 
     const QColor col = MathUtil::GetVector4AsColour(props->GetColour()->toQVector4D());
     auto tex_id = linear_gradient_img->GetTextureHandle(true);
-    RendererInterface::m_pimpl->BindTextureHandle(1, tex_id);
+    Renderer::m_pimpl->BindTextureHandle(1, tex_id);
 
     shader->SetConstColour(QVector4D(col.redF(), col.greenF(), col.blueF(), 1));
 
@@ -3819,7 +3819,7 @@ void RoomObject::DrawPortalFrameGL(QPointer <AssetShader> shader)
     if (props->GetCircular()) {
         MathUtil::ModelMatrix().scale(1.0f, 1.0f, !props->GetOpen() ? 0.2f : 0.1f);
         shader->UpdateObjectUniforms();
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                                 renderer->GetConePrimCount(),
                                 0,
@@ -3887,7 +3887,7 @@ void RoomObject::DrawPortalFrameGL(QPointer <AssetShader> shader)
     else {
         MathUtil::ModelMatrix().scale(1.0f, 1.0f, 0.1f);
         shader->UpdateObjectUniforms();
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                                 renderer->GetPyramidPrimCount(),
                                 0,
@@ -3981,7 +3981,7 @@ void RoomObject::DrawPortalStencilGL(QPointer <AssetShader> shader, const bool d
     shader->UpdateObjectUniforms();   
 
     if (props->GetCircular()) {
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         AbstractRenderCommand a(PrimitiveType::TRIANGLE_FAN,
                                 renderer->GetDiscPrimCount(),
                                 0,
@@ -4003,8 +4003,8 @@ void RoomObject::DrawPortalStencilGL(QPointer <AssetShader> shader, const bool d
         renderer->PushAbstractRenderCommand(a);
         if (draw_offset_stencil)
         {
-            RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
-            RendererInterface * renderer = RendererInterface::m_pimpl;
+            Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
+            Renderer * renderer = Renderer::m_pimpl;
             AbstractRenderCommand a2(PrimitiveType::TRIANGLES,
                                      renderer->GetPortalStencilCylinderPrimCount(),
                                      0,
@@ -4024,12 +4024,12 @@ void RoomObject::DrawPortalStencilGL(QPointer <AssetShader> shader, const bool d
                                      renderer->GetStencilOp(),                                     
                                      renderer->GetColorMask());
             renderer->PushAbstractRenderCommand(a2);
-            RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
+            Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
         }
     }
     else
     {
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                                 renderer->GetPlanePrimCount(),
                                 0,
@@ -4051,8 +4051,8 @@ void RoomObject::DrawPortalStencilGL(QPointer <AssetShader> shader, const bool d
         renderer->PushAbstractRenderCommand(a);
         if (draw_offset_stencil)
         {
-            RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
-            RendererInterface * renderer = RendererInterface::m_pimpl;
+            Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
+            Renderer * renderer = Renderer::m_pimpl;
             AbstractRenderCommand a2(PrimitiveType::TRIANGLES,
                                      renderer->GetPortalStencilCubePrimCount(),
                                      0,
@@ -4072,7 +4072,7 @@ void RoomObject::DrawPortalStencilGL(QPointer <AssetShader> shader, const bool d
                                      renderer->GetStencilOp(),                                     
                                      renderer->GetColorMask());
             renderer->PushAbstractRenderCommand(a2);
-            RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
+            Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
         }
     }
 
@@ -4686,7 +4686,7 @@ void RoomObject::DrawGhostUserIDChat(QPointer <AssetShader> shader)
         MathUtil::ModelMatrix().translate(-width*0.5f -1.0f,0,0);
         MathUtil::ModelMatrix().scale(2.0f, 2.0f, 1.0f);
 
-        RendererInterface::m_pimpl->BindTextureHandle(0, sound_img->GetTextureHandle(true));
+        Renderer::m_pimpl->BindTextureHandle(0, sound_img->GetTextureHandle(true));
         shader->SetUseTexture(0, true);
         SpinAnimation::DrawPlaneGL(shader, QColor(255,255,255,255));
         shader->SetUseTexture(0, false);

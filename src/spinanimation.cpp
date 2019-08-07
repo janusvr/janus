@@ -79,7 +79,7 @@ void SpinAnimation::DrawIconGL(QPointer <AssetShader> shader, const bool billboa
 
         shader->UpdateObjectUniforms();
 
-        RendererInterface::m_pimpl->BindTextureHandle(0, texture0);
+        Renderer::m_pimpl->BindTextureHandle(0, texture0);
         shader->SetOverrideTexture(true);
         plane_obj->DrawGL(shader, color);
         shader->SetOverrideTexture(false);

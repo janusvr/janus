@@ -117,7 +117,7 @@ void Environment::draw_current_room(MultiPlayerManager*  multi_players, QPointer
         return;
     }
 
-    RendererInterface * renderer = RendererInterface::m_pimpl;   
+    Renderer * renderer = Renderer::m_pimpl;
 
     //59.7 - Note!  Currently no portal culling.
 
@@ -198,10 +198,10 @@ void Environment::draw_child_rooms(MultiPlayerManager*  multi_players, QPointer 
 {
     const QHash <QString, QPointer <RoomObject> > & envobjects = curnode->GetRoomObjects();
 
-    RendererInterface * renderer = RendererInterface::m_pimpl;
+    Renderer * renderer = Renderer::m_pimpl;
 
     // 2. Draw child portals (and their skyboxes as seen through portal)
-    RendererInterface::m_pimpl->BeginScope(RENDERER::RENDER_SCOPE::CHILD_ROOM_OBJECTS);
+    Renderer::m_pimpl->BeginScope(RENDERER::RENDER_SCOPE::CHILD_ROOM_OBJECTS);
     renderer->SetDepthFunc(DepthFunc::LEQUAL);
     renderer->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
     renderer->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
@@ -221,7 +221,7 @@ void Environment::draw_child_rooms(MultiPlayerManager*  multi_players, QPointer 
             ++i;
         }
     }
-    RendererInterface::m_pimpl->EndCurrentScope();
+    Renderer::m_pimpl->EndCurrentScope();
 
     // 3. Draw portal stencils again to depth buffer only, not color buffer (this stops portal decorations in current room being drawn "on top" of views into open portals)
     renderer->BeginScope(RENDERER::RENDER_SCOPE::CURRENT_ROOM_PORTAL_DEPTH_REFRESH);
@@ -303,7 +303,7 @@ void Environment::DrawRoomWithinPortalStencilGL(QPointer <RoomObject> portal, QP
         return;
     }
 
-    RendererInterface * renderer = RendererInterface::m_pimpl;
+    Renderer * renderer = Renderer::m_pimpl;
 
     QVector3D x1;
     QVector3D y1;

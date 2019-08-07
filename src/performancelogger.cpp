@@ -125,11 +125,11 @@ TextureHandle* PerformanceLogger::GetFrameSamplesTextureHandle()
 
     if (!m_texture_handle)
     {
-        m_texture_handle = RendererInterface::m_pimpl->CreateTextureQImage(perfTex, true, false, true, TextureHandle::ALPHA_TYPE::CUTOUT, TextureHandle::COLOR_SPACE::SRGB);
+        m_texture_handle = Renderer::m_pimpl->CreateTextureQImage(perfTex, true, false, true, TextureHandle::ALPHA_TYPE::CUTOUT, TextureHandle::COLOR_SPACE::SRGB);
     }
 
-    RendererInterface::m_pimpl->UpdateTextureHandleData(m_texture_handle, 0, 0, 0, perfTex.width(), perfTex.height(), GL_RGBA, GL_UNSIGNED_BYTE, (void *)perfTex.constBits(), perfTex.width() * perfTex.height() * 4);
-    RendererInterface::m_pimpl->GenerateTextureHandleMipMap(m_texture_handle);
+    Renderer::m_pimpl->UpdateTextureHandleData(m_texture_handle, 0, 0, 0, perfTex.width(), perfTex.height(), GL_RGBA, GL_UNSIGNED_BYTE, (void *)perfTex.constBits(), perfTex.width() * perfTex.height() * 4);
+    Renderer::m_pimpl->GenerateTextureHandleMipMap(m_texture_handle);
     return m_texture_handle;
 }
 

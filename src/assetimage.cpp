@@ -117,13 +117,12 @@ void AssetImage::initializeGL()
         null_image_data->SetTotalTextures(1);
         null_image_data->SetSource("null_image");
 
-        // will use the function in the child to transfer the data to the GPU
-        //auto null_image_tex_handle = RendererInterface::m_pimpl->CreateTextureFromAssetImageData(null_image_data, true, true, true, false, TextureHandle::ALPHA_TYPE::NONE, TextureHandle::COLOR_SPACE::SRGB);
-//        qDebug() << "m_pimpl" << RendererInterface::m_pimpl;
-        AssetImage::null_image_tex_handle = RendererInterface::m_pimpl->CreateTextureFromAssetImageData(null_image_data, true, true, true, false, TextureHandle::ALPHA_TYPE::NONE, TextureHandle::COLOR_SPACE::SRGB);
+        // will use the function in the child to transfer the data to the GPU        
+//        qDebug() << "m_pimpl" << Renderer::m_pimpl;
+        AssetImage::null_image_tex_handle = Renderer::m_pimpl->CreateTextureFromAssetImageData(null_image_data, true, true, true, false, TextureHandle::ALPHA_TYPE::NONE, TextureHandle::COLOR_SPACE::SRGB);
         for (uint32_t i = 0; i < ASSETSHADER_NUM_TEXTURES; ++i)
         {
-            RendererInterface::m_pimpl->BindTextureHandle(i, AssetImage::null_image_tex_handle);
+            Renderer::m_pimpl->BindTextureHandle(i, AssetImage::null_image_tex_handle);
         }
     }
 
@@ -138,14 +137,14 @@ void AssetImage::initializeGL()
             QByteArray file_data = face_file.readAll();
             if (!file_data.isNull() && !file_data.isEmpty())
             {
-                AssetImage::null_cubemap_tex_handle = RendererInterface::m_pimpl->CreateTextureFromGLIData(file_data, true, true, true, TextureHandle::ALPHA_TYPE::NONE, TextureHandle::COLOR_SPACE::SRGB);
+                AssetImage::null_cubemap_tex_handle = Renderer::m_pimpl->CreateTextureFromGLIData(file_data, true, true, true, TextureHandle::ALPHA_TYPE::NONE, TextureHandle::COLOR_SPACE::SRGB);
             }
             face_file.close();
         }
 
         for (uint32_t i = 0; i < ASSETSHADER_NUM_CUBEMAPS; ++i)
         {
-            RendererInterface::m_pimpl->BindTextureHandle(i + ASSETSHADER_NUM_TEXTURES, AssetImage::null_cubemap_tex_handle);
+            Renderer::m_pimpl->BindTextureHandle(i + ASSETSHADER_NUM_TEXTURES, AssetImage::null_cubemap_tex_handle);
         }
     }
 }
@@ -346,7 +345,7 @@ void AssetImage::DrawSelectedGL(QPointer <AssetShader> shader)
 
     shader->UpdateObjectUniforms();
 
-    RendererInterface * renderer = RendererInterface::m_pimpl;
+    Renderer * renderer = Renderer::m_pimpl;
     AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                             renderer->GetTexturedCubePrimCount(),
                             0,
@@ -385,7 +384,7 @@ void AssetImage::DrawImageGL(QPointer <AssetShader> shader, const bool left_eye)
     TextureHandle* tex_id_left = GetTextureHandle(left_eye);
     TextureHandle* tex_id_right = GetTextureHandle(false);
 
-    RendererInterface * renderer = RendererInterface::m_pimpl;
+    Renderer * renderer = Renderer::m_pimpl;
     renderer->BindTextureHandle(0, tex_id_left);
 
     auto textureSet = renderer->GetCurrentlyBoundTextures();
@@ -564,7 +563,7 @@ void AssetImage::LoadTextures()
             tex_colorspace = TextureHandle::COLOR_SPACE::LINEAR;
         }
 
-        QPointer<TextureHandle> tex_handle = RendererInterface::m_pimpl->CreateTextureFromGLIData(GetData(), tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
+        QPointer<TextureHandle> tex_handle = Renderer::m_pimpl->CreateTextureFromGLIData(GetData(), tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
         SetFinished(true);
 
         if (tex_handle == nullptr) {
@@ -572,8 +571,8 @@ void AssetImage::LoadTextures()
         }
 
         textureData = QPointer<AssetImageData>(new AssetImageData());
-        textureData->SetWidth(RendererInterface::m_pimpl->GetTextureWidth(tex_handle));
-        textureData->SetHeight(RendererInterface::m_pimpl->GetTextureHeight(tex_handle));
+        textureData->SetWidth(Renderer::m_pimpl->GetTextureWidth(tex_handle));
+        textureData->SetHeight(Renderer::m_pimpl->GetTextureHeight(tex_handle));
         textureData->SetTotalTextures(1);
         textureData->SetUploadedTexture(tex_handle, tex_handle);
     }
@@ -657,21 +656,21 @@ void AssetImage::CreateTexture(QPointer<AssetImageData> data, QPointer <DOMNode>
         if (left.size() > current && !left[current].isNull())
         {
             //ltex = CreateTexture(left[current], tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
-            ltex_handle = RendererInterface::m_pimpl->CreateTextureQImage(left[current], tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
+            ltex_handle = Renderer::m_pimpl->CreateTextureQImage(left[current], tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
         }
 
         if (right.size() > current && !right[current].isNull())
         {
             //rtex = CreateTexture(right[current], tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
-            ltex_handle = RendererInterface::m_pimpl->CreateTextureQImage(right[current], tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
+            ltex_handle = Renderer::m_pimpl->CreateTextureQImage(right[current], tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
         }
     }
     else
     {
 
-        ltex_handle = RendererInterface::m_pimpl->CreateTextureFromAssetImageData(data, true, tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
+        ltex_handle = Renderer::m_pimpl->CreateTextureFromAssetImageData(data, true, tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
 
-        rtex_handle = RendererInterface::m_pimpl->CreateTextureFromAssetImageData(data, false, tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
+        rtex_handle = Renderer::m_pimpl->CreateTextureFromAssetImageData(data, false, tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
     }
 
     //auto ltex_handle = TextureManager::GetTextureHandle(ltex);

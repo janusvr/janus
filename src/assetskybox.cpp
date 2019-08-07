@@ -115,7 +115,7 @@ QPointer <TextureHandle> AssetSkybox::GetTextureHandle()
                 }
 			}
 
-            m_texture_handle = RendererInterface::m_pimpl->CreateCubemapTextureHandleFromTextureHandles(asset_image_datas, asset_image_handles, tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
+            m_texture_handle = Renderer::m_pimpl->CreateCubemapTextureHandleFromTextureHandles(asset_image_datas, asset_image_handles, tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
 
 			m_has_generated_texture = true;
 		}
@@ -129,7 +129,7 @@ void AssetSkybox::DrawGL(QPointer <AssetShader> shader, const QMatrix4x4 & model
     TextureHandle* tex_handle = GetTextureHandle();
     // Tex_handle will be nullptr if we are using a cubemap assetImage
     // if we generated the handle ourselves from faces then we have a valid pointer here.
-    RendererInterface * const renderer = RendererInterface::m_pimpl;
+    Renderer * renderer = Renderer::m_pimpl;
     renderer->BindTextureHandle(10, tex_handle);
 
     MathUtil::PushModelMatrix();

@@ -7,7 +7,7 @@
 #include "asset.h"
 #include "mathutil.h"
 #include "webasset.h"
-#include "rendererinterface.h"
+#include "renderer.h"
 
 class AssetShader : public Asset
 {

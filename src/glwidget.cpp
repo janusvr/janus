@@ -23,7 +23,7 @@ GLWidget::GLWidget()
 GLWidget::~GLWidget()
 {
 //    qDebug() << "GLWidget::~GLWidget()";
-    //delete RendererInterface::m_pimpl;
+    //delete Renderer::m_pimpl;
 }
 
 void GLWidget::SetGame(Game * g)
@@ -380,14 +380,14 @@ void GLWidget::SetupFramebuffer()
 {
     uint32_t samples = (SettingsManager::GetAntialiasingEnabled()) ? 4 : 0;
     const float dpr = this->devicePixelRatio();
-    RendererInterface::m_pimpl->SetIsUsingEnhancedDepthPrecision(SettingsManager::GetEnhancedDepthPrecisionEnabled());
+    Renderer::m_pimpl->SetIsUsingEnhancedDepthPrecision(SettingsManager::GetEnhancedDepthPrecisionEnabled());
     switch(disp_mode)
     {
     case MODE_RIFT:
     case MODE_VIVE:
         if (hmd_manager) {
             const QSize s = hmd_manager->GetTextureSize();
-            RendererInterface::m_pimpl->ConfigureFramebuffer(s.width() * 2, s.height(), samples);
+            Renderer::m_pimpl->ConfigureFramebuffer(s.width() * 2, s.height(), samples);
         }
         break;
     case MODE_SBS:
@@ -395,10 +395,10 @@ void GLWidget::SetupFramebuffer()
     case MODE_OU3D:
     case MODE_CUBE:
     case MODE_EQUI:
-        RendererInterface::m_pimpl->ConfigureFramebuffer(width() * dpr, height() * dpr, samples);
+        Renderer::m_pimpl->ConfigureFramebuffer(width() * dpr, height() * dpr, samples);
         break;
     default:
-        RendererInterface::m_pimpl->ConfigureFramebuffer(width() * dpr, height() * dpr, samples);
+        Renderer::m_pimpl->ConfigureFramebuffer(width() * dpr, height() * dpr, samples);
         break;
     }
 }
@@ -407,8 +407,8 @@ void GLWidget::initializeGL()
 {       
     if (MathUtil::InitializeGLContext())
     {
-        RendererInterface::m_pimpl = Renderer::GetSingleton();
-        RendererInterface::m_pimpl->Initialize();
+        Renderer::m_pimpl = Renderer::GetSingleton();
+        Renderer::m_pimpl->Initialize();
         SetupFramebuffer();
     }
 
@@ -425,7 +425,7 @@ void GLWidget::initializeGL()
     }
 
     if (hmd_manager) {
-        RendererInterface::m_pimpl->InitializeHMDManager(hmd_manager);
+        Renderer::m_pimpl->InitializeHMDManager(hmd_manager);
     }
 
     if (game) {
@@ -465,8 +465,8 @@ void GLWidget::paintGL()
 
     const int w = width();
     const int h = height();
-    const int w2 = RendererInterface::m_pimpl->GetWindowWidth();
-    const int h2 = RendererInterface::m_pimpl->GetWindowHeight();
+    const int w2 = Renderer::m_pimpl->GetWindowWidth();
+    const int h2 = Renderer::m_pimpl->GetWindowHeight();
     const float near_dist = game->GetCurrentNearDist();
     const float far_dist = game->GetCurrentFarDist();
     QPointF mouse_pos(w2*0.5f, h2*0.5f);
@@ -485,11 +485,11 @@ void GLWidget::paintGL()
     }
 
     //for screenshots, we do
-    uint32_t overrideWidth = RendererInterface::m_pimpl->GetWindowWidth();
-    uint32_t overrideHeight = RendererInterface::m_pimpl->GetWindowHeight();
+    uint32_t overrideWidth = Renderer::m_pimpl->GetWindowWidth();
+    uint32_t overrideHeight = Renderer::m_pimpl->GetWindowHeight();
     if (take_screenshot) {
         //take_screenshot_path
-        RendererInterface::m_pimpl->RequestScreenShot(width(), height(), RendererInterface::m_pimpl->GetMSAACount(), false, (RendererInterface::m_pimpl->GetLastSubmittedFrameID() + 1));
+        Renderer::m_pimpl->RequestScreenShot(width(), height(), Renderer::m_pimpl->GetMSAACount(), false, (Renderer::m_pimpl->GetLastSubmittedFrameID() + 1));
         take_screenshot = false;
     }
 
@@ -498,7 +498,7 @@ void GLWidget::paintGL()
     {
         disp_mode_override = MODE_EQUI;
         //take_screenshot_path
-        RendererInterface::m_pimpl->RequestScreenShot(width(), height(), RendererInterface::m_pimpl->GetMSAACount() * 2, true, (RendererInterface::m_pimpl->GetLastSubmittedFrameID() + 1));
+        Renderer::m_pimpl->RequestScreenShot(width(), height(), Renderer::m_pimpl->GetMSAACount() * 2, true, (Renderer::m_pimpl->GetLastSubmittedFrameID() + 1));
         take_screenshot_cubemap = false;
     }
 
@@ -507,15 +507,15 @@ void GLWidget::paintGL()
     {
     case MODE_OU3D:
     {
-        RendererInterface::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::ALL);
-        RendererInterface::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::NONE);
+        Renderer::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::ALL);
+        Renderer::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::NONE);
 
-        const int w = RendererInterface::m_pimpl->GetWindowWidth();
-        const int h = RendererInterface::m_pimpl->GetWindowHeight();
+        const int w = Renderer::m_pimpl->GetWindowWidth();
+        const int h = Renderer::m_pimpl->GetWindowHeight();
 
-        RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
-        RendererInterface::m_pimpl->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
-        RendererInterface::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
+        Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
+        Renderer::m_pimpl->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
+        Renderer::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
 
         QVector<GLfloat> m_viewPortArray;
         m_viewPortArray.reserve(8);
@@ -569,7 +569,7 @@ void GLWidget::paintGL()
         cameras[3].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, true);
         cameras[3].SetLeftEye(false);
 
-        RendererInterface::m_pimpl->SetCameras(&cameras);
+        Renderer::m_pimpl->SetCameras(&cameras);
 
         // Set matrices and draw the game
         SetDefaultProjectionPersp(SettingsManager::GetFOV(), float(w)/float(h/2), near_dist, far_dist);
@@ -582,13 +582,13 @@ void GLWidget::paintGL()
         }
 
         // Tell Renderer we are done submitting render commands
-        RendererInterface::m_pimpl->SubmitFrame();
+        Renderer::m_pimpl->SubmitFrame();
 
         // Draw the frame
-        RendererInterface::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
+        Renderer::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
 
         // Blit Attachment 0 of the MSAA FBO to the contex default FBO for presenting to the user
-        RendererInterface::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::COLOR, false);
+        Renderer::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::COLOR, false);
         MathUtil::glFuncs->glBindFramebuffer(GL_DRAW_FRAMEBUFFER, defaultFramebufferObject());
         GLenum buf = GL_COLOR_ATTACHMENT0;
         MathUtil::glFuncs->glDrawBuffers(1, &buf);
@@ -600,15 +600,15 @@ void GLWidget::paintGL()
     case MODE_SBS:
     case MODE_SBS_REVERSE:
     {
-        RendererInterface::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::ALL);
-        RendererInterface::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::NONE);
+        Renderer::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::ALL);
+        Renderer::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::NONE);
 
-        const int w = RendererInterface::m_pimpl->GetWindowWidth();
-        const int h = RendererInterface::m_pimpl->GetWindowHeight();
+        const int w = Renderer::m_pimpl->GetWindowWidth();
+        const int h = Renderer::m_pimpl->GetWindowHeight();
 
-        RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
-        RendererInterface::m_pimpl->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
-        RendererInterface::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
+        Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
+        Renderer::m_pimpl->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
+        Renderer::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
 
         QVector<GLfloat> m_viewPortArray;
         m_viewPortArray.reserve(8);
@@ -669,7 +669,7 @@ void GLWidget::paintGL()
         cameras[3].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, true);
         cameras[3].SetLeftEye(false);
 
-        RendererInterface::m_pimpl->SetCameras(&cameras);
+        Renderer::m_pimpl->SetCameras(&cameras);
 
         // Set matrices and draw the game
         SetDefaultProjectionPersp(SettingsManager::GetFOV(), float(w/2)/float(h), near_dist, far_dist);
@@ -684,13 +684,13 @@ void GLWidget::paintGL()
         }
 
         // Tell Renderer we are done submitting render commands
-        RendererInterface::m_pimpl->SubmitFrame();
+        Renderer::m_pimpl->SubmitFrame();
 
         // Draw the frame
-        RendererInterface::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
+        Renderer::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
 
         // Blit Attachment 0 of the MSAA FBO to the contex default FBO for presenting to the user
-        RendererInterface::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::COLOR, false);
+        Renderer::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::COLOR, false);
         MathUtil::glFuncs->glBindFramebuffer(GL_DRAW_FRAMEBUFFER, defaultFramebufferObject());
         GLenum buf = GL_COLOR_ATTACHMENT0;
         MathUtil::glFuncs->glDrawBuffers(1, &buf);
@@ -701,15 +701,15 @@ void GLWidget::paintGL()
 
     case MODE_CUBE:
     {
-        RendererInterface::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::ALL);
-        RendererInterface::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::NONE);
+        Renderer::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::ALL);
+        Renderer::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::NONE);
 
-        const int w = RendererInterface::m_pimpl->GetWindowWidth();
-        const int h = RendererInterface::m_pimpl->GetWindowHeight();
+        const int w = Renderer::m_pimpl->GetWindowWidth();
+        const int h = Renderer::m_pimpl->GetWindowHeight();
 
-        RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
-        RendererInterface::m_pimpl->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
-        RendererInterface::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
+        Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
+        Renderer::m_pimpl->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
+        Renderer::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
 
         game->GetPlayer()->SetViewGL(true, 0.0f, base_xform);
         QMatrix4x4 qt_viewMatrix = MathUtil::ViewMatrix();
@@ -814,20 +814,20 @@ void GLWidget::paintGL()
                                         1.0f, 90.0f, near_dist, far_dist));
         cameras[6].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, false);
 
-        RendererInterface::m_pimpl->SetCameras(&cameras);
+        Renderer::m_pimpl->SetCameras(&cameras);
 
         SetDefaultProjectionPersp(90.0f, 1.0f, near_dist, far_dist);
         MathUtil::LoadModelIdentity();
         game->DrawGL(0.0f, base_xform, false, s, mouse_pos);
 
         // Tell Renderer we are done submitting render commands
-        RendererInterface::m_pimpl->SubmitFrame();
+        Renderer::m_pimpl->SubmitFrame();
 
         // Draw the frame
-        RendererInterface::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
+        Renderer::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
 
         // Blit Attachment 0 of the MSAA FBO to the contex default FBO for presenting to the user
-        RendererInterface::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::COLOR, false);
+        Renderer::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::COLOR, false);
         MathUtil::glFuncs->glBindFramebuffer(GL_DRAW_FRAMEBUFFER, defaultFramebufferObject());
         GLenum buf = GL_COLOR_ATTACHMENT0;
         MathUtil::glFuncs->glDrawBuffers(1, &buf);
@@ -839,14 +839,14 @@ void GLWidget::paintGL()
     case MODE_RIFT:
     case MODE_VIVE:
     {
-        RendererInterface::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::ALL);
-        RendererInterface::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::NONE);
-        RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
-        RendererInterface::m_pimpl->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
-        RendererInterface::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
+        Renderer::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::ALL);
+        Renderer::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::NONE);
+        Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
+        Renderer::m_pimpl->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
+        Renderer::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
 
-        const int fbo_w = RendererInterface::m_pimpl->GetWindowWidth();
-        const int fbo_h = RendererInterface::m_pimpl->GetWindowHeight();
+        const int fbo_w = Renderer::m_pimpl->GetWindowWidth();
+        const int fbo_h = Renderer::m_pimpl->GetWindowHeight();
 
         QVector<GLfloat> m_viewPortArray;
         m_viewPortArray.reserve(8);
@@ -913,7 +913,7 @@ void GLWidget::paintGL()
         cameras[3].SetScopeMask(RENDERER::RENDER_SCOPE::ALL, false);
         cameras[3].SetScopeMask(RENDERER::RENDER_SCOPE::AVATARS, true);
 
-        RendererInterface::m_pimpl->SetCameras(&cameras);
+        Renderer::m_pimpl->SetCameras(&cameras);
 
         // Set matrices and draw the game
         // hmd_xform here is set as the base viewMatrix for things like ray-casting and selection
@@ -924,15 +924,15 @@ void GLWidget::paintGL()
         game->DrawGL(0, hmd_xform, true, s, mouse_pos);
 
         // Tell Renderer we are done submitting render commands
-        RendererInterface::m_pimpl->SubmitFrame();
+        Renderer::m_pimpl->SubmitFrame();
 
         // Draw the frame
-        RendererInterface::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
+        Renderer::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
 
         // Blit Attachment 0 of the MSAA FBO to the contex default FBO for presenting to the user
         // because we already blit the MSAA into the non MSAA in EndRendering() we can blit the already resolved
         // image to the window.
-        RendererInterface::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::COLOR, false);
+        Renderer::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::COLOR, false);
         MathUtil::glFuncs->glBindFramebuffer(GL_DRAW_FRAMEBUFFER, defaultFramebufferObject());
         GLenum buf = GL_COLOR_ATTACHMENT0;
         MathUtil::glFuncs->glDrawBuffers(1, &buf);
@@ -943,11 +943,11 @@ void GLWidget::paintGL()
 
     case MODE_EQUI:
     {
-        RendererInterface::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::ALL);
-        RendererInterface::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::NONE);
-        RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
-        RendererInterface::m_pimpl->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
-        RendererInterface::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
+        Renderer::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::ALL);
+        Renderer::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::NONE);
+        Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
+        Renderer::m_pimpl->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
+        Renderer::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
 
         const int cube_cross_width = overrideWidth;
         const int cube_cross_height = overrideHeight;
@@ -1033,19 +1033,19 @@ void GLWidget::paintGL()
         cameras[6].SetScopeMask(RENDERER::RENDER_SCOPE::ALL, false);
         cameras[6].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, true);
 
-        RendererInterface::m_pimpl->SetCameras(&cameras);
+        Renderer::m_pimpl->SetCameras(&cameras);
 
         SetDefaultProjectionPersp(90.0f, 1.0f, near_dist, far_dist);
         game->DrawGL(0.0f, base_xform, false, s, mouse_pos);
 
         // Tell Renderer we are done submitting render commands
-        RendererInterface::m_pimpl->SubmitFrame();
+        Renderer::m_pimpl->SubmitFrame();
 
         // Draw the frame
-        RendererInterface::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
+        Renderer::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
 
         // Blit Attachment 0 of the MSAA FBO to the contex default FBO for presenting to the user
-        RendererInterface::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::COLOR, false);
+        Renderer::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::COLOR, false);
         MathUtil::glFuncs->glBindFramebuffer(GL_DRAW_FRAMEBUFFER, defaultFramebufferObject());
         GLenum buf = GL_COLOR_ATTACHMENT0;
         MathUtil::glFuncs->glDrawBuffers(1, &buf);
@@ -1061,12 +1061,12 @@ void GLWidget::paintGL()
     {        
         // Make sure we have no FBO bound here, so that the render-thread won't have texture binding issues
         // when it tries to copy it's resulting texture to our FBO color layer.
-        RendererInterface::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::NONE);
-        RendererInterface::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::NONE);
+        Renderer::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::NONE);
+        Renderer::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::NONE);
 
-        RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
-        RendererInterface::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
-        RendererInterface::m_pimpl->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
+        Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
+        Renderer::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
+        Renderer::m_pimpl->SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
 
         // Setup matrices as uniforms
         SetDefaultProjectionPersp(SettingsManager::GetFOV(), float(w)/float(h), near_dist, far_dist);
@@ -1104,19 +1104,19 @@ void GLWidget::paintGL()
         cameras[2].SetScopeMask(RENDERER::RENDER_SCOPE::ALL, false);
         cameras[2].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, true);
 
-        RendererInterface::m_pimpl->SetCameras(&cameras);
+        Renderer::m_pimpl->SetCameras(&cameras);
 
         // Render the scene
         game->DrawGL(0.0f, base_xform, true, s, mouse_pos);
 
         // Tell Renderer we are done submitting render commands
-        RendererInterface::m_pimpl->SubmitFrame();
+        Renderer::m_pimpl->SubmitFrame();
 
         // Draw the frame
-        RendererInterface::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
+        Renderer::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
 
         // Blit Attachment 0 of the MSAA FBO to the contex default FBO for presenting to the user
-        RendererInterface::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::COLOR, false);
+        Renderer::m_pimpl->BindFBOToRead(FBO_TEXTURE_BITFIELD::COLOR, false);
         MathUtil::glFuncs->glBindFramebuffer(GL_DRAW_FRAMEBUFFER, defaultFramebufferObject());
         GLenum buf = GL_COLOR_ATTACHMENT0;
         MathUtil::glFuncs->glDrawBuffers(1, &buf);
@@ -1131,8 +1131,8 @@ void GLWidget::paintGL()
 
     game->SetWindowSize(size());
 
-    r->GetPerformanceLogger().SetGPUTimeQueryResults(RendererInterface::m_pimpl->GetGPUTimeQueryResults());
-    r->GetPerformanceLogger().SetCPUTimeQueryResults(RendererInterface::m_pimpl->GetCPUTimeQueryResults());
+    r->GetPerformanceLogger().SetGPUTimeQueryResults(Renderer::m_pimpl->GetGPUTimeQueryResults());
+    r->GetPerformanceLogger().SetCPUTimeQueryResults(Renderer::m_pimpl->GetCPUTimeQueryResults());
     r->GetPerformanceLogger().EndFrameSample();
 
     //for thumbs we don't want instructions

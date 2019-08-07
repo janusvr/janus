@@ -4,7 +4,6 @@
 #include "asset.h"
 #include "assetshader.h"
 #include "mathutil.h"
-#include "rendererinterface.h"
 #include "mediaplayer.h"
 
 class AssetVideo : public Asset

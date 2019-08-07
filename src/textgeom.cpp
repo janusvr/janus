@@ -23,8 +23,8 @@ void TextGeom::initializeGL()
 {
     QImage img(MathUtil::GetApplicationPath() + "assets/fonts/ubuntumono.png");
     img = img.convertToFormat(QImage::Format_RGBA8888_Premultiplied);
-    auto tex_handle = RendererInterface::m_pimpl->CreateTextureQImage(img, true, true, true, TextureHandle::ALPHA_TYPE::BLENDED, TextureHandle::COLOR_SPACE::SRGB);
-	RendererInterface::m_pimpl->SetDefaultFontGlyphAtlas(tex_handle);
+    auto tex_handle = Renderer::m_pimpl->CreateTextureQImage(img, true, true, true, TextureHandle::ALPHA_TYPE::BLENDED, TextureHandle::COLOR_SPACE::SRGB);
+	Renderer::m_pimpl->SetDefaultFontGlyphAtlas(tex_handle);
 }
 
 void TextGeom::SetMaxSize(float x, float y)
@@ -296,11 +296,11 @@ void TextGeom::CreateVBO()
 
         //65.3 - deallocate previous buffers and mesh (reallocation will allow for index reuse)
         if (!texts[text_index].m_mesh_handle.isNull()) {
-            QVector<QPointer<BufferHandle>> buffers = RendererInterface::m_pimpl->GetBufferHandlesForMeshHandle(texts[text_index].m_mesh_handle);
+            QVector<QPointer<BufferHandle>> buffers = Renderer::m_pimpl->GetBufferHandlesForMeshHandle(texts[text_index].m_mesh_handle);
             for (int i=0; i<buffers.size(); ++i) {
-                RendererInterface::m_pimpl->RemoveBufferHandleFromMap(buffers[i]);
+                Renderer::m_pimpl->RemoveBufferHandleFromMap(buffers[i]);
             }
-            RendererInterface::m_pimpl->RemoveMeshHandleFromMap(texts[text_index].m_mesh_handle);
+            Renderer::m_pimpl->RemoveMeshHandleFromMap(texts[text_index].m_mesh_handle);
         }
 
         VertexAttributeLayout layout;
@@ -325,22 +325,22 @@ void TextGeom::CreateVBO()
         layout.attributes[(uint32_t)VAO_ATTRIB::INDICES].offset_in_bytes = 0;
         layout.attributes[(uint32_t)VAO_ATTRIB::INDICES].stride_in_bytes = 1 * sizeof(uint32_t);
 
-        texts[text_index].m_mesh_handle = RendererInterface::m_pimpl->CreateMeshHandle(layout);
+        texts[text_index].m_mesh_handle = Renderer::m_pimpl->CreateMeshHandle(layout);
 
-        QVector<QPointer<BufferHandle>> buffers = RendererInterface::m_pimpl->GetBufferHandlesForMeshHandle(texts[text_index].m_mesh_handle);
+        QVector<QPointer<BufferHandle>> buffers = Renderer::m_pimpl->GetBufferHandlesForMeshHandle(texts[text_index].m_mesh_handle);
 
         if (buffers.size() >= VAO_ATTRIB::NUM_ATTRIBS) {
             texts[text_index].m_position_handle = buffers[(GLuint)VAO_ATTRIB::POSITION];
-            RendererInterface::m_pimpl->BindBufferHandle(texts[text_index].m_position_handle);
-            RendererInterface::m_pimpl->ConfigureBufferHandleData(texts[text_index].m_position_handle, glyph_count * vertices_per_glyph * 4 * float_size, texts[text_index].m_positions.data(), BufferHandle::BUFFER_USAGE::STATIC_DRAW);
+            Renderer::m_pimpl->BindBufferHandle(texts[text_index].m_position_handle);
+            Renderer::m_pimpl->ConfigureBufferHandleData(texts[text_index].m_position_handle, glyph_count * vertices_per_glyph * 4 * float_size, texts[text_index].m_positions.data(), BufferHandle::BUFFER_USAGE::STATIC_DRAW);
 
             texts[text_index].m_texcoord_handle = buffers[(GLuint)VAO_ATTRIB::TEXCOORD0];
-            RendererInterface::m_pimpl->BindBufferHandle(texts[text_index].m_texcoord_handle);
-            RendererInterface::m_pimpl->ConfigureBufferHandleData(texts[text_index].m_texcoord_handle, glyph_count * vertices_per_glyph * 2 * float_size, texts[text_index].m_texcoords.data(), BufferHandle::BUFFER_USAGE::STATIC_DRAW);
+            Renderer::m_pimpl->BindBufferHandle(texts[text_index].m_texcoord_handle);
+            Renderer::m_pimpl->ConfigureBufferHandleData(texts[text_index].m_texcoord_handle, glyph_count * vertices_per_glyph * 2 * float_size, texts[text_index].m_texcoords.data(), BufferHandle::BUFFER_USAGE::STATIC_DRAW);
 
             texts[text_index].m_index_handle = buffers[(GLuint)VAO_ATTRIB::INDICES];
-            RendererInterface::m_pimpl->BindBufferHandle(texts[text_index].m_index_handle);
-            RendererInterface::m_pimpl->ConfigureBufferHandleData(texts[text_index].m_index_handle, glyph_count * indices_per_glyph * 1 * sizeof(uint32_t), texts[text_index].m_indices.data(), BufferHandle::BUFFER_USAGE::STATIC_DRAW);
+            Renderer::m_pimpl->BindBufferHandle(texts[text_index].m_index_handle);
+            Renderer::m_pimpl->ConfigureBufferHandleData(texts[text_index].m_index_handle, glyph_count * indices_per_glyph * 1 * sizeof(uint32_t), texts[text_index].m_indices.data(), BufferHandle::BUFFER_USAGE::STATIC_DRAW);
         }
     }    
 }
@@ -362,7 +362,7 @@ void TextGeom::DrawSelectedGL(QPointer <AssetShader> shader)
             continue;
         }
 
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                                 glyph_count * 6,
                                 0,
@@ -409,7 +409,7 @@ void TextGeom::DrawGL(QPointer <AssetShader> shader)
     shader->SetEmission(QVector3D(0,0,0));
     shader->SetUseLighting(false);
 
-    RendererInterface::m_pimpl->BindTextureHandle(0, RendererInterface::m_pimpl->GetDefaultFontGlyphAtlas());
+    Renderer::m_pimpl->BindTextureHandle(0, Renderer::m_pimpl->GetDefaultFontGlyphAtlas());
     for (int j=0; j<texts.size(); ++j) {
 
         const int glyph_count = texts[j].text.length();
@@ -421,7 +421,7 @@ void TextGeom::DrawGL(QPointer <AssetShader> shader)
         shader->SetConstColour(QVector4D(texts[j].col.redF(), texts[j].col.greenF(), texts[j].col.blueF(), texts[j].col.alphaF()));
         shader->UpdateObjectUniforms();
 
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                                 glyph_count * 6,
                                 0,

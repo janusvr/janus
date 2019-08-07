@@ -14,7 +14,7 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 
-#include "rendererinterface.h"
+#include "renderer.h"
 #include "assetimage.h"
 
 class MediaPlayer;

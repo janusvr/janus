@@ -53,14 +53,14 @@ void Room::initializeGL()
 {
     if (transparency_shader == NULL) {
         transparency_shader = QPointer<AssetShader>(new AssetShader());
-        transparency_shader->SetProgramHandle(RendererInterface::m_pimpl->GetDefaultObjectShaderProgram());
+        transparency_shader->SetProgramHandle(Renderer::m_pimpl->GetDefaultObjectShaderProgram());
         transparency_shader->GetProperties()->SetID("transparency_shader");
         transparency_shader->Load();
     }
 
     if (portal_shader == NULL) {
         portal_shader = QPointer<AssetShader>(new AssetShader());
-        portal_shader->SetProgramHandle(RendererInterface::m_pimpl->GetDefaultPortalShaderProgram());
+        portal_shader->SetProgramHandle(Renderer::m_pimpl->GetDefaultPortalShaderProgram());
         portal_shader->GetProperties()->SetID("portal_shader");
         portal_shader->Load();
     }
@@ -81,7 +81,7 @@ void Room::initializeGL()
 
     if (skybox_shader == NULL) {
         skybox_shader = QPointer<AssetShader>(new AssetShader());
-        skybox_shader->SetProgramHandle(RendererInterface::m_pimpl->GetDefaultSkyboxShaderProgram());
+        skybox_shader->SetProgramHandle(Renderer::m_pimpl->GetDefaultSkyboxShaderProgram());
         skybox_shader->GetProperties()->SetID("skybox_shader");
         skybox_shader->Load();
     }
@@ -627,7 +627,7 @@ void Room::BindCubemaps(QPointer <AssetShader> shader)
             && radiance_texture_id != AssetImage::null_image_tex_handle
             && radiance_texture_id != AssetImage::null_cubemap_tex_handle)
         {
-            RendererInterface::m_pimpl->BindTextureHandle(11, radiance_texture_id);
+            Renderer::m_pimpl->BindTextureHandle(11, radiance_texture_id);
             shader->SetUseCubeTexture1(true);
         }
         else
@@ -640,7 +640,7 @@ void Room::BindCubemaps(QPointer <AssetShader> shader)
             && irradiance_texture_id != AssetImage::null_image_tex_handle
             && irradiance_texture_id != AssetImage::null_cubemap_tex_handle)
         {
-            RendererInterface::m_pimpl->BindTextureHandle(12, irradiance_texture_id);
+            Renderer::m_pimpl->BindTextureHandle(12, irradiance_texture_id);
             shader->SetUseCubeTexture2(true);
         }
         else
@@ -696,7 +696,7 @@ void Room::BindCubemaps(QPointer <AssetShader> shader)
 //            file_names.push_back(cubemap_output_path_irradiance);
 //            file_names.push_back(cubemap_output_path_radiance);
 //            Cubemaps cubemaps(file_names, gl_tex_id);
-//            RendererInterface::m_pimpl->GenerateEnvMapsFromCubemapTextureHandle(cubemaps);
+//            Renderer::m_pimpl->GenerateEnvMapsFromCubemapTextureHandle(cubemaps);
 //            cubemap_manager->RegisterForProcessing(room_url_md5, cubemaps);
 //        }
 //        else if (current_processing_state == PROCESSING_STATE::READY)
@@ -755,7 +755,7 @@ void Room::BindCubemaps(QPointer <AssetShader> shader)
             && texID != AssetImage::null_image_tex_handle
             && texID != AssetImage::null_cubemap_tex_handle)
         {
-            RendererInterface::m_pimpl->BindTextureHandle(11, texID);
+            Renderer::m_pimpl->BindTextureHandle(11, texID);
             shader->SetUseCubeTexture1(true);
         }
         else
@@ -771,7 +771,7 @@ void Room::BindCubemaps(QPointer <AssetShader> shader)
             && texID != AssetImage::null_image_tex_handle
             && texID != AssetImage::null_cubemap_tex_handle)
         {
-            RendererInterface::m_pimpl->BindTextureHandle(12, texID);
+            Renderer::m_pimpl->BindTextureHandle(12, texID);
             shader->SetUseCubeTexture2(true);
         }
         else
@@ -821,7 +821,7 @@ void Room::DrawGL(MultiPlayerManager *multi_players, QPointer <Player> player, c
 
     const bool allow_glsl_shaders = SettingsManager::GetShadersEnabled();
 
-    RendererInterface * renderer = RendererInterface::m_pimpl;
+    Renderer * renderer = Renderer::m_pimpl;
 
     //59.3 - iterate through all of this room's shaders, updating room-specific shader uniforms (and applying cubemap textures)    
     for (QPointer <AssetShader> & s : assetshaders) {

@@ -5,7 +5,6 @@
 
 #include "mathutil.h"
 #include "cookiejar.h"
-#include "rendererinterface.h"
 
 struct AuthData {
     QString user;

@@ -116,7 +116,7 @@ void AssetShader::CompileShaderProgram()
         *vertex_data = QByteArray(vertex_src_bytearray.data());
     }
 
-    m_program_handle = RendererInterface::m_pimpl->CompileAndLinkShaderProgram(vertex_data, vertex_src_url_str, fragment_data, props->GetSrcURL());
+    m_program_handle = Renderer::m_pimpl->CompileAndLinkShaderProgram(vertex_data, vertex_src_url_str, fragment_data, props->GetSrcURL());
 }
 
 void AssetShader::SetProgramHandle(QPointer<ProgramHandle> p_shader_program)
@@ -232,7 +232,7 @@ void AssetShader::UpdateFrameUniforms()
 {
     const float s = time.elapsed() * 0.001f;
     mFrame.iMouse = QVector4D(0,0,0,0); //TODO
-    mFrame.iResolution = QVector4D(static_cast<float>(RendererInterface::m_pimpl->GetWindowWidth()), static_cast<float>(RendererInterface::m_pimpl->GetWindowHeight()), 0.0f, 0.0f);    
+    mFrame.iResolution = QVector4D(static_cast<float>(Renderer::m_pimpl->GetWindowWidth()), static_cast<float>(Renderer::m_pimpl->GetWindowHeight()), 0.0f, 0.0f);
     mFrame.iGlobalTime = QVector4D(s, s, s, s);
 }
 

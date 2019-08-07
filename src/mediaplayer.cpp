@@ -352,12 +352,12 @@ void MediaPlayer::UpdateTexture(MediaContext * ctx)
     if (ctx->update_tex && ctx->video_lock.tryLock()) {
         if (ctx->img[0] && !ctx->img[0]->isNull()) {
             if (ctx->m_texture_handles[0] == nullptr || ctx->m_texture_handles[0] == AssetImage::null_image_tex_handle) {
-                ctx->m_texture_handles[0] = RendererInterface::m_pimpl->CreateTextureQImage(*(ctx->img[0]), true, true, false, TextureHandle::ALPHA_TYPE::BLENDED, TextureHandle::COLOR_SPACE::SRGB);
+                ctx->m_texture_handles[0] = Renderer::m_pimpl->CreateTextureQImage(*(ctx->img[0]), true, true, false, TextureHandle::ALPHA_TYPE::BLENDED, TextureHandle::COLOR_SPACE::SRGB);
             }
             else {
-                RendererInterface::m_pimpl->UpdateTextureHandleData(ctx->m_texture_handles[0], 0 ,0, 0,
+                Renderer::m_pimpl->UpdateTextureHandleData(ctx->m_texture_handles[0], 0 ,0, 0,
                         ctx->img[0]->width(), ctx->img[0]->height(), GL_RGBA, GL_UNSIGNED_BYTE, (void *)ctx->img[0]->constBits(), ctx->img[0]->width() * ctx->img[0]->height() * 4);
-                RendererInterface::m_pimpl->GenerateTextureHandleMipMap(ctx->m_texture_handles[0]);
+                Renderer::m_pimpl->GenerateTextureHandleMipMap(ctx->m_texture_handles[0]);
             }
         }
         ctx->update_tex = false;
@@ -375,13 +375,13 @@ void MediaPlayer::UpdateLeftRightTextures(MediaContext * ctx)
         for (int i=0; i<2; ++i) {
             if (ctx->img[i] && !ctx->img[i]->isNull()) {
                 if (!ctx->m_texture_handles[i] || ctx->m_texture_handles[i] == AssetImage::null_image_tex_handle) {
-                    ctx->m_texture_handles[i] = RendererInterface::m_pimpl->CreateTextureQImage(*(ctx->img[i]), true, true, false, TextureHandle::ALPHA_TYPE::BLENDED, TextureHandle::COLOR_SPACE::SRGB);
+                    ctx->m_texture_handles[i] = Renderer::m_pimpl->CreateTextureQImage(*(ctx->img[i]), true, true, false, TextureHandle::ALPHA_TYPE::BLENDED, TextureHandle::COLOR_SPACE::SRGB);
                 }
                 else
                 {
-                    RendererInterface::m_pimpl->UpdateTextureHandleData(ctx->m_texture_handles[i], 0, 0, 0,
+                    Renderer::m_pimpl->UpdateTextureHandleData(ctx->m_texture_handles[i], 0, 0, 0,
                             ctx->img[i]->width(), ctx->img[i]->height(), GL_RGBA, GL_UNSIGNED_BYTE, (void *)ctx->img[i]->constBits(), ctx->img[i]->width() * ctx->img[i]->height() * 4);
-                    RendererInterface::m_pimpl->GenerateTextureHandleMipMap(ctx->m_texture_handles[i]);
+                    Renderer::m_pimpl->GenerateTextureHandleMipMap(ctx->m_texture_handles[i]);
                 }
             }
         }

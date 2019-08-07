@@ -68,7 +68,7 @@ Game::~Game()
 
     MathUtil::FlushErrorLog();
 
-    // This needs cleaned up while RendererInterface is still valid
+    // This needs cleaned up while Renderer is still valid
     AssetImage::null_cubemap_tex_handle = nullptr;
     AssetImage::null_image_tex_handle = nullptr;
 
@@ -566,7 +566,7 @@ void Game::DrawFadingGL()
         return;
     }
 
-    RendererInterface * renderer = RendererInterface::m_pimpl;
+    Renderer * renderer = Renderer::m_pimpl;
     renderer->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
     renderer->SetStencilOp(StencilOp(StencilOpAction::KEEP, StencilOpAction::KEEP, StencilOpAction::KEEP));
     renderer->SetStencilFunc(StencilFunc(StencilTestFuncion::ALWAYS, StencilReferenceValue(0), StencilMask(0xffffffff)));
@@ -624,7 +624,7 @@ void Game::DrawFadingGL()
         shader->SetUseLighting(false);
         shader->UpdateObjectUniforms();
 
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                                 renderer->GetTexturedCube2PrimCount(),
                                 0,
@@ -817,11 +817,11 @@ void Game::DrawGL(const float ipd, const QMatrix4x4 head_xform, const bool set_m
 
     // Update the cursor (Object ID, normal, world-space location)
     QPointer <Room> r = env->GetCurRoom();
-    RendererInterface::m_pimpl->BeginScope(RENDERER::RENDER_SCOPE::VIRTUAL_MENU);
+    Renderer::m_pimpl->BeginScope(RENDERER::RENDER_SCOPE::VIRTUAL_MENU);
     r->BindShader(Room::GetTransparencyShader());
     DrawVirtualMenu();    
     r->UnbindShader(Room::GetTransparencyShader());
-    RendererInterface::m_pimpl->EndCurrentScope();
+    Renderer::m_pimpl->EndCurrentScope();
 
     // Draw child rooms
     env->draw_child_rooms(multi_players, player, true); 
@@ -834,7 +834,7 @@ void Game::DrawGL(const float ipd, const QMatrix4x4 head_xform, const bool set_m
     }
 
     //draw player avatar (if enabled)
-    RendererInterface::m_pimpl->BeginScope(RENDERER::RENDER_SCOPE::AVATARS);
+    Renderer::m_pimpl->BeginScope(RENDERER::RENDER_SCOPE::AVATARS);
     if (SettingsManager::GetSelfAvatar()) {
 
         QPointer <AssetShader> shader = Room::GetTransparencyShader();
@@ -877,10 +877,10 @@ void Game::DrawGL(const float ipd, const QMatrix4x4 head_xform, const bool set_m
 
         r->UnbindShader(shader);
     }
-    RendererInterface::m_pimpl->EndCurrentScope();
+    Renderer::m_pimpl->EndCurrentScope();
 
     //draw controllers (vive, oculus touch, Leap Motion, etc.)
-    RendererInterface::m_pimpl->BeginScope(RENDERER::RENDER_SCOPE::CONTROLLERS);
+    Renderer::m_pimpl->BeginScope(RENDERER::RENDER_SCOPE::CONTROLLERS);
     if (controller_manager) {
         QPointer <AssetShader> shader = Room::GetTransparencyShader();
         if (r->GetAssetShader()) {
@@ -891,17 +891,17 @@ void Game::DrawGL(const float ipd, const QMatrix4x4 head_xform, const bool set_m
         controller_manager->DrawGL(shader, player->GetTransform());
         r->UnbindShader(shader);
     }
-    RendererInterface::m_pimpl->EndCurrentScope();
+    Renderer::m_pimpl->EndCurrentScope();
 
     // Draw menu before cursor update if it is selected
-    RendererInterface::m_pimpl->BeginScope(RENDERER::RENDER_SCOPE::CURSOR);
+    Renderer::m_pimpl->BeginScope(RENDERER::RENDER_SCOPE::CURSOR);
     DrawCursorGL();
-    RendererInterface::m_pimpl->EndCurrentScope();
+    Renderer::m_pimpl->EndCurrentScope();
 
-    RendererInterface::m_pimpl->BeginScope(RENDERER::RENDER_SCOPE::OVERLAYS);
+    Renderer::m_pimpl->BeginScope(RENDERER::RENDER_SCOPE::OVERLAYS);
     DrawOverlaysGL();
     DrawFadingGL();
-    RendererInterface::m_pimpl->EndCurrentScope();
+    Renderer::m_pimpl->EndCurrentScope();
 
     // Recomputes the AABB's for all RoomObjects and adds them to a fresh instance of
     // the rooms physics world then draws it
@@ -2561,9 +2561,9 @@ void Game::DrawCursorGL()
     //draw crosshair
     if (state == JVR_STATE_DEFAULT || state == JVR_STATE_INTERACT_TELEPORT) {
 
-        RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
-        RendererInterface::m_pimpl->SetDepthFunc(DepthFunc::ALWAYS);
-        RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_DISABLED);
+        Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
+        Renderer::m_pimpl->SetDepthFunc(DepthFunc::ALWAYS);
+        Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_DISABLED);
 
         if (cursor_active >= 0) {
             const float dist = (player->GetProperties()->GetEyePoint() - player->GetCursorPos(cursor_active)).length();
@@ -2667,8 +2667,8 @@ void Game::DrawCursorGL()
 
         shader->SetConstColour(QVector4D(1,1,1,1));
 
-        RendererInterface::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
-        RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
+        Renderer::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
+        Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
     }
 }
 
@@ -2837,12 +2837,12 @@ void Game::UpdateOverlays()
         const int num_objs = r->GetRoomObjects().size();
 
         QString version_text = QString("Version: ") + menu_ops.version;
-        QString renderer_text = QString("Renderer: ") + RendererInterface::m_pimpl->GetRendererName();
+        QString renderer_text = QString("Renderer: ") + Renderer::m_pimpl->GetRendererName();
         double current_render_fps = 1000.0 / perf_logger.GetAverageRenderThreadCPUTime();
         QString fps_text3 = QString("Update: ") + QString::number(perf_logger.GetAverageMainThreadCPUTime(),'f', 1) + QString("ms/") + QString::number(1000.0 / perf_logger.GetAverageMainThreadCPUTime(),'f', 1) + QString("fps");
         QString thread_text = QString("Threads: ") + QString::number(QThreadPool::globalInstance()->activeThreadCount()) + "/" + QString::number(QThreadPool::globalInstance()->maxThreadCount());
         QString tricount_text = QString("Room: ") + QString::number(num_tris) + " tris, " + QString::number(num_objs) + " objects";
-        QString tex_text = QString("Textures: ") + QString::number(RendererInterface::m_pimpl->GetNumTextures());
+        QString tex_text = QString("Textures: ") + QString::number(Renderer::m_pimpl->GetNumTextures());
         QString userid_text = QString("UserID: ") + multi_players->GetUserID();
 
         if (player->GetSpeaking()) {
@@ -2944,9 +2944,9 @@ void Game::DrawOverlaysGL()
     QPointer <Room> r = env->GetCurRoom();
     PerformanceLogger & perf_logger = r->GetPerformanceLogger();
 
-    RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
-    RendererInterface::m_pimpl->SetDepthFunc(DepthFunc::ALWAYS);
-    RendererInterface::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
+    Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::DISABLED);
+    Renderer::m_pimpl->SetDepthFunc(DepthFunc::ALWAYS);
+    Renderer::m_pimpl->SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
 
     shader->SetFogEnabled(false);
     shader->SetUseTextureAll(false);
@@ -3006,7 +3006,7 @@ void Game::DrawOverlaysGL()
         shader->SetUseTexture(0, true);
         shader->UpdateObjectUniforms();
 
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
 
         auto shader_data = shader->GetARCData();
         renderer->BindTextureHandle(0, perf_logger.GetFrameSamplesTextureHandle());
@@ -3056,8 +3056,8 @@ void Game::DrawOverlaysGL()
         MathUtil::PopModelMatrix();
     }
 
-    RendererInterface::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
-    RendererInterface::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
+    Renderer::m_pimpl->SetDepthFunc(DepthFunc::LEQUAL);
+    Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
 }
 
 QPointer <Player> Game::GetPlayer()

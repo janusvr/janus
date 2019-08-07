@@ -1,7 +1,6 @@
 #ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
 
-#include "mathutil.h"
 #include "assetskybox.h"
 #include "assetobject.h"
 #include "assetshader.h"
@@ -11,8 +10,7 @@
 #include "soundmanager.h"
 #include "multiplayermanager.h"
 #include "cookiejar.h"
-#include "rendererinterface.h"
-#include "abstractrenderer.h"
+#include "renderer.h"
 #include "assetimage.h"
 #include "scriptbuiltins.h"
 

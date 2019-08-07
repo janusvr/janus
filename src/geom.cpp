@@ -1059,7 +1059,7 @@ void Geom::DrawGL(QPointer <AssetShader> shader, const QColor col)
     QList <QString> materials = data.GetMaterialNames();
 
     shader->SetConstColour(QVector4D(col.redF(), col.greenF(), col.blueF(), col.alphaF())); //break the colour out of the display list
-    RendererInterface * const renderer = RendererInterface::m_pimpl;
+    Renderer * renderer = Renderer::m_pimpl;
 
     for (int i=0; i<materials.size(); ++i)
     {
@@ -1143,7 +1143,7 @@ void Geom::DrawGL(QPointer <AssetShader> shader, const QColor col)
                 if (a) {
                     a->UpdateGL();
                     auto tex_id = a->GetTextureHandle(true);
-                    RendererInterface::m_pimpl->BindTextureHandle(j, tex_id);
+                    Renderer::m_pimpl->BindTextureHandle(j, tex_id);
                     shader->SetUseTexture(j, true);
                 }
             }
@@ -1693,7 +1693,7 @@ void Geom::BuildVBOsGL()
         for (int mesh_index = 0; mesh_index < mesh_count; ++mesh_index)
         {
             GeomVBOData & vbo_data = data.GetVBOData(materials[i], mesh_index);
-            RendererInterface::m_pimpl->CreateMeshHandleForGeomVBOData(vbo_data);
+            Renderer::m_pimpl->CreateMeshHandleForGeomVBOData(vbo_data);
             vbo_data.ClearVertexData();
         }
     }

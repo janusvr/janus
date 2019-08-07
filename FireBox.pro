@@ -103,7 +103,6 @@ SOURCES += \
     src/player.cpp \
     src/propertieswindow.cpp \
     src/renderer.cpp \
-    src/rendererinterface.cpp \    
     src/room.cpp \
     src/roomobject.cpp \
     src/roomphysics.cpp \
@@ -169,7 +168,6 @@ HEADERS += \
     src/player.h \
     src/propertieswindow.h \
     src/renderer.h \
-    src/rendererinterface.h \    
     src/room.h \
     src/roomobject.h \
     src/roomphysics.h \

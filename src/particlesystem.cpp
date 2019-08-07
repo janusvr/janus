@@ -204,8 +204,8 @@ void ParticleSystem::Update(QPointer <DOMNode> props, const double dt_sec)
 
     //update VBO contents
     if (count != 0) {
-        RendererInterface::m_pimpl->UpdateBufferHandleData(m_VBO_positions, 0, static_cast<uint32_t>(m_positions.size() * sizeof(float)), m_positions.data());
-        RendererInterface::m_pimpl->UpdateBufferHandleData(m_VBO_colors, 0, static_cast<uint32_t>(m_colors.size() * sizeof(float)), m_colors.data());
+        Renderer::m_pimpl->UpdateBufferHandleData(m_VBO_positions, 0, static_cast<uint32_t>(m_positions.size() * sizeof(float)), m_positions.data());
+        Renderer::m_pimpl->UpdateBufferHandleData(m_VBO_colors, 0, static_cast<uint32_t>(m_colors.size() * sizeof(float)), m_colors.data());
     }
 }
 
@@ -248,7 +248,7 @@ void ParticleSystem::DrawGL(QPointer <AssetShader> shader, const QVector3D eye_p
             //shader->SetUseParticleColours(true); //55.10
             shader->UpdateObjectUniforms();
 
-            RendererInterface * const renderer = RendererInterface::m_pimpl;
+            Renderer * renderer = Renderer::m_pimpl;
 
             AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                             indice_count,
@@ -397,33 +397,33 @@ void ParticleSystem::CreateVBO()
     layout.attributes[(uint32_t)VAO_ATTRIB::INDICES].stride_in_bytes = elements_per_index * sizeof(uint32_t);
     layout.attributes[(uint32_t)VAO_ATTRIB::INDICES].offset_in_bytes = 0;
 
-    m_mesh_handle = RendererInterface::m_pimpl->CreateMeshHandle(layout);    
+    m_mesh_handle = Renderer::m_pimpl->CreateMeshHandle(layout);    
 
-    QVector<QPointer<BufferHandle>> buffers = RendererInterface::m_pimpl->GetBufferHandlesForMeshHandle(m_mesh_handle);
+    QVector<QPointer<BufferHandle>> buffers = Renderer::m_pimpl->GetBufferHandlesForMeshHandle(m_mesh_handle);
 
     if (buffers.size() >= VAO_ATTRIB::NUM_ATTRIBS) {
         m_VBO_positions = buffers[(GLuint)VAO_ATTRIB::POSITION];
         if (m_VBO_positions) {
-            RendererInterface::m_pimpl->BindBufferHandle(m_VBO_positions);
-            RendererInterface::m_pimpl->ConfigureBufferHandleData(m_VBO_positions, static_cast<uint32_t>(m_positions.size() * float_size), m_positions.data(), BufferHandle::BUFFER_USAGE::DYNAMIC_DRAW);
+            Renderer::m_pimpl->BindBufferHandle(m_VBO_positions);
+            Renderer::m_pimpl->ConfigureBufferHandleData(m_VBO_positions, static_cast<uint32_t>(m_positions.size() * float_size), m_positions.data(), BufferHandle::BUFFER_USAGE::DYNAMIC_DRAW);
         }
 
         m_VBO_tex_coords0 = buffers[(GLuint)VAO_ATTRIB::TEXCOORD0];
         if (m_VBO_tex_coords0) {
-            RendererInterface::m_pimpl->BindBufferHandle(m_VBO_tex_coords0);
-            RendererInterface::m_pimpl->ConfigureBufferHandleData(m_VBO_tex_coords0, static_cast<uint32_t>(m_tex_coords.size() * sizeof(uint8_t)), m_tex_coords.data(), BufferHandle::BUFFER_USAGE::STATIC_DRAW);
+            Renderer::m_pimpl->BindBufferHandle(m_VBO_tex_coords0);
+            Renderer::m_pimpl->ConfigureBufferHandleData(m_VBO_tex_coords0, static_cast<uint32_t>(m_tex_coords.size() * sizeof(uint8_t)), m_tex_coords.data(), BufferHandle::BUFFER_USAGE::STATIC_DRAW);
         }
 
         m_VBO_colors = buffers[(GLuint)VAO_ATTRIB::COLOR];
         if (m_VBO_colors) {
-            RendererInterface::m_pimpl->BindBufferHandle(m_VBO_colors);
-            RendererInterface::m_pimpl->ConfigureBufferHandleData(m_VBO_colors, static_cast<uint32_t>(m_colors.size() * float_size), m_colors.data(), BufferHandle::BUFFER_USAGE::DYNAMIC_DRAW);
+            Renderer::m_pimpl->BindBufferHandle(m_VBO_colors);
+            Renderer::m_pimpl->ConfigureBufferHandleData(m_VBO_colors, static_cast<uint32_t>(m_colors.size() * float_size), m_colors.data(), BufferHandle::BUFFER_USAGE::DYNAMIC_DRAW);
         }
 
         m_VBO_indices = buffers[(GLuint)VAO_ATTRIB::INDICES];
         if (m_VBO_indices) {
-            RendererInterface::m_pimpl->BindBufferHandle(m_VBO_indices);
-            RendererInterface::m_pimpl->ConfigureBufferHandleData(m_VBO_indices, static_cast<uint32_t>(m_indices.size() * sizeof(uint32_t)), m_indices.data(), BufferHandle::BUFFER_USAGE::STATIC_DRAW);
+            Renderer::m_pimpl->BindBufferHandle(m_VBO_indices);
+            Renderer::m_pimpl->ConfigureBufferHandleData(m_VBO_indices, static_cast<uint32_t>(m_indices.size() * sizeof(uint32_t)), m_indices.data(), BufferHandle::BUFFER_USAGE::STATIC_DRAW);
         }
     }
 

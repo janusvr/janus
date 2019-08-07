@@ -4,7 +4,7 @@
 #include <QtCore>
 #include <QImage>
 
-#include "rendererinterface.h"
+#include "abstractrenderer.h"
 
 class AssetImageData : public QObject
 {

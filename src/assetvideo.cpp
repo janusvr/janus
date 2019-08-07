@@ -90,7 +90,7 @@ void AssetVideo::DrawGL(MediaContext * ctx, QPointer <AssetShader> shader, const
     auto tex_id_left = GetTextureHandle(ctx, left_eye);
     auto tex_id_right = GetTextureHandle(ctx, !left_eye);
 
-    RendererInterface * renderer = RendererInterface::m_pimpl;
+    Renderer * renderer = Renderer::m_pimpl;
     renderer->BindTextureHandle(0, tex_id_left);
 
     auto textureSet = renderer->GetCurrentlyBoundTextures();
@@ -138,7 +138,7 @@ void AssetVideo::DrawSelectedGL(QPointer <AssetShader> shader)
 
     shader->UpdateObjectUniforms();
 
-    RendererInterface * renderer = RendererInterface::m_pimpl;
+    Renderer * renderer = Renderer::m_pimpl;
     AbstractRenderCommand a(PrimitiveType::TRIANGLES,
                             renderer->GetTexturedCubePrimCount(),
                             0,

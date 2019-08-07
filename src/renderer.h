@@ -2,16 +2,31 @@
 #define RENDERER_H
 
 #include <QDebug>
-#include <vector>
 #include <QVector>
 #include <QString>
 #include <QImage>
+#include <QVector4D>
+#include <QVector3D>
+#include <QMatrix4x4>
+#include <QMatrix3x3>
+#include <QQuaternion>
+#include <QOpenGLShaderProgram>
+#include <QtCore>
+#include <QString>
+
 #include <algorithm>
-#include "rendererinterface.h"
+#include <vector>
+#include <cfloat>
+#include <memory>
+#include <stdint.h>
+#include <cmath>
+
+#include "half.hpp"
+
 #include "assetimagedata.h"
 #include "abstractrenderer.h"
 
-class Renderer : public RendererInterface
+class Renderer
 {
 public:
 	Renderer();
@@ -67,7 +82,6 @@ public:
 	void UpdateBufferHandleData(QPointer<BufferHandle> p_buffer_handle, uint32_t const p_offset, uint32_t const p_data_size, void* const p_data);
     void RemoveBufferHandleFromMap(QPointer <BufferHandle> p_handle);
 
-    //AbstractRenderCommand CreateDefaultAbstractRenderCommand();
     bool GetIsEnhancedDepthPrecisionSupported() const;
     bool GetIsUsingEnhancedDepthPrecision() const;
     void SetIsUsingEnhancedDepthPrecision(bool const p_is_using);
@@ -159,6 +173,8 @@ public:
     void RequestScreenShot(uint32_t const p_width, uint32_t const p_height, uint32_t const p_sample_count, bool const p_is_equi, uint64_t p_frame_index);
     uint64_t GetLastSubmittedFrameID();
 
+    static Renderer * m_pimpl;
+
 private:
 
     void PreRender(QHash<int, QVector<AbstractRenderCommand> > & p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> & p_scoped_light_containers);
@@ -167,7 +183,7 @@ private:
 
     RENDERER::RENDER_SCOPE m_current_scope;
     std::unique_ptr<AbstractRenderer> m_abstractRenderer;    
-    QVector<AbstractRenderCommand_sort> m_sorted_command_indices;
+    QVector<AbstractRenderCommand_sort> m_sorted_command_indices;   
 };
 
 #endif // RENDERER_H

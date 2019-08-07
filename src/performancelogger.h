@@ -8,7 +8,7 @@
 #include <QtCore>
 
 #include "mathutil.h"
-#include "rendererinterface.h"
+#include "renderer.h"
 
 struct PerformanceLoggerSample
 {

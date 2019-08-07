@@ -341,10 +341,10 @@ void MainWindow::TimeOut()
 
     //Check for changes to antialiasing setting
     uint32_t sampleCount = (SettingsManager::GetAntialiasingEnabled()) ? 4 : 0;
-    RendererInterface::m_pimpl->ConfigureSamples(sampleCount);
+    Renderer::m_pimpl->ConfigureSamples(sampleCount);
 
     //Check for changes to enhanced depth precision setting
-    RendererInterface::m_pimpl->SetIsUsingEnhancedDepthPrecision(SettingsManager::GetEnhancedDepthPrecisionEnabled());
+    Renderer::m_pimpl->SetIsUsingEnhancedDepthPrecision(SettingsManager::GetEnhancedDepthPrecisionEnabled());
 
     Update();    
     glwidget->update();      

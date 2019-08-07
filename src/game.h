@@ -17,7 +17,6 @@
 #include "assetscript.h"
 #include "multiplayermanager.h"
 #include "menu.h"
-#include "rendererinterface.h"
 #include "virtualmenu.h"
 #include "bookmarkmanager.h"
 #include "controllermanager.h"

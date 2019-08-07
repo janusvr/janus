@@ -159,7 +159,7 @@ void RiftManager::Update()
     ViewOffset[0] = EyeRenderDesc[0].HmdToEyePose; //.HmdToEyeViewOffset;
     ViewOffset[1] = EyeRenderDesc[1].HmdToEyePose; //.HmdToEyeViewOffset;
 
-    current_frame_index = RendererInterface::m_pimpl->GetFrameCounter();
+    current_frame_index = Renderer::m_pimpl->GetFrameCounter();
     ovrResult result = ovr_WaitToBeginFrame(Session, current_frame_index);
     if (!OVR_SUCCESS(result)) {
         ///     Returns an ovrResult for which OVR_SUCCESS(result) is false upon error and true
@@ -390,8 +390,8 @@ QMatrix4x4 RiftManager::GetProjectionMatrix(const int eye, const bool p_is_avata
     ovrMatrix4f proj = ovrMatrix4f_Projection(hmdDesc.DefaultEyeFov[eye],
                                               (p_is_avatar) ? m_avatar_near_clip : m_near_clip,
                                               (p_is_avatar) ? m_avatar_far_clip : m_far_clip,
-                                               (RendererInterface::m_pimpl->GetIsUsingEnhancedDepthPrecision() == true
-                                                && RendererInterface::m_pimpl->GetIsEnhancedDepthPrecisionSupported() == true)
+                                               (Renderer::m_pimpl->GetIsUsingEnhancedDepthPrecision() == true
+                                                && Renderer::m_pimpl->GetIsEnhancedDepthPrecisionSupported() == true)
                                                 ? (ovrProjection_FarLessThanNear)
                                                 : (ovrProjection_ClipRangeOpenGL)
                                               );

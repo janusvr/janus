@@ -6,8 +6,7 @@
 
 #include "OVR_Platform.h"
 
-#include "mathutil.h"
-#include "rendererinterface.h"
+#include "renderer.h"
 #include "abstracthmdmanager.h"
 
 struct TextureBuffer
@@ -45,7 +44,7 @@ struct TextureBuffer
             for (int i=0; i<length; ++i) {
                 /*GLuint chainTexId = 0;
                 ovr_GetTextureSwapChainBufferGL(Session, TextureChain, i, &chainTexId);
-                //RendererInterface::m_pimpl->BindTexture(0, chainTexId); // TODO Reenable Rift rendering by moving HMD manager into Renderer
+                //Renderer::m_pimpl->BindTexture(0, chainTexId); // TODO Reenable Rift rendering by moving HMD manager into Renderer
                 MathUtil::glFuncs->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
                 MathUtil::glFuncs->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
                 MathUtil::glFuncs->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

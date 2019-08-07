@@ -158,7 +158,7 @@ void AssetObject::DrawGL(QPointer <AssetShader> shader, const QColor col)
         const float iw = 1.0f;
         const float ih = iw * img_error->GetAspectRatio();
 
-        RendererInterface * renderer = RendererInterface::m_pimpl;
+        Renderer * renderer = Renderer::m_pimpl;
         auto tex_id = img_error->GetTextureHandle(true);
         renderer->BindTextureHandle(0, tex_id);
 
