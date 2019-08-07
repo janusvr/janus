@@ -156,22 +156,6 @@ void Renderer::GenerateTextureHandleMipMap(TextureHandle* p_handle)
 {
     return m_abstractRenderer->GenerateTextureHandleMipMap(p_handle);
 }
-#ifdef WIN32
-QVector<QPointer<TextureHandle>> Renderer::CreateSlugTextureHandles(uint32_t const p_curve_texture_width,
-                                                                                       uint32_t const p_curve_texture_height,
-                                                                                       void const * p_curve_texture,
-                                                                                       uint32_t const p_band_texture_width,
-                                                                                       uint32_t const p_band_texture_height,
-                                                                                       void const * p_band_texture)
-{
-    return m_abstractRenderer->CreateSlugTextureHandles(p_curve_texture_width,
-                                                        p_curve_texture_height,
-                                                        p_curve_texture,
-                                                        p_band_texture_width,
-                                                        p_band_texture_height,
-                                                        p_band_texture);
-}
-#endif
 
 void Renderer::CreateMeshHandleForGeomVBOData(GeomVBOData & p_VBO_data)
 {

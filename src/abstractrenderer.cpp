@@ -3346,48 +3346,7 @@ QPointer<TextureHandle> AbstractRenderer::CreateCubemapTextureHandle(uint32_t co
 
     return CreateTextureHandle(texture_type, color_space, alpha_type,p_width, p_height, texture_id);
 }
-#ifdef WIN32
-QVector<QPointer<TextureHandle>> AbstractRenderer::CreateSlugTextureHandles(uint32_t const p_curve_texture_width,
-                                                                                       uint32_t const p_curve_texture_height,
-                                                                                       void const * p_curve_texture,
-                                                                                       uint32_t const p_band_texture_width,
-                                                                                       uint32_t const p_band_texture_height,
-                                                                                       void const * p_band_texture)
-{
-    // Create TextureHandles for the font textures
-    GLuint texture_ids[2] = {0, 0};
-    MathUtil::glFuncs->glActiveTexture(GL_TEXTURE15);
-    m_active_texture_slot = 15;
-    MathUtil::glFuncs->glGenTextures(2, &(texture_ids[0]));
 
-    MathUtil::glFuncs->glBindTexture(GL_TEXTURE_RECTANGLE, texture_ids[0]);
-    MathUtil::glFuncs->glTexImage2D(GL_TEXTURE_RECTANGLE, 0, GL_RGBA16F, p_curve_texture_width, p_curve_texture_height, 0, GL_RGBA, GL_HALF_FLOAT, p_curve_texture);
-
-    MathUtil::glFuncs->glBindTexture(GL_TEXTURE_RECTANGLE, texture_ids[1]);
-    MathUtil::glFuncs->glTexImage2D(GL_TEXTURE_RECTANGLE, 0, GL_RGBA16UI, p_band_texture_width, p_band_texture_height, 0, GL_RGBA_INTEGER, GL_UNSIGNED_INT, p_band_texture);
-
-    // The OpenGL spec requires that the filtering modes for integer textures be set to GL_NEAREST,
-    // or else the results of a texture fetch are undefined. Nvidia and AMD drivers still return the
-    // expected texel values, but the Intel driver returns zeros if the default modes aren't changed.
-    MathUtil::glFuncs->glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    MathUtil::glFuncs->glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    // Defaults for the texture handle
-    TextureHandle::TEXTURE_TYPE texture_type = TextureHandle::TEXTURE_TYPE::TEXTURE_RECTANGLE;
-    TextureHandle::COLOR_SPACE color_space = TextureHandle::COLOR_SPACE::LINEAR;
-    TextureHandle::ALPHA_TYPE alpha_type = TextureHandle::ALPHA_TYPE::CUTOUT;
-
-    QVector<QPointer<TextureHandle>> handles;
-    handles.reserve(2);
-    handles.push_back(CreateTextureHandle(texture_type, color_space, alpha_type,
-                                          p_curve_texture_width, p_curve_texture_height, texture_ids[0]));
-    handles.push_back(CreateTextureHandle(texture_type, color_space, alpha_type,
-                                          p_band_texture_width, p_band_texture_height, texture_ids[1]));
-
-    return handles;
-
-}
-#endif
 QPointer<TextureHandle> AbstractRenderer::CreateTextureQImage(const QImage & img, const bool tex_mipmap, const bool tex_linear, const bool tex_clamp, const TextureHandle::ALPHA_TYPE tex_alpha, const TextureHandle::COLOR_SPACE tex_colorspace)
 {
     GLuint texture_id = 0;

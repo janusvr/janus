@@ -1459,14 +1459,7 @@ public:
     virtual QPointer<TextureHandle> CreateCubemapTextureHandle(const uint32_t p_width, const uint32_t p_height, const TextureHandle::COLOR_SPACE p_color_space, const int32_t p_internal_texture_format, const bool tex_mipmap, const bool tex_linear, const bool tex_clamp, const TextureHandle::ALPHA_TYPE tex_alpha, const TextureHandle::COLOR_SPACE tex_colorspace) = 0;
     virtual QPointer<TextureHandle> CreateCubemapTextureHandleFromTextureHandles(QVector<QPointer<AssetImageData> > &p_skybox_image_data, QVector<QPointer <TextureHandle> > &p_skybox_image_handles, const bool tex_mipmap, const bool tex_linear, const bool tex_clamp, const TextureHandle::ALPHA_TYPE tex_alpha, const TextureHandle::COLOR_SPACE tex_colorspace) = 0;
     virtual void GenerateEnvMapsFromCubemapTextureHandle(Cubemaps &p_cubemaps) = 0;
-#ifdef WIN32
-    virtual QVector<QPointer<TextureHandle>> CreateSlugTextureHandles(uint32_t const p_curve_texture_width,
-                                                                                 uint32_t const p_curve_texture_height,
-                                                                                 void const * p_curve_texture,
-                                                                                 uint32_t const p_band_texture_width,
-                                                                                 uint32_t const p_band_texture_height,
-                                                                                 void const * p_band_texture) = 0;
-#endif
+
     virtual void UpdateTextureHandleData(TextureHandle* p_handle, uint const p_level, uint const p_x_offset, uint const p_y_offset, uint const p_width, uint const p_height, uint const p_pixel_size, void* const p_pixel_data) = 0;
     virtual void UpdateTextureHandleData(TextureHandle* p_handle, uint const p_level, uint const p_x_offset, uint const p_y_offset, uint const p_width, uint const p_height, int const p_pixel_format, int const p_pixel_type, void* const p_pixel_data, uint32_t const p_data_size) = 0;
     virtual void GenerateTextureHandleMipMap(TextureHandle* p_handle) = 0;
