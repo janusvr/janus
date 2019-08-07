@@ -4800,7 +4800,7 @@ void AbstractRenderer::DecoupledRender()
         // Update rendering_index if needed
         if (m_current_frame_id != m_submitted_frame_id)
         {
-            m_rendering_index = m_completed_submission_index.exchange(m_rendering_index);
+            qSwap(m_rendering_index, m_completed_submission_index);
             m_current_frame_id = m_submitted_frame_id;
         }
 

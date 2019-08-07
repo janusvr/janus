@@ -360,7 +360,7 @@ void Renderer::SubmitFrame()
     SortRenderCommandsByDistance(m_abstractRenderer->m_scoped_render_commands_cache[m_abstractRenderer->m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CHILD_ROOM_OBJECTS_BLENDED)], true);
 
     // Swap our submission indices round
-    m_abstractRenderer->m_current_submission_index = m_abstractRenderer->m_completed_submission_index.exchange(m_abstractRenderer->m_current_submission_index);
+    qSwap(m_abstractRenderer->m_current_submission_index, m_abstractRenderer->m_completed_submission_index);
     m_abstractRenderer->m_submitted_frame_id++;
     m_abstractRenderer->m_draw_id = 0;
 

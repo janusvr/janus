@@ -11,11 +11,6 @@
 #include <QVector>
 #include <QObject>
 #include <QImage>
-#include <QWindow>
-#include <QThread>
-#include <atomic>
-#include <future>
-#include <memory>
 
 #include "mathutil.h"
 #include "lightmanager.h"
@@ -443,7 +438,7 @@ public:
     QVector<QPointer<TextureHandle>> m_texture_handles;
     QPointer<TextureHandle> m_default_font_glyph_atlas;
     uint8_t m_current_submission_index;
-    std::atomic<uint8_t> m_completed_submission_index;
+    uint8_t m_completed_submission_index;
     uint8_t m_rendering_index;
     uint64_t m_submitted_frame_id;
     uint64_t m_current_frame_id;
