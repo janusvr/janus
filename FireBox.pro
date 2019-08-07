@@ -59,7 +59,6 @@ TEMPLATE = app
 
 SOURCES += \
     src/abstracthmdmanager.cpp \
-    src/abstractrenderer.cpp \
     src/asset.cpp \
     src/assetghost.cpp \
     src/assetimage.cpp \
@@ -125,7 +124,6 @@ SOURCES += \
 
 HEADERS += \
     src/abstracthmdmanager.h \
-    src/abstractrenderer.h \
     src/asset.h \
     src/assetghost.h \
     src/assetimage.h \

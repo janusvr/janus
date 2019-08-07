@@ -7,7 +7,7 @@
 
 #include "contentimporter.h"
 
-#include "abstractrenderer.h"
+#include "renderer.h"
 #include "assetimagedata.h"
 
 #include "cmft/image.h"
