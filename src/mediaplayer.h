@@ -6,7 +6,9 @@
 #include <QtConcurrent/QtConcurrent>
 #include <QGLWidget>
 
+#ifdef WIN32
 #define ssize_t SSIZE_T
+#endif
 #include <vlc/vlc.h>
 
 #include <AL/al.h>
