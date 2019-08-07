@@ -235,12 +235,14 @@ int main(int argc, char *argv[])
     //If a new default QSurfaceFormat with a modified OpenGL profile has to be set,
     //it should be set before the application instance is declared, to make sure
     //that all created OpenGL contexts use the same OpenGL profile.
-    QSurfaceFormat format;
-    format.setProfile(QSurfaceFormat::CoreProfile);
+    QSurfaceFormat format;    
     format.setRenderableType(QSurfaceFormat::OpenGL);
     format.setSwapBehavior(QSurfaceFormat::TripleBuffer);
     format.setDepthBufferSize(24);
     format.setStencilBufferSize(8);
+    format.setMajorVersion(3); //66.0 - ensure that default vertex/fragment shaders are supported (GLSL 330)
+    format.setMinorVersion(3);
+    format.setProfile(QSurfaceFormat::CoreProfile);
     if (GLWidget::GetNoVSync() || GLWidget::GetDisplayMode() == MODE_AUTO) {
         format.setSwapInterval(0); //this disables vsync
     }
