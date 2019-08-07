@@ -9,7 +9,7 @@
 #include <algorithm>
 #include "rendererinterface.h"
 #include "assetimagedata.h"
-#include "renderergl.h"
+#include "abstractrenderer.h"
 
 class Renderer : public RendererInterface
 {

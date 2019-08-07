@@ -4,17 +4,19 @@
 #include <qopengl.h>
 #include <qopenglext.h>
 #include <QDebug>
-#include <memory>
 #include <QtAlgorithms>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLTexture>
 #include <QMap>
 #include <QVector>
-#include <vector>
+#include <QObject>
+#include <QImage>
+#include <QWindow>
+#include <QThread>
 #include <atomic>
-#include <unordered_map>
-#include <memory>
 #include <future>
+#include <memory>
+
 #include "mathutil.h"
 #include "lightmanager.h"
 #include "assetimagedata.h"
@@ -196,35 +198,37 @@ public:
     float m_inverseViewMatrix[16];
 };
 
-class AbstractRenderer
+class AbstractRenderer : public QObject
 {
+    Q_OBJECT
+
 public:
     AbstractRenderer();
     virtual ~AbstractRenderer();
 
-// Interface
-    virtual void Initialize() = 0;
+//    Interface
+    void Initialize();
     void InitializeHMDManager(QPointer<AbstractHMDManager> p_hmd_manager);
-    virtual QString GetRendererName() const;
-    virtual int GetRendererMajorVersion() const;
-    virtual int GetRendererMinorVersion() const;
-    virtual void Render(QHash<int, QVector<AbstractRenderCommand>> * p_scoped_render_commands,
-                        QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers) = 0;
-    virtual void PreRender(QHash<int, QVector<AbstractRenderCommand> > * p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers) = 0;
-    virtual void PostRender(QHash<int, QVector<AbstractRenderCommand> > * p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers) = 0;
-    virtual void UpgradeShaderSource(QByteArray& p_shader_source, bool p_is_vertex_shader) = 0;
+    QString GetRendererName() const;
+    int GetRendererMajorVersion() const;
+    int GetRendererMinorVersion() const;
+    void Render(QHash<int, QVector<AbstractRenderCommand>> * p_scoped_render_commands,
+                        QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers);
+    void PreRender(QHash<int, QVector<AbstractRenderCommand> > * p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers);
+    void PostRender(QHash<int, QVector<AbstractRenderCommand> > * p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers);
+    void UpgradeShaderSource(QByteArray& p_shader_source, bool p_is_vertex_shader);
     void RequestScreenShot(uint32_t const p_width, uint32_t const p_height, uint32_t const p_sample_count, bool const p_is_equi, uint64_t p_frame_index);
    
-	// Shader Handle
-    virtual QPointer<ProgramHandle> CompileAndLinkShaderProgram(QByteArray * p_vertex_shader, QString p_vertex_shader_path,
+//	 Shader Handle
+    QPointer<ProgramHandle> CompileAndLinkShaderProgram(QByteArray * p_vertex_shader, QString p_vertex_shader_path,
                                                                               QByteArray * p_fragment_shader, QString p_fragment_shader_path);
 	
-	// Texture Handle
-    virtual QPointer<TextureHandle> CreateTextureHandle(TextureHandle::TEXTURE_TYPE p_texture_type,
+//	 Texture Handle
+    QPointer<TextureHandle> CreateTextureHandle(TextureHandle::TEXTURE_TYPE p_texture_type,
         TextureHandle::COLOR_SPACE p_color_space,
         TextureHandle::ALPHA_TYPE p_alpha_type, uint32_t p_width, uint32_t p_height,
         GLuint p_GL_texture_ID);
-    virtual void RemoveTextureHandleFromMap(QPointer<TextureHandle> p_handle);
+    void RemoveTextureHandleFromMap(QPointer<TextureHandle> p_handle);
     QVector<QPointer<BufferHandle>> GetBufferHandlesForMeshHandle(QPointer<MeshHandle> p_mesh_handle);
     int GetTextureWidth(TextureHandle* p_handle);
     int GetTextureHeight(TextureHandle* p_handle);
@@ -254,15 +258,15 @@ public:
                                                int32_t p_src_width,
                                                int32_t p_src_height);
 
-	// Mesh Handle (VAO)
-    virtual void CreateMeshHandleForGeomVBOData(GeomVBOData & p_VBO_data);
-    virtual QPointer<MeshHandle> CreateMeshHandle(VertexAttributeLayout p_layout);
-    virtual QPointer<MeshHandle> CreateMeshHandle(VertexAttributeLayout p_layout, GLuint p_GL_VAO_ID);
-    virtual void RemoveMeshHandleFromMap(QPointer <MeshHandle> p_handle);
+//	 Mesh Handle (VAO)
+    void CreateMeshHandleForGeomVBOData(GeomVBOData & p_VBO_data);
+    QPointer<MeshHandle> CreateMeshHandle(VertexAttributeLayout p_layout);
+    QPointer<MeshHandle> CreateMeshHandle(VertexAttributeLayout p_layout, GLuint p_GL_VAO_ID);
+    void RemoveMeshHandleFromMap(QPointer <MeshHandle> p_handle);
 
-	// Buffer Handle (VBO, etc)
+//	 Buffer Handle (VBO, etc)
     QPointer<BufferHandle> CreateBufferHandle(BufferHandle::BUFFER_TYPE const p_buffer_type, BufferHandle::BUFFER_USAGE const p_buffer_usage);
-    virtual void RemoveBufferHandleFromMap(QPointer<BufferHandle> p_handle);
+    void RemoveBufferHandleFromMap(QPointer<BufferHandle> p_handle);
     void ConfigureBufferHandleData(QPointer<BufferHandle> p_buffer_handle, uint32_t const p_data_size, void* const p_data, BufferHandle::BUFFER_USAGE const p_buffer_usage);
     void UpdateBufferHandleData(QPointer<BufferHandle> p_buffer_handle, uint32_t const p_offset, uint32_t const p_data_size, void* const p_data);
 
@@ -271,89 +275,15 @@ public:
 
     TextureSet GetCurrentlyBoundTextures();
 
-    inline void BindTextureHandle(QMap<QPointer <TextureHandle>, GLuint> & p_map,
-                                  uint32_t p_slot_index, QPointer <TextureHandle> p_texture_handle, bool p_force_rebind = false)
-    {
-        if (p_texture_handle.isNull() || p_texture_handle->m_UUID.m_in_use_flag == 0)
-		{
-            qDebug() << QString("ERROR: AbstractRenderer::BindTextureHandle p_texture_handle was nullptr");
-            return;
-		}
+    void BindTextureHandle(QMap<QPointer <TextureHandle>, GLuint> & p_map, uint32_t p_slot_index, QPointer <TextureHandle> p_texture_handle, bool p_force_rebind = false);
 
-        if (m_active_texture_slot != p_slot_index)
-        {
-            MathUtil::glFuncs->glActiveTexture(GL_TEXTURE0 + p_slot_index);
-            m_active_texture_slot = p_slot_index;
-        }
-		
-        if (m_bound_texture_handles[p_slot_index].isNull() || m_bound_texture_handles[p_slot_index]->m_UUID.m_UUID != p_texture_handle->m_UUID.m_UUID || p_force_rebind == true)
-        {            
-            GLuint texture_id = 0;
-            if (p_map.contains(p_texture_handle)) {
-                texture_id = p_map[p_texture_handle];
-            }
+    GLuint GetCurrentlyBoundMeshHandle();
+    void BindMeshHandle(QPointer <MeshHandle> p_mesh_handle);
 
-            auto texture_type = p_texture_handle->GetTextureType();
-			GLenum texture_target = (texture_type == TextureHandle::TEXTURE_2D) ? GL_TEXTURE_2D : GL_TEXTURE_CUBE_MAP;
+    GLuint GetCurrentlyBoundBufferHandle(BufferHandle::BUFFER_TYPE p_buffer_type);
 
-            MathUtil::glFuncs->glBindTexture(texture_target, texture_id);
-			m_bound_texture_handles[p_slot_index] = p_texture_handle;
-        }
-    }   
-
-    virtual GLuint GetCurrentlyBoundMeshHandle() { return m_bound_VAO; }
-    virtual void BindMeshHandle(QPointer <MeshHandle> p_mesh_handle)
-	{
-		GLuint VAO_id = 0;
-
-        if (p_mesh_handle.isNull()) {
-            qDebug() << QString("ERROR: AbstractRenderer::BindMeshHandle p_mesh_handle was nullptr");
-			return;
-		}
-
-        if (m_mesh_handle_to_GL_ID.contains(p_mesh_handle)) {
-            VAO_id = m_mesh_handle_to_GL_ID[p_mesh_handle];
-        }        
-
-        if (m_bound_VAO != VAO_id) {
-			MathUtil::glFuncs->glBindVertexArray(VAO_id);
-			m_bound_VAO = VAO_id;
-		}
-	}
-
-	inline GLuint GetCurrentlyBoundBufferHandle(BufferHandle::BUFFER_TYPE p_buffer_type) 
-	{
-		uint16_t buffer_index = p_buffer_type - 1;
-		
-		return m_bound_buffers[buffer_index];
-	}
-
-    inline void BindBufferHandle(QPointer <BufferHandle> p_buffer_handle, BufferHandle::BUFFER_TYPE p_buffer_type)
-	{
-		GLuint VBO_id = 0;
-
-        if (p_buffer_handle.isNull()) {
-            qDebug() << QString("ERROR: AbstractRenderer::BindBufferHandle p_buffer_handle was nullptr");
-			return;
-		}
-
-        if (m_buffer_handle_to_GL_ID.contains(p_buffer_handle)) {
-            VBO_id = m_buffer_handle_to_GL_ID[p_buffer_handle];
-        }
-
-		GLenum buffer_type = (GLenum)BufferHandle::GetBufferTypeEnum(p_buffer_type);
-		uint16_t buffer_index = p_buffer_type - 1;
-
-        MathUtil::glFuncs->glBindBuffer(buffer_type, VBO_id);
-        m_bound_buffers[buffer_index] = VBO_id;
-	}
-
-    inline void BindBufferHandle(QPointer <BufferHandle> p_buffer_handle)
-	{
-        if (p_buffer_handle) {
-            BindBufferHandle(p_buffer_handle, (BufferHandle::BUFFER_TYPE)p_buffer_handle->m_UUID.m_buffer_type);
-        }        
-	}
+    void BindBufferHandle(QPointer <BufferHandle> p_buffer_handle, BufferHandle::BUFFER_TYPE p_buffer_type);
+    void BindBufferHandle(QPointer <BufferHandle> p_buffer_handle);
 
     bool GetIsEnhancedDepthPrecisionSupported() const;
     bool GetIsUsingEnhancedDepthPrecision() const;
@@ -389,7 +319,7 @@ public:
     void PushNewLightData(LightContainer const * p_lightContainer);
     virtual void InitializeGLObjects();
 
-    virtual GLuint GetProgramHandleID(QPointer <ProgramHandle> p_handle);
+    GLuint GetProgramHandleID(QPointer <ProgramHandle> p_handle);
 
     GLuint InitGLBuffer(GLsizeiptr p_dataSizeInBytes, void* p_data, GLenum p_bufferType, GLenum p_bufferUse);
     GLuint InitGLVertexAttribBuffer(GLenum p_dataType, GLboolean p_normalised, GLint p_dataTypeCount, GLsizeiptr p_dataSizeInBytes, GLuint p_attribID, GLuint p_attribDivisor, GLsizei p_stride, GLenum p_bufferUse, void* p_data);
@@ -519,7 +449,6 @@ public:
     uint64_t m_current_frame_id;
     QVector<QHash<int, QVector<AbstractRenderCommand>>> m_scoped_render_commands_cache;
     QVector<QHash<StencilReferenceValue, LightContainer>> m_scoped_light_containers_cache;
-    //QVector<QVector<VirtualCamera>> m_cameras_cache;
     QVector<QHash<int, QVector<VirtualCamera>>> m_scoped_cameras_cache;
     QHash<int, QVector<QMatrix4x4>> m_per_frame_scoped_cameras_view_matrix;
     QHash<int, QVector<bool>> m_per_frame_scoped_cameras_is_left_eye;
@@ -537,89 +466,29 @@ public:
 
     void PostConstructorInitialize();
 
+    //From RendererGL
+    QPointer<ProgramHandle> CompileAndLinkShaderProgram(QByteArray & p_vertex_shader, QString p_vertex_shader_path,
+                                                                              QByteArray & p_fragment_shader, QString p_fragment_shader_path);
+    void CompileAndLinkShaderProgram2(QPointer<ProgramHandle> & p_abstract_program, QByteArray &p_vertex_shader, QString p_vertex_shader_path, QByteArray &p_fragment_shader, QString p_fragment_shader_path, QVector<QVector<GLint> > &p_map);
+
+    void SaveScreenshot();
+
+    void InitializeGLContext(QOpenGLContext* p_gl_context);
+    void CreateMeshHandle(QPointer<MeshHandle> &p_handle, VertexAttributeLayout p_layout);
+    void DecoupledRender();
+
 protected:
 
     void CacheUniformLocations(GLuint p_program, QVector<QVector<GLint>> & p_map);
 
-    static inline void UpdateUniform4fv(GLint const p_loc,  GLuint const p_vector_count, float* p_values)
-    {
-        if (p_loc != -1)
-        {
-            MathUtil::glFuncs->glUniform4fv(p_loc, p_vector_count, p_values);
-        }
-    }
+    static void UpdateUniform4fv(GLint const p_loc,  GLuint const p_vector_count, float* p_values);
+    static void UpdateUniform4iv(GLint const p_loc,  GLuint const p_vector_count, int32_t* p_values);
+    static void UpdateUniformMatrix4fv(GLint const p_loc,  GLuint const p_matrix_count, float* p_values);
 
-    static inline void UpdateUniform4iv(GLint const p_loc,  GLuint const p_vector_count, int32_t* p_values)
-    {
-        if (p_loc != -1)
-        {
-            MathUtil::glFuncs->glUniform4iv(p_loc, p_vector_count, p_values);
-        }
-    }
-
-    static inline void UpdateUniformMatrix4fv(GLint const p_loc,  GLuint const p_matrix_count, float* p_values)
-    {
-        if (p_loc != -1)
-        {
-            MathUtil::glFuncs->glUniformMatrix4fv(p_loc, p_matrix_count, GL_FALSE, p_values);
-        }
-    }
-
-    inline void UpdateFrameUniforms(GLuint const p_program_id, AssetShader_Frame const * const p_new_uniforms) const
-    {
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iLeftEye)], 1, (float *)&(p_new_uniforms->iLeftEye));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iResolution)], 1, (float *)&(p_new_uniforms->iResolution));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iGlobalTime)], 1, (float *)&(p_new_uniforms->iGlobalTime));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iViewportCount)], 1, (float *)&(p_new_uniforms->iViewportCount));
-    }
-
-    inline void UpdateRoomUniforms(GLuint const p_program_id, AssetShader_Room const * const p_new_uniforms) const
-    {
-        UpdateUniformMatrix4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iMiscRoomData)], 1, (float *)&(p_new_uniforms->iMiscRoomData[0]));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iPlayerPosition)], 1, (float *)&(p_new_uniforms->iPlayerPosition));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iUseClipPlane)], 1, (float *)&(p_new_uniforms->iUseClipPlane));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iClipPlane)], 1, (float *)&(p_new_uniforms->iClipPlane));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iFogEnabled)], 1, (float *)&(p_new_uniforms->iFogEnabled));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iFogMode)], 1, (float *)&(p_new_uniforms->iFogMode));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iFogDensity)], 1, (float *)&(p_new_uniforms->iFogDensity));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iFogStart)], 1, (float *)&(p_new_uniforms->iFogStart));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iFogEnd)], 1, (float *)&(p_new_uniforms->iFogEnd));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iFogCol)], 1, (float *)&(p_new_uniforms->iFogCol));
-        UpdateUniformMatrix4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iRoomMatrix)], 1, (float *)&(p_new_uniforms->iRoomMatrix[0]));
-    }
-
-    inline void UpdateObjectUniforms(GLuint const p_program_id, AssetShader_Object const * const p_new_uniforms) const
-    {
-        UpdateUniform4iv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iMiscObjectData)], 1, (int32_t *)&(p_new_uniforms->iMiscObjectData[0]));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iConstColour)], 1, (float *)&(p_new_uniforms->iConstColour[0]));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iChromaKeyColour)], 1, (float *)&(p_new_uniforms->iChromaKeyColour[0]));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iUseFlags)], 1, (float *)&(p_new_uniforms->iUseFlags[0]));
-        UpdateUniformMatrix4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iModelMatrix)], 1, (float *)&(p_new_uniforms->iModelMatrix[0]));
-        UpdateUniformMatrix4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iViewMatrix)], 1, (float *)&(p_new_uniforms->iViewMatrix[0]));
-        UpdateUniformMatrix4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iProjectionMatrix)], 1, (float *)&(p_new_uniforms->iProjectionMatrix[0]));
-        UpdateUniformMatrix4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iInverseViewMatrix)], 1, (float *)&(p_new_uniforms->iInverseViewMatrix[0]));
-        UpdateUniformMatrix4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iModelViewMatrix)], 1, (float *)&(p_new_uniforms->iModelViewMatrix[0]));
-        UpdateUniformMatrix4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iModelViewProjectionMatrix)], 1, (float *)&(p_new_uniforms->iModelViewProjectionMatrix[0]));
-        UpdateUniformMatrix4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iTransposeInverseModelMatrix)], 1, (float *)&(p_new_uniforms->iTransposeInverseModelMatrix[0]));
-        UpdateUniformMatrix4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iTransposeInverseModelViewMatrix)], 1, (float *)&(p_new_uniforms->iTransposeInverseModelViewMatrix[0]));
-
-        if (p_new_uniforms->iUseFlags[0] == 1.0f)
-        {
-            UpdateUniformMatrix4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iSkelAnimJoints)], static_cast<GLuint>(ASSETSHADER_MAX_JOINTS), (float *)&(p_new_uniforms->iSkelAnimJoints[0]));
-        }
-    }
-
-    inline void UpdateMaterialUniforms(GLuint const p_program_id, AssetShader_Material const * const p_new_uniforms) const
-    {
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iAmbient)], 1, (float *)&(p_new_uniforms->iAmbient));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iDiffuse)], 1, (float *)&(p_new_uniforms->iDiffuse));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iSpecular)], 1, (float *)&(p_new_uniforms->iSpecular));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iShininess)], 1, (float *)&(p_new_uniforms->iShininess));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iEmission)], 1, (float *)&(p_new_uniforms->iEmission));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iLightmapScale)], 1, (float *)&(p_new_uniforms->iLightmapScale));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iTiling)], 1, (float *)&(p_new_uniforms->iTiling));
-        UpdateUniform4fv(m_uniform_locs[p_program_id][(ShaderUniformEnum::iUseTexture)], 4, (float *)&(p_new_uniforms->iUseTexture[0]));
-    }
+    void UpdateFrameUniforms(GLuint const p_program_id, AssetShader_Frame const * const p_new_uniforms) const;
+    void UpdateRoomUniforms(GLuint const p_program_id, AssetShader_Room const * const p_new_uniforms) const;
+    void UpdateObjectUniforms(GLuint const p_program_id, AssetShader_Object const * const p_new_uniforms) const;
+    void UpdateMaterialUniforms(GLuint const p_program_id, AssetShader_Material const * const p_new_uniforms) const;
 
     void InitScreenAlignedQuad();
     void InitScreenQuadShaderProgram();
@@ -654,8 +523,11 @@ protected:
 private:
 
     void GetViewportsAndCameraCount(QVector<float>& viewports, RENDERER::RENDER_SCOPE const p_scope, int &camera_count);
-
     void InternalFormatFromSize(GLenum *p_pixel_format, const uint p_pixel_size);
+
+    //from RendererGL
+    void UpdatePerObjectData(QHash<int, QVector<AbstractRenderCommand> > * p_scoped_render_commands);
+    void RenderEqui();
 
     LightContainer m_empty_light_container;
     GLfloat m_max_anisotropy;
@@ -683,7 +555,21 @@ private:
     BlendFunction m_current_blend_dest;
     GLuint m_light_UBOs[static_cast<int>(BUFFER_CHUNK_COUNT)];
     LightContainer m_dummyLights;
-    GLuint m_active_light_UBO_index;
+    GLuint m_active_light_UBO_index;   
+
+    //from RendererGL
+    QOffscreenSurface *  m_gl_surface;
+    QOpenGLContext * m_gl_context;
+    QOpenGLExtraFunctions * m_gl_funcs;
+
+    GLuint m_main_fbo;
+    QPointer<TextureHandle> m_equi_cubemap_handle;
+    uint32_t m_equi_cubemap_face_size;
+    bool m_is_initialized;
+    bool m_hmd_initialized;
+
+    bool m_screenshot_pbo_pending;
+    GLuint m_screenshot_pbo;
 };
 
 #endif // ABSTRACTRENDERER_H

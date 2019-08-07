@@ -46,7 +46,7 @@ inline void Renderer::InitializeScopes()
 
 void Renderer::Initialize()
 {
-    m_abstractRenderer = std::unique_ptr<AbstractRenderer>(new RendererGL());
+    m_abstractRenderer = std::unique_ptr<AbstractRenderer>(new AbstractRenderer());
 
     InitializeScopes();
     m_abstractRenderer->Initialize();    

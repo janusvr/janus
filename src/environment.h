@@ -12,7 +12,7 @@
 #include "multiplayermanager.h"
 #include "cookiejar.h"
 #include "rendererinterface.h"
-#include "renderergl.h"
+#include "abstractrenderer.h"
 #include "assetimage.h"
 #include "scriptbuiltins.h"
 
