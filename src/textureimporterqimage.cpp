@@ -170,9 +170,9 @@ void TextureImporterQImage::LoadImageDataThread_Helper(QImageReader& img_reader,
 	}
 }
 
-QPointer<BaseAssetData> TextureImporterQImage::Import(const QByteArray& bytes, QPointer <DOMNode> props)
+QPointer<QObject> TextureImporterQImage::Import(const QByteArray& bytes, QPointer <DOMNode> props)
 {
-    QPointer<BaseAssetData> bdata = QPointer<BaseAssetData>(new AssetImageData());
+    QPointer<QObject> bdata = QPointer<QObject>(new AssetImageData());
 	AssetImageData* data = (AssetImageData*)bdata.data();
 
     if (!props->GetSrc().isEmpty()) {

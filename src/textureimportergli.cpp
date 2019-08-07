@@ -11,7 +11,7 @@ bool TextureImporterGLI::CanImport(const QByteArray& , QString extension, QVaria
 		   QString::compare(extension, "ktx", Qt::CaseInsensitive) == 0;
 }
 
-QPointer<BaseAssetData> TextureImporterGLI::Import(const QByteArray & buffer, QVariantMap vars)
+QPointer<QObject> TextureImporterGLI::Import(const QByteArray & buffer, QVariantMap vars)
 {
     const char * da = (char*)buffer.constData();
     const int size = buffer.length();
@@ -22,7 +22,7 @@ QPointer<BaseAssetData> TextureImporterGLI::Import(const QByteArray & buffer, QV
 
     if ((Texture.target() != gli::TARGET_2D && Texture.target() != gli::TARGET_CUBE) || Texture.empty()) {
 		qDebug("ERROR: GLI texture loading failed due to invalid texture target or no texture data");
-        return QPointer<BaseAssetData>();
+        return QPointer<QObject>();
 	}
 
     QPointer <AssetImageData> data = new AssetImageData();
@@ -38,5 +38,5 @@ QPointer<BaseAssetData> TextureImporterGLI::Import(const QByteArray & buffer, QV
         data->SetSource(vars["src"].toString());
     }
 
-    return static_cast<BaseAssetData *>(data.data());
+    return static_cast<QObject *>(data.data());
 }

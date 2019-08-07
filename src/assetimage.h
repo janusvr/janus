@@ -65,7 +65,7 @@ public:
     static QPointer<TextureHandle> null_cubemap_tex_handle;
     static QPointer<TextureHandle> null_image_tex_handle;
 
-    static QPointer<BaseAssetData> LoadAssetImage(const QByteArray& buffer, QString extension, QPointer <DOMNode> props, bool& is_gli);
+    static QPointer<QObject> LoadAssetImage(const QByteArray& buffer, QString extension, QPointer <DOMNode> props, bool& is_gli);
 
     bool GetIsStereoImage();
 

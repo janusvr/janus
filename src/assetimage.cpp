@@ -34,7 +34,7 @@ AssetImage::~AssetImage()
     Unload();
 }
 
-QPointer<BaseAssetData> AssetImage::LoadAssetImage(const QByteArray& buffer, QString extension, QPointer <DOMNode> props, bool& is_gli)
+QPointer<QObject> AssetImage::LoadAssetImage(const QByteArray& buffer, QString extension, QPointer <DOMNode> props, bool& is_gli)
 {
     int count = importers.size();
     ContentImporter* importer = nullptr;
@@ -63,13 +63,13 @@ QPointer<BaseAssetData> AssetImage::LoadAssetImage(const QByteArray& buffer, QSt
         QString::compare(extension, "ktx", Qt::CaseInsensitive) == 0)
     {
         is_gli = true;
-        return QPointer<BaseAssetData>();
+        return QPointer<QObject>();
     }
     else if (QString::compare(extension, "hdr", Qt::CaseInsensitive) == 0)
     {
         importer->Import(buffer, props);
         is_gli = true;
-        return QPointer<BaseAssetData>();
+        return QPointer<QObject>();
     }
     else if (importer == nullptr)
     {

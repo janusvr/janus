@@ -4,10 +4,9 @@
 #include <QtCore>
 #include <QImage>
 
-#include "baseassetdata.h"
 #include "rendererinterface.h"
 
-class AssetImageData : public BaseAssetData
+class AssetImageData : public QObject
 {
 private:
 	int width;

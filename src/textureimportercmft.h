@@ -22,7 +22,7 @@ public:
     ~TextureImporterCMFT();
 
     bool CanImport(const QByteArray& buffer, QString extension, QPointer <DOMNode> props);
-    QPointer<BaseAssetData> Import(const QByteArray& buffer, QPointer <DOMNode> props);
+    QPointer<QObject> Import(const QByteArray& buffer, QPointer <DOMNode> props);
 };
 
 #endif // TEXTUREIMPORTERCMFT_H

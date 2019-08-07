@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 # Define version
-__VERSION=66.0
+__VERSION=66.1
 
 #JamesMcCrae: define this when doing Oculus-submitted builds
 #DEFINES += OCULUS_SUBMISSION_BUILD
@@ -75,7 +75,6 @@ SOURCES += \
     src/assetwebsurface.cpp \    
     src/assetwindow.cpp \
     src/audioutil.cpp \
-    src/baseassetdata.cpp \
     src/bookmarkmanager.cpp \    
     src/codeeditorwindow.cpp \
     src/contentimporter.cpp \
@@ -144,7 +143,6 @@ HEADERS += \
     src/assetwebsurface.h \    
     src/assetwindow.h \
     src/audioutil.h \
-    src/baseassetdata.h \
     src/bookmarkmanager.h \
     src/codeeditorwindow.h \
     src/contentimporter.h \

@@ -15,7 +15,7 @@ bool TextureImporterCMFT::CanImport(const QByteArray& , QString extension, QPoin
     return QString::compare(extension, "hdr", Qt::CaseInsensitive) == 0;
 }
 
-QPointer<BaseAssetData> TextureImporterCMFT::Import(const QByteArray& buffer, QPointer <DOMNode> )
+QPointer<QObject> TextureImporterCMFT::Import(const QByteArray& buffer, QPointer <DOMNode> )
 {
     char* da = (char*)buffer.constData();
     const int size = buffer.length();
@@ -33,5 +33,5 @@ QPointer<BaseAssetData> TextureImporterCMFT::Import(const QByteArray& buffer, QP
     ((QByteArray&)buffer).resize(mem_size);
     memcpy((char*)(((QByteArray&)(buffer)).constData()), mem_dds.data(), mem_dds.size());
 
-    return static_cast<BaseAssetData *>(nullptr);
+    return static_cast<QObject *>(nullptr);
 }

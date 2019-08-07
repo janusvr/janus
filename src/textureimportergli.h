@@ -19,7 +19,7 @@ public:
     ~TextureImporterGLI();
 
     bool CanImport(const QByteArray& buffer, QString extension, QVariantMap vars);
-    QPointer<BaseAssetData> Import(const QByteArray& buffer, QVariantMap vars);
+    QPointer<QObject> Import(const QByteArray& buffer, QVariantMap vars);
 };
 
 #endif // GLITEXTUREIMPORTER_H
