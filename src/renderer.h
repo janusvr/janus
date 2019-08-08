@@ -376,9 +376,7 @@ public:
     uint32_t m_screenshot_height;
     uint32_t m_screenshot_sample_count;
     bool m_screenshot_is_equi;
-    uint64_t m_screenshot_frame_index;
-    bool m_enhanced_depth_precision_used;
-    bool m_enhanced_depth_precision_supported;
+    uint64_t m_screenshot_frame_index;    
 
 protected:
 

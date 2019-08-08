@@ -1,5 +1,8 @@
 #include "mathutil.h"
 
+bool VirtualCamera::m_enhanced_depth_precision_used = false;
+bool VirtualCamera::m_enhanced_depth_precision_supported = false;
+
 QStringList MathUtil::img_extensions;
 QStringList MathUtil::sound_extensions;
 QStringList MathUtil::vid_extensions;
@@ -25,7 +28,6 @@ QString MathUtil::m_last_screenshot_path = QString("");
 QStringList MathUtil::error_log_msgs;
 QStringList MathUtil::error_log_msgs_temp;
 QVariantList MathUtil::partymode_data;
-uint64_t MathUtil::m_frame_limiter_render_thread = 1;
 bool MathUtil::m_linear_framebuffer = false;
 bool MathUtil::m_do_equi = false;
 
@@ -555,6 +557,41 @@ void VirtualCamera::RecomputeViewMatrix()
     m_viewMatrix.translate(m_position);
     m_viewMatrix.rotate(m_orientation);
     m_viewMatrix.scale(m_scale);
+}
+
+void VirtualCamera::RecomputeProjectionMatrix()
+{
+    if (m_fov > 0.0f && m_fov < 180.0f)
+    {
+        if (m_enhanced_depth_precision_used && m_enhanced_depth_precision_supported) {
+            double fovY_radians = m_fov * 0.0174533;
+            double f = 1.0 / std::tan(fovY_radians / 2.0);
+
+            // Infinite FarClip
+            /*QVector4D col0 = QVector4D(f / m_aspectRatio,   0.0f,   0.0f,       0.0f);
+            QVector4D col1 = QVector4D(0.0f,                f,      0.0f,       0.0f);
+            QVector4D col2 = QVector4D(0.0f,                0.0f,   0.0f,       -1.0f);
+            QVector4D col3 = QVector4D(0.0f,                0.0f,   m_nearClip, 0.0f);*/
+            // Normal FarClip
+            QVector4D col0 = QVector4D(f / m_aspectRatio,   0.0f,   0.0f,       0.0f);
+            QVector4D col1 = QVector4D(0.0f,                f,      0.0f,       0.0f);
+            QVector4D col2 = QVector4D(0.0f,                0.0f,   (-1.0 * ((m_farClip) / (m_nearClip - m_farClip))) - 1,          -1.0f);
+            QVector4D col3 = QVector4D(0.0f,                0.0f,   -1.0 * ((m_nearClip * m_farClip) / (m_nearClip - m_farClip)), 0.0f);
+
+            QMatrix4x4 inv_depth_inf_far;
+            inv_depth_inf_far.setColumn(0, col0);
+            inv_depth_inf_far.setColumn(1, col1);
+            inv_depth_inf_far.setColumn(2, col2);
+            inv_depth_inf_far.setColumn(3, col3);
+            m_projectionMatrix = inv_depth_inf_far;
+        }
+        else {
+            m_projectionMatrix.perspective(m_fov, m_aspectRatio, m_nearClip, m_farClip);
+        }
+    }
+    else if (m_fov == -1.0f) {
+        m_projectionMatrix.setToIdentity();
+    }
 }
 
 bool TextureSet::operator==(const TextureSet &rhs) const

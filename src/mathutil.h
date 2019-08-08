@@ -1346,6 +1346,9 @@ public:
     bool GetLeftEye() const;
     void SetLeftEye(bool p_is_left_eye);
 
+    static bool m_enhanced_depth_precision_used;
+    static bool m_enhanced_depth_precision_supported;
+
 private:
 
     void Initialize();
@@ -1968,8 +1971,7 @@ public:
 
     static QByteArray loadFile(const QString fname);
     static void printShaderError(const GLuint p_shader);
-    static bool loadGLShaderFromFile(GLuint* const p_program, const QString vertName, const QString fragName);    
-    static uint64_t m_frame_limiter_render_thread;
+    static bool loadGLShaderFromFile(GLuint* const p_program, const QString vertName, const QString fragName);        
     static bool m_linear_framebuffer;
     static bool m_do_equi;
     static QString m_last_screenshot_path;
@@ -1980,7 +1982,6 @@ public:
 
 private:
 
-    static bool use_render_doc;
     static QStringList error_log_msgs;
     static QStringList error_log_msgs_temp;
     static QVariantList partymode_data;

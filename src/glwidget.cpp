@@ -49,8 +49,6 @@ DisplayMode GLWidget::GetDisplayMode()
 void GLWidget::SetNoVSync(const bool b)
 {
     novsync = b;
-
-    MathUtil::m_frame_limiter_render_thread = (b == true) ? 0 : 1;
 }
 
 bool GLWidget::GetNoVSync()

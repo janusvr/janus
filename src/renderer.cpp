@@ -3,45 +3,6 @@
 Renderer * Renderer::m_pimpl = nullptr;
 char const * Renderer::g_gamma_correction_GLSL = "out_color = pow(out_color, vec4(0.45454545454, 0.45454545454, 0.45454545454, 1.0));";
 
-void VirtualCamera::RecomputeProjectionMatrix()
-{
-    if (m_fov > 0.0f && m_fov < 180.0f)
-    {
-        if (Renderer::m_pimpl->GetIsUsingEnhancedDepthPrecision() == true
-            && Renderer::m_pimpl->GetIsEnhancedDepthPrecisionSupported() == true)
-        {
-            double fovY_radians = m_fov * 0.0174533;
-            double f = 1.0 / std::tan(fovY_radians / 2.0);
-
-            // Infinite FarClip
-            /*QVector4D col0 = QVector4D(f / m_aspectRatio,   0.0f,   0.0f,       0.0f);
-            QVector4D col1 = QVector4D(0.0f,                f,      0.0f,       0.0f);
-            QVector4D col2 = QVector4D(0.0f,                0.0f,   0.0f,       -1.0f);
-            QVector4D col3 = QVector4D(0.0f,                0.0f,   m_nearClip, 0.0f);*/
-            // Normal FarClip
-            QVector4D col0 = QVector4D(f / m_aspectRatio,   0.0f,   0.0f,       0.0f);
-            QVector4D col1 = QVector4D(0.0f,                f,      0.0f,       0.0f);
-            QVector4D col2 = QVector4D(0.0f,                0.0f,   (-1.0 * ((m_farClip) / (m_nearClip - m_farClip))) - 1,          -1.0f);
-            QVector4D col3 = QVector4D(0.0f,                0.0f,   -1.0 * ((m_nearClip * m_farClip) / (m_nearClip - m_farClip)), 0.0f);
-
-            QMatrix4x4 inv_depth_inf_far;
-            inv_depth_inf_far.setColumn(0, col0);
-            inv_depth_inf_far.setColumn(1, col1);
-            inv_depth_inf_far.setColumn(2, col2);
-            inv_depth_inf_far.setColumn(3, col3);
-            m_projectionMatrix = inv_depth_inf_far;
-        }
-        else
-        {
-            m_projectionMatrix.perspective(m_fov, m_aspectRatio, m_nearClip, m_farClip);
-        }
-    }
-    else if (m_fov == -1.0f)
-    {
-        m_projectionMatrix.setToIdentity();
-    }
-}
-
 Renderer::Renderer()
     : m_current_scope(RENDERER::RENDER_SCOPE::NONE),      
       m_update_GPU_state(false),
@@ -66,8 +27,6 @@ Renderer::Renderer()
       m_screenshot_sample_count(m_msaa_count),
       m_screenshot_is_equi(false),
       m_screenshot_frame_index(0),
-      m_enhanced_depth_precision_used(false),
-      m_enhanced_depth_precision_supported(false),
       m_glClipControl(nullptr),
       m_GPUTimeMin(UINT64_MAX),
       m_GPUTimeMax(0),
@@ -1588,12 +1547,12 @@ void Renderer::InitializeState()
         if (m_glClipControl != nullptr)
         {
             qDebug() << "glClipControl extension found, enabling improved depth precision";
-            m_enhanced_depth_precision_supported = true;
+            VirtualCamera::m_enhanced_depth_precision_supported = true;
         }
         else
         {
             qDebug () << "glClipControl NOT SUPPORTED!";
-            m_enhanced_depth_precision_supported = false;
+            VirtualCamera::m_enhanced_depth_precision_supported = false;
         }
     }
 
@@ -1824,18 +1783,18 @@ void Renderer::BindBufferHandle(QPointer <BufferHandle> p_buffer_handle)
 
 bool Renderer::GetIsEnhancedDepthPrecisionSupported() const
 {
-    return m_enhanced_depth_precision_supported;
+    return VirtualCamera::m_enhanced_depth_precision_supported;
 }
 
 bool Renderer::GetIsUsingEnhancedDepthPrecision() const
 {
-    return (m_enhanced_depth_precision_used);
+    return VirtualCamera::m_enhanced_depth_precision_used;
 }
 
 void Renderer::SetIsUsingEnhancedDepthPrecision(bool const p_is_using)
 {
-    m_framebuffer_requires_initialization = (m_framebuffer_requires_initialization == false) ? (m_enhanced_depth_precision_supported && (m_enhanced_depth_precision_used != p_is_using)) : m_framebuffer_requires_initialization;
-    m_enhanced_depth_precision_used = p_is_using;
+    m_framebuffer_requires_initialization = (m_framebuffer_requires_initialization == false) ? (VirtualCamera::m_enhanced_depth_precision_supported && (VirtualCamera::m_enhanced_depth_precision_used != p_is_using)) : m_framebuffer_requires_initialization;
+    VirtualCamera::m_enhanced_depth_precision_used = p_is_using;
 }
 
 void Renderer::SetFaceCullMode(FaceCullMode p_face_cull_mode)
