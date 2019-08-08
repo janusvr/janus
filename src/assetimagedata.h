@@ -61,7 +61,7 @@ public:
 	bool HasFrameData(int index, bool is_left);
 
 	// Deletes only the pixel data, while keeping everything else the same
-	virtual void ClearPixelData();
+    virtual void ClearPixelData();
 	virtual void ClearPixelData(int index);
 
 	uint GetLeftTexture(int index);
@@ -105,13 +105,11 @@ public:
     void SetLeftFrameData(int index, QByteArray data);
     void SetRightFrameData(int index, QByteArray data);
 
-	// Clones this image and all left frames get cropped in 2
-    AssetImageData* SideBySide(bool reverse3d = false);
-
-    QImage::Format format;
     void SetUploadedTexture(QPointer<TextureHandle> left_id, QPointer<TextureHandle> right_id);
     QPointer<TextureHandle> GetLeftTextureHandle(int index);
     QPointer<TextureHandle> GetRightTextureHandle(int index);
+
+    QImage::Format format;
 };
 
 #endif
