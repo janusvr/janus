@@ -25,7 +25,6 @@
 #include <vector>
 #include <cfloat>
 #include <QtDebug>
-#include <memory>
 
 #include "scriptablevector.h"
 
@@ -1234,7 +1233,6 @@ private:
     // Renderer is made a friend class so that it can mutate an AbstractRenderCommand
     // when needed for special cases such as mirrors, without the need of constructing another AbstractRenderCommand.
     friend class Renderer;
-    friend class AbstractRenderer;
     friend class AbstractRenderCommand_sort;
 
     // Data required for MultiDrawIndirect

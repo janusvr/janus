@@ -6,7 +6,6 @@
 #include <QVector>
 #include <QVector4D>
 #include <QVector3D>
-#include <memory>
 
 class LightContainer;
 

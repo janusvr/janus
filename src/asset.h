@@ -2,7 +2,6 @@
 #define ASSET_H
 
 #include <QtCore>
-#include <memory>
 
 #include "domnode.h"
 #include "webasset.h"

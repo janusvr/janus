@@ -3,45 +3,29 @@
 
 #include <qopengl.h>
 #include <qopenglext.h>
-#include <QDebug>
+#include <QtCore>
 #include <QtAlgorithms>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLTexture>
-#include <QMap>
-#include <QVector>
-#include <QObject>
-#include <QImage>
-#include <QDebug>
-#include <QString>
-#include <QImage>
-#include <QVector4D>
-#include <QVector3D>
-#include <QMatrix4x4>
-#include <QMatrix3x3>
-#include <QQuaternion>
-#include <QtCore>
 
 #include <algorithm>
 #include <vector>
 #include <cfloat>
-#include <memory>
 #include <stdint.h>
 #include <cmath>
 
 #include "half.hpp"
-
-#include "assetimagedata.h"
-
-#include "mathutil.h"
-#include "lightmanager.h"
-#include "assetimagedata.h"
 
 #include "cmft/image.h"
 #include "cmft/cubemapfilter.h"
 #include "cmft/clcontext.h"
 #include "cmft/print.h"
 
+#include "assetimagedata.h"
+#include "mathutil.h"
+#include "lightmanager.h"
 #include "abstracthmdmanager.h"
+
 #define gli glm
 #include "gli/gli.hpp"
 

@@ -2,7 +2,6 @@
 #define GAME_H
 
 #include <QtGui>
-#include <memory>
 
 #include <AL/al.h>
 #include <AL/alc.h>

@@ -5,7 +5,6 @@
 #include <qopenglext.h>
 
 #include <QKeyEvent>
-#include <memory>
 
 #include "renderer.h"
 
