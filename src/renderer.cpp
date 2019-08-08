@@ -1,6 +1,6 @@
 #include "renderer.h"
 
-Renderer * Renderer::m_pimpl = nullptr;
+QPointer <Renderer> Renderer::m_pimpl(nullptr);
 char const * Renderer::g_gamma_correction_GLSL = "out_color = pow(out_color, vec4(0.45454545454, 0.45454545454, 0.45454545454, 1.0));";
 
 Renderer::Renderer()
@@ -2433,146 +2433,6 @@ QPointer <TextureHandle> Renderer::GetDefaultFontGlyphAtlas()
     return m_default_font_glyph_atlas;
 }
 
-QPointer<ProgramHandle> Renderer::CompileAndLinkShaderProgram(QByteArray *p_vertex_shader, QString p_vertex_shader_path,
-                                                                                QByteArray *p_fragment_shader, QString p_fragment_shader_path)
-{
-//    qDebug() << "Renderer::CompileAndLinkShaderProgram()";
-    GLuint program_id;
-    QPointer<ProgramHandle> abstract_shader_program = CreateProgramHandle(program_id);
-
-    GLuint vertex_shader_id = MathUtil::glFuncs->glCreateShader(GL_VERTEX_SHADER);
-    GLuint fragment_shader_id = MathUtil::glFuncs->glCreateShader(GL_FRAGMENT_SHADER);
-    GLint vertex_compile_result = GL_FALSE;
-    GLint fragment_compile_result = GL_FALSE;
-    GLint program_link_result = GL_FALSE;
-
-    bool shader_failed = false;
-
-    if (p_vertex_shader->contains("#version 330 core")) {
-        UpgradeShaderSource(*p_vertex_shader, true);
-        const char * shader_data = p_vertex_shader->data();
-        GLint shader_data_size = p_vertex_shader->size();
-        MathUtil::glFuncs->glShaderSource(vertex_shader_id, 1, &shader_data, &shader_data_size);
-        MathUtil::glFuncs->glCompileShader(vertex_shader_id);
-        MathUtil::glFuncs->glGetShaderiv(vertex_shader_id, GL_COMPILE_STATUS, &vertex_compile_result);
-
-        if (vertex_compile_result == GL_FALSE)
-        {
-            shader_failed = true;
-            int log_length;
-            MathUtil::glFuncs->glGetShaderiv(vertex_shader_id, GL_INFO_LOG_LENGTH, &log_length);
-            QVector<char> vertex_shader_log((log_length > 1) ? log_length : 1);
-            MathUtil::glFuncs->glGetShaderInfoLog(vertex_shader_id, log_length, NULL, &vertex_shader_log[0]);
-            MathUtil::ErrorLog(QString("Compilation of vertex shader \"") + p_vertex_shader_path + QString("\" failed:") + QString("\n") + vertex_shader_log.data());
-        }
-    }
-    else {
-        QString default_object_vertex_shader_path(MathUtil::GetApplicationPath() + "assets/shaders/vertex.txt");
-        QFile default_object_vertex_shader_file(default_object_vertex_shader_path);
-        default_object_vertex_shader_file.open(QIODevice::ReadOnly | QIODevice::Text);
-        QByteArray default_object_vertex_shader_bytes = default_object_vertex_shader_file.readAll();
-        default_object_vertex_shader_file.close();
-
-        UpgradeShaderSource(default_object_vertex_shader_bytes, true);
-        const char * shader_data = default_object_vertex_shader_bytes.data();
-        GLint shader_data_size = default_object_vertex_shader_bytes.size();
-        MathUtil::glFuncs->glShaderSource(vertex_shader_id, 1, &shader_data, &shader_data_size);
-        MathUtil::glFuncs->glCompileShader(vertex_shader_id);
-        MathUtil::glFuncs->glGetShaderiv(vertex_shader_id, GL_COMPILE_STATUS, &vertex_compile_result);
-
-        if (vertex_compile_result == GL_FALSE)
-        {
-            shader_failed = true;
-            int log_length;
-            MathUtil::glFuncs->glGetShaderiv(vertex_shader_id, GL_INFO_LOG_LENGTH, &log_length);
-            QVector<char> vertex_shader_log((log_length > 1) ? log_length : 1);
-            MathUtil::glFuncs->glGetShaderInfoLog(vertex_shader_id, log_length, NULL, &vertex_shader_log[0]);
-            MathUtil::ErrorLog(QString("Compilation of vertex shader \"") + default_object_vertex_shader_path + QString("\" failed:") + QString("\n") + vertex_shader_log.data());
-        }
-    }
-
-    if (!shader_failed && p_fragment_shader->contains("#version 330 core")) {
-        UpgradeShaderSource(*p_fragment_shader, false);
-        const char * shader_data = p_fragment_shader->data();
-        GLint shader_data_size = p_fragment_shader->size();
-        MathUtil::glFuncs->glShaderSource(fragment_shader_id, 1, &shader_data, &shader_data_size);
-        MathUtil::glFuncs->glCompileShader(fragment_shader_id);
-        MathUtil::glFuncs->glGetShaderiv(fragment_shader_id, GL_COMPILE_STATUS, &fragment_compile_result);
-
-        if (fragment_compile_result == GL_FALSE)
-        {
-            shader_failed = true;
-            int log_length;
-            MathUtil::glFuncs->glGetShaderiv(fragment_shader_id, GL_INFO_LOG_LENGTH, &log_length);
-            QVector<char> fragment_shader_lod((log_length > 1) ? log_length : 1);
-            MathUtil::glFuncs->glGetShaderInfoLog(fragment_shader_id, log_length, NULL, &fragment_shader_lod[0]);
-            MathUtil::ErrorLog(QString("Compilation of fragment shader \"") + p_fragment_shader_path + QString("\" failed:") + QString("\n") + fragment_shader_lod.data());
-        }
-    }
-    else {
-        QString default_object_fragment_shader_path(MathUtil::GetApplicationPath() + "assets/shaders/trans_frag.txt");
-        QFile default_object_fragment_shader_file(default_object_fragment_shader_path);
-        default_object_fragment_shader_file.open(QIODevice::ReadOnly | QIODevice::Text);
-        QByteArray default_object_fragment_shader_bytes = default_object_fragment_shader_file.readAll();
-        default_object_fragment_shader_file.close();
-
-        UpgradeShaderSource(default_object_fragment_shader_bytes, false);
-        const char * shader_data = default_object_fragment_shader_bytes.data();
-        GLint shader_data_size = default_object_fragment_shader_bytes.size();
-        MathUtil::glFuncs->glShaderSource(fragment_shader_id, 1, &shader_data, &shader_data_size);
-        MathUtil::glFuncs->glCompileShader(fragment_shader_id);
-        MathUtil::glFuncs->glGetShaderiv(fragment_shader_id, GL_COMPILE_STATUS, &fragment_compile_result);
-
-        if (fragment_compile_result == GL_FALSE)
-        {
-            shader_failed = true;
-            int log_length;
-            MathUtil::glFuncs->glGetShaderiv(fragment_shader_id, GL_INFO_LOG_LENGTH, &log_length);
-            QVector<char> fragment_shader_lod((log_length > 1) ? log_length : 1);
-            MathUtil::glFuncs->glGetShaderInfoLog(fragment_shader_id, log_length, NULL, &fragment_shader_lod[0]);
-            MathUtil::ErrorLog(QString("Error: Compilation of fragment shader \"") + default_object_fragment_shader_path + QString("\" failed:") + QString("\n") + fragment_shader_lod.data());
-        }
-    }
-
-    if (!shader_failed) {
-        MathUtil::glFuncs->glAttachShader(program_id, vertex_shader_id);
-        MathUtil::glFuncs->glAttachShader(program_id, fragment_shader_id);
-        MathUtil::glFuncs->glLinkProgram(program_id);
-        MathUtil::glFuncs->glGetProgramiv(program_id, GL_LINK_STATUS, &program_link_result);
-
-        if (program_link_result == GL_FALSE)
-        {
-            int log_length;
-            MathUtil::glFuncs->glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &log_length);
-            QVector<char> program_log( (log_length > 1) ? log_length : 1 );
-            MathUtil::glFuncs->glGetProgramInfoLog(program_id, log_length, NULL, &program_log[0]);
-
-            shader_failed = true;
-            MathUtil::ErrorLog(QString("Linking of shaders \"") + program_id + QString("\" & \"") + p_fragment_shader_path + QString("\" failed:") + QString("\n") + program_log.data());
-        }
-    }
-
-    // If we failed just return the default object shader
-    if (shader_failed) {
-        abstract_shader_program = m_default_object_shader;
-    }
-    else {
-        int log_length;
-        MathUtil::glFuncs->glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &log_length);
-        QVector<char> program_log( (log_length > 1) ? log_length : 1 );
-        MathUtil::glFuncs->glGetProgramInfoLog(program_id, log_length, NULL, &program_log[0]);;
-//        MathUtil::ErrorLog(QString("Linking of shaders \"") + p_vertex_shader_path + QString("\" & \"") + p_fragment_shader_path + QString("\" successful:") + QString("\n") + program_log.data());
-
-        MathUtil::glFuncs->glUseProgram(program_id);
-        CacheUniformLocations(program_id, m_uniform_locs);
-
-        MathUtil::glFuncs->glDeleteShader(vertex_shader_id);
-        MathUtil::glFuncs->glDeleteShader(fragment_shader_id);
-    }
-
-    return abstract_shader_program;
-}
-
 QPointer<TextureHandle> Renderer::CreateTextureHandle(TextureHandle::TEXTURE_TYPE p_texture_type,
     TextureHandle::COLOR_SPACE p_color_space,
     TextureHandle::ALPHA_TYPE p_alpha_type,
@@ -4827,19 +4687,10 @@ void Renderer::PostRender(QHash<int, QVector<AbstractRenderCommand> > * p_scoped
 
 QPointer<ProgramHandle> Renderer::CompileAndLinkShaderProgram(QByteArray & p_vertex_shader, QString p_vertex_shader_path, QByteArray & p_fragment_shader, QString p_fragment_shader_path)
 {
-//    qDebug() << "Renderer::CompileAndLinkShaderProgram" << this;
-    QPointer<ProgramHandle> handle_id = nullptr;
-    CompileAndLinkShaderProgram2(handle_id, p_vertex_shader, p_vertex_shader_path, p_fragment_shader, p_fragment_shader_path, m_uniform_locs);
-    return handle_id;
-}
-
-void Renderer::CompileAndLinkShaderProgram2(QPointer<ProgramHandle> & p_abstract_program, QByteArray & p_vertex_shader,
-                                                            QString p_vertex_shader_path, QByteArray & p_fragment_shader, QString p_fragment_shader_path,
-                                                            QVector<QVector<GLint>> & p_map)
-{
-//    qDebug() << "Renderer::CompileAndLinkShaderProgram2";
+//    qDebug() << "Renderer::CompileAndLinkShaderProgram" << this;        
+    //    qDebug() << "Renderer::CompileAndLinkShaderProgram2";
     GLuint program_id;
-    p_abstract_program = CreateProgramHandle(program_id);
+    QPointer<ProgramHandle> p_abstract_program = CreateProgramHandle(program_id);
 
     GLuint vertex_shader_id = MathUtil::glFuncs->glCreateShader(GL_VERTEX_SHADER);
     GLuint fragment_shader_id = MathUtil::glFuncs->glCreateShader(GL_FRAGMENT_SHADER);
@@ -4939,7 +4790,7 @@ void Renderer::CompileAndLinkShaderProgram2(QPointer<ProgramHandle> & p_abstract
         }
     }
 
-//    qDebug() << "Renderer::CompileAndLinkShaderProgram2" << shader_failed << vertex_empty << fragment_empty;
+    //    qDebug() << "Renderer::CompileAndLinkShaderProgram2" << shader_failed << vertex_empty << fragment_empty;
 
     if (!shader_failed && (!vertex_empty || !fragment_empty))
     {
@@ -4959,16 +4810,16 @@ void Renderer::CompileAndLinkShaderProgram2(QPointer<ProgramHandle> & p_abstract
             MathUtil::ErrorLog(QString("Linking of shaders ") + p_vertex_shader_path + QString(" & ") + p_fragment_shader_path + QString(" failed:") + program_log.data());
         }
 
-//        qDebug() << "Vertex glDetachShader:" << program_id << "," << vertex_shader_id;
+        //        qDebug() << "Vertex glDetachShader:" << program_id << "," << vertex_shader_id;
         MathUtil::glFuncs->glDetachShader(program_id, vertex_shader_id);
 
-//        qDebug() << "Vertex glDeleteShader:" << vertex_shader_id;
+        //        qDebug() << "Vertex glDeleteShader:" << vertex_shader_id;
         MathUtil::glFuncs->glDeleteShader(vertex_shader_id);
 
-//        qDebug() << "Fragment glDetachShader:" << program_id << "," << fragment_shader_id;
+        //        qDebug() << "Fragment glDetachShader:" << program_id << "," << fragment_shader_id;
         MathUtil::glFuncs->glDetachShader(program_id, fragment_shader_id);
 
-//        qDebug() << "Fragment glDeleteShader:" << fragment_shader_id;
+        //        qDebug() << "Fragment glDeleteShader:" << fragment_shader_id;
         MathUtil::glFuncs->glDeleteShader(fragment_shader_id);
     }
 
@@ -4981,13 +4832,14 @@ void Renderer::CompileAndLinkShaderProgram2(QPointer<ProgramHandle> & p_abstract
         MathUtil::glFuncs->glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &log_length);
         QVector<char> program_log( (log_length > 1) ? log_length : 1 );
         MathUtil::glFuncs->glGetProgramInfoLog(program_id, log_length, NULL, &program_log[0]);
-//        MathUtil::ErrorLog(QString("Linking of shaders ") + p_vertex_shader_path + QString(" & ") + p_fragment_shader_path + QString(" successful:"));
-//        MathUtil::ErrorLog(program_log.data());
+        //        MathUtil::ErrorLog(QString("Linking of shaders ") + p_vertex_shader_path + QString(" & ") + p_fragment_shader_path + QString(" successful:"));
+        //        MathUtil::ErrorLog(program_log.data());
 
         MathUtil::glFuncs->glUseProgram(program_id);
         CacheUniformLocations(program_id, m_uniform_locs);
-        CacheUniformLocations(program_id, p_map);
     }
+
+    return p_abstract_program;
 }
 
 void Renderer::Render(QHash<int, QVector<AbstractRenderCommand>> * p_scoped_render_commands,

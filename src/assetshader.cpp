@@ -101,22 +101,9 @@ void AssetShader::CompileShaderProgram()
         return;
     }      
 //    qDebug() << "AssetShader::CompileShaderProgram()"  << this;
-
-    const QByteArray src_bytearray = GetData();
-    QByteArray * fragment_data = new QByteArray();
-
-    if (src_bytearray.size() != 0) {
-        *fragment_data = QByteArray(src_bytearray.data());
-    }
-
-    const QByteArray vertex_src_bytearray = vertex_webasset.GetData();
-    QByteArray * vertex_data = new QByteArray();
-
-    if (vertex_src_bytearray.size() != 0) {
-        *vertex_data = QByteArray(vertex_src_bytearray.data());
-    }
-
-    m_program_handle = Renderer::m_pimpl->CompileAndLinkShaderProgram(vertex_data, vertex_src_url_str, fragment_data, props->GetSrcURL());
+    QByteArray fragment_src = QByteArray(GetData());
+    QByteArray vertex_src = QByteArray(vertex_webasset.GetData());
+    m_program_handle = Renderer::m_pimpl->CompileAndLinkShaderProgram(vertex_src, vertex_src_url_str, fragment_src, props->GetSrcURL());
 }
 
 void AssetShader::SetProgramHandle(QPointer<ProgramHandle> p_shader_program)

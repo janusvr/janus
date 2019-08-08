@@ -300,10 +300,7 @@ public:
 
     // Frustum Culling Member Functions
     QVector3D GetBBoxMin();
-    QVector3D GetBBoxMax();
-    /*FrustumCullingProxyObject * GetProxyObject();
-    void SetProxyObject(std::unique_ptr<FrustumCullingProxyObject>&& p_proxy_object);
-    void ResetFrustumCullingProxyObject(FrustumCullingPhysicsWorld* p_owner_world);*/
+    QVector3D GetBBoxMax();    
 
     void GetLights(LightContainer* p_container, QMatrix4x4* p_model_matrix);
     void GetLight(LightContainer* p_container, QMatrix4x4* p_model_matrix);

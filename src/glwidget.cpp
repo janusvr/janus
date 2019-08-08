@@ -405,7 +405,7 @@ void GLWidget::initializeGL()
 {       
     if (MathUtil::InitializeGLContext())
     {
-        Renderer::m_pimpl = Renderer::GetSingleton();
+        Renderer::m_pimpl = new Renderer();
         Renderer::m_pimpl->Initialize();
         SetupFramebuffer();
     }

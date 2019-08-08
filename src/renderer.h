@@ -55,22 +55,11 @@ public:
 	Renderer();
     ~Renderer();
 
-	static Renderer * GetSingleton()
-	{
-		static Renderer * const singleton = new Renderer();
-		return singleton;
-	}
-
-    uint32_t CreateVAO();
-    uint32_t DeleteVAO();
-
     void Initialize();
     void InitializeScopes();
     void InitializeState();
     void InitializeLightUBOs();
-    void InitializeHMDManager(QPointer <AbstractHMDManager> p_hmd_manager);
-    QPointer<ProgramHandle> CompileAndLinkShaderProgram(QByteArray * p_vertex_shader, QString p_vertex_shader_path,
-                                                                      QByteArray * p_fragment_shader, QString p_fragment_shader_path);
+    void InitializeHMDManager(QPointer <AbstractHMDManager> p_hmd_manager);    
 
     QPointer<ProgramHandle> GetDefaultObjectShaderProgram();
     QPointer<ProgramHandle> GetDefaultSkyboxShaderProgram();
@@ -276,9 +265,7 @@ public:
 
     void PostConstructorInitialize();
 
-    QPointer<ProgramHandle> CompileAndLinkShaderProgram(QByteArray & p_vertex_shader, QString p_vertex_shader_path,
-                                                                              QByteArray & p_fragment_shader, QString p_fragment_shader_path);
-    void CompileAndLinkShaderProgram2(QPointer<ProgramHandle> & p_abstract_program, QByteArray &p_vertex_shader, QString p_vertex_shader_path, QByteArray &p_fragment_shader, QString p_fragment_shader_path, QVector<QVector<GLint> > &p_map);
+    QPointer <ProgramHandle> CompileAndLinkShaderProgram(QByteArray & p_vertex_shader, QString p_vertex_shader_path, QByteArray & p_fragment_shader, QString p_fragment_shader_path);
 
     void SaveScreenshot();
 
@@ -286,7 +273,7 @@ public:
     void CreateMeshHandle(QPointer<MeshHandle> &p_handle, VertexAttributeLayout p_layout);
     void DecoupledRender();
 
-    static Renderer * m_pimpl;
+    static QPointer <Renderer> m_pimpl;
 
     bool m_update_GPU_state;
     bool m_allow_color_mask;
