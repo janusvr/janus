@@ -51,7 +51,6 @@ Renderer::Renderer()
       m_active_light_UBO_index(0),
       m_gl_surface(nullptr),
       m_gl_context(nullptr),
-      m_gl_funcs(nullptr),
       m_main_fbo(0),
       m_is_initialized(false),
       m_hmd_initialized(false),
@@ -137,7 +136,7 @@ void Renderer::Initialize()
     Vendor-specific information may follow the version number. Its format depends on the implementation, but a space always separates the version number and the vendor-specific information.
     All strings are null-terminated.
     */
-    m_name = QString((char *)(m_gl_funcs->glGetString(GL_VERSION)));
+    m_name = QString((char *)(MathUtil::glFuncs->glGetString(GL_VERSION)));
 
     // Store minor/major GL version used
     const QStringList s = m_name.left(m_name.indexOf(" ")).split(".");
@@ -458,11 +457,6 @@ void Renderer::EndCurrentScope()
 {
     //qDebug() << "Renderer::EndCurrentScope" << m_current_scope;
     m_current_scope = RENDERER::RENDER_SCOPE::NONE;
-}
-
-RENDERER::RENDER_SCOPE Renderer::GetCurrentScope()
-{
-    return m_current_scope;
 }
 
 QPointer<MeshHandle> Renderer::GetSkyboxCubeVAO()
@@ -1657,11 +1651,6 @@ void Renderer::BindTextureHandle(uint32_t p_slot_index, QPointer <TextureHandle>
     }
 }
 
-GLuint Renderer::GetCurrentlyBoundMeshHandle()
-{
-    return m_bound_VAO;
-}
-
 void Renderer::BindMeshHandle(QPointer <MeshHandle> p_mesh_handle)
 {
     GLuint VAO_id = 0;
@@ -1679,13 +1668,6 @@ void Renderer::BindMeshHandle(QPointer <MeshHandle> p_mesh_handle)
         MathUtil::glFuncs->glBindVertexArray(VAO_id);
         m_bound_VAO = VAO_id;
     }
-}
-
-GLuint Renderer::GetCurrentlyBoundBufferHandle(BufferHandle::BUFFER_TYPE p_buffer_type)
-{
-    uint16_t buffer_index = p_buffer_type - 1;
-
-    return m_bound_buffers[buffer_index];
 }
 
 void Renderer::BindBufferHandle(QPointer <BufferHandle> p_buffer_handle, BufferHandle::BUFFER_TYPE p_buffer_type)
@@ -1891,98 +1873,6 @@ void Renderer::SetColorMask(ColorMask p_color_mask)
 ColorMask Renderer::GetColorMask() const
 {
     return m_color_mask;
-}
-
-void Renderer::GetViewportsAndCameraCount(QVector<float> & viewports, RENDERER::RENDER_SCOPE const p_scope, int & camera_count)
-{
-    QVector4D viewport;
-    camera_count = m_scoped_cameras_cache[m_rendering_index][static_cast<int>(p_scope)].size();
-    for (int camera_index = 0; camera_index < camera_count; camera_index++)
-    {
-        VirtualCamera& camera = m_scoped_cameras_cache[m_rendering_index][static_cast<int>(p_scope)][camera_index];
-        viewport = camera.GetViewport();
-        viewports.push_back(viewport.x());
-        viewports.push_back(viewport.y());
-        viewports.push_back(viewport.z());
-        viewports.push_back(viewport.w());
-    }
-}
-
-void Renderer::GenerateEnvMapsFromCubemapTextureHandle(Cubemaps& p_cubemaps)
-{
-// STAGE 1: Generate and save to memory, dds files containing the 6 faces of the cubemap
-    // Bind Texture Handle
-    BindTextureHandle(15, p_cubemaps.m_cubemap);
-
-    // Get pixel channel swizzles
-    int gl_tex_swizzle_mask[4] = {GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA};
-    MathUtil::glFuncs->glGetTexParameteriv(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_SWIZZLE_R, &(gl_tex_swizzle_mask[0]));
-    MathUtil::glFuncs->glGetTexParameteriv(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_SWIZZLE_G, &(gl_tex_swizzle_mask[1]));
-    MathUtil::glFuncs->glGetTexParameteriv(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_SWIZZLE_B, &(gl_tex_swizzle_mask[2]));
-    MathUtil::glFuncs->glGetTexParameteriv(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_SWIZZLE_A, &(gl_tex_swizzle_mask[3]));
-
-    // Calculate optimal mip level (Face size of at least 256)
-    int gl_max_level = -2;
-    MathUtil::glFuncs->glGetTexParameteriv(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAX_LEVEL, &gl_max_level);
-    int const target_mip_level = (gl_max_level < 9) ? 0 : gl_max_level - 8;
-
-    // Get width of chosen mip level
-    int gl_tex_width = -2;
-    MathUtil::glFuncs->glGetTexLevelParameteriv(GL_TEXTURE_CUBE_MAP_POSITIVE_X, target_mip_level, GL_TEXTURE_WIDTH, &gl_tex_width);
-
-    // Get pixel channel sizes in bytes
-    int gl_tex_red_size = -2;
-    int gl_tex_green_size = -2;
-    int gl_tex_blue_size = -2;
-    int gl_tex_alpha_size = -2;
-    MathUtil::glFuncs->glGetTexLevelParameteriv(GL_TEXTURE_CUBE_MAP_POSITIVE_X, target_mip_level, GL_TEXTURE_RED_SIZE, &gl_tex_red_size);
-    MathUtil::glFuncs->glGetTexLevelParameteriv(GL_TEXTURE_CUBE_MAP_POSITIVE_X, target_mip_level, GL_TEXTURE_GREEN_SIZE, &gl_tex_green_size);
-    MathUtil::glFuncs->glGetTexLevelParameteriv(GL_TEXTURE_CUBE_MAP_POSITIVE_X, target_mip_level, GL_TEXTURE_BLUE_SIZE, &gl_tex_blue_size);
-    MathUtil::glFuncs->glGetTexLevelParameteriv(GL_TEXTURE_CUBE_MAP_POSITIVE_X, target_mip_level, GL_TEXTURE_ALPHA_SIZE, &gl_tex_alpha_size);
-
-    // Allocate memory for holding raw face data
-    int const pixel_data_size = (gl_tex_red_size / 8 * ((gl_tex_red_size == 8) ? 3 : 4));
-    QVector<uint8_t> pixel_data(pixel_data_size * gl_tex_width * gl_tex_width, 0);
-    // For each face
-    gli::format format = (gl_tex_red_size == 8) ? gli::FORMAT_BGR8_UNORM_PACK8 : gli::FORMAT_RGBA16_SFLOAT_PACK16;
-    gli::extent2d extent = { gl_tex_width, gl_tex_width };
-    int const levels = 1;
-    // Allocate Texture
-    gli::texture2d texture2d(format, extent, levels);
-    for (int face_index = 0; face_index < 6; ++face_index)
-    {
-        // Load face data into memory via glReadPixels
-        GLint draw_fbo = 0;
-        GLint read_fbo = 0;
-        GLuint dummy_fbo = 0;
-
-        GLuint texture_id = 0;
-        if (m_texture_handle_to_GL_ID.contains(p_cubemaps.m_cubemap)) {
-            texture_id = m_texture_handle_to_GL_ID[p_cubemaps.m_cubemap];
-        }
-
-        glGetIntegerv(GL_DRAW_FRAMEBUFFER_BINDING, &draw_fbo);
-        glGetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &read_fbo);
-
-        MathUtil::glFuncs->glGenFramebuffers(1, &dummy_fbo);
-        MathUtil::glFuncs->glBindFramebuffer(GL_FRAMEBUFFER, dummy_fbo);
-
-        MathUtil::glFuncs->glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + face_index, texture_id, 0);
-        MathUtil::glFuncs->glReadPixels(0, 0, gl_tex_width, gl_tex_width, (gl_tex_red_size == 8) ? GL_RGB : GL_RGBA, (gl_tex_red_size == 1) ? GL_UNSIGNED_BYTE : GL_HALF_FLOAT, pixel_data.data());
-
-        MathUtil::glFuncs->glBindFramebuffer(GL_DRAW_FRAMEBUFFER, draw_fbo);
-        MathUtil::glFuncs->glBindFramebuffer(GL_READ_FRAMEBUFFER, read_fbo);
-
-        MathUtil::glFuncs->glDeleteFramebuffers(1, &dummy_fbo);
-
-        // Create and save gli based dds file into memory
-        memcpy(texture2d.data(0, 0, 0), pixel_data.data(), pixel_data.size());
-        std::vector<char> vec = p_cubemaps.m_dds_data[face_index].toStdVector();
-        gli::save_dds(texture2d, vec);
-    }
-
-    p_cubemaps.m_channel_size = gl_tex_red_size;
-
 }
 
 void Renderer::RenderObjects(const RENDERER::RENDER_SCOPE p_scope,
@@ -4128,30 +4018,12 @@ void Renderer::ConfigureFramebuffer(const uint32_t p_window_width, const uint32_
     m_msaa_count = p_msaa_count;
 }
 
-void Renderer::ConfigureWindowSize(const uint32_t p_window_width, const uint32_t p_window_height)
-{
-    m_framebuffer_requires_initialization = (m_framebuffer_requires_initialization == false)
-                                            ?	(m_window_width != p_window_width) ||
-                                                (m_window_height != p_window_height)
-                                                : m_framebuffer_requires_initialization;
-
-    m_window_width = p_window_width;
-    m_window_width = p_window_height;
-}
-
 void Renderer::ConfigureSamples(const uint32_t p_msaa_count)
 {
     m_framebuffer_requires_initialization = (m_framebuffer_requires_initialization == false)
                                             ?	(m_msaa_count != p_msaa_count)
                                             :	m_framebuffer_requires_initialization;
     m_msaa_count = p_msaa_count;
-}
-
-uint32_t Renderer::GetTextureID(const FBO_TEXTURE_ENUM p_texture_index, const bool p_multisampled) const
-{
-    int const offset = (p_multisampled) ? FBO_TEXTURE::COUNT : 0;
-    uint32_t texture_id = m_textures[p_texture_index + offset];
-    return texture_id;
 }
 
 uint32_t Renderer::GetWindowWidth() const
@@ -4347,8 +4219,10 @@ QVector<uint32_t> Renderer::BindFBOToDraw(FBO_TEXTURE_BITFIELD_ENUM const p_text
     return draw_buffers;
 }
 
-void Renderer::CacheUniformLocations(GLuint p_program, QVector<QVector<GLint>> & p_map)
+void Renderer::CacheUniformLocations(GLuint p_program)
 {
+    QVector<QVector<GLint>> & p_map = m_uniform_locs;
+
     GLint loc = -1;
 
     if (p_map.size() <= int(p_program))
@@ -4570,7 +4444,7 @@ QPointer<ProgramHandle> Renderer::CompileAndLinkShaderProgram(QByteArray & p_ver
 {
 //    qDebug() << "Renderer::CompileAndLinkShaderProgram" << this;        
     //    qDebug() << "Renderer::CompileAndLinkShaderProgram2";
-    GLuint program_id;
+    GLuint program_id = 0;
     QPointer<ProgramHandle> p_abstract_program = CreateProgramHandle(program_id);
 
     GLuint vertex_shader_id = MathUtil::glFuncs->glCreateShader(GL_VERTEX_SHADER);
@@ -4717,7 +4591,7 @@ QPointer<ProgramHandle> Renderer::CompileAndLinkShaderProgram(QByteArray & p_ver
         //        MathUtil::ErrorLog(program_log.data());
 
         MathUtil::glFuncs->glUseProgram(program_id);
-        CacheUniformLocations(program_id, m_uniform_locs);
+        CacheUniformLocations(program_id);
     }
 
     return p_abstract_program;
@@ -4869,8 +4743,7 @@ void Renderer::InitializeGLContext(QOpenGLContext * p_gl_context)
     m_gl_surface->setFormat(format);
     m_gl_surface->create();
 
-    m_gl_context->makeCurrent(m_gl_surface);
-    m_gl_funcs = m_gl_context->extraFunctions();
+    m_gl_context->makeCurrent(m_gl_surface);   
 
     // Create FBO to use for attaching main-thread FBO textures to for blitting
     m_main_fbo = 0;
@@ -4888,7 +4761,7 @@ void Renderer::InitializeGLContext(QOpenGLContext * p_gl_context)
             qDebug() << "Renderer::InitializeGLContext - DEBUG OUTPUT SUPPORTED";
 
             glDebugMessageCallbackARB((GLDEBUGPROCARB)&MathUtil::DebugCallback, NULL);
-            m_gl_funcs->glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB);
+            MathUtil::glFuncs->glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB);
         }
         else
         {
@@ -5003,7 +4876,8 @@ void Renderer::Render()
             if (m_hmd_manager->m_using_openVR) {
                 MathUtil::glFuncs->glActiveTexture(GL_TEXTURE15);
                 m_active_texture_slot_render = 15;
-                m_hmd_manager->m_color_texture_id =  GetTextureID(FBO_TEXTURE::COLOR, false);
+
+                m_hmd_manager->m_color_texture_id = m_textures[FBO_TEXTURE::COLOR];
             }
 
             m_hmd_manager->EndRenderEye(0);

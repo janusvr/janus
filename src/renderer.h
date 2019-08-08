@@ -39,10 +39,7 @@ public:
 	Renderer();
     ~Renderer();
 
-    void Initialize();
-    void InitializeScopes();
-    void InitializeState();
-    void InitializeLightUBOs();
+    void Initialize();    
     void InitializeHMDManager(QPointer <AbstractHMDManager> p_hmd_manager);    
 
     QPointer<ProgramHandle> GetDefaultObjectShaderProgram();
@@ -59,7 +56,6 @@ public:
     QPointer<TextureHandle> CreateTextureQImage(const QImage & img, const bool tex_mipmap, const bool tex_linear, const bool tex_clamp, const TextureHandle::ALPHA_TYPE tex_alpha, const TextureHandle::COLOR_SPACE tex_colorspace);
     QPointer<TextureHandle> CreateCubemapTextureHandle(const uint32_t p_width, const uint32_t p_height, const TextureHandle::COLOR_SPACE p_color_space, const int32_t p_internal_texture_format, const bool tex_mipmap, const bool tex_linear, const bool tex_clamp, const TextureHandle::ALPHA_TYPE tex_alpha, const TextureHandle::COLOR_SPACE tex_colorspace);
     QPointer<TextureHandle> CreateCubemapTextureHandleFromTextureHandles(QVector<QPointer<AssetImageData> > &p_skybox_image_data, QVector<QPointer<TextureHandle> > &p_skybox_image_handles, const bool tex_mipmap, const bool tex_linear, const bool tex_clamp, const TextureHandle::ALPHA_TYPE tex_alpha, const TextureHandle::COLOR_SPACE tex_colorspace);
-    void GenerateEnvMapsFromCubemapTextureHandle(Cubemaps &p_cubemaps);
 
     void UpdateTextureHandleData(TextureHandle* p_handle, uint const p_level, uint const p_x_offset, uint const p_y_offset, uint const p_width, uint const p_height, uint const p_pixel_size, void* const p_pixel_data);
     void UpdateTextureHandleData(TextureHandle* p_handle, uint const p_level, uint const p_x_offset, uint const p_y_offset, uint const p_width, uint const p_height, int const p_pixel_format, int const p_pixel_type, void* const p_pixel_data, uint32_t const p_data_size);
@@ -115,7 +111,6 @@ public:
 
     void BeginScope(RENDERER::RENDER_SCOPE p_scope);
     void EndCurrentScope();
-    RENDERER::RENDER_SCOPE GetCurrentScope();
 
     QVector<uint64_t> & GetGPUTimeQueryResults();
     QVector<uint64_t> & GetCPUTimeQueryResults();
@@ -150,10 +145,9 @@ public:
     QPointer<MeshHandle> GetPyramidVAO();
     GLuint GetPyramidPrimCount() const;
 
-    void ConfigureFramebuffer(uint32_t const p_window_width, uint32_t const p_window_height, uint32_t const p_msaa_count);
-    void ConfigureWindowSize(uint32_t const p_window_width, uint32_t const p_window_height);
+    void ConfigureFramebuffer(uint32_t const p_window_width, uint32_t const p_window_height, uint32_t const p_msaa_count);    
     void ConfigureSamples(uint32_t const p_msaa_count);
-    uint32_t GetTextureID(FBO_TEXTURE_ENUM const p_texture_index, bool const p_multisampled) const;
+
     QVector<uint32_t> BindFBOToRead(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask, bool const p_bind_multisampled = true) const;
     QVector<uint32_t> BindFBOToDraw(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask, bool const p_bind_multisampled = true) const;
     void BlitMultisampledFramebuffer(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask,
@@ -167,8 +161,7 @@ public:
     void RequestScreenShot(uint32_t const p_width, uint32_t const p_height, uint32_t const p_sample_count, bool const p_is_equi, uint64_t p_frame_index);
     uint64_t GetLastSubmittedFrameID();
 
-    //    Interface    
-    void PreRender(QHash<int, QVector<AbstractRenderCommand> > * p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers);    
+    //    Interface        
     void UpgradeShaderSource(QByteArray& p_shader_source, bool p_is_vertex_shader);
 
     //	 Texture Handle
@@ -197,9 +190,6 @@ public:
     // Helper Functions
     void BindTextureHandle(uint32_t p_slot_index, QPointer <TextureHandle> p_texture_handle, bool p_force_rebind = false);
 
-    GLuint GetCurrentlyBoundMeshHandle();
-    GLuint GetCurrentlyBoundBufferHandle(BufferHandle::BUFFER_TYPE p_buffer_type);
-
     void SetFaceCullMode(FaceCullMode p_face_cull_mode);
     FaceCullMode GetFaceCullMode() const;
 
@@ -212,10 +202,7 @@ public:
 
     GLuint InitGLBuffer(GLsizeiptr p_dataSizeInBytes, void* p_data, GLenum p_bufferType, GLenum p_bufferUse);
     GLuint InitGLVertexAttribBuffer(GLenum p_dataType, GLboolean p_normalised, GLint p_dataTypeCount, GLsizeiptr p_dataSizeInBytes, GLuint p_attribID, GLuint p_attribDivisor, GLsizei p_stride, GLenum p_bufferUse, void* p_data);
-    void CopyDataBetweenBuffers(GLuint p_src, GLuint p_dst, GLsizeiptr p_size, GLintptr p_srcOffset, GLintptr p_dstOffset);    
-
-    QVector<VirtualCamera> const & GetCameras() const;
-    uint32_t GetCamerasPerScope(RENDERER::RENDER_SCOPE const p_scope) const;
+    void CopyDataBetweenBuffers(GLuint p_src, GLuint p_dst, GLsizeiptr p_size, GLintptr p_srcOffset, GLintptr p_dstOffset);       
 
     void prependDataInShaderMainFunction(QByteArray &p_shader_source, const char *p_insertion_string);
 
@@ -241,7 +228,6 @@ public:
 
     void SaveScreenshot();
 
-    void InitializeGLContext(QOpenGLContext* p_gl_context);
     void CreateMeshHandle(QPointer<MeshHandle> &p_handle, VertexAttributeLayout p_layout);    
 
     static QPointer <Renderer> m_pimpl;
@@ -338,7 +324,7 @@ public:
 
 protected:
 
-    void CacheUniformLocations(GLuint p_program, QVector<QVector<GLint>> & p_map);
+    void CacheUniformLocations(GLuint p_program);
 
     static void UpdateUniform4fv(GLint const p_loc,  GLuint const p_vector_count, float* p_values);
     static void UpdateUniform4iv(GLint const p_loc,  GLuint const p_vector_count, int32_t* p_values);
@@ -376,10 +362,13 @@ protected:
 
 private:
 
-    void PreRender(QHash<int, QVector<AbstractRenderCommand> > & p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> & p_scoped_light_containers);    
+    void InitializeScopes();
+    void InitializeState();
+    void InitializeLightUBOs();
+    void InitializeGLContext(QOpenGLContext* p_gl_context);
+
     void SortRenderCommandsByDistance(QVector<AbstractRenderCommand>& render_command_vector, const bool p_is_transparent);    
 
-    void GetViewportsAndCameraCount(QVector<float>& viewports, RENDERER::RENDER_SCOPE const p_scope, int &camera_count);
     void InternalFormatFromSize(GLenum *p_pixel_format, const uint p_pixel_size);
     void UpdatePerObjectData(QHash<int, QVector<AbstractRenderCommand> > &p_scoped_render_commands);
     void RenderEqui();
@@ -416,8 +405,7 @@ private:
     GLuint m_active_light_UBO_index;
 
     QOffscreenSurface *  m_gl_surface;
-    QOpenGLContext * m_gl_context;
-    QOpenGLExtraFunctions * m_gl_funcs;
+    QOpenGLContext * m_gl_context;    
 
     GLuint m_main_fbo;
     QPointer<TextureHandle> m_equi_cubemap_handle;
