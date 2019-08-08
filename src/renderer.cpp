@@ -4024,11 +4024,6 @@ void Renderer::BlitMultisampledFramebuffer(const FBO_TEXTURE_BITFIELD_ENUM p_tex
     }
 }
 
-void Renderer::BlitMultisampledFramebuffer(const FBO_TEXTURE_BITFIELD_ENUM p_textures_bitmask)
-{
-    BlitMultisampledFramebuffer(p_textures_bitmask, 0, 0, m_window_width, m_window_height, 0, 0, m_window_width, m_window_height);
-}
-
 QVector<uint32_t> Renderer::BindFBOToRead(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask, bool const p_bind_multisampled/* = true*/)
 {
     QVector<uint32_t> read_buffers;
@@ -4718,7 +4713,7 @@ void Renderer::Render()
                                         m_scoped_light_containers_cache[m_rendering_index]);
         }
 
-        BlitMultisampledFramebuffer(FBO_TEXTURE_BITFIELD::COLOR);
+        BlitMultisampledFramebuffer(FBO_TEXTURE_BITFIELD::COLOR, 0, 0, m_window_width, m_window_height, 0, 0, m_window_width, m_window_height);
         MathUtil::glFuncs->glBindFramebuffer(GL_FRAMEBUFFER, 0);       
 
         if (MathUtil::m_do_equi

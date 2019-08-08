@@ -150,10 +150,7 @@ public:
 
     QVector<uint32_t> BindFBOToRead(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask, bool const p_bind_multisampled = true) const;
     QVector<uint32_t> BindFBOToDraw(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask, bool const p_bind_multisampled = true) const;
-    void BlitMultisampledFramebuffer(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask,
-                                     int32_t srcX0, int32_t srcY0, int32_t srcX1, int32_t srcY1,
-                                     int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1) const;
-    void BlitMultisampledFramebuffer(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask) const;
+
     uint32_t GetWindowWidth() const;
     uint32_t GetWindowHeight() const;
     uint32_t GetMSAACount() const;
@@ -204,10 +201,10 @@ public:
     void BindFBOAndTextures(QVector<uint32_t>& p_bound_buffers, uint32_t const p_texture_type,
                             uint32_t const p_framebuffer_target, uint32_t const p_fbo,
                             int const p_texture_offset, FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask) const;
+
     void BlitMultisampledFramebuffer(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask,
                                      int32_t srcX0, int32_t srcY0, int32_t srcX1, int32_t srcY1,
-                                     int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1);
-    void BlitMultisampledFramebuffer(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask);   
+                                     int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1); 
 
     QPointer <ProgramHandle> CompileAndLinkShaderProgram(QByteArray & p_vertex_shader, QString p_vertex_shader_path, QByteArray & p_fragment_shader, QString p_fragment_shader_path);
 
