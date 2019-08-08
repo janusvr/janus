@@ -157,7 +157,7 @@ public:
     uint32_t GetWindowWidth() const;
     uint32_t GetWindowHeight() const;
     uint32_t GetMSAACount() const;
-    void SubmitFrame();
+
     void RequestScreenShot(uint32_t const p_width, uint32_t const p_height, uint32_t const p_sample_count, bool const p_is_equi, uint64_t p_frame_index);
     uint64_t GetLastSubmittedFrameID();
 
@@ -195,18 +195,17 @@ public:
 
     void RenderObjects(RENDERER::RENDER_SCOPE const p_scope, QVector<AbstractRenderCommand> const & p_object_render_commands, QHash<StencilReferenceValue, LightContainer> const & p_scoped_light_containers);
 
-    void PushNewLightData(LightContainer const * p_lightContainer);
+    void PushNewLightData(const LightContainer &p_lightContainer);
     virtual void InitializeGLObjects();
 
     GLuint GetProgramHandleID(QPointer <ProgramHandle> p_handle);
 
-    GLuint InitGLBuffer(GLsizeiptr p_dataSizeInBytes, void* p_data, GLenum p_bufferType, GLenum p_bufferUse);
     GLuint InitGLVertexAttribBuffer(GLenum p_dataType, GLboolean p_normalised, GLint p_dataTypeCount, GLsizeiptr p_dataSizeInBytes, GLuint p_attribID, GLuint p_attribDivisor, GLsizei p_stride, GLenum p_bufferUse, void* p_data);
     void CopyDataBetweenBuffers(GLuint p_src, GLuint p_dst, GLsizeiptr p_size, GLintptr p_srcOffset, GLintptr p_dstOffset);       
 
     void prependDataInShaderMainFunction(QByteArray &p_shader_source, const char *p_insertion_string);
 
-    static char const * g_gamma_correction_GLSL;
+    static const char * g_gamma_correction_GLSL;
     QPointer<ProgramHandle> CreateProgramHandle(uint32_t & p_GPU_ID);
     void RemoveProgramHandleFromMap(QPointer <ProgramHandle> p_handle);
 
@@ -231,11 +230,6 @@ public:
     void CreateMeshHandle(QPointer<MeshHandle> &p_handle, VertexAttributeLayout p_layout);    
 
     static QPointer <Renderer> m_pimpl;
-
-    bool m_update_GPU_state;
-    bool m_allow_color_mask;
-    GLuint m_active_texture_slot;
-    GLuint m_active_texture_slot_render;
 
     QMap<QPointer <TextureHandle>, GLuint> m_texture_handle_to_GL_ID;
 
@@ -380,8 +374,7 @@ private:
     GLfloat m_max_anisotropy;
     QVector <QPointer <TextureHandle> > m_bound_texture_handles;
     QVector <QPointer <TextureHandle> > m_bound_texture_handles_render;
-    GLuint m_bound_VAO;
-    GLuint m_bound_buffers[BUFFER_TYPE_COUNT];
+
     FaceCullMode m_face_cull_mode;
     FaceCullMode m_current_face_cull_mode;
     FaceCullMode m_default_face_cull_mode;
@@ -404,8 +397,7 @@ private:
     LightContainer m_dummyLights;
     GLuint m_active_light_UBO_index;
 
-    QOffscreenSurface *  m_gl_surface;
-    QOpenGLContext * m_gl_context;    
+    QOffscreenSurface *  m_gl_surface;    
 
     GLuint m_main_fbo;
     QPointer<TextureHandle> m_equi_cubemap_handle;

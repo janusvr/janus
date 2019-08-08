@@ -1,14 +1,10 @@
 #include "renderer.h"
 
 QPointer <Renderer> Renderer::m_pimpl(nullptr);
-char const * Renderer::g_gamma_correction_GLSL = "out_color = pow(out_color, vec4(0.45454545454, 0.45454545454, 0.45454545454, 1.0));";
+const char * Renderer::g_gamma_correction_GLSL = "out_color = pow(out_color, vec4(0.45454545454, 0.45454545454, 0.45454545454, 1.0));";
 
 Renderer::Renderer()
     : m_current_scope(RENDERER::RENDER_SCOPE::NONE),      
-      m_update_GPU_state(false),
-      m_allow_color_mask(true),
-      m_active_texture_slot(0),
-      m_active_texture_slot_render(0),
       m_fullScreenQuadShaderProgram(0),
       m_window_width(1280),
       m_window_height(720),
@@ -39,7 +35,6 @@ Renderer::Renderer()
       m_buffer_UUID(1),
       m_shader_UUID(1),
       m_max_anisotropy(0.0f),
-      m_bound_VAO(0),
       m_face_cull_mode(FaceCullMode::BACK),
       m_current_face_cull_mode(FaceCullMode::BACK),
       m_default_face_cull_mode(FaceCullMode::BACK),
@@ -49,8 +44,7 @@ Renderer::Renderer()
       m_depth_mask(DepthMask::DEPTH_WRITES_ENABLED),
       m_current_depth_mask(DepthMask::DEPTH_WRITES_ENABLED),
       m_active_light_UBO_index(0),
-      m_gl_surface(nullptr),
-      m_gl_context(nullptr),
+      m_gl_surface(nullptr),      
       m_main_fbo(0),
       m_is_initialized(false),
       m_hmd_initialized(false),
@@ -102,14 +96,9 @@ void Renderer::Initialize()
     m_bound_texture_handles = QVector<QPointer <TextureHandle> >(ASSETSHADER_MAX_TEXTURE_UNITS, nullptr);
     m_bound_texture_handles_render = QVector<QPointer <TextureHandle> >(ASSETSHADER_MAX_TEXTURE_UNITS, nullptr);
 
-    for (int i = 0; i <BUFFER_TYPE_COUNT; ++i) {
-        m_bound_buffers[i] = 0;
-    }
     for (int i = 0; i <BUFFER_CHUNK_COUNT; ++i) {
         m_light_UBOs[i] = 0;
     }
-
-    m_bound_VAO = 0;
 
     // Pre allocated our mapping buffers to avoid frequent reallocations during initial loading.
     m_uniform_locs.resize(1024);
@@ -206,33 +195,6 @@ void Renderer::Initialize()
 uint64_t Renderer::GetLastSubmittedFrameID()
 {
     return m_submitted_frame_id;
-}
-
-void Renderer::SubmitFrame()
-{
-    // Sort commands on the main-thread to avoid stutters or frametime impact on the render-thread
-    //SortRenderCommandsByDistance(m_abstractRenderer->m_scoped_render_commands_cache[m_abstractRenderer->m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CURRENT_ROOM_OBJECTS_OPAQUE)], false);
-    //SortRenderCommandsByDistance(m_abstractRenderer->m_scoped_render_commands_cache[m_abstractRenderer->m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CURRENT_ROOM_OBJECTS_CUTOUT)], false);
-    SortRenderCommandsByDistance(m_scoped_render_commands_cache[m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CURRENT_ROOM_OBJECTS_BLENDED)], true);
-    SortRenderCommandsByDistance(m_scoped_render_commands_cache[m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CURRENT_ROOM_PORTAL_DECORATIONS)], true);
-    //SortRenderCommandsByDistance(m_abstractRenderer->m_scoped_render_commands_cache[m_abstractRenderer->m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CHILD_ROOM_OBJECTS_OPAQUE)], false);
-    //SortRenderCommandsByDistance(m_abstractRenderer->m_scoped_render_commands_cache[m_abstractRenderer->m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CHILD_ROOM_OBJECTS_CUTOUT)], false);
-    SortRenderCommandsByDistance(m_scoped_render_commands_cache[m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CHILD_ROOM_OBJECTS_BLENDED)], true);
-
-    // Swap our submission indices round
-    qSwap(m_current_submission_index, m_completed_submission_index);
-    m_submitted_frame_id++;
-    m_draw_id = 0;
-
-    // Erase the existing contents of the vector we are now going to be pushing AbstractRenderCommands into
-    // This shouldn't deallocate the memory, only call destructors and change the size member of the vector
-    // which is what we want as allocating/deallocating every frame would be costly.
-    for (const RENDERER::RENDER_SCOPE scope : m_scopes)
-    {
-        m_scoped_render_commands_cache[m_current_submission_index][static_cast<int>(scope)].erase(
-                    m_scoped_render_commands_cache[m_current_submission_index][static_cast<int>(scope)].begin(),
-                    m_scoped_render_commands_cache[m_current_submission_index][static_cast<int>(scope)].end());
-    }
 }
 
 void Renderer::SortRenderCommandsByDistance(QVector<AbstractRenderCommand>& render_command_vector, bool const p_is_transparent)
@@ -1584,23 +1546,21 @@ void Renderer::InitializeLightUBOs()
     MathUtil::glFuncs->glBindBufferBase(GL_UNIFORM_BUFFER, 0, m_light_UBOs[0]);
 }
 
-void Renderer::PushNewLightData(LightContainer const * p_lightContainer)
+void Renderer::PushNewLightData(const LightContainer & p_lightContainer)
 {
     // Bind UBO, update it's contents, attach to block index 0
     MathUtil::glFuncs->glBindBuffer(GL_UNIFORM_BUFFER, m_light_UBOs[m_active_light_UBO_index]);
 
-    auto const light_count = p_lightContainer->m_lights.size();
+    const int light_count = p_lightContainer.m_lights.size();
 
     // Check that we have the appropriate amount of data in the container
     // This can happen when we try to draw a new portal
-    if (light_count == 0)
-    {
+    if (light_count == 0) {
         // Push a single dummy light with defaults so that lighting is disabled.
         MathUtil::glFuncs->glBufferData(GL_UNIFORM_BUFFER, sizeof(Light) * 1, &(m_dummyLights.m_lights[0]), GL_DYNAMIC_DRAW);
     }
-    else
-    {
-        MathUtil::glFuncs->glBufferData(GL_UNIFORM_BUFFER, sizeof(Light) * light_count, &(p_lightContainer->m_lights[0]), GL_DYNAMIC_DRAW);
+    else {
+        MathUtil::glFuncs->glBufferData(GL_UNIFORM_BUFFER, sizeof(Light) * light_count, &(p_lightContainer.m_lights[0]), GL_DYNAMIC_DRAW);
     }
 
     MathUtil::glFuncs->glBindBufferBase(GL_UNIFORM_BUFFER, 0, m_light_UBOs[m_active_light_UBO_index]);
@@ -1613,8 +1573,7 @@ TextureSet Renderer::GetCurrentlyBoundTextures()
 {
     TextureSet texture_set;
 
-    for (int i = 0; i < ASSETSHADER_NUM_COMBINED_TEXURES; ++i)
-    {
+    for (int i = 0; i < ASSETSHADER_NUM_COMBINED_TEXURES; ++i) {
         texture_set.SetTextureHandle(i, m_bound_texture_handles[i]);
     }
     return texture_set;
@@ -1624,20 +1583,14 @@ void Renderer::BindTextureHandle(uint32_t p_slot_index, QPointer <TextureHandle>
 {
     QMap<QPointer <TextureHandle>, GLuint> & p_map = m_texture_handle_to_GL_ID;
 
-    if (p_texture_handle.isNull() || p_texture_handle->m_UUID.m_in_use_flag == 0)
-    {
+    if (p_texture_handle.isNull() || p_texture_handle->m_UUID.m_in_use_flag == 0) {
         qDebug() << QString("ERROR: Renderer::BindTextureHandle p_texture_handle was nullptr");
         return;
     }
 
-    if (m_active_texture_slot != p_slot_index)
-    {
-        MathUtil::glFuncs->glActiveTexture(GL_TEXTURE0 + p_slot_index);
-        m_active_texture_slot = p_slot_index;
-    }
+    MathUtil::glFuncs->glActiveTexture(GL_TEXTURE0 + p_slot_index);
 
-    if (m_bound_texture_handles[p_slot_index].isNull() || m_bound_texture_handles[p_slot_index]->m_UUID.m_UUID != p_texture_handle->m_UUID.m_UUID || p_force_rebind == true)
-    {
+    if (m_bound_texture_handles[p_slot_index].isNull() || m_bound_texture_handles[p_slot_index]->m_UUID.m_UUID != p_texture_handle->m_UUID.m_UUID || p_force_rebind == true) {
         GLuint texture_id = 0;
         if (p_map.contains(p_texture_handle)) {
             texture_id = p_map[p_texture_handle];
@@ -1664,10 +1617,7 @@ void Renderer::BindMeshHandle(QPointer <MeshHandle> p_mesh_handle)
         VAO_id = m_mesh_handle_to_GL_ID[p_mesh_handle];
     }
 
-    if (m_bound_VAO != VAO_id) {
-        MathUtil::glFuncs->glBindVertexArray(VAO_id);
-        m_bound_VAO = VAO_id;
-    }
+    MathUtil::glFuncs->glBindVertexArray(VAO_id);
 }
 
 void Renderer::BindBufferHandle(QPointer <BufferHandle> p_buffer_handle, BufferHandle::BUFFER_TYPE p_buffer_type)
@@ -1687,7 +1637,6 @@ void Renderer::BindBufferHandle(QPointer <BufferHandle> p_buffer_handle, BufferH
     uint16_t buffer_index = p_buffer_type - 1;
 
     MathUtil::glFuncs->glBindBuffer(buffer_type, VBO_id);
-    m_bound_buffers[buffer_index] = VBO_id;
 }
 
 void Renderer::BindBufferHandle(QPointer <BufferHandle> p_buffer_handle)
@@ -1715,7 +1664,7 @@ void Renderer::SetIsUsingEnhancedDepthPrecision(bool const p_is_using)
 
 void Renderer::SetFaceCullMode(FaceCullMode p_face_cull_mode)
 {
-    if ((m_current_face_cull_mode != p_face_cull_mode) && m_update_GPU_state)
+    if (m_current_face_cull_mode != p_face_cull_mode)
     {
         // If we are currently disabled, enable face culling before updating the value
         if (m_current_face_cull_mode == FaceCullMode::DISABLED)
@@ -1789,7 +1738,7 @@ void Renderer::SetDepthFunc(DepthFunc p_depth_func)
         }
     }
 
-    if (m_current_depth_func != p_depth_func && m_update_GPU_state)
+    if (m_current_depth_func != p_depth_func)
     {
         MathUtil::glFuncs->glDepthFunc(static_cast<GLenum>(p_depth_func));
         m_current_depth_func = p_depth_func;
@@ -1805,7 +1754,7 @@ void Renderer::SetDepthMask(DepthMask p_depth_mask)
 {
     m_depth_mask = p_depth_mask;
 
-    if (m_current_depth_mask != m_depth_mask && m_update_GPU_state)
+    if (m_current_depth_mask != m_depth_mask)
     {
         MathUtil::glFuncs->glDepthMask(static_cast<GLboolean>(m_depth_mask));
         m_current_depth_mask = m_depth_mask;
@@ -1821,7 +1770,7 @@ void Renderer::SetStencilFunc(StencilFunc p_stencil_func)
 {
     m_stencil_func = p_stencil_func;
 
-    if (m_current_stencil_func != m_stencil_func && m_update_GPU_state)
+    if (m_current_stencil_func != m_stencil_func)
     {
         MathUtil::glFuncs->glStencilFunc(static_cast<GLenum>(m_stencil_func.GetStencilTestFunction()),
                                          static_cast<GLint>(m_stencil_func.GetStencilReferenceValue()),
@@ -1842,7 +1791,7 @@ void Renderer::SetStencilOp(StencilOp p_stencil_op)
 {
     m_stencil_op = p_stencil_op;
 
-    if (m_current_stencil_op != m_stencil_op && m_update_GPU_state)
+    if (m_current_stencil_op != m_stencil_op)
     {
         MathUtil::glFuncs->glStencilOp(static_cast<GLenum>(m_stencil_op.GetStencilFailAction()),
                                          static_cast<GLenum>(m_stencil_op.GetDepthFailAction()),
@@ -1860,7 +1809,7 @@ void Renderer::SetColorMask(ColorMask p_color_mask)
 {
     m_color_mask = p_color_mask;
 
-    if (m_current_color_mask != m_color_mask && m_update_GPU_state && m_allow_color_mask)
+    if (m_current_color_mask != m_color_mask)
     {
         MathUtil::glFuncs->glColorMask(static_cast<GLboolean>(m_color_mask),
                                        static_cast<GLboolean>(m_color_mask),
@@ -1920,11 +1869,10 @@ void Renderer::RenderObjects(const RENDERER::RENDER_SCOPE p_scope,
         {
             MathUtil::glFuncs->glViewport(encompassing_viewport[0], encompassing_viewport[1], encompassing_viewport[2], encompassing_viewport[3]);
         }
-        m_update_GPU_state = true;
+
         SetDepthMask(DepthMask::DEPTH_WRITES_ENABLED);
         SetColorMask(ColorMask::COLOR_WRITES_ENABLED);
         MathUtil::glFuncs->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); //clear
-        m_update_GPU_state = false;
     }
 
     if (p_scope == RENDERER::RENDER_SCOPE::CURRENT_ROOM_OBJECTS_CUTOUT
@@ -1965,9 +1913,6 @@ void Renderer::RenderObjects(const RENDERER::RENDER_SCOPE p_scope,
     AssetShader_Material const * current_material_uniforms = nullptr;
     AssetShader_Object const * current_object_uniforms = nullptr;
 
-    m_update_GPU_state = true;
-
-    m_active_texture_slot_render = 0;
     MathUtil::glFuncs->glActiveTexture(GL_TEXTURE0);
 
     if (p_scope == RENDERER::RENDER_SCOPE::CURRENT_ROOM_OBJECTS_CUTOUT
@@ -2062,19 +2007,16 @@ void Renderer::RenderObjects(const RENDERER::RENDER_SCOPE p_scope,
                     {
                         current_stencil_ref = stencil_ref;
                         QHash<StencilReferenceValue, LightContainer>::const_iterator itr = p_scoped_light_containers.find(current_stencil_ref);
-                        if (itr != p_scoped_light_containers.end())
-                        {
-//                            p_main_thread_renderer->PushNewLightData(&(itr->second));
-                            PushNewLightData(&(itr.value()));
+                        if (itr != p_scoped_light_containers.end()) {
+                            PushNewLightData(itr.value());
                         }
-                        else
-                        {
-                            PushNewLightData(&m_empty_light_container);
+                        else {
+                            PushNewLightData(m_empty_light_container);
                         }
                     }
 
                     // Push new object uniforms if necessary
-                    AssetShader_Object const * object_uniforms = current_render_command.GetObjectUniformsPointer();
+                    const AssetShader_Object * object_uniforms = current_render_command.GetObjectUniformsPointer();
                     if (current_object_uniforms == nullptr || *object_uniforms != *current_object_uniforms || shader_changed == true)
                     {
                         UpdateObjectUniforms(current_programID, object_uniforms);
@@ -2082,7 +2024,7 @@ void Renderer::RenderObjects(const RENDERER::RENDER_SCOPE p_scope,
                     }
 
                     // Push new material uniforms if necessary
-                    AssetShader_Material const * material_uniforms = current_render_command.GetMaterialUniformsPointer();
+                    const AssetShader_Material * material_uniforms = current_render_command.GetMaterialUniformsPointer();
                     if (current_material_uniforms == nullptr || *material_uniforms != *current_material_uniforms || shader_changed == true)
                     {
                         UpdateMaterialUniforms(current_programID, material_uniforms);
@@ -2093,8 +2035,7 @@ void Renderer::RenderObjects(const RENDERER::RENDER_SCOPE p_scope,
                     for (uint32_t texture_slot = 0; texture_slot < ASSETSHADER_NUM_COMBINED_TEXURES; ++texture_slot)
                     {
                         QPointer <TextureHandle> texture_handle_ref = current_render_command.m_texture_set.GetTextureHandle(texture_slot, is_left_eye);
-                        if (!texture_handle_ref || (texture_handle_ref->m_UUID.m_in_use_flag == 0))
-                        {
+                        if (!texture_handle_ref || (texture_handle_ref->m_UUID.m_in_use_flag == 0)) {
                             continue;
                         }
 
@@ -2105,18 +2046,14 @@ void Renderer::RenderObjects(const RENDERER::RENDER_SCOPE p_scope,
                     GLenum current_mode = static_cast<GLenum>(current_render_command.GetPrimitiveType());
                     GLuint current_first_index = current_render_command.GetFirstIndex();
                     GLuint current_primitive_count = current_render_command.GetPrimitiveCount();
-                    if (current_primitive_count != 0)
-                    {
+                    if (current_primitive_count != 0) {
                         auto current_mesh_handle = current_render_command.m_mesh_handle;
-                        if (current_mesh_handle != nullptr)
-                        {
+                        if (current_mesh_handle != nullptr) {
                             BindMeshHandle(current_mesh_handle);
-                            if (current_mesh_handle->m_UUID.m_has_INDICES == 1)
-                            {
+                            if (current_mesh_handle->m_UUID.m_has_INDICES == 1) {
                                 MathUtil::glFuncs->glDrawElements(current_mode, current_primitive_count, GL_UNSIGNED_INT, 0);
                             }
-                            else
-                            {
+                            else {
                                 MathUtil::glFuncs->glDrawArrays(current_mode, current_first_index, current_primitive_count);
                             }
 
@@ -2130,22 +2067,16 @@ void Renderer::RenderObjects(const RENDERER::RENDER_SCOPE p_scope,
             }
         }
     }
-    m_update_GPU_state = false;
-}
-
-GLuint Renderer::InitGLBuffer(GLsizeiptr p_dataSizeInBytes, void* p_data, GLenum p_bufferType, GLenum p_bufferUse)
-{
-    GLuint ID;
-    MathUtil::glFuncs->glGenBuffers(1, &ID);
-    MathUtil::glFuncs->glBindBuffer(p_bufferType, ID);
-    MathUtil::glFuncs->glBufferData(p_bufferType, p_dataSizeInBytes, p_data, p_bufferUse);
-    return ID;
 }
 
 GLuint Renderer::InitGLVertexAttribBuffer(GLenum p_dataType, GLboolean p_normalised, GLint p_dataTypeCount, GLsizeiptr p_dataSizeInBytes
                                                         , GLuint p_attribID, GLuint p_attribDivisor, GLsizei p_stride, GLenum p_bufferUse, void* p_data)
-{
-    GLuint ID = InitGLBuffer(p_dataSizeInBytes, p_data, GL_ARRAY_BUFFER, p_bufferUse);
+{    
+    GLuint ID = 0;
+    MathUtil::glFuncs->glGenBuffers(1, &ID);
+    MathUtil::glFuncs->glBindBuffer(GL_ARRAY_BUFFER, ID);
+    MathUtil::glFuncs->glBufferData(GL_ARRAY_BUFFER, p_dataSizeInBytes, p_data, p_bufferUse);
+
     MathUtil::glFuncs->glVertexAttribPointer(p_attribID, p_dataTypeCount, p_dataType, p_normalised, p_stride, 0);
     MathUtil::glFuncs->glVertexAttribDivisor(p_attribID, p_attribDivisor);
     MathUtil::glFuncs->glEnableVertexAttribArray(p_attribID);
@@ -2608,7 +2539,6 @@ QPointer<TextureHandle> Renderer::CreateCubemapTextureHandleFromTextureHandles(Q
     GLuint texture_id = 0;
     MathUtil::glFuncs->glGenTextures(1, &texture_id);
     MathUtil::glFuncs->glActiveTexture(GL_TEXTURE15);
-    m_active_texture_slot = 15;
     MathUtil::glFuncs->glBindTexture(GL_TEXTURE_CUBE_MAP, texture_id);
 
     //mipmap levels
@@ -2785,7 +2715,6 @@ QPointer<TextureHandle> Renderer::CreateCubemapTextureHandleFromAssetImages(QVec
     MathUtil::glFuncs->glGenTextures(1, &texture_id);
     MathUtil::glFuncs->glGenTextures(1, &texture_id);
     MathUtil::glFuncs->glActiveTexture(GL_TEXTURE15);
-    m_active_texture_slot = 15;
     MathUtil::glFuncs->glBindTexture(GL_TEXTURE_CUBE_MAP, texture_id);
 
     //mipmap levels
@@ -3073,7 +3002,6 @@ QPointer<TextureHandle> Renderer::CreateTextureFromAssetImageData(QPointer<Asset
     GLuint texture_id = 0;
     MathUtil::glFuncs->glGenTextures(1, &texture_id);
     MathUtil::glFuncs->glActiveTexture(GL_TEXTURE15);
-    m_active_texture_slot = 15;
     MathUtil::glFuncs->glBindTexture(GL_TEXTURE_2D, texture_id);
 
     // Mipmaping
@@ -3212,7 +3140,6 @@ QPointer<TextureHandle> Renderer::CreateTextureFromGLIData(const QByteArray & ba
     GLuint texture_id = 0;
     MathUtil::glFuncs->glGenTextures(1, &texture_id);
     MathUtil::glFuncs->glActiveTexture(GL_TEXTURE15);
-    m_active_texture_slot = 15;
     MathUtil::glFuncs->glBindTexture(targetType, texture_id);
 
     // Mipmaping
@@ -3391,7 +3318,6 @@ QPointer<TextureHandle> Renderer::CreateCubemapTextureHandle(uint32_t const p_wi
     GLuint texture_id = 0;
     MathUtil::glFuncs->glGenTextures(1, &texture_id);
     MathUtil::glFuncs->glActiveTexture(GL_TEXTURE15);
-    m_active_texture_slot = 15;
     MathUtil::glFuncs->glBindTexture(GL_TEXTURE_CUBE_MAP, texture_id);
 
     // Mipmaping
@@ -3489,7 +3415,6 @@ QPointer<TextureHandle> Renderer::CreateTextureQImage(const QImage & img, const 
     GLuint texture_id = 0;
     MathUtil::glFuncs->glGenTextures(1, &texture_id);
     MathUtil::glFuncs->glActiveTexture(GL_TEXTURE15);
-    m_active_texture_slot = 15;
     MathUtil::glFuncs->glBindTexture(GL_TEXTURE_2D, texture_id);
 
     //mipmap levels
@@ -3870,7 +3795,6 @@ void Renderer::UpdateFramebuffer()
     if (IsFramebufferConfigurationValid() && m_framebuffer_requires_initialization)
     {
         MathUtil::glFuncs->glActiveTexture(GL_TEXTURE15);
-        m_active_texture_slot = 15;
         const bool do_multi_fbos = (m_msaa_count > 0);
         const int fbo_count = (do_multi_fbos ? 2 : 1);
         m_FBOs.resize(fbo_count);
@@ -4736,35 +4660,29 @@ void Renderer::UpdatePerObjectData(QHash<int, QVector<AbstractRenderCommand>> & 
 void Renderer::InitializeGLContext(QOpenGLContext * p_gl_context)
 {
     qDebug("Renderer::InitializeGLContext");
-    m_gl_context = p_gl_context;
 
     m_gl_surface = new QOffscreenSurface();
-    auto format = m_gl_context->format();
+    auto format = p_gl_context->format();
     m_gl_surface->setFormat(format);
     m_gl_surface->create();
 
-    m_gl_context->makeCurrent(m_gl_surface);   
+    p_gl_context->makeCurrent(m_gl_surface);
 
     // Create FBO to use for attaching main-thread FBO textures to for blitting
     m_main_fbo = 0;
     MathUtil::glFuncs->glGenFramebuffers(1, &m_main_fbo);
 
-    m_gl_context->makeCurrent(m_gl_surface);
-
-    if (m_gl_context->hasExtension(QByteArrayLiteral("GL_ARB_debug_output")))
-    {
+    if (p_gl_context->hasExtension(QByteArrayLiteral("GL_ARB_debug_output"))) {
         PFNGLDEBUGMESSAGECALLBACKARBPROC glDebugMessageCallbackARB = NULL;
-        glDebugMessageCallbackARB = (PFNGLDEBUGMESSAGECALLBACKARBPROC)m_gl_context->getProcAddress(QByteArrayLiteral("glDebugMessageCallbackARB"));
+        glDebugMessageCallbackARB = (PFNGLDEBUGMESSAGECALLBACKARBPROC)p_gl_context->getProcAddress(QByteArrayLiteral("glDebugMessageCallbackARB"));
 
-        if (glDebugMessageCallbackARB != NULL)
-        {
+        if (glDebugMessageCallbackARB != NULL) {
             qDebug() << "Renderer::InitializeGLContext - DEBUG OUTPUT SUPPORTED";
 
             glDebugMessageCallbackARB((GLDEBUGPROCARB)&MathUtil::DebugCallback, NULL);
             MathUtil::glFuncs->glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB);
         }
-        else
-        {
+        else {
             qDebug() << "Renderer::InitializeGLContext - DEBUG OUTPUT NOT SUPPORTED!";
         }
     }
@@ -4783,6 +4701,30 @@ void Renderer::Render()
             m_hmd_manager->InitializeGL();
             m_hmd_manager->ReCentre();
             m_hmd_initialized = true;
+        }
+
+        // Sort commands
+        //SortRenderCommandsByDistance(m_abstractRenderer->m_scoped_render_commands_cache[m_abstractRenderer->m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CURRENT_ROOM_OBJECTS_OPAQUE)], false);
+        //SortRenderCommandsByDistance(m_abstractRenderer->m_scoped_render_commands_cache[m_abstractRenderer->m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CURRENT_ROOM_OBJECTS_CUTOUT)], false);
+        SortRenderCommandsByDistance(m_scoped_render_commands_cache[m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CURRENT_ROOM_OBJECTS_BLENDED)], true);
+        SortRenderCommandsByDistance(m_scoped_render_commands_cache[m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CURRENT_ROOM_PORTAL_DECORATIONS)], true);
+        //SortRenderCommandsByDistance(m_abstractRenderer->m_scoped_render_commands_cache[m_abstractRenderer->m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CHILD_ROOM_OBJECTS_OPAQUE)], false);
+        //SortRenderCommandsByDistance(m_abstractRenderer->m_scoped_render_commands_cache[m_abstractRenderer->m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CHILD_ROOM_OBJECTS_CUTOUT)], false);
+        SortRenderCommandsByDistance(m_scoped_render_commands_cache[m_current_submission_index][static_cast<int>(RENDERER::RENDER_SCOPE::CHILD_ROOM_OBJECTS_BLENDED)], true);
+
+        // Swap our submission indices round
+        qSwap(m_current_submission_index, m_completed_submission_index);
+        m_submitted_frame_id++;
+        m_draw_id = 0;
+
+        // Erase the existing contents of the vector we are now going to be pushing AbstractRenderCommands into
+        // This shouldn't deallocate the memory, only call destructors and change the size member of the vector
+        // which is what we want as allocating/deallocating every frame would be costly.
+        for (const RENDERER::RENDER_SCOPE scope : m_scopes)
+        {
+            m_scoped_render_commands_cache[m_current_submission_index][static_cast<int>(scope)].erase(
+                        m_scoped_render_commands_cache[m_current_submission_index][static_cast<int>(scope)].begin(),
+                        m_scoped_render_commands_cache[m_current_submission_index][static_cast<int>(scope)].end());
         }
 
         // Update rendering_index if needed
@@ -4812,22 +4754,19 @@ void Renderer::Render()
         // This call allows the PreRender function to get recent pose data for the HMD for this frames render
         // this is important for reducing motion-to-photon latency in VR rendering and to ensure that the timers
         // from the various HMD perf overlays show correct latency values and return us accurate predicted pose values
-        if (do_VR)
-        {
+        if (do_VR) {
             m_hmd_manager->Update();
         }
 
         UpdatePerObjectData(m_scoped_render_commands_cache[m_rendering_index]);
 
-        if (do_VR)
-        {
+        if (do_VR) {
             m_hmd_manager->BeginRendering();
             m_hmd_manager->BeginRenderEye(0);
             m_hmd_manager->BeginRenderEye(1);
         }
 
-        for (int scope = 0; scope < int(RENDERER::RENDER_SCOPE::SCOPE_COUNT); ++scope)
-        {
+        for (int scope = 0; scope < int(RENDERER::RENDER_SCOPE::SCOPE_COUNT); ++scope) {
             auto current_scope  = static_cast<RENDERER::RENDER_SCOPE>(scope);
             RenderObjects(current_scope,
                                         m_scoped_render_commands_cache[m_rendering_index][scope],
@@ -4840,8 +4779,7 @@ void Renderer::Render()
         if (MathUtil::m_do_equi
                 || ((m_screenshot_requested == true)
                     && m_screenshot_is_equi == true
-                    && m_screenshot_frame_index == m_current_frame_id))
-        {
+                    && m_screenshot_frame_index == m_current_frame_id)) {
             RenderEqui();
         }
 
@@ -4854,8 +4792,7 @@ void Renderer::Render()
         // offscreen render that doesn't cause a 1 frame flicker
         if ((m_screenshot_requested == false)
                 || (m_screenshot_is_equi == false)
-                || (m_screenshot_frame_index != m_current_frame_id))
-        {
+                || (m_screenshot_frame_index != m_current_frame_id)) {
             // Bind our current FBO as read, and the main-thread textures as our draw-FBO
             // This may have issues if those same main-thread textures are bound to a FBO on the main-thread context.
             MathUtil::glFuncs->glBlitFramebuffer(0, 0, m_window_width, m_window_height,
@@ -4875,8 +4812,6 @@ void Renderer::Render()
             // OpenVR needs the OpenGL handle for the texture, so we update it here.
             if (m_hmd_manager->m_using_openVR) {
                 MathUtil::glFuncs->glActiveTexture(GL_TEXTURE15);
-                m_active_texture_slot_render = 15;
-
                 m_hmd_manager->m_color_texture_id = m_textures[FBO_TEXTURE::COLOR];
             }
 
@@ -4890,8 +4825,7 @@ void Renderer::Render()
 
 void Renderer::SaveScreenshot()
 {
-    if (m_screenshot_pbo_pending == false)
-    {
+    if (!m_screenshot_pbo_pending){
         GLsizei const pbo_size = m_screenshot_width * m_screenshot_height * sizeof(GL_UNSIGNED_BYTE) * 4; // RGBA8
         MathUtil::glFuncs->glGenBuffers(1, &m_screenshot_pbo);
         MathUtil::glFuncs->glBindBuffer(GL_PIXEL_PACK_BUFFER, m_screenshot_pbo);
@@ -4899,8 +4833,7 @@ void Renderer::SaveScreenshot()
         MathUtil::glFuncs->glReadPixels(0, 0, m_screenshot_width, m_screenshot_height, GL_RGBA, GL_UNSIGNED_BYTE, 0);
         m_screenshot_pbo_pending = true;
     }
-    else
-    {
+    else {
         GLsizei const pbo_size = m_screenshot_width * m_screenshot_height * sizeof(GL_UNSIGNED_BYTE) * 4; // RGBA8
         MathUtil::glFuncs->glBindBuffer(GL_PIXEL_PACK_BUFFER, m_screenshot_pbo);
         unsigned char* ptr = nullptr;

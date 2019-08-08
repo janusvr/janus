@@ -579,9 +579,6 @@ void GLWidget::paintGL()
             game->DrawGL(ipd, base_xform, true, QSize(w, h/2), QPoint(mouse_pos.x(), mouse_pos.y()));
         }
 
-        // Tell Renderer we are done submitting render commands
-        Renderer::m_pimpl->SubmitFrame();
-
         // Draw the frame
         Renderer::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
 
@@ -680,9 +677,6 @@ void GLWidget::paintGL()
         {
             game->DrawGL(ipd, base_xform, true, QSize(w/2, h), QPoint(mouse_pos.x()/2, mouse_pos.y()));
         }
-
-        // Tell Renderer we are done submitting render commands
-        Renderer::m_pimpl->SubmitFrame();
 
         // Draw the frame
         Renderer::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
@@ -818,9 +812,6 @@ void GLWidget::paintGL()
         MathUtil::LoadModelIdentity();
         game->DrawGL(0.0f, base_xform, false, s, mouse_pos);
 
-        // Tell Renderer we are done submitting render commands
-        Renderer::m_pimpl->SubmitFrame();
-
         // Draw the frame
         Renderer::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
 
@@ -920,9 +911,6 @@ void GLWidget::paintGL()
 //        game->DrawGL(0, base_xform, true, s, mouse_pos);
         const QMatrix4x4 hmd_xform = hmd_manager->GetHMDTransform();
         game->DrawGL(0, hmd_xform, true, s, mouse_pos);
-
-        // Tell Renderer we are done submitting render commands
-        Renderer::m_pimpl->SubmitFrame();
 
         // Draw the frame
         Renderer::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
@@ -1036,9 +1024,6 @@ void GLWidget::paintGL()
         SetDefaultProjectionPersp(90.0f, 1.0f, near_dist, far_dist);
         game->DrawGL(0.0f, base_xform, false, s, mouse_pos);
 
-        // Tell Renderer we are done submitting render commands
-        Renderer::m_pimpl->SubmitFrame();
-
         // Draw the frame
         Renderer::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
 
@@ -1106,9 +1091,6 @@ void GLWidget::paintGL()
 
         // Render the scene
         game->DrawGL(0.0f, base_xform, true, s, mouse_pos);
-
-        // Tell Renderer we are done submitting render commands
-        Renderer::m_pimpl->SubmitFrame();
 
         // Draw the frame
         Renderer::m_pimpl->Render(); // TODO: This call will no longer be needed once it's running on it's own thread
