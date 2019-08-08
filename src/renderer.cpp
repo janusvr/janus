@@ -209,12 +209,6 @@ void Renderer::SubmitFrame()
     }
 }
 
-void Renderer::Render()
-{
-    Render(&(m_scoped_render_commands_cache[m_completed_submission_index]),
-                               &(m_scoped_light_containers_cache[m_completed_submission_index]));
-}
-
 void Renderer::SortRenderCommandsByDistance(QVector<AbstractRenderCommand>& render_command_vector, bool const p_is_transparent)
 {
     int command_count = render_command_vector.size();
@@ -420,11 +414,6 @@ void Renderer::PushAbstractRenderCommand(AbstractRenderCommand& p_object_render_
         }
     }
     m_draw_id++;
-}
-
-void Renderer::RenderObjects()
-{
-    Render(&(m_scoped_render_commands_cache[m_rendering_index]), &(m_scoped_light_containers_cache[m_rendering_index]));
 }
 
 void Renderer::PushLightContainer(LightContainer const * p_light_container, StencilReferenceValue p_room_stencil_ref)
@@ -4673,18 +4662,6 @@ QPointer<ProgramHandle> Renderer::GetDefaultPortalShaderProgram()
     return m_default_portal_shader;
 }
 
-void Renderer::PreRender(QHash<int, QVector<AbstractRenderCommand> > * p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers)
-{
-    Q_UNUSED(p_scoped_light_containers)
-    UpdatePerObjectData(p_scoped_render_commands);
-}
-
-void Renderer::PostRender(QHash<int, QVector<AbstractRenderCommand> > * p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers)
-{
-    Q_UNUSED(p_scoped_render_commands)
-    Q_UNUSED(p_scoped_light_containers)
-}
-
 QPointer<ProgramHandle> Renderer::CompileAndLinkShaderProgram(QByteArray & p_vertex_shader, QString p_vertex_shader_path, QByteArray & p_fragment_shader, QString p_fragment_shader_path)
 {
 //    qDebug() << "Renderer::CompileAndLinkShaderProgram" << this;        
@@ -4840,16 +4817,6 @@ QPointer<ProgramHandle> Renderer::CompileAndLinkShaderProgram(QByteArray & p_ver
     }
 
     return p_abstract_program;
-}
-
-void Renderer::Render(QHash<int, QVector<AbstractRenderCommand>> * p_scoped_render_commands,
-                          QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers)
-{
-    Q_UNUSED(p_scoped_render_commands);
-    Q_UNUSED(p_scoped_light_containers);
-
-    //62.0 - draw
-    DecoupledRender();
 }
 
 void Renderer::CreateMeshHandle(QPointer<MeshHandle> & p_handle, VertexAttributeLayout p_layout)
@@ -5028,7 +4995,7 @@ void Renderer::InitializeGLContext(QOpenGLContext * p_gl_context)
     m_is_initialized = true;
 }
 
-void Renderer::DecoupledRender()
+void Renderer::Render()
 {
     if (m_is_initialized)
     {
@@ -5075,8 +5042,7 @@ void Renderer::DecoupledRender()
             m_hmd_manager->Update();
         }
 
-        PreRender(&(m_scoped_render_commands_cache[m_rendering_index]),
-                  &(m_scoped_light_containers_cache[m_rendering_index]));
+        UpdatePerObjectData(&(m_scoped_render_commands_cache[m_rendering_index]));
 
         if (do_VR)
         {
@@ -5094,12 +5060,7 @@ void Renderer::DecoupledRender()
         }
 
         BlitMultisampledFramebuffer(FBO_TEXTURE_BITFIELD::COLOR);
-        MathUtil::glFuncs->glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-        // TODO:: Make this function create a mip-chain for the attached fbo color texture
-        // this combined with a layer for the OVRSDK allows for better filtering
-        // it is also useful if we want to create a mip-chain for the depth to use for frame n+1 reprojection or object culling techniques.
-        PostRender(&(m_scoped_render_commands_cache[m_rendering_index]), &(m_scoped_light_containers_cache[m_rendering_index]));
+        MathUtil::glFuncs->glBindFramebuffer(GL_FRAMEBUFFER, 0);       
 
         if (MathUtil::m_do_equi
                 || ((m_screenshot_requested == true)
@@ -5286,7 +5247,7 @@ void Renderer::RenderEqui()
                                        ColorMask::COLOR_WRITES_ENABLED));
 
     // Do the second pass of rendering to convert cubemap to equi
-    PreRender(&post_process_commands, &(m_scoped_light_containers_cache[m_rendering_index]));
+    UpdatePerObjectData(&post_process_commands);
     // This is just to trigger the clearing of the FBO
     //RenderObjectsNaiveDecoupled(m_main_thread_renderer, RENDERER::RENDER_SCOPE::CURRENT_ROOM_PORTAL_STENCILS, post_process_commands[(int)RENDERER::RENDER_SCOPE::POST_PROCESS], (m_scoped_light_containers));
     // This draws our full-screen quad with the cubemap-to-equi fragment shader

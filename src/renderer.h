@@ -109,8 +109,7 @@ public:
     int GetTextureHeight(TextureHandle* p_handle);
 
     void Render();
-    void PushAbstractRenderCommand(AbstractRenderCommand& p_object_render_command);
-    void RenderObjects();	    
+    void PushAbstractRenderCommand(AbstractRenderCommand& p_object_render_command);    
 
     void PushLightContainer(LightContainer const * p_lightContainer, StencilReferenceValue p_room_stencil_ref);
 
@@ -168,11 +167,8 @@ public:
     void RequestScreenShot(uint32_t const p_width, uint32_t const p_height, uint32_t const p_sample_count, bool const p_is_equi, uint64_t p_frame_index);
     uint64_t GetLastSubmittedFrameID();
 
-    //    Interface
-    void Render(QHash<int, QVector<AbstractRenderCommand>> * p_scoped_render_commands,
-                QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers);
-    void PreRender(QHash<int, QVector<AbstractRenderCommand> > * p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers);
-    void PostRender(QHash<int, QVector<AbstractRenderCommand> > * p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers);
+    //    Interface    
+    void PreRender(QHash<int, QVector<AbstractRenderCommand> > * p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> * p_scoped_light_containers);    
     void UpgradeShaderSource(QByteArray& p_shader_source, bool p_is_vertex_shader);
 
     //	 Texture Handle
@@ -254,8 +250,7 @@ public:
     void SaveScreenshot();
 
     void InitializeGLContext(QOpenGLContext* p_gl_context);
-    void CreateMeshHandle(QPointer<MeshHandle> &p_handle, VertexAttributeLayout p_layout);
-    void DecoupledRender();
+    void CreateMeshHandle(QPointer<MeshHandle> &p_handle, VertexAttributeLayout p_layout);    
 
     static QPointer <Renderer> m_pimpl;
 
@@ -393,8 +388,7 @@ protected:
 
 private:
 
-    void PreRender(QHash<int, QVector<AbstractRenderCommand> > & p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> & p_scoped_light_containers);
-    void PostRender(QHash<int, QVector<AbstractRenderCommand> > & p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> & p_scoped_light_containers);
+    void PreRender(QHash<int, QVector<AbstractRenderCommand> > & p_scoped_render_commands, QHash<StencilReferenceValue, LightContainer> & p_scoped_light_containers);    
     void SortRenderCommandsByDistance(QVector<AbstractRenderCommand>& render_command_vector, const bool p_is_transparent);    
 
     void GetViewportsAndCameraCount(QVector<float>& viewports, RENDERER::RENDER_SCOPE const p_scope, int &camera_count);
