@@ -61,8 +61,9 @@ public:
     void UpdateTextureHandleData(TextureHandle* p_handle, uint const p_level, uint const p_x_offset, uint const p_y_offset, uint const p_width, uint const p_height, int const p_pixel_format, int const p_pixel_type, void* const p_pixel_data, uint32_t const p_data_size);
     void GenerateTextureHandleMipMap(TextureHandle* p_handle);
 
-    void CreateMeshHandleForGeomVBOData(GeomVBOData &p_VBO_data);
-    QPointer<MeshHandle> CreateMeshHandle(VertexAttributeLayout p_layout);
+//    	 Mesh Handle (VAO)
+    void CreateMeshHandleForGeomVBOData(GeomVBOData &p_VBO_data);    
+    QPointer<MeshHandle> CreateMeshHandle(VertexAttributeLayout p_layout);        
     void BindMeshHandle(QPointer <MeshHandle> p_mesh_handle);
     QVector<QPointer<BufferHandle>> GetBufferHandlesForMeshHandle(QPointer <MeshHandle> p_mesh_handle);
     void RemoveMeshHandleFromMap(QPointer <MeshHandle> p_handle);
@@ -172,20 +173,7 @@ public:
     void RemoveTextureHandleFromMap(QPointer<TextureHandle> p_handle);
     void externalFormatAndTypeFromSize(GLenum* p_pixel_format, GLenum* p_pixel_type, uint const p_pixel_size);
 
-    void GenerateTextureHandleMipMap(QPointer <TextureHandle> p_handle);
-
-    void CopyReadBufferToTextureHandle(QMap<QPointer<TextureHandle>, GLuint> &p_map, QPointer<TextureHandle> p_handle,
-                                       uint32_t p_target,
-                                       int32_t p_level,
-                                       int32_t p_dst_x,
-                                       int32_t p_dst_y,
-                                       int32_t p_src_x,
-                                       int32_t p_src_y,
-                                       int32_t p_src_width,
-                                       int32_t p_src_height);
-
-    //	 Mesh Handle (VAO)
-    QPointer<MeshHandle> CreateMeshHandle(VertexAttributeLayout p_layout, GLuint p_GL_VAO_ID);
+    void GenerateTextureHandleMipMap(QPointer <TextureHandle> p_handle);   
 
     // Helper Functions
     void BindTextureHandle(uint32_t p_slot_index, QPointer <TextureHandle> p_texture_handle, bool p_force_rebind = false);
@@ -205,7 +193,6 @@ public:
 
     void prependDataInShaderMainFunction(QByteArray &p_shader_source, const char *p_insertion_string);
 
-    static const char * g_gamma_correction_GLSL;
     QPointer<ProgramHandle> CreateProgramHandle(uint32_t & p_GPU_ID);
     void RemoveProgramHandleFromMap(QPointer <ProgramHandle> p_handle);
 
@@ -227,9 +214,8 @@ public:
 
     void SaveScreenshot();
 
-    void CreateMeshHandle(QPointer<MeshHandle> &p_handle, VertexAttributeLayout p_layout);    
-
     static QPointer <Renderer> m_pimpl;
+    static const char * g_gamma_correction_GLSL;
 
     QMap<QPointer <TextureHandle>, GLuint> m_texture_handle_to_GL_ID;
 

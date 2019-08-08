@@ -2187,9 +2187,6 @@ QVector<QPointer<BufferHandle>> Renderer::GetBufferHandlesForMeshHandle(QPointer
 
 void Renderer::CreateMeshHandleForGeomVBOData(GeomVBOData & p_VBO_data)
 {
-    GLuint VAO_ID = 0;
-    MathUtil::glFuncs->glGenVertexArrays(1, &VAO_ID);
-
     int32_t float_type = GL_FLOAT;
     int32_t float_size = sizeof(float);
 
@@ -2245,7 +2242,7 @@ void Renderer::CreateMeshHandleForGeomVBOData(GeomVBOData & p_VBO_data)
     layout.attributes[(uint32_t)VAO_ATTRIB::INDICES].stride_in_bytes = 1 * sizeof(uint32_t);
     layout.attributes[(uint32_t)VAO_ATTRIB::INDICES].offset_in_bytes = 0;
 
-    p_VBO_data.m_mesh_handle = CreateMeshHandle(layout, VAO_ID);
+    p_VBO_data.m_mesh_handle = CreateMeshHandle(layout);
     BindMeshHandle(p_VBO_data.m_mesh_handle);
 
     QVector<QPointer<BufferHandle>> buffer_handles = GetBufferHandlesForMeshHandle(p_VBO_data.m_mesh_handle);
@@ -2280,12 +2277,6 @@ QPointer<MeshHandle> Renderer::CreateMeshHandle(VertexAttributeLayout p_layout)
     uint32_t VAO_id = 0;
     MathUtil::glFuncs->glGenVertexArrays(1, &VAO_id);
 
-    return CreateMeshHandle(p_layout,
-                            VAO_id);
-}
-
-QPointer<MeshHandle> Renderer::CreateMeshHandle(VertexAttributeLayout p_layout, GLuint p_GL_VAO_ID)
-{
     QPointer <MeshHandle> mesh_address = new MeshHandle(m_mesh_UUID,
         p_layout.attributes[(uint32_t)VAO_ATTRIB::POSITION].in_use,
         p_layout.attributes[(uint32_t)VAO_ATTRIB::NORMAL].in_use,
@@ -2303,7 +2294,7 @@ QPointer<MeshHandle> Renderer::CreateMeshHandle(VertexAttributeLayout p_layout, 
         p_layout.attributes[(uint32_t)VAO_ATTRIB::INDICES].in_use);
 
     m_mesh_UUID++;
-    m_mesh_handle_to_GL_ID[mesh_address] = p_GL_VAO_ID;
+    m_mesh_handle_to_GL_ID[mesh_address] = VAO_id;
 
     BindMeshHandle(mesh_address);
 
@@ -2348,14 +2339,12 @@ QPointer<MeshHandle> Renderer::CreateMeshHandle(VertexAttributeLayout p_layout, 
     }
 
     m_mesh_handle_to_buffers[mesh_address] = buffer_handles;
-
     return mesh_address;
 }
 
 void Renderer::RemoveMeshHandleFromMap(QPointer <MeshHandle> p_handle)
 {
-    if (p_handle.isNull())
-    {
+    if (p_handle.isNull()) {
         qDebug() << QString("ERROR!: RemoveMeshHandleFromMap:: p_handle was nullptr");
         return;
     }
@@ -3623,13 +3612,6 @@ void Renderer::GenerateTextureHandleMipMap(QPointer <TextureHandle> p_handle)
     MathUtil::glFuncs->glGenerateMipmap(target);
 }
 
-void Renderer::CopyReadBufferToTextureHandle(QMap<QPointer <TextureHandle>, GLuint> &, QPointer <TextureHandle> p_handle, uint32_t p_target, int32_t p_level, int32_t p_dst_x, int32_t p_dst_y, int32_t p_src_x, int32_t p_src_y, int32_t p_src_width, int32_t p_src_height)
-{
-    if (p_handle) {
-        MathUtil::glFuncs->glCopyTexSubImage2D(p_target, p_level, p_dst_x, p_dst_y, p_src_x, p_src_y, p_src_width, p_src_height);
-    }
-}
-
 void Renderer::RemoveBufferHandleFromMap(QPointer<BufferHandle> p_handle)
 {
     if (p_handle.isNull())
@@ -4518,16 +4500,6 @@ QPointer<ProgramHandle> Renderer::CompileAndLinkShaderProgram(QByteArray & p_ver
     return p_abstract_program;
 }
 
-void Renderer::CreateMeshHandle(QPointer<MeshHandle> & p_handle, VertexAttributeLayout p_layout)
-{
-    // Calling CreateMeshHandle here will cause the VAO to be created on the render-thread's GL Context, any attempt to bind a
-    // VAO obtained from the MeshHandles stored in GeomVBOData on the main-thread will cause wierd behaviour
-    // as those VAO ID are not guaranteed to even exist in the main-thread GL context
-    uint32_t VAO_id = 0;
-    MathUtil::glFuncs->glGenVertexArrays(1, &VAO_id);
-    p_handle = Renderer::CreateMeshHandle(p_layout, VAO_id);
-}
-
 void Renderer::UpgradeShaderSource(QByteArray & p_shader_source, bool p_is_vertex_shader)
 {
 //    p_shader_source.replace("uniform vec4 iUseSkelAnim;",  "uniform vec4 iUseFlags;");
@@ -4875,9 +4847,11 @@ void Renderer::RenderEqui()
     {
 
         uint32_t target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + face_index;
-        CopyReadBufferToTextureHandle(m_texture_handle_to_GL_ID, m_equi_cubemap_handle, target, 0, 0, 0,
-                                      viewports[face_index].x(), viewports[face_index].y(),
-                                      cube_face_dim, cube_face_dim);
+        if (m_equi_cubemap_handle) {
+            MathUtil::glFuncs->glCopyTexSubImage2D(target, 0, 0, 0,
+                                                   viewports[face_index].x(), viewports[face_index].y(),
+                                                   cube_face_dim, cube_face_dim);
+        }
     }
 
 
