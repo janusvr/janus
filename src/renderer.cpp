@@ -1617,29 +1617,23 @@ void Renderer::BindMeshHandle(QPointer <MeshHandle> p_mesh_handle)
     MathUtil::glFuncs->glBindVertexArray(VAO_id);
 }
 
-void Renderer::BindBufferHandle(QPointer <BufferHandle> p_buffer_handle, BufferHandle::BUFFER_TYPE p_buffer_type)
-{
-    GLuint VBO_id = 0;
-
-    if (p_buffer_handle.isNull()) {
-        qDebug() << QString("ERROR: Renderer::BindBufferHandle p_buffer_handle was nullptr");
-        return;
-    }
-
-    if (m_buffer_handle_to_GL_ID.contains(p_buffer_handle)) {
-        VBO_id = m_buffer_handle_to_GL_ID[p_buffer_handle];
-    }
-
-    GLenum buffer_type = (GLenum)BufferHandle::GetBufferTypeEnum(p_buffer_type);
-    uint16_t buffer_index = p_buffer_type - 1;
-
-    MathUtil::glFuncs->glBindBuffer(buffer_type, VBO_id);
-}
-
 void Renderer::BindBufferHandle(QPointer <BufferHandle> p_buffer_handle)
 {
     if (p_buffer_handle) {
-        BindBufferHandle(p_buffer_handle, (BufferHandle::BUFFER_TYPE)p_buffer_handle->m_UUID.m_buffer_type);
+        GLuint VBO_id = 0;
+
+        if (m_buffer_handle_to_GL_ID.contains(p_buffer_handle)) {
+            VBO_id = m_buffer_handle_to_GL_ID[p_buffer_handle];
+        }
+
+        BufferHandle::BUFFER_TYPE p_buffer_type = (BufferHandle::BUFFER_TYPE)p_buffer_handle->m_UUID.m_buffer_type;
+        GLenum buffer_type = (GLenum)BufferHandle::GetBufferTypeEnum(p_buffer_type);
+
+        MathUtil::glFuncs->glBindBuffer(buffer_type, VBO_id);
+    }
+    else {
+        qDebug() << QString("ERROR: Renderer::BindBufferHandle p_buffer_handle was nullptr");
+        return;
     }
 }
 
@@ -1661,22 +1655,18 @@ void Renderer::SetIsUsingEnhancedDepthPrecision(bool const p_is_using)
 
 void Renderer::SetFaceCullMode(FaceCullMode p_face_cull_mode)
 {
-    if (m_current_face_cull_mode != p_face_cull_mode)
-    {
+    if (m_current_face_cull_mode != p_face_cull_mode) {
         // If we are currently disabled, enable face culling before updating the value
-        if (m_current_face_cull_mode == FaceCullMode::DISABLED)
-        {
+        if (m_current_face_cull_mode == FaceCullMode::DISABLED) {
             MathUtil::glFuncs->glEnable(GL_CULL_FACE);
             MathUtil::glFuncs->glCullFace(static_cast<GLenum>(p_face_cull_mode));
         }
         // Else, we are already enabled, so disable if needed
-        else if (p_face_cull_mode == FaceCullMode::DISABLED)
-        {
+        else if (p_face_cull_mode == FaceCullMode::DISABLED) {
             MathUtil::glFuncs->glDisable(GL_CULL_FACE);
         }
         // otherwise just change the face culling mode
-        else
-        {
+        else {
             MathUtil::glFuncs->glCullFace(static_cast<GLenum>(p_face_cull_mode));
         }
 
@@ -1714,29 +1704,22 @@ void Renderer::SetDepthFunc(DepthFunc p_depth_func)
     m_depth_func = p_depth_func;
     // Floating point depth requires that we invert the usual 0 to 1 depth range to be 1 to 0
     // which means we need to also flip the depth compare functions
-    if (GetIsUsingEnhancedDepthPrecision() == true
-        && GetIsEnhancedDepthPrecisionSupported() == true)
-    {
-        if (p_depth_func == DepthFunc::LEQUAL)
-        {
+    if (GetIsUsingEnhancedDepthPrecision() && GetIsEnhancedDepthPrecisionSupported()) {
+        if (p_depth_func == DepthFunc::LEQUAL) {
             p_depth_func = DepthFunc::GEQUAL;
         }
-        else if (p_depth_func == DepthFunc::LESS)
-        {
+        else if (p_depth_func == DepthFunc::LESS) {
             p_depth_func = DepthFunc::GREATER;
         }
-        else if (p_depth_func == DepthFunc::GEQUAL)
-        {
+        else if (p_depth_func == DepthFunc::GEQUAL) {
             p_depth_func = DepthFunc::LEQUAL;
         }
-        else if (p_depth_func == DepthFunc::GREATER)
-        {
+        else if (p_depth_func == DepthFunc::GREATER) {
             p_depth_func = DepthFunc::LESS;
         }
     }
 
-    if (m_current_depth_func != p_depth_func)
-    {
+    if (m_current_depth_func != p_depth_func) {
         MathUtil::glFuncs->glDepthFunc(static_cast<GLenum>(p_depth_func));
         m_current_depth_func = p_depth_func;
     }
@@ -1751,8 +1734,7 @@ void Renderer::SetDepthMask(DepthMask p_depth_mask)
 {
     m_depth_mask = p_depth_mask;
 
-    if (m_current_depth_mask != m_depth_mask)
-    {
+    if (m_current_depth_mask != m_depth_mask) {
         MathUtil::glFuncs->glDepthMask(static_cast<GLboolean>(m_depth_mask));
         m_current_depth_mask = m_depth_mask;
     }
@@ -1767,8 +1749,7 @@ void Renderer::SetStencilFunc(StencilFunc p_stencil_func)
 {
     m_stencil_func = p_stencil_func;
 
-    if (m_current_stencil_func != m_stencil_func)
-    {
+    if (m_current_stencil_func != m_stencil_func) {
         MathUtil::glFuncs->glStencilFunc(static_cast<GLenum>(m_stencil_func.GetStencilTestFunction()),
                                          static_cast<GLint>(m_stencil_func.GetStencilReferenceValue()),
                                          static_cast<GLuint>(m_stencil_func.GetStencilMask()));
@@ -1776,20 +1757,16 @@ void Renderer::SetStencilFunc(StencilFunc p_stencil_func)
     }
 }
 
-
-
 StencilFunc Renderer::GetStencilFunc() const
 {
     return m_stencil_func;
 }
 
-
 void Renderer::SetStencilOp(StencilOp p_stencil_op)
 {
     m_stencil_op = p_stencil_op;
 
-    if (m_current_stencil_op != m_stencil_op)
-    {
+    if (m_current_stencil_op != m_stencil_op) {
         MathUtil::glFuncs->glStencilOp(static_cast<GLenum>(m_stencil_op.GetStencilFailAction()),
                                          static_cast<GLenum>(m_stencil_op.GetDepthFailAction()),
                                          static_cast<GLenum>(m_stencil_op.GetPassAction()));
@@ -1806,8 +1783,7 @@ void Renderer::SetColorMask(ColorMask p_color_mask)
 {
     m_color_mask = p_color_mask;
 
-    if (m_current_color_mask != m_color_mask)
-    {
+    if (m_current_color_mask != m_color_mask) {
         MathUtil::glFuncs->glColorMask(static_cast<GLboolean>(m_color_mask),
                                        static_cast<GLboolean>(m_color_mask),
                                        static_cast<GLboolean>(m_color_mask),

@@ -68,8 +68,7 @@ public:
     QVector<QPointer<BufferHandle>> GetBufferHandlesForMeshHandle(QPointer <MeshHandle> p_mesh_handle);
     void RemoveMeshHandleFromMap(QPointer <MeshHandle> p_handle);
 	
-	QPointer<BufferHandle> CreateBufferHandle(BufferHandle::BUFFER_TYPE const p_buffer_type, BufferHandle::BUFFER_USAGE const p_buffer_usage);
-    void BindBufferHandle(QPointer <BufferHandle> p_buffer_handle, BufferHandle::BUFFER_TYPE const p_buffer_type);
+	QPointer<BufferHandle> CreateBufferHandle(BufferHandle::BUFFER_TYPE const p_buffer_type, BufferHandle::BUFFER_USAGE const p_buffer_usage);    
     void BindBufferHandle(QPointer <BufferHandle> p_buffer_handle);
 	void ConfigureBufferHandleData(QPointer<BufferHandle> p_buffer_handle, uint32_t const p_data_size, void* const p_data, BufferHandle::BUFFER_USAGE const p_buffer_usage);
 	void UpdateBufferHandleData(QPointer<BufferHandle> p_buffer_handle, uint32_t const p_offset, uint32_t const p_data_size, void* const p_data);
