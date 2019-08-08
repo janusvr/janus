@@ -212,14 +212,8 @@ public:
 
     GLuint InitGLBuffer(GLsizeiptr p_dataSizeInBytes, void* p_data, GLenum p_bufferType, GLenum p_bufferUse);
     GLuint InitGLVertexAttribBuffer(GLenum p_dataType, GLboolean p_normalised, GLint p_dataTypeCount, GLsizeiptr p_dataSizeInBytes, GLuint p_attribID, GLuint p_attribDivisor, GLsizei p_stride, GLenum p_bufferUse, void* p_data);
-    void CopyDataBetweenBuffers(GLuint p_src, GLuint p_dst, GLsizeiptr p_size, GLintptr p_srcOffset, GLintptr p_dstOffset);
-    void CreateShadowVAO(GLuint p_VAO, QVector<GLuint> p_VBOs);
-    void CreateShadowFBO(GLuint p_FBO, QVector<GLuint> p_texture_ids);
+    void CopyDataBetweenBuffers(GLuint p_src, GLuint p_dst, GLsizeiptr p_size, GLintptr p_srcOffset, GLintptr p_dstOffset);    
 
-    void WaitforFrameSyncObject();
-    void LockFrameSyncObject();
-    void StartFrame();
-    void EndFrame();
     QVector<VirtualCamera> const & GetCameras() const;
     uint32_t GetCamerasPerScope(RENDERER::RENDER_SCOPE const p_scope) const;
 
@@ -241,9 +235,7 @@ public:
     void BlitMultisampledFramebuffer(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask,
                                      int32_t srcX0, int32_t srcY0, int32_t srcX1, int32_t srcY1,
                                      int32_t dstX0, int32_t dstY0, int32_t dstX1, int32_t dstY1);
-    void BlitMultisampledFramebuffer(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask);
-
-    void PostConstructorInitialize();
+    void BlitMultisampledFramebuffer(FBO_TEXTURE_BITFIELD_ENUM const p_textures_bitmask);   
 
     QPointer <ProgramHandle> CompileAndLinkShaderProgram(QByteArray & p_vertex_shader, QString p_vertex_shader_path, QByteArray & p_fragment_shader, QString p_fragment_shader_path);
 
@@ -357,11 +349,7 @@ protected:
     void UpdateObjectUniforms(GLuint const p_program_id, AssetShader_Object const * const p_new_uniforms) const;
     void UpdateMaterialUniforms(GLuint const p_program_id, AssetShader_Material const * const p_new_uniforms) const;
 
-    void InitScreenAlignedQuad();
-    void InitScreenQuadShaderProgram();
-
-    PFNGLCLIPCONTROLPROC m_glClipControl;
-    QVector<GLsync> m_syncObjects; // These are used to prevent stopming over data in-use by the GPU
+    PFNGLCLIPCONTROLPROC m_glClipControl;   
     QVector<GLuint> m_GPUTimeQuery; // Used for profiling GPU frame times
     GLuint64 m_GPUTimeMin;
     GLuint64 m_GPUTimeMax;
@@ -393,7 +381,7 @@ private:
 
     void GetViewportsAndCameraCount(QVector<float>& viewports, RENDERER::RENDER_SCOPE const p_scope, int &camera_count);
     void InternalFormatFromSize(GLenum *p_pixel_format, const uint p_pixel_size);
-    void UpdatePerObjectData(QHash<int, QVector<AbstractRenderCommand> > * p_scoped_render_commands);
+    void UpdatePerObjectData(QHash<int, QVector<AbstractRenderCommand> > &p_scoped_render_commands);
     void RenderEqui();
 
     RENDERER::RENDER_SCOPE m_current_scope;

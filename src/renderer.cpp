@@ -100,7 +100,34 @@ void Renderer::Initialize()
 {    
     InitializeScopes();
 
-    PostConstructorInitialize();
+    m_bound_texture_handles = QVector<QPointer <TextureHandle> >(ASSETSHADER_MAX_TEXTURE_UNITS, nullptr);
+    m_bound_texture_handles_render = QVector<QPointer <TextureHandle> >(ASSETSHADER_MAX_TEXTURE_UNITS, nullptr);
+
+    for (int i = 0; i <BUFFER_TYPE_COUNT; ++i) {
+        m_bound_buffers[i] = 0;
+    }
+    for (int i = 0; i <BUFFER_CHUNK_COUNT; ++i) {
+        m_light_UBOs[i] = 0;
+    }
+
+    m_bound_VAO = 0;
+
+    // Pre allocated our mapping buffers to avoid frequent reallocations during initial loading.
+    m_uniform_locs.resize(1024);
+
+    UpdateFramebuffer();
+    InitializeState();
+    InitializeLightUBOs();
+
+    MathUtil::glFuncs->glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &m_max_anisotropy);
+
+    m_scopes.reserve(static_cast<int>(RENDERER::RENDER_SCOPE::SCOPE_COUNT));
+    for (int scope_enum = 0; scope_enum < static_cast<int>(RENDERER::RENDER_SCOPE::SCOPE_COUNT); ++scope_enum)
+    {
+         m_scopes.push_back(static_cast<RENDERER::RENDER_SCOPE>(scope_enum));
+    }
+
+    m_scoped_cameras_cache.resize(3);
 
     InitializeGLContext(QOpenGLContext::currentContext());
 
@@ -546,38 +573,6 @@ QPointer<MeshHandle> Renderer::GetPyramidVAO()
 GLuint Renderer::GetPyramidPrimCount() const
 {
     return 24;
-}
-
-void Renderer::PostConstructorInitialize()
-{
-    m_bound_texture_handles = QVector<QPointer <TextureHandle> >(ASSETSHADER_MAX_TEXTURE_UNITS, nullptr);
-    m_bound_texture_handles_render = QVector<QPointer <TextureHandle> >(ASSETSHADER_MAX_TEXTURE_UNITS, nullptr);
-
-    for (int i = 0; i <BUFFER_TYPE_COUNT; ++i) {
-        m_bound_buffers[i] = 0;
-    }
-    for (int i = 0; i <BUFFER_CHUNK_COUNT; ++i) {
-        m_light_UBOs[i] = 0;
-    }
-
-    m_bound_VAO = 0;
-
-    // Pre allocated our mapping buffers to avoid frequent reallocations during initial loading.
-    m_uniform_locs.resize(1024);
-
-    UpdateFramebuffer();
-    InitializeState();
-    InitializeLightUBOs();
-
-    MathUtil::glFuncs->glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &m_max_anisotropy);
-
-    m_scopes.reserve(static_cast<int>(RENDERER::RENDER_SCOPE::SCOPE_COUNT));
-    for (int scope_enum = 0; scope_enum < static_cast<int>(RENDERER::RENDER_SCOPE::SCOPE_COUNT); ++scope_enum)
-    {
-         m_scopes.push_back(static_cast<RENDERER::RENDER_SCOPE>(scope_enum));
-    }
-
-    m_scoped_cameras_cache.resize(3);
 }
 
 void Renderer::InitializeHMDManager(QPointer<AbstractHMDManager> p_hmd_manager)
@@ -1566,9 +1561,6 @@ void Renderer::InitializeState()
     m_current_stencil_op = m_stencil_op;
     MathUtil::glFuncs->glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 
-    // Create sync objects to use for frame resource fencing
-    m_syncObjects.resize(BUFFER_CHUNK_COUNT);
-
     // Initialize GPU Frame timers
     m_GPUTimeQuery.resize(BUFFER_CHUNK_COUNT);
     for (int i = 0; i < m_GPUTimeQuery.size(); ++i)
@@ -1581,53 +1573,6 @@ void Renderer::InitializeState()
     m_GPUTimeQueryResults.resize(180);
     m_CPUTimeQueryResults.resize(180);
     m_frame_time_timer.start();
-}
-
-void Renderer::InitScreenAlignedQuad()
-{
-    /*GLfloat vertices[] = {	-1.0f, -1.0f,
-                            -1.0f,  1.0f,
-                             1.0f,  1.0f,
-                             1.0f, -1.0f};
-
-    GLuint indices[] = { 0,3,1,
-                         3,2,1};
-
-    m_fullScreenQuadVAO = CreateMeshHandle(true, false, false, false, false, false, false, false, false, false, false, false, false, true);
-    BindMeshHandle(m_fullScreenQuadVAO.get());
-
-    auto buffers = GetBufferHandlesForMeshHandle(m_fullScreenQuadVAO.get());
-    m_fullScreenQuadVBOs.resize(2);
-    m_fullScreenQuadVBOs[0] = (*buffers)[(GLuint)VAO_ATTRIB::POSITION];
-    BindBufferHandle(m_fullScreenQuadVBOs[0].get());
-    ConfigureBufferHandleData(m_fullScreenQuadVBOs[0], sizeof(GLfloat) * 8, (void* const)&vertices[0], BufferHandle::BUFFER_USAGE::STATIC_DRAW);
-    MathUtil::glFuncs->glVertexAttribPointer((GLuint)VAO_ATTRIB::POSITION, 2, GL_FLOAT, GL_FALSE, 0, 0);
-    MathUtil::glFuncs->glVertexAttribDivisor((GLuint)VAO_ATTRIB::POSITION, 0);
-    MathUtil::glFuncs->glEnableVertexAttribArray((GLuint)VAO_ATTRIB::POSITION);
-
-    m_fullScreenQuadVBOs[1] = (*buffers)[(GLuint)VAO_ATTRIB::INDICES];
-    BindBufferHandle(m_fullScreenQuadVBOs[1].get());
-    ConfigureBufferHandleData(m_fullScreenQuadVBOs[1], sizeof(GLuint) * 6, (void* const)&indices[0], BufferHandle::BUFFER_USAGE::STATIC_DRAW);*/
-}
-
-void Renderer::InitScreenQuadShaderProgram()
-{
-    const QString full_screen_quad_vertex_shader_path = MathUtil::GetApplicationPath() + "assets/shaders/fullScreenQuad_vert.txt";
-    const QString full_screen_quad_frag_shader_path = MathUtil::GetApplicationPath() + "assets/shaders/fullScreenQuad_frag.txt";
-
-    m_fullScreenQuadShaderProgram = 0;
-    MathUtil::loadGLShaderFromFile(&m_fullScreenQuadShaderProgram, full_screen_quad_vertex_shader_path, full_screen_quad_frag_shader_path);
-
-    MathUtil::glFuncs->glUseProgram(m_fullScreenQuadShaderProgram);
-    GLint texture0Loc = MathUtil::glFuncs->glGetUniformLocation(m_fullScreenQuadShaderProgram, "iTexture0");
-    GLint texture1Loc = MathUtil::glFuncs->glGetUniformLocation(m_fullScreenQuadShaderProgram, "iTexture1");
-    GLint texture2Loc = MathUtil::glFuncs->glGetUniformLocation(m_fullScreenQuadShaderProgram, "iTexture2");
-    GLint texture3Loc = MathUtil::glFuncs->glGetUniformLocation(m_fullScreenQuadShaderProgram, "iTexture3");
-
-    MathUtil::glFuncs->glUniform1i(texture0Loc, 0);
-    MathUtil::glFuncs->glUniform1i(texture1Loc, 1);
-    MathUtil::glFuncs->glUniform1i(texture2Loc, 2);
-    MathUtil::glFuncs->glUniform1i(texture3Loc, 3);
 }
 
 void Renderer::InitializeLightUBOs()
@@ -2331,47 +2276,6 @@ void Renderer::CopyDataBetweenBuffers(GLuint p_src, GLuint p_dst, GLsizeiptr p_s
     {
         qDebug() << "WARNING: Renderer::copyDataBetweenBuffers tried to copy data of 0 size, no copy has occured.";
     }
-}
-
-void Renderer::CreateShadowVAO(GLuint p_VAO, QVector<GLuint> p_VBOs)
-{
-    Q_UNUSED(p_VAO);
-    Q_UNUSED(p_VBOs);
-}
-
-void Renderer::CreateShadowFBO(GLuint p_FBO, QVector<GLuint> p_texture_ids)
-{
-    Q_UNUSED(p_FBO);
-    Q_UNUSED(p_texture_ids);
-}
-
-void Renderer::WaitforFrameSyncObject()
-{
-    GLuint frame_index = m_frame_counter % BUFFER_CHUNK_COUNT;
-    if (m_syncObjects[frame_index] != NULL)
-    {
-        GLenum waitRet = GL_UNSIGNALED;
-        while (waitRet != GL_ALREADY_SIGNALED && waitRet != GL_CONDITION_SATISFIED)
-        {
-            waitRet = MathUtil::glFuncs->glClientWaitSync(m_syncObjects[frame_index], GL_SYNC_FLUSH_COMMANDS_BIT, 1);
-        }
-        MathUtil::glFuncs->glDeleteSync(m_syncObjects[frame_index]);
-        m_syncObjects[frame_index] = NULL;
-    }
-}
-
-void Renderer::LockFrameSyncObject()
-{
-    GLuint frame_index = m_frame_counter % BUFFER_CHUNK_COUNT;
-    m_syncObjects[frame_index] = MathUtil::glFuncs->glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
-}
-
-void Renderer::StartFrame()
-{
-}
-
-void Renderer::EndFrame()
-{
 }
 
 int64_t Renderer::GetFrameCounter()
@@ -4856,7 +4760,7 @@ void Renderer::UpgradeShaderSource(QByteArray & p_shader_source, bool p_is_verte
     }
 }
 
-void Renderer::UpdatePerObjectData(QHash<int, QVector<AbstractRenderCommand>> * p_scoped_render_commands)
+void Renderer::UpdatePerObjectData(QHash<int, QVector<AbstractRenderCommand>> & p_scoped_render_commands)
 {
     QMatrix4x4 temp_matrix;
     QMatrix4x4 model_matrix;
@@ -4912,7 +4816,7 @@ void Renderer::UpdatePerObjectData(QHash<int, QVector<AbstractRenderCommand>> * 
 
     for (const RENDERER::RENDER_SCOPE scope : m_scopes)
     {
-        QVector<AbstractRenderCommand> & render_command_vector = (*p_scoped_render_commands)[static_cast<int>(scope)];
+        QVector<AbstractRenderCommand> & render_command_vector = p_scoped_render_commands[static_cast<int>(scope)];
 
         const int command_count(render_command_vector.size());
         const int camera_count_this_scope(m_per_frame_scoped_cameras_view_matrix[static_cast<int>(scope)].size());
@@ -5018,7 +4922,6 @@ void Renderer::Render()
         const bool do_VR = (m_hmd_manager != nullptr && m_hmd_manager->GetEnabled() == true);
 //        qDebug() << "Renderer::DecoupledRender()" << m_is_initialized << m_shutting_down;
 
-        StartFrame();
         auto texture_size = (m_hmd_manager != nullptr && m_hmd_manager->GetEnabled() == true)
                 ? m_hmd_manager->GetTextureSize()
                 : QSize(m_window_width / 2, m_window_height);
@@ -5032,7 +4935,6 @@ void Renderer::Render()
         ConfigureFramebuffer(texture_size.width()*2, texture_size.height(), msaa_count);
         BindFBOToDraw(FBO_TEXTURE_BITFIELD::COLOR | FBO_TEXTURE_BITFIELD::DEPTH_STENCIL, true);
         UpdateFramebuffer();
-        WaitforFrameSyncObject();
 
         // This call allows the PreRender function to get recent pose data for the HMD for this frames render
         // this is important for reducing motion-to-photon latency in VR rendering and to ensure that the timers
@@ -5042,7 +4944,7 @@ void Renderer::Render()
             m_hmd_manager->Update();
         }
 
-        UpdatePerObjectData(&(m_scoped_render_commands_cache[m_rendering_index]));
+        UpdatePerObjectData(m_scoped_render_commands_cache[m_rendering_index]);
 
         if (do_VR)
         {
@@ -5088,21 +4990,17 @@ void Renderer::Render()
                                                  GL_COLOR_BUFFER_BIT, GL_LINEAR);
         }
 
-        if (m_screenshot_requested == true
-                && (m_current_frame_id >= m_screenshot_frame_index))
-        {
+        if (m_screenshot_requested && (m_current_frame_id >= m_screenshot_frame_index)) {
             SaveScreenshot();
         }
 
-        if (do_VR)
-        {
+        if (do_VR) {
             // OpenVR binds textures inside of its submission step.
             // I change the active slot here to one we do not use for normal
             // rendering to avoid the call invalidating our GL state copy.
             //
             // OpenVR needs the OpenGL handle for the texture, so we update it here.
-            if (m_hmd_manager->m_using_openVR)
-            {
+            if (m_hmd_manager->m_using_openVR) {
                 MathUtil::glFuncs->glActiveTexture(GL_TEXTURE15);
                 m_active_texture_slot_render = 15;
                 m_hmd_manager->m_color_texture_id =  GetTextureID(FBO_TEXTURE::COLOR, false);
@@ -5113,9 +5011,6 @@ void Renderer::Render()
             m_hmd_manager->EndRendering();
             MathUtil::glFuncs->glFlush();
         }
-
-        LockFrameSyncObject();
-        EndFrame();
     }
 }
 
@@ -5247,7 +5142,7 @@ void Renderer::RenderEqui()
                                        ColorMask::COLOR_WRITES_ENABLED));
 
     // Do the second pass of rendering to convert cubemap to equi
-    UpdatePerObjectData(&post_process_commands);
+    UpdatePerObjectData(post_process_commands);
     // This is just to trigger the clearing of the FBO
     //RenderObjectsNaiveDecoupled(m_main_thread_renderer, RENDERER::RENDER_SCOPE::CURRENT_ROOM_PORTAL_STENCILS, post_process_commands[(int)RENDERER::RENDER_SCOPE::POST_PROCESS], (m_scoped_light_containers));
     // This draws our full-screen quad with the cubemap-to-equi fragment shader
