@@ -372,8 +372,6 @@ private:
     LightContainer m_dummyLights;
     GLuint m_active_light_UBO_index;
 
-    QOffscreenSurface *  m_gl_surface;
-
     GLuint m_main_fbo;
     QPointer<TextureHandle> m_equi_cubemap_handle;
     uint32_t m_equi_cubemap_face_size;

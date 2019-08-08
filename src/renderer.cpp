@@ -43,7 +43,6 @@ Renderer::Renderer()
       m_depth_mask(DepthMask::DEPTH_WRITES_ENABLED),
       m_current_depth_mask(DepthMask::DEPTH_WRITES_ENABLED),
       m_active_light_UBO_index(0),
-      m_gl_surface(nullptr),
       m_main_fbo(0),
       m_is_initialized(false),
       m_hmd_initialized(false)
@@ -4576,13 +4575,6 @@ void Renderer::UpdatePerObjectData(QHash<int, QVector<AbstractRenderCommand>> & 
 void Renderer::InitializeGLContext(QOpenGLContext * p_gl_context)
 {
     qDebug("Renderer::InitializeGLContext");
-
-    m_gl_surface = new QOffscreenSurface();
-    auto format = p_gl_context->format();
-    m_gl_surface->setFormat(format);
-    m_gl_surface->create();
-
-    p_gl_context->makeCurrent(m_gl_surface);
 
     // Create FBO to use for attaching main-thread FBO textures to for blitting
     m_main_fbo = 0;
