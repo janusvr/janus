@@ -228,9 +228,6 @@ public:
     QPointer<ProgramHandle> m_default_skybox_shader;
     QPointer<ProgramHandle> m_default_portal_shader;
     QPointer<ProgramHandle> m_default_equi_shader;
-    QPointer<ProgramHandle> m_per_instance_compute_shader;
-
-    QPointer<MeshHandle> m_default_vao;
 
     QPointer<BufferHandle> m_slab_vbo;
     QPointer<MeshHandle> m_slab_vao;
@@ -375,7 +372,7 @@ private:
     LightContainer m_dummyLights;
     GLuint m_active_light_UBO_index;
 
-    QOffscreenSurface *  m_gl_surface;    
+    QOffscreenSurface *  m_gl_surface;
 
     GLuint m_main_fbo;
     QPointer<TextureHandle> m_equi_cubemap_handle;

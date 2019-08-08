@@ -43,7 +43,7 @@ Renderer::Renderer()
       m_depth_mask(DepthMask::DEPTH_WRITES_ENABLED),
       m_current_depth_mask(DepthMask::DEPTH_WRITES_ENABLED),
       m_active_light_UBO_index(0),
-      m_gl_surface(nullptr),      
+      m_gl_surface(nullptr),
       m_main_fbo(0),
       m_is_initialized(false),
       m_hmd_initialized(false)
@@ -3784,30 +3784,6 @@ void Renderer::UpdateFramebuffer()
                                                                                                          TextureHandle::ALPHA_TYPE::NONE,
                                                                                                          m_window_width, m_window_height,
                                                                                                          colour_texture);
-
-            /*// GL_RGB16F AO
-            GLuint ao_texture = 0;
-            MathUtil::glFuncs->glGenTextures(1, &ao_texture);
-            m_textures[fbo_index * FBO_TEXTURE::COUNT + FBO_TEXTURE::AO] = ao_texture;
-            MathUtil::glFuncs->glBindTexture(texture_type, ao_texture);
-            MathUtil::glFuncs->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, static_cast<GLint>(GL_LINEAR));
-            MathUtil::glFuncs->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, static_cast<GLint>(GL_LINEAR));
-            MathUtil::glFuncs->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, static_cast<GLint>(GL_CLAMP_TO_EDGE));
-            MathUtil::glFuncs->glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, static_cast<GLint>(GL_CLAMP_TO_EDGE));
-            if (texture_type == GL_TEXTURE_2D_MULTISAMPLE)
-            {
-                MathUtil::glFuncs->glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, m_msaa_count, GL_RGB16F, m_window_width, m_window_height, GL_TRUE);
-            }
-            else
-            {
-                MathUtil::glFuncs->glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(GL_RGB16F), m_window_width,  m_window_height, 0, GL_RGB, GL_HALF_FLOAT, NULL);
-            }
-
-            m_texture_handles[fbo_index * FBO_TEXTURE::COUNT + FBO_TEXTURE::AO] = CreateTextureHandle(TextureHandle::TEXTURE_TYPE::TEXTURE_2D,
-                                                                                                         TextureHandle::COLOR_SPACE::LINEAR,
-                                                                                                         TextureHandle::ALPHA_TYPE::NONE,
-                                                                                                         m_window_width, m_window_height,
-                                                                                                         ao_texture);*/
 
             // GL_DEPTH24_STENCIL8 (On most modern cards this is emulated by using 24-bits of a 32-bit int texture for depth and an 8-bit texture for stencil
             GLuint depth_stencil_texture = 0;
