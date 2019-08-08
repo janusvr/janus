@@ -281,11 +281,7 @@ public:
     QPointer<MeshHandle> m_portal_stencil_cube_vao;
 
     QPointer<BufferHandle> m_portal_stencil_cylinder_vbo;
-    QPointer<MeshHandle> m_portal_stencil_cylinder_vao;
-
-    GLuint m_fullScreenQuadShaderProgram;
-    QPointer<MeshHandle> m_fullScreenQuadVAO;
-    QVector<QPointer<BufferHandle>> m_fullScreenQuadVBOs;
+    QPointer<MeshHandle> m_portal_stencil_cylinder_vao;            
 
     uint32_t m_window_width;
     uint32_t m_window_height;
@@ -403,11 +399,7 @@ private:
     QPointer<TextureHandle> m_equi_cubemap_handle;
     uint32_t m_equi_cubemap_face_size;
     bool m_is_initialized;
-    bool m_hmd_initialized;
-
-    bool m_screenshot_pbo_pending;
-    GLuint m_screenshot_pbo;
-
+    bool m_hmd_initialized;   
 };
 
 #endif // RENDERER_H

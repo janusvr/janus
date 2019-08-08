@@ -4,8 +4,7 @@ QPointer <Renderer> Renderer::m_pimpl(nullptr);
 const char * Renderer::g_gamma_correction_GLSL = "out_color = pow(out_color, vec4(0.45454545454, 0.45454545454, 0.45454545454, 1.0));";
 
 Renderer::Renderer()
-    : m_current_scope(RENDERER::RENDER_SCOPE::NONE),      
-      m_fullScreenQuadShaderProgram(0),
+    : m_current_scope(RENDERER::RENDER_SCOPE::NONE),            
       m_window_width(1280),
       m_window_height(720),
       m_msaa_count(4),
@@ -47,9 +46,7 @@ Renderer::Renderer()
       m_gl_surface(nullptr),      
       m_main_fbo(0),
       m_is_initialized(false),
-      m_hmd_initialized(false),
-      m_screenshot_pbo_pending(false),
-      m_screenshot_pbo(0)
+      m_hmd_initialized(false)
 {
 }
 
@@ -4825,33 +4822,27 @@ void Renderer::Render()
 
 void Renderer::SaveScreenshot()
 {
-    if (!m_screenshot_pbo_pending){
-        GLsizei const pbo_size = m_screenshot_width * m_screenshot_height * sizeof(GL_UNSIGNED_BYTE) * 4; // RGBA8
-        MathUtil::glFuncs->glGenBuffers(1, &m_screenshot_pbo);
-        MathUtil::glFuncs->glBindBuffer(GL_PIXEL_PACK_BUFFER, m_screenshot_pbo);
-        MathUtil::glFuncs->glBufferData(GL_PIXEL_PACK_BUFFER, pbo_size, 0, GL_STREAM_READ);
-        MathUtil::glFuncs->glReadPixels(0, 0, m_screenshot_width, m_screenshot_height, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-        m_screenshot_pbo_pending = true;
+    GLsizei const pbo_size = m_screenshot_width * m_screenshot_height * sizeof(GL_UNSIGNED_BYTE) * 4; // RGBA8
+    GLuint screenshot_pbo = 0;
+    MathUtil::glFuncs->glGenBuffers(1, &screenshot_pbo);
+    MathUtil::glFuncs->glBindBuffer(GL_PIXEL_PACK_BUFFER, screenshot_pbo);
+    MathUtil::glFuncs->glBufferData(GL_PIXEL_PACK_BUFFER, pbo_size, 0, GL_STREAM_READ);
+    MathUtil::glFuncs->glReadPixels(0, 0, m_screenshot_width, m_screenshot_height, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+
+    unsigned char* ptr = (unsigned char*)MathUtil::glFuncs->glMapBufferRange(GL_PIXEL_PACK_BUFFER, 0, pbo_size, GL_MAP_READ_BIT);
+    if (ptr != nullptr)
+    {
+        QString const out_filename = MathUtil::GetLastScreenshotPath();
+        QImage img(ptr, m_screenshot_width, m_screenshot_height, QImage::Format_RGBX8888);
+        img = img.mirrored();
+        img.save(out_filename, "jpg", 95);
+        //qDebug() << "GLWidget::SaveScreenShot() - image" << out_filename << "saved";
+        MathUtil::glFuncs->glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
     }
-    else {
-        GLsizei const pbo_size = m_screenshot_width * m_screenshot_height * sizeof(GL_UNSIGNED_BYTE) * 4; // RGBA8
-        MathUtil::glFuncs->glBindBuffer(GL_PIXEL_PACK_BUFFER, m_screenshot_pbo);
-        unsigned char* ptr = nullptr;
-        ptr = (unsigned char*)MathUtil::glFuncs->glMapBufferRange(GL_PIXEL_PACK_BUFFER, 0, pbo_size, GL_MAP_READ_BIT);
-        if (ptr != nullptr)
-        {
-            QString const out_filename = MathUtil::GetLastScreenshotPath();
-            QImage img(ptr, m_screenshot_width, m_screenshot_height, QImage::Format_RGBX8888);
-            img = img.mirrored();
-            img.save(out_filename, "jpg", 95);
-            //qDebug() << "GLWidget::SaveScreenShot() - image" << out_filename << "saved";
-            MathUtil::glFuncs->glUnmapBuffer(GL_PIXEL_PACK_BUFFER);
-        }
-        MathUtil::glFuncs->glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);
-        MathUtil::glFuncs->glDeleteBuffers(1, &m_screenshot_pbo);
-        m_screenshot_pbo_pending = false;
-        m_screenshot_requested = false;
-    }
+    MathUtil::glFuncs->glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);
+    MathUtil::glFuncs->glDeleteBuffers(1, &screenshot_pbo);
+
+    m_screenshot_requested = false;
 }
 
 void Renderer::RenderEqui()
