@@ -10,43 +10,6 @@
 #include <Windows.h>
 #endif
 
-//Uncomment to enable Leak debugging in Visual Studio when using Visual Leak Detector
-//#include <vld.h>
-
-//void SetRegistrySettings()
-//{
-//    qDebug() << "SetRegistrySettings()";
-//#ifdef WIN32
-//    {
-//    QSettings settings("HKEY_CLASSES_ROOT\\janus", QSettings::NativeFormat);
-//    settings.setValue("@", "URL:janus Protocol");
-//    settings.setValue("URL Protocol", "");
-//    settings.setValue("EditFlags", 0x00000002);
-//    }
-//    {
-//    QSettings settings("HKEY_CLASSES_ROOT\\janus\\DefaultIcon", QSettings::NativeFormat);
-//    settings.setValue(".", QString(""));
-//    }
-//    {
-//    QSettings settings("HKEY_CLASSES_ROOT\\janus\\shell", QSettings::NativeFormat);
-//    settings.setValue(".", QString("open"));
-//    }
-//    {
-//    QSettings settings("HKEY_CLASSES_ROOT\\janus\\shell\\open", QSettings::NativeFormat);
-//    settings.setValue("CommandId", QString("IE.Protocol"));
-//    }
-//    {
-//    QSettings settings("HKEY_CLASSES_ROOT\\janus\\shell\\open\\command", QSettings::NativeFormat);
-//    settings.setValue(".", QString("\"" + QCoreApplication::applicationFilePath() + "\" \"%1\""));
-//    }
-//    {
-//    QSettings settings("HKEY_CLASSES_ROOT\\janus\\shell\\open\\ddeexec", QSettings::NativeFormat);
-//    settings.setValue(".", QString(""));
-//    }
-//#endif
-
-//}
-
 void DisplayVersion()
 {
     std::cout << QString(__JANUS_VERSION_COMPLETE).toLatin1().data() << "\n";
