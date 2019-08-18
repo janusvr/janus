@@ -92,7 +92,7 @@ void AssetObject::SetMTLFile(const QString & mtl)
 
 void AssetObject::Load()
 {   
-//    qDebug() << "AssetObject::Load()" << props->GetSrcURL();
+//    qDebug() << "AssetObject::Load()" << props->GetSrcURL() << this;
     SetStarted(true);
 
     for (int i=0; i<tex_url_str.size(); ++i) {
@@ -127,11 +127,8 @@ bool AssetObject::UpdateGL()
 
 void AssetObject::Update()
 {
+//    qDebug() << "AssetObject::Update()" << props->GetSrcURL() << this;
     if (geom) {
-        if ((!props->GetSrcURL().isEmpty() || geom->GetHasMeshData()) && !geom->GetStarted() && !GetStarted()) {
-            SetStarted(true);
-            QtConcurrent::run(geom.data(), &Geom::Load);
-        }
         geom->Update();
     }
 }
@@ -145,7 +142,6 @@ void AssetObject::DrawGL(QPointer <AssetShader> shader, const QColor col)
 
 //    qDebug() << "AssetObject::DrawGL" << GetS("src") << GetError();
     if (GetError()) {
-
         if (img_error.isNull()) {
             img_error = new AssetImage();
             img_error->CreateFromText(QString("<p align=\"center\">error loading: ") + props->GetSrcURL() + QString("</p>"), 24, true, QColor(255,128,192), QColor(25,25,128), 1.0f, 256, 256, true);

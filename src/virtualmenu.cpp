@@ -172,6 +172,9 @@ void VirtualMenu::Update()
 
     for (QPointer <AssetObject> & a : assetobjs) {
         if (a) {
+            if (!a->GetStarted()) {
+                a->Load();
+            }
             a->Update();
             a->UpdateGL();
         }

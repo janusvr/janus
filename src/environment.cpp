@@ -605,10 +605,13 @@ void Environment::Update_CrossPortals(QPointer <Player> player)
 
 void Environment::UpdateAssets()
 {
-    QMap <QString, QPointer <Room> > visible_rooms = curnode->GetVisibleRooms();
-    for (QPointer <Room> & r : visible_rooms) {
-        if (r) {
-            r->UpdateAssets();
+    if (rootnode) {
+        //66.2 - Update Assets for *ALL* active rooms, to avoid thread starvation bug
+        QList <QPointer <Room> > nodes = rootnode->GetAllChildren();
+        for (QPointer <Room> & r : nodes) {
+            if (r) {
+                r->UpdateAssets();
+            }
         }
     }
 }

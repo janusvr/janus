@@ -1120,6 +1120,7 @@ void Room::DoEditsDeletes(QPointer <RoomObject> obj)
 
 void Room::UpdateAssets()
 {
+//    qDebug() << "Room::UpdateAssets()" << props->GetURL() << this;
     for (QPointer <AssetSkybox> & a : skyboxes) {
         if (a) {
             a->UpdateAssets();

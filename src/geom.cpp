@@ -112,6 +112,7 @@ GeomIOStream::~GeomIOStream()
 
 void GeomIOStream::SetData(const QByteArray & b)
 {
+//    qDebug() << "GeomIOStream::SetData" << url << b.size();
     ba = b;
     buffer = new QBuffer(&ba);
     buffer->open(QBuffer::ReadOnly);
@@ -176,18 +177,7 @@ aiReturn GeomIOStream::Seek(size_t pOffset, aiOrigin pOrigin)
         new_pos += buffersize;
     }
 
-    const bool ret_val = buffer->seek(new_pos);
-
-//    const qint64 buf_pos2 = buffer->pos();
-//    if (url.toString().contains("skysphere")) {
-//        qDebug() << this << " did a seek with" << pOffset << pOrigin << "bufpos" << buf_pos << "bufsize" << buffersize << "bufpos2" << buf_pos2 << "retval" << ret_val;
-//    }
-
-//    if (new_pos >= 0 && new_pos < buffersize) {
-    if (ret_val) {
-        return aiReturn_SUCCESS;
-    }
-    return aiReturn_FAILURE;
+    return buffer->seek(new_pos) ? aiReturn_SUCCESS : aiReturn_FAILURE;
 }
 
 size_t GeomIOStream::Tell() const
@@ -202,10 +192,8 @@ size_t GeomIOStream::Write(const void *pvBuffer, size_t pSize, size_t pCount)
 
 void GeomIOStream::Close()
 {
+//    qDebug() << "GeomIOStream::Close()" << url;
     if (buffer) {
-//        if (url.toString().contains("skysphere")) {
-//            qDebug() << this << " did a close on buffer of size" << buffer->size();
-//        }
         if (buffer->isOpen()) {
             buffer->close();
         }
@@ -266,16 +254,14 @@ void GeomIOSystem::SetShuttingDown(const bool b)
 
 float GeomIOSystem::UpdateRequests()
 {
-//    qDebug() << "GeomIOSystem::UpdateRequests()" << this << streams.size();
+//    qDebug() << "GeomIOSystem::UpdateRequests()" << base_path << this; // this << streams.size();
     int num_streams = 0;
     float progress = 0.0f;
 
-    for (int i=0; i<streams.size(); ++i) {
-//        qDebug() << "  i" << i << streams[i] << streams[i]->GetUrl() << streams[i]->GetWebAsset();
+    for (int i=0; i<streams.size(); ++i) {        
         if (streams[i] && streams[i]->GetWebAsset().isNull()) {
             WebAsset * w = new WebAsset;
             streams[i]->SetWebAsset(w);
-//            qDebug() << "GeomIOSystem::UpdateRequests()" << i << streams[i]->GetUrl();
             w->Load(streams[i]->GetUrl());
         }
         else if (streams[i] && streams[i]->GetWebAsset()) {
@@ -295,14 +281,12 @@ Assimp::IOStream * GeomIOSystem::Open(const char *pFile, const char *)
 
 Assimp::IOStream * GeomIOSystem::Open(const std::string & pFile, const std::string &)
 {
-//    qDebug() << "GeomIOSystem::Open2" << pFile;
     return Open(pFile.c_str());
-//    return NULL;
 }
 
 Assimp::IOStream * GeomIOSystem::Open(const char *pFile)
 {
-//    qDebug() << "GeomIOSystem::Open" << this << base_path.toString() << pFile << mtl_file_path << gzipped;
+//    qDebug() << "GeomIOSystem::Open" << pFile;
     QString p(pFile);
     QUrl u;
 
@@ -332,33 +316,27 @@ Assimp::IOStream * GeomIOSystem::Open(const char *pFile)
     if (i > 8) {
         p = p.left(i) + p.right(p.length()-i-1);
         u = base_path.resolved(QUrl(p));
-//        qDebug() << "PROCESSING" << p << u;
     }
 
     const QString u_str = u.toString();
-//    qDebug() << "GeomIOSystem::Open" << u_str;
-    //qDebug() << "GeomIOSystem::Open()" << p.lastIndexOf("http://", Qt::CaseInsensitive) << p.lastIndexOf("https://", Qt::CaseInsensitive) << u_str << pFile << gzipped << mtl_file_path;
-
     GeomIOStream * s = new GeomIOStream();
     s->SetUrl(u);
 
     if (data_cache.contains(u_str)) {
-//        qDebug() << "Cache hit!" << u_str;
+//        qDebug() << "GeomIOSystem::Open Cache hit!" << u_str;
         s->SetData(data_cache[u_str]);
         return s;
     }
 
     streams.push_back(s);
-//    qDebug() << " pushed back stream" << streams.size();
-
-    // Wait if webasset is null, hasn't started, or has started and is running and not loaded or with error
-//    qDebug() << "GeomIOSystem::Open started" << this;
+//    qDebug() << " pushed back stream" << streams.size() << data_cache.size();
 
     QTime load_time;
     load_time.start();
 
     float load_progress = 0.0f;
 
+//    qDebug() << "GeomIOSystem::Open" << pFile;
     while (!shutting_down) //release 60.0 - shutting down, it is critical we exit these loops, otherwise active threads do not allow the application to exit cleanly
     {
         QPointer <WebAsset> w = s->GetWebAsset();
@@ -383,24 +361,13 @@ Assimp::IOStream * GeomIOSystem::Open(const char *pFile)
                 load_time.restart();
             }
         }
+
         QThread::yieldCurrentThread();
     };
-//    qDebug() << "GeomIOSystem::Open stopped" << this;
 
 //    qDebug() << "GeomIOSystem::Open" << this << streams.size() << pFile;
     QPointer <WebAsset> w = s->GetWebAsset();
     if (w && w->GetLoaded() && !w->GetError()) {
-        //59.9 - do not allow redirects where extension string changes (e.g. to html pages which will cause assimp to crash)
-        //62.7 - however, this causes extension-less geometry not to load at all
-//        qDebug() << QString(pFile) << w->GetURL().toString();
-//        if (w->GetRedirected() && QString(pFile).right(4) != w->GetURL().toString().right(4)) {
-//            qDebug() << "REDIRECT" << pFile << w->GetURL().toString();
-//            w->ClearData();
-//        }
-//        else if (u_str.right(7).toLower().contains(".obj") && !mtl_file_path.isEmpty()) {
-
-//        qDebug() << "DONE" << w->GetData().size() << base_path;
-
         if (u_str.right(7).toLower().contains(".obj") && !mtl_file_path.isEmpty()) {
             //61.0 mtllib override
             QByteArray b = w->GetData();
@@ -411,12 +378,10 @@ Assimp::IOStream * GeomIOSystem::Open(const char *pFile)
 
         //cache the data if fetched again
         if (!data_cache.contains(u_str)) {
-//            qDebug() << " newdata" << w->GetData().size() << " bytes for " << u_str;
             data_cache[u_str] = w->GetData();
         }
 
         s->SetData(data_cache[u_str]);
-//        s->SetData(w->GetData());
         return s;
     }
     else
@@ -724,8 +689,7 @@ bool Geom::GetHasMeshData() const
 }
 
 void Geom::Load()
-{
-//    qDebug() << "Geom::Load()" << this << path;
+{    
     if (started || ready) {
         return;
     }
@@ -847,7 +811,7 @@ void Geom::Unload()
 
 void Geom::Update()
 {
-//    qDebug() << "Geom::Update()" << ready;
+//    qDebug() << "Geom::Update()" << path << ready << iosystem;
     if (scene && ready && !textures_started) {
         textures_started = true;
 
@@ -878,7 +842,7 @@ void Geom::Update()
 
 //                qDebug() << "Geom::Update()" << path << s << s3 << scene->mNumTextures;
                 if (s3.left(1) == "*") { //62.3 - hacky fix for Assimp where it uses a special asterisk indexing scheme
-                    const int t_ind = s3.mid(1).toInt();
+                    const unsigned int t_ind = s3.mid(1).toInt();
                     if (t_ind >= 0 && t_ind <scene->mNumTextures) {
                         tex_index = t_ind;
                     }
@@ -1003,11 +967,9 @@ void Geom::Update()
             texture_progress = (nTextures == 0)?0.0f:nProgressTextures / float(nTextures);
         }
     }
-    else if (!ready || !textures_ready) {
-//        qDebug() << "Geom::Update() update iorequests" << path;
-        if (iosystem) {
-            progress = iosystem->UpdateRequests();
-        }
+
+    if (iosystem) {
+        progress = iosystem->UpdateRequests();
     }
 
     if (ready) {
