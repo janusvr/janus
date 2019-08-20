@@ -4266,6 +4266,11 @@ void RoomObject::PlayCreateObject()
     }
 }
 
+void RoomObject::PlayCreatePortal()
+{
+    SoundManager::Play(SOUND_NEWENTRANCE, false, GetPos(), 1.0f);
+}
+
 void RoomObject::PlayDeleteObject()
 {
     SoundManager::Play(SOUND_DELETING, false, GetPos(), 1.0f);

@@ -262,6 +262,8 @@ public:
     void PlayCreateObject();
     void PlayDeleteObject();
 
+    void PlayCreatePortal();
+
     float GetTimeElapsed() const;
 
     void LoadGhost(const QString & data);

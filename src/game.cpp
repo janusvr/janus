@@ -1550,7 +1550,9 @@ void Game::keyPressEvent(QKeyEvent * e)
 
             case Qt::Key_F:
             {
-                player->SetFlying(!player->GetFlying());
+                const bool b = !player->GetFlying();
+                SoundManager::Play(b ? SOUND_FLIGHT : SOUND_NOFLIGHT, false, player->GetProperties()->GetPos()->toQVector3D(), 10.0f);
+                player->SetFlying(b);
                 player->SetFollowMode(false);
                 player->SetFollowModeUserID("");
             }
@@ -3750,7 +3752,9 @@ void Game::UpdateControllers()
         //flight
         if (s[1].b[3].proc_release) {
             s[1].b[3].proc_release = false;
-            player->SetFlying(!player->GetFlying());
+            const bool b = !player->GetFlying();
+            SoundManager::Play(b ? SOUND_FLIGHT : SOUND_NOFLIGHT, false, player->GetProperties()->GetPos()->toQVector3D(), 10.0f);
+            player->SetFlying(b);
         }
 
         //refresh
@@ -3975,8 +3979,9 @@ void Game::UpdateVirtualMenu()
         if (virtualmenu->GetDoReload()) {
             env->ReloadRoom();
         }
-        if (virtualmenu->GetDoReset()) {
-            env->Reset();
+        if (virtualmenu->GetDoReset()) {            
+            env->Reset();            
+            SoundManager::Play(SOUND_RESET, false, player->GetProperties()->GetPos()->toQVector3D(), 10.0f);
         }
         if (virtualmenu->GetDoSetUserID()) {
             SetUserID(virtualmenu->GetEnteredUserID());
@@ -4112,6 +4117,8 @@ QPointer <RoomObject> Game::CreatePortal(const QUrl url, const bool send_multi)
         if (send_multi) {
             multi_players->SetSendPortal(url.toString(), portal_jsid);
         }
+
+        new_portal->PlayCreatePortal();
     }
     return new_portal;
 }

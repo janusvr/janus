@@ -62,7 +62,7 @@ void Environment::Reset()
     //setup root
     rootnode = new Room();
     rootnode->GetProperties()->SetURL(launch_url_is_custom ? launch_url : SettingsManager::GetHomeURL());
-    curnode = rootnode;    
+    curnode = rootnode;
 
     emit RoomsChanged();
 }
@@ -817,6 +817,10 @@ void Environment::Update2(QPointer <Player> player, MultiPlayerManager *multi_pl
                     player->UpdateDir();
                 }
                 r->GetProperties()->SetReloaded(false);
+            }
+
+            if (r->GetParentObject()) {
+                SoundManager::Play(SOUND_ROOM, false, r->GetParentObject()->GetPos(), 5.0f);
             }
         }
     }   

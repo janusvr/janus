@@ -882,6 +882,7 @@ void MainWindow::ActionReload()
 void MainWindow::ActionHome()
 {
     game->GetEnvironment()->Reset();
+    SoundManager::Play(SOUND_RESET, false, game->GetPlayer()->GetProperties()->GetPos()->toQVector3D(), 10.0f);
 }
 
 void MainWindow::ActionBookmark()
