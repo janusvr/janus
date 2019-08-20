@@ -13,8 +13,7 @@ QHash <QString, QPointer <AssetObject> > Room::object_primitives;
 
 Room::Room() :            
     assetshader(0),
-    scripts_ready(false),
-    translator_busy(false)
+    scripts_ready(false)
 {        
     props = new DOMNode(this);
     props->SetType(TYPE_ROOM);  
@@ -1009,18 +1008,6 @@ bool Room::GetMountPoint(QVector3D & pos, QVector3D & dir)
     return false;
 }
 
-int Room::GetNumMountPointsFree() const
-{
-    const QString s = props->GetUseLocalAsset();
-    const int cur_mount = props->GetCurMount();
-    if (room_templates.contains(s) && room_templates[s]) {
-        return (room_templates[s]->GetNumMounts() - cur_mount);
-    }
-    else {
-        return 0;
-    }
-}
-
 QPointer <RoomObject> Room::GetRoomObject(const QString js_id)
 {
     if (!js_id.isEmpty() && envobjects.contains(js_id) && envobjects[js_id]) {
@@ -1339,7 +1326,7 @@ void Room::UpdateObjects(QPointer <Player> player, MultiPlayerManager *multi_pla
 
     const QString s = props->GetUseLocalAsset();
     float progress = props->GetProgress();
-    if ((!props->GetReadyForScreenshot() || !props->GetReady() || progress < 1.0f) && GetProcessed() && (envobjects.size() > 0 || (room_templates.contains(s) && room_templates[s])) && !translator_busy) {
+    if ((!props->GetReadyForScreenshot() || !props->GetReady() || progress < 1.0f) && GetProcessed() && (envobjects.size() > 0 || (room_templates.contains(s) && room_templates[s]))) {
 
         bool is_room_ready = true;
         bool is_room_ready_for_screenshot = true;
@@ -2627,11 +2614,6 @@ float Room::GetProgress() const
 bool Room::GetReady() const
 {
     return props->GetReady();
-}
-
-bool Room::GetReadyForScreenshot() const
-{
-    return props->GetReadyForScreenshot();
 }
 
 void Room::SetLoaded(const bool b)
@@ -4789,14 +4771,4 @@ void Room::SetAllObjectsLocked(const bool b)
             o->GetProperties()->SetLocked(b);
         }
     }
-}
-
-bool Room::GetTranslatorBusy() const
-{
-    return translator_busy;
-}
-
-void Room::SetTranslatorBusy(bool value)
-{
-    translator_busy = value;
 }

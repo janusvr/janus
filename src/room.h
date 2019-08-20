@@ -100,7 +100,6 @@ public:
     void AddRoomObjects(QList <QPointer <RoomObject> > & objects);
 
     bool GetMountPoint(QVector3D & pos, QVector3D & dir);
-    int GetNumMountPointsFree() const;
 
     QPointer <RoomObject> GetRoomObject(const QString js_id);
     QHash <QString, QPointer <RoomObject> > & GetRoomObjects();
@@ -172,7 +171,6 @@ public:
     //loading/processing status related
     float GetProgress() const;
     bool GetReady() const;
-    bool GetReadyForScreenshot() const;
 
     void SetStarted(const bool b);
     bool GetStarted() const;
@@ -186,10 +184,7 @@ public:
     void SetProcessed(bool b);    
     bool GetProcessed() const;
 
-    QPointer <HTMLPage> GetPage() const;   
-
-    bool GetTranslatorBusy() const;
-    void SetTranslatorBusy(bool value);
+    QPointer <HTMLPage> GetPage() const;      
 
     void Create();
     void Create_Default_Workspace();
@@ -202,7 +197,6 @@ public:
 
     QPair <QVector3D, QVector3D> GetResetVolume();
 
-    //custom translator support
     QString GetURL() const;
 
     //adding things    
@@ -319,11 +313,9 @@ private:
     QPointer <RoomObject> parent_object;
 
     QPointer <Room> parent; //my parent's node
-    QList <QPointer <Room> > children; //my children nodes
-    QPointer <Room> last_child; //last visited child node
+    QList <QPointer <Room> > children; //my children nodes    
 
     bool scripts_ready;    
-    bool translator_busy;
 
     //statics    
     static QList <QPointer <AssetSkybox> > skyboxes;    
