@@ -54,32 +54,8 @@ void BookmarkManager::AddBookmark(const QString url, const QString title, const 
         else if (url.contains("youtube.com")) {
             thumb = QString(translator_path + "youtube/thumb.jpg");
         }
-        else if (url.contains("youtube.com")) {
-            thumb = QString(translator_path + "youtube/thumb.jpg");
-        }
         else if (url.contains("vimeo.com")) {
             thumb = QString(translator_path + "vimeo/thumb.jpg");
-        }
-        else if (url.contains("usagii.net/wikiverse")) {
-            thumb = QString(translator_path + "usagii/wikiverse.jpg");
-        }
-        else if (url.contains("techn0shaman.one")) {
-            thumb = QString(translator_path + "default/techno.jpg");
-        }
-        else if (url.contains("frog.thevirtualarts.com")) {
-            thumb = QString(translator_path + "default/frogger.jpg");
-        }
-        else if (url.contains("minervavr.com")) {
-            thumb = QString(translator_path + "default/minerva.jpg");
-        }
-        else if (url.contains("geniusvr.com")) {
-            thumb = QString(translator_path + "default/geniusvr.jpg");
-        }
-        else if (url.contains("spyduck.net")) {
-            thumb = QString(translator_path + "default/spyduck.jpg");
-        }
-        else if (url.contains("www.dgp.toronto.edu/~karan/janusvr/maya2janus")) {
-            thumb = QString(translator_path + "default/animation.jpg");
         }
         else if (url.contains("vesta.janusvr.com")) {
             thumb = QString(translator_path + "default/vesta.jpg");
