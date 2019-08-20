@@ -725,7 +725,7 @@ void Game::ComputeMouseCursorTransform(const QSize p_windowSize, const QPointF p
     const float near_dist = r->GetProperties()->GetNearDist();
     const float far_dist = r->GetProperties()->GetFarDist();
 
-    if (menu_ops.hmd) { //54.10 hack: forces cursor to remain at centre (look to click)
+    if (player->GetHMDEnabled()) { //54.10 hack: forces cursor to remain at centre (look to click)
         persp.perspective(0.01f, float(p_windowSize.width()) / float(p_windowSize.height()), near_dist, far_dist);
     }
     else {
@@ -2396,11 +2396,6 @@ float Game::GetCurrentFarDist()
     return (r ? r->GetProperties()->GetFarDist() : 1000.0f);
 }
 
-MenuOperations & Game::GetMenuOperations()
-{
-    return menu_ops;
-}
-
 void Game::SetState(const JVR_GameState & s)
 {
     state = s;
@@ -2821,7 +2816,6 @@ void Game::UpdateOverlays()
         const int num_tris = r->GetRoomNumTris();
         const int num_objs = r->GetRoomObjects().size();
 
-        QString version_text = QString("Version: ") + menu_ops.version;
         QString renderer_text = QString("Renderer: ") + Renderer::m_pimpl->GetRendererName();
         double current_render_fps = 1000.0 / perf_logger.GetAverageRenderThreadCPUTime();
         QString fps_text3 = QString("Update: ") + QString::number(perf_logger.GetAverageMainThreadCPUTime(),'f', 1) + QString("ms/") + QString::number(1000.0 / perf_logger.GetAverageMainThreadCPUTime(),'f', 1) + QString("fps");
@@ -2849,8 +2843,7 @@ void Game::UpdateOverlays()
         info2_text_geom.AddText(pos_text);
         info2_text_geom.AddText(xdir_text);
         info2_text_geom.AddText(ydir_text);
-        info2_text_geom.AddText(zdir_text);        
-        info2_text_geom.AddText(version_text);
+        info2_text_geom.AddText(zdir_text);                
         info2_text_geom.AddText(renderer_text);
         info2_text_geom.AddText(thread_text);
 
@@ -3048,11 +3041,6 @@ void Game::DrawOverlaysGL()
 QPointer <Player> Game::GetPlayer()
 {
     return player;
-}
-
-QString Game::GetVersion() const
-{
-    return menu_ops.version;
 }
 
 void Game::StartResetPlayer()

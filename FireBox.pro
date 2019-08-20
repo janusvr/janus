@@ -94,7 +94,6 @@ SOURCES += \
     src/mainwindow.cpp \
     src/mathutil.cpp \
     src/mediaplayer.cpp \    
-    src/menu.cpp \
     src/multiplayermanager.cpp \
     src/navigationwindow.cpp \
     src/particlesystem.cpp \
@@ -158,7 +157,6 @@ HEADERS += \
     src/mainwindow.h \
     src/mathutil.h \
     src/mediaplayer.h \    
-    src/menu.h \
     src/multiplayermanager.h \
     src/navigationwindow.h \
     src/particlesystem.h \

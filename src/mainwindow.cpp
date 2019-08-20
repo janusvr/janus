@@ -414,18 +414,14 @@ void MainWindow::Initialize()
         game->SetMouseDoPitch(true);
     }      
 
-    MenuOperations & menu_ops = game->GetMenuOperations();
-
     switch (disp_mode) {    
     case MODE_VIVE:
         game->GetPlayer()->SetHMDType(hmd_manager->GetHMDString());
-        game->GetPlayer()->SetHMDEnabled(true);
-        menu_ops.hmd = true;
+        game->GetPlayer()->SetHMDEnabled(true);   
         break;
     case MODE_RIFT:
         game->GetPlayer()->SetHMDType("rift");
-        game->GetPlayer()->SetHMDEnabled(true);
-        menu_ops.hmd = true;
+        game->GetPlayer()->SetHMDEnabled(true);        
         break;   
     case MODE_SBS:
         game->GetPlayer()->SetHMDType("sbs");

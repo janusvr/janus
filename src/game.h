@@ -15,7 +15,6 @@
 #include "assetghost.h"
 #include "assetscript.h"
 #include "multiplayermanager.h"
-#include "menu.h"
 #include "virtualmenu.h"
 #include "bookmarkmanager.h"
 #include "controllermanager.h"
@@ -85,8 +84,7 @@ public:
     QPointer <Player> GetPlayer();
     QPointer <MultiPlayerManager> GetMultiPlayerManager();
     QPointer <ControllerManager> GetControllerManager();
-    QPointer <BookmarkManager> GetBookmarkManager();
-    MenuOperations & GetMenuOperations();
+    QPointer <BookmarkManager> GetBookmarkManager();    
 
     void ResetCursor(const QPoint p);
 
@@ -128,10 +126,7 @@ public:
 
     float UpdateCursorRaycast(const QMatrix4x4 transform, const int cursor_index);
     QMatrix4x4 GetMouseCursorTransform() const;
-    void ComputeMouseCursorTransform(const QSize p_windowSize, const QPointF p_mousePos);      
-
-    QString GetVersion() const;    
-    void SetOnlineVersion(const QString & s);      
+    void ComputeMouseCursorTransform(const QSize p_windowSize, const QPointF p_mousePos);         
 
     bool GetAllowTeleport(const int cursor_index);
 
@@ -256,9 +251,7 @@ private:
     QPointer <MultiPlayerManager> multi_players;
     QPointer <VirtualMenu> virtualmenu;    
     QPointer <BookmarkManager> bookmarks;
-    QPointer <ControllerManager> controller_manager;
-
-    MenuOperations menu_ops;
+    QPointer <ControllerManager> controller_manager;  
 
     bool do_exit;
     QTime fade_time;
