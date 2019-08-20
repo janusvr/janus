@@ -5,11 +5,7 @@ DisplayMode GLWidget::disp_mode = MODE_AUTO;
 
 GLWidget::GLWidget()
 {
-    snap_mouse = true;
     grabbed = false;
-    counted_frames = 0;
-    fps = 0;
-    framerate_time.start();
 
     take_screenshot = false;
     take_screenshot_cubemap = false;
@@ -60,12 +56,6 @@ void GLWidget::SetDefaultProjectionPersp(const float fov, const float aspect, co
 {
     MathUtil::LoadProjectionIdentity();
     MathUtil::ProjectionMatrix().perspective(fov, aspect, near_dist, far_dist);
-}
-
-void GLWidget::SetDefaultProjectionOrtho()
-{
-    MathUtil::LoadProjectionIdentity();
-    MathUtil::ProjectionMatrix().ortho(0,1,0,1,-1,1);
 }
 
 void GLWidget::SetGrab(const bool b)
@@ -205,10 +195,8 @@ void GLWidget::DoBookmark()
 
 void GLWidget::keyPressEvent(QKeyEvent * e)
 {
-    //m_context->makeCurrent(this);
     makeCurrent();
 
-    //qDebug() << "GLWidget::keyPressEvent";
     switch (e->key()) {
     case Qt::Key_F4:
         if ((e->modifiers() & Qt::ControlModifier) > 0) {
@@ -237,50 +225,7 @@ void GLWidget::keyPressEvent(QKeyEvent * e)
             take_screenshot = true;
         }
         break;
-//    case Qt::Key_Escape:
-//        if (game->GetState() == JVR_STATE_DEFAULT) {
-//            last_mouse_pos = GetLocalWinCentre();
-//            mouse_pos = last_mouse_pos;
-//            QCursor::setPos(GetWinCentre());
-//        }
-//        break;
-//    case Qt::Key_F11:
-//        if (windowState() & Qt::WindowFullScreen ||
-//                windowState() & Qt::WindowMaximized) {
-//            showNormal();
-//            QRect screenSize = QApplication::desktop()->screenGeometry();
-//            setGeometry(100, 100, screenSize.width()-200, screenSize.height()-200);
-//        }
-//        else {
-//            showFullScreen();
-//        }
-//        break;
-//    case Qt::Key_F12:
-//    {
-//        const bool is_fullscreen = windowState() & Qt::WindowFullScreen;
-//        if (is_fullscreen) {
-//            showNormal();
-//        }
-//        const int scrn_count = QApplication::desktop()->screenCount();
-//        if (scrn_count > 1) {
-//            cur_screen = (cur_screen+1) % scrn_count;
-//        }
-//        QRect screenres = QApplication::desktop()->screenGeometry(cur_screen);
-//        setGeometry(screenres);
-//        if (is_fullscreen) {
-//            showFullScreen();
-//        }
-//    }
-//        break;
-//    case Qt::Key_P:
-//        if ((e->modifiers() & Qt::ControlModifier) > 0
-//            && game->GetMenu().GetPortalHotkeys()
-//            && !game->GetMenu().GetFocus()
-//            && game->GetWebSurfaceSelected().isNull()
-//            && game->GetState() == JVR_STATE_DEFAULT) {
-//            take_screenshot_cubemap = true;
-//        }
-//        break;
+
     case Qt::Key_R:
         if (hmd_manager && game->GetState() == JVR_STATE_DEFAULT && game->GetWebSurfaceSelected().isNull()) {
             hmd_manager->ReCentre();
@@ -317,35 +262,6 @@ void GLWidget::keyPressEvent(QKeyEvent * e)
         }
         break;
 
-//    case Qt::Key_H:
-//        if ((e->modifiers() & Qt::ControlModifier) > 0) {
-
-//            if (windowState() & Qt::WindowFullScreen) {
-//                showNormal();
-//                QRect screenSize = QApplication::desktop()->screenGeometry();
-//                setGeometry(100, 100, screenSize.width()-200, screenSize.height()-200);
-//            }
-
-//            if (hierarchy_window->isVisible()) {
-//                hierarchy_window->hide();
-//            }
-//            else {
-//                hierarchy_window->show();
-//            }
-
-//            if (properties_window->isVisible()) {
-//                properties_window->hide();
-//            }
-//            else {
-//                properties_window->show();
-//            }
-//        }
-//        break;
-
-//    case Qt::Key_PageDown:
-//        EndAdvertisement();
-//        break;
-
     default:
         break;
     }
@@ -355,7 +271,6 @@ void GLWidget::keyPressEvent(QKeyEvent * e)
 
 void GLWidget::keyReleaseEvent(QKeyEvent * e)
 {
-    //m_context->makeCurrent(this);
     makeCurrent();
     game->keyReleaseEvent(e);
 }
@@ -366,8 +281,6 @@ void GLWidget::leaveEvent(QEvent * )
         SetGrab(true);
         QCursor::setPos(GetWinCentre()); //qcursor wants global position
         QPoint centre = GetLocalWinCentre(); //interally we use local position
-        qDebug() << "GLWidget::leaveEvent snap_mouse=true";
-        snap_mouse = true;
         last_mouse_pos = centre;
         mouse_pos = centre;
         game->ResetCursor(centre);
@@ -432,12 +345,13 @@ void GLWidget::initializeGL()
     else {
         qDebug() << "GLWidget::initializeGL() - warning, game pointer null";
     }
+
+    framerate_time.start();
 }
 
 void GLWidget::resizeGL(int , int )
 {
 //    qDebug() << "GLWidget::resizeGL" << w << h;
-    m_equi_cubemap_handle = nullptr;
     SetupFramebuffer();
 }
 
@@ -754,19 +668,19 @@ void GLWidget::paintGL()
         mat = mat * qt_viewMatrix;
         cameras.push_back(VirtualCamera(mat,
                                         QVector4D(m_viewPortArray[0], m_viewPortArray[1], m_viewPortArray[2], m_viewPortArray[3]),
-                                        1.0f, 90.0f, near_dist, far_dist));
+                1.0f, 90.0f, near_dist, far_dist));
         cameras[0].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, false);
 
         //forward
         mat = qt_viewMatrix;
         cameras.push_back(VirtualCamera(mat,
                                         QVector4D(m_viewPortArray[4], m_viewPortArray[5], m_viewPortArray[6], m_viewPortArray[7]),
-                                        1.0f, 90.0f, near_dist, far_dist));
+                1.0f, 90.0f, near_dist, far_dist));
 
         //forward menu
         cameras.push_back(VirtualCamera(QVector3D(0.0f, 0.0f, 0.0f), QQuaternion(), QVector3D(1.0f, 1.0f, 1.0f),
                                         QVector4D(m_viewPortArray[8], m_viewPortArray[9], m_viewPortArray[10], m_viewPortArray[11]),
-                                        1.0f, 90.0f, near_dist, far_dist));
+                1.0f, 90.0f, near_dist, far_dist));
         cameras[2].SetScopeMask(RENDERER::RENDER_SCOPE::ALL, false);
         cameras[2].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, true);
 
@@ -776,7 +690,7 @@ void GLWidget::paintGL()
         mat = mat * qt_viewMatrix;
         cameras.push_back(VirtualCamera(mat,
                                         QVector4D(m_viewPortArray[12], m_viewPortArray[13], m_viewPortArray[14], m_viewPortArray[15]),
-                                        1.0f, 90.0f, near_dist, far_dist));
+                1.0f, 90.0f, near_dist, far_dist));
         cameras[3].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, false);
 
         //back
@@ -785,7 +699,7 @@ void GLWidget::paintGL()
         mat = mat * qt_viewMatrix;
         cameras.push_back(VirtualCamera(mat,
                                         QVector4D(m_viewPortArray[16], m_viewPortArray[17], m_viewPortArray[18], m_viewPortArray[19]),
-                                        1.0f, 90.0f, near_dist, far_dist));
+                1.0f, 90.0f, near_dist, far_dist));
         cameras[4].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, false);
 
         //up
@@ -794,7 +708,7 @@ void GLWidget::paintGL()
         mat = mat * qt_viewMatrix;
         cameras.push_back(VirtualCamera(mat,
                                         QVector4D(m_viewPortArray[20], m_viewPortArray[21], m_viewPortArray[22], m_viewPortArray[23]),
-                                        1.0f, 90.0f, near_dist, far_dist));
+                1.0f, 90.0f, near_dist, far_dist));
         cameras[5].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, false);
 
         //down
@@ -803,7 +717,7 @@ void GLWidget::paintGL()
         mat = mat * qt_viewMatrix;
         cameras.push_back(VirtualCamera(mat,
                                         QVector4D(m_viewPortArray[24], m_viewPortArray[25], m_viewPortArray[26], m_viewPortArray[27]),
-                                        1.0f, 90.0f, near_dist, far_dist));
+                1.0f, 90.0f, near_dist, far_dist));
         cameras[6].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, false);
 
         Renderer::m_pimpl->SetCameras(&cameras);
@@ -908,7 +822,7 @@ void GLWidget::paintGL()
         // hmd_xform here is set as the base viewMatrix for things like ray-casting and selection
         MathUtil::LoadModelIdentity();
         //62.11 - we use the HMD transform so that the cursor updates for selection (especially important for HMD+gamepad interaction)
-//        game->DrawGL(0, base_xform, true, s, mouse_pos);
+        //        game->DrawGL(0, base_xform, true, s, mouse_pos);
         const QMatrix4x4 hmd_xform = hmd_manager->GetHMDTransform();
         game->DrawGL(0, hmd_xform, true, s, mouse_pos);
 
@@ -964,7 +878,7 @@ void GLWidget::paintGL()
         mat = mat * qt_viewMatrix;
         cameras.push_back(VirtualCamera(mat,
                                         viewports[0],
-                                        1.0f, 90.0f, near_dist, far_dist));
+                          1.0f, 90.0f, near_dist, far_dist));
         cameras[0].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, false);
 
         //left
@@ -973,7 +887,7 @@ void GLWidget::paintGL()
         mat = mat * qt_viewMatrix;
         cameras.push_back(VirtualCamera(mat,
                                         viewports[1],
-                                        1.0f, 90.0f, near_dist, far_dist));
+                          1.0f, 90.0f, near_dist, far_dist));
         cameras[1].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, false);
 
         //up
@@ -983,7 +897,7 @@ void GLWidget::paintGL()
         mat = mat * qt_viewMatrix;
         cameras.push_back(VirtualCamera(mat,
                                         viewports[2],
-                                        1.0f, 90.0f, near_dist, far_dist));
+                          1.0f, 90.0f, near_dist, far_dist));
         cameras[2].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, false);
 
         //down
@@ -993,7 +907,7 @@ void GLWidget::paintGL()
         mat = mat * qt_viewMatrix;
         cameras.push_back(VirtualCamera(mat,
                                         viewports[3],
-                                        1.0f, 90.0f, near_dist, far_dist));
+                          1.0f, 90.0f, near_dist, far_dist));
         cameras[3].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, false);
 
         //back
@@ -1002,7 +916,7 @@ void GLWidget::paintGL()
         mat = mat * qt_viewMatrix;
         cameras.push_back(VirtualCamera(mat,
                                         viewports[4],
-                                        1.0f, 90.0f, near_dist, far_dist));
+                          1.0f, 90.0f, near_dist, far_dist));
         cameras[4].SetScopeMask(RENDERER::RENDER_SCOPE::MENU, false);
 
         //forward
@@ -1010,7 +924,7 @@ void GLWidget::paintGL()
         mat = qt_viewMatrix;
         cameras.push_back(VirtualCamera(mat,
                                         viewports[5],
-                                        1.0f, 90.0f, near_dist, far_dist));
+                          1.0f, 90.0f, near_dist, far_dist));
 
         //forward menu
         cameras.push_back(VirtualCamera(QVector3D(0.0f, 0.0f, 0.0f), QQuaternion(), QVector3D(1.0f, 1.0f, 1.0f),
@@ -1041,7 +955,7 @@ void GLWidget::paintGL()
     case MODE_AUTO:
     case MODE_2D:
     default:
-    {        
+    {
         // Make sure we have no FBO bound here, so that the render-thread won't have texture binding issues
         // when it tries to copy it's resulting texture to our FBO color layer.
         Renderer::m_pimpl->BindFBOToDraw(FBO_TEXTURE_BITFIELD::NONE);
@@ -1131,11 +1045,5 @@ void GLWidget::paintGL()
             game->GetVirtualMenu()->SetTakingScreenshot(false);
             game->GetVirtualMenu()->ConstructSubmenus();
         }
-    }   
-
-    /*int64_t t10 = JNIUtil::GetTimestampNsec();
-    qDebug() << "  GLWidget::paintGL time" << t10 - t1;
-    qDebug() << "AVERAGE MAIN THREAD CPU TIME" << game->GetEnvironment()->GetCurNodeRoom()->GetPerformanceLogger().GetAverageMainThreadCPUTime();
-    qDebug() << "AVERAGE RENDER THREAD CPU TIME" << game->GetEnvironment()->GetCurNodeRoom()->GetPerformanceLogger().GetAverageRenderThreadCPUTime();
-    qDebug() << "AVERAGE RENDER THREAD GPU TIME" << game->GetEnvironment()->GetCurNodeRoom()->GetPerformanceLogger().GetAverageRenderThreadGPUTime();*/
+    }      
 }

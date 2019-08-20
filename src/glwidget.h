@@ -39,9 +39,7 @@ public:
     static void SetNoVSync(const bool b);
     static bool GetNoVSync();
 
-    //these are from GLWidget
-    void SetDefaultProjectionPersp(const float fov, const float aspect, const float near_dist, const float far_dist);
-    void SetDefaultProjectionOrtho();
+    static void SetDefaultProjectionPersp(const float fov, const float aspect, const float near_dist, const float far_dist);
 
     void SetGrab(const bool b);
     bool GetGrab() const;
@@ -74,14 +72,9 @@ private:
 
     QPoint last_mouse_pos;
     QPoint mouse_pos;
-    bool snap_mouse;
     bool grabbed;
 
-    //frametime related
     QTime framerate_time;
-    unsigned int counted_frames;
-
-    unsigned int fps;
 
     QString take_screenshot_path;
     bool take_screenshot;
@@ -89,16 +82,11 @@ private:
     bool take_screenthumb;
     bool take_bookmark;
 
-    GLsizei m_cube_face_width;
-    GLsizei m_cube_face_height;
-
     QPointer <Game> game;
     QPointer <AbstractHMDManager> hmd_manager;   
 
     static bool novsync;
     static DisplayMode disp_mode;
-
-    QPointer<TextureHandle> m_equi_cubemap_handle;
 
     QVector<VirtualCamera> cameras;
 };
