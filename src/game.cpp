@@ -76,28 +76,15 @@ Game::~Game()
 }
 
 void Game::Initialize()
-{
-    //set the initial URL if it wasn't already done via command line
-    if (SettingsManager::GetDemoModeEnabled() && !SettingsManager::GetDemoModeLaunchURL().isEmpty()) {
-        Environment::SetLaunchURLIsCustom(true);
-        Environment::SetLaunchURL(SettingsManager::GetDemoModeLaunchURL());
-    }
-
+{    
     env->Reset();
 
-    multi_players->Initialize();
-    if (SettingsManager::GetDemoModeEnabled() && !SettingsManager::GetDemoModeMultiplayer()) {
-        multi_players->SetEnabled(false);
-    }
-    else {
-        multi_players->SetEnabled(SettingsManager::GetMultiplayerEnabled());
-    }    
+    multi_players->Initialize();    
+    multi_players->SetEnabled(SettingsManager::GetMultiplayerEnabled());
 
     const float s = 0.05f;
     info_text_geom.SetFixedSize(true, s);
     info2_text_geom.SetFixedSize(true, s);
-
-    //TextureManager::Initialize();
 
     WebAsset::SetUseCache(SettingsManager::GetCacheEnabled());
 

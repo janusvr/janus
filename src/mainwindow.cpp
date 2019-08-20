@@ -45,21 +45,13 @@ MainWindow::MainWindow()
     installEventFilter(closeFilter);
     connect(closeFilter, SIGNAL(Closed()), this, SLOT(Closed()));
 
-    //set window title (and optionally, demo_windowtitle override
-    if (SettingsManager::GetDemoModeEnabled() && !SettingsManager::GetDemoModeWindowTitle().isEmpty()) {
-        setWindowTitle(SettingsManager::GetDemoModeWindowTitle());
-    }
-    else {
+    //set window title
+    QString win_title = QString("Janus VR (");
 #ifdef OCULUS_SUBMISSION_BUILD
-        setWindowTitle(QString("Janus VR (Oculus build "+QString(__JANUS_VERSION_COMPLETE)+")"));
-#else
-        setWindowTitle(QString("Janus VR ("+QString(__JANUS_VERSION_COMPLETE)+")"));
+    win_title+="Oculus build ";
 #endif
-    }
-
-    if (SettingsManager::GetDemoModeEnabled() && !SettingsManager::GetDemoModeWindowIcon().isEmpty()) {
-        setWindowIcon(QIcon(SettingsManager::GetDemoModeWindowIcon()));
-    }
+    win_title += QString(__JANUS_VERSION_COMPLETE)+")";
+    setWindowTitle(win_title);
 
     setMinimumSize(QSize(800, 600));
 
@@ -143,10 +135,6 @@ MainWindow::MainWindow()
     int margin_x = int(float(screenSize.width())*0.1f);
     int margin_y = int(float(screenSize.height())*0.1f);
     setGeometry(margin_x, margin_y, screenSize.width()-margin_x*2, screenSize.height()-margin_y*2);
-
-    if (SettingsManager::GetDemoModeEnabled() && SettingsManager::GetDemoModeGrabCursor()) {
-        glwidget->SetGrab(true);
-    }
 
     button_bookmark_state = 0;
     default_window_flags = windowFlags();
@@ -442,13 +430,7 @@ void MainWindow::Initialize()
 
     qDebug() << "MainWindow::InitializeGame() - HMD/render type:" << game->GetPlayer()->GetHMDType();
 
-    //game->SetPlayerHeight(rift_render.GetPlayerEyeHeight());
-    qDebug() << "MainWindow::InitializeGame() - Initializing sound manager...";
-    if (SettingsManager::GetDemoModeEnabled()) {
-        SoundManager::SetBuiltinSoundsEnabled(SettingsManager::GetDemoModeBuiltinSounds());
-    }
-    SoundManager::Load(SettingsManager::GetPlaybackDevice(),
-                       SettingsManager::GetCaptureDevice());
+    SoundManager::Load(SettingsManager::GetPlaybackDevice(), SettingsManager::GetCaptureDevice());
 
     //initialize controllers
     GamepadInit();
@@ -593,11 +575,8 @@ void MainWindow::SetupWidgets()
 
     QVBoxLayout * l2 = new QVBoxLayout();
     l2->setSpacing(0);
-    l2->setMargin(0);
-    //add top panel widget (optionally disabled if demo_enabled is true and demo_ui is false)
-    if (!SettingsManager::GetDemoModeEnabled() || SettingsManager::GetDemoModeUI()) {
-        l2->addWidget(topbarwidget);
-    }
+    l2->setMargin(0);    
+    l2->addWidget(topbarwidget);
     l2->addWidget(glwidget);
 
     splitter = new QSplitter(this);
@@ -1074,7 +1053,6 @@ void MainWindow::ActionOpenBookmarks()
         QString thumbnail = o["thumbnail"].toString();
 
         QAction * a = new QAction(QIcon(QUrl(thumbnail).toLocalFile()), url, bookmarkMenu);
-//        connect(a, SIGNAL(triggered(bool)), this, SLOT(ActionOpenURL(QString)));
         bookmarkMenu->addAction(a);
     }
     bookmarkMenu->addSeparator();
@@ -1085,7 +1063,6 @@ void MainWindow::ActionOpenBookmarks()
         QString thumbnail = o["thumbnail"].toString();
 
         QAction * a = new QAction(QIcon(QUrl(thumbnail).toLocalFile()), QUrl::fromLocalFile(url).toString(), bookmarkMenu);
-//        connect(a, SIGNAL(triggered(bool)), this, SLOT(ActionOpenURL(QString)));
         bookmarkMenu->addAction(a);
     }
 
@@ -1111,14 +1088,12 @@ void MainWindow::ActionToggleFullscreen()
     if (fullscreened) {
         setWindowFlags( default_window_flags );
         show();
-//        setWindowFlags( Qt::CustomizeWindowHint );
         setGeometry(r.left()+100, r.top()+100, r.width()-200, r.height()-200);
     }
     else {
         default_window_flags = windowFlags();
-        setWindowFlags( Qt::CustomizeWindowHint); // | Qt::FramelessWindowHint); // | Qt::WindowStaysOnTopHint);
+        setWindowFlags( Qt::CustomizeWindowHint);
         show();
-        //setGeometry(r.left()+1, r.top(), r.width()-1, r.height());
         setGeometry(s->availableGeometry());
     }
     fullscreened = !fullscreened;

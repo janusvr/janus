@@ -52,7 +52,7 @@ float SoundManager::GetMicLevel()
 
 void SoundManager::Load(QString device_id, QString capture_device_id)
 {
-//    qDebug() << "SoundManager::Load()";
+    qDebug() << "SoundManager::Load()";
 
     //qDebug() << "Playback" << GetDevices(ALC_DEVICE_SPECIFIER);
     bool closed_playback = false;
@@ -116,24 +116,15 @@ void SoundManager::Load(QString device_id, QString capture_device_id)
             if (context) alcDestroyContext(context);
             if (device) alcCloseDevice(device);
 
-//            device = alcOpenDevice((ALCchar *) device_to_open); // open default device
             device = alcOpenDevice(NULL); // open default device
             if (device) {
-                // Request 1 Auxiliary Send per Source
-                //ALint attribs[4] = {0};
-                //attribs[0] = ALC_MAX_AUXILIARY_SENDS;
-                //attribs[1] = 1;
-
-                //context = alcCreateContext(device, attribs); // create context
                 context = alcCreateContext(device, NULL); // create context
-                if (context) {
-        //            qDebug() << "SoundManager::Load() - Setting active context";
+                if (context) {        
                     alcMakeContextCurrent(context); // set active context
                 }
             }
 
             alDistanceModel(AL_INVERSE_DISTANCE_CLAMPED); //AL_INVERSE_DISTANCE_CLAMPED - the default
-            //alDistanceModel(AL_EXPONENT_DISTANCE_CLAMPED);
         }
 
         if (!closed_capture && (device_input == NULL || QString::compare((char *) alcGetString(device_input, ALC_CAPTURE_DEVICE_SPECIFIER), capture_device_to_open) != 0))
@@ -184,9 +175,6 @@ void SoundManager::Load(QString device_id, QString capture_device_id)
         if (err != AL_NO_ERROR) {
             qDebug() << "SoundManager::Load() - Error occurred: " << err;
         }
-//        else {
-//            qDebug() << "SoundManager::Load() - No errors";
-//        }
 
         if (sounds.isEmpty() && builtin_sounds_enabled) {
             sounds.resize(SOUND_COUNT);

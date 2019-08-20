@@ -3992,10 +3992,6 @@ void Room::LoadTemplates()
 
 void Room::LoadSkyboxes()
 {
-    if (SettingsManager::GetDemoModeEnabled() && !SettingsManager::GetDemoModeBuiltinSkyboxes()) {
-        return;
-    }
-
     if (skyboxes.isEmpty()) {
         QList <QString> skybox_image_urls;
         QList <QString> skybox_cubemap_image_urls;

@@ -236,12 +236,7 @@ int main(int argc, char *argv[])
                  (MainWindow::window_height > 0) ? MainWindow::window_height : screenres.height());
     }
 
-    if (SettingsManager::GetDemoModeEnabled() && SettingsManager::GetDemoModeWindowMaximize()) {
-        w.showMaximized();
-    }
-    else {
-        w.show();
-    }
+    w.show();
 
     qDebug() << "main(): application path " << MathUtil::GetApplicationPath();
 

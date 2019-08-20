@@ -70,23 +70,9 @@ public:
     static bool GetUpdateWebsurfaces();
     static bool GetUpdateVOIP();
     static bool GetUpdateCMFT();
-    static bool GetUpdateCustomAvatars();
-
-    //demo-mode specific (from demo.json in app binary dir)
-    static bool GetDemoModeEnabled();
-    static bool GetDemoModeUI();
-    static bool GetDemoModeAvatar();
-    static QString GetDemoModeWindowTitle();
-    static QString GetDemoModeWindowIcon();
-    static bool GetDemoModeWindowMaximize();
-    static bool GetDemoModeMultiplayer();
-    static QString GetDemoModeLaunchURL();
-    static bool GetDemoModeGrabCursor();
-    static bool GetDemoModeBuiltinSounds();
-    static bool GetDemoModeBuiltinSkyboxes();
+    static bool GetUpdateCustomAvatars();  
 
     static QVariantMap settings;
-    static QVariantMap demo_settings;
 };
 
 #endif // SETTINGSMANAGER_H

@@ -1248,20 +1248,11 @@ void MultiPlayerManager::DoUserChat(const QVariantMap & m)
 
 void MultiPlayerManager::LoadAvatarData(const bool load_userid)
 {   
-    //57.0 - reconstruct the whole ghost, so defaults don't hang around
-//    if (user_ghost) {
-//        delete user_ghost;
-//    }
-
     user_ghost->SetType(TYPE_GHOST);
 
     QPointer <AssetGhost> user_ghost_asset = new AssetGhost();    
     user_ghost->SetAssetGhost(user_ghost_asset);
     user_ghost->Play();
-
-    if (SettingsManager::GetDemoModeEnabled() && !SettingsManager::GetDemoModeAvatar()) {
-        return;
-    }
 
     QFile file(userid_filename);
     if (!load_userid || !file.open( QIODevice::ReadOnly | QIODevice::Text )) {
@@ -1290,7 +1281,6 @@ void MultiPlayerManager::LoadAvatarData(const bool load_userid)
         QPointer <AssetObject> body_obj = new AssetObject();
         body_obj->GetProperties()->SetID("body");
         body_obj->SetSrc(base_url, base_url + avatar_names[character] + "/Beta.fbx.gz");       
-//        body_obj->Load();
 
         //set the body
         QHash <QString, QPointer <AssetObject> > asset_obj_list;

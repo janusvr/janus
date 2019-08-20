@@ -1,7 +1,6 @@
 #include "settingsmanager.h"
 
 QVariantMap SettingsManager::settings;
-QVariantMap SettingsManager::demo_settings;
 
 SettingsManager::SettingsManager()
 {
@@ -59,32 +58,22 @@ void SettingsManager::LoadSettings()
     settings["vivetrackpadmovement"] = false;
     settings["homeurl"] = QString("https://vesta.janusvr.com/");
     settings["websurfaceurl"] = QString("https://google.com");
-    settings["renderportalrooms"] = true;
+    settings["renderportalrooms"] = true;   
 
-    QVector <QString> filename(2);
+    const QString filename = MathUtil::GetAppDataPath() + "settings.json";
 
-    filename[0] = MathUtil::GetAppDataPath() + "settings.json";
-    filename[1] = MathUtil::GetApplicationPath() + "demo.json"; //packaged demo.json settings override
-
-    for (int j=0; j<filename.size(); ++j) {
-        QFile file(filename[j]);
-        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            qDebug() << "SettingsManager::LoadSettings(): File " << filename << " not found";
-            continue;
-        }
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "SettingsManager::LoadSettings(): File " << filename << " not found";
+    }
+    else {
         const QByteArray ba = file.readAll();
         file.close();
 
         //49.78 - unite the two maps (defaults and loaded) instead of direct assignment, fixes null launchurls
         QVariantMap loaded_map = QJsonDocument::fromJson(ba).toVariant().toMap();
         for (QVariantMap::iterator i = loaded_map.begin(); i != loaded_map.end(); ++i) {
-            if (j == 0) {
-                settings[i.key()] = i.value();
-            }
-            else {
-                demo_settings[i.key()] = i.value();
-            }
-//            qDebug() << i.key() << i.value();
+            settings[i.key()] = i.value();
         }
     }
 
@@ -360,116 +349,6 @@ bool SettingsManager::GetUpdateCMFT()
 bool SettingsManager::GetUpdateCustomAvatars()
 {
     return settings["updatecustomavatars"].toBool();
-}
-
-bool SettingsManager::GetDemoModeEnabled()
-{
-    if (demo_settings.contains("demo_enabled")) {
-        return demo_settings["demo_enabled"].toBool();
-    }
-    else {
-        return false;
-    }
-}
-
-bool SettingsManager::GetDemoModeUI()
-{
-    if (demo_settings.contains("demo_ui")) {
-        return demo_settings["demo_ui"].toBool();
-    }
-    else {
-        return true;
-    }
-}
-
-bool SettingsManager::GetDemoModeAvatar()
-{
-    if (demo_settings.contains("demo_avatar")) {
-        return demo_settings["demo_avatar"].toBool();
-    }
-    else {
-        return true;
-    }
-}
-
-QString SettingsManager::GetDemoModeWindowTitle()
-{
-    if (demo_settings.contains("demo_windowtitle")) {
-        return demo_settings["demo_windowtitle"].toString();
-    }
-    else {
-        return "";
-    }
-}
-
-QString SettingsManager::GetDemoModeWindowIcon()
-{
-    if (demo_settings.contains("demo_windowicon")) {
-        return demo_settings["demo_windowicon"].toString();
-    }
-    else {
-        return "";
-    }
-}
-
-bool SettingsManager::GetDemoModeWindowMaximize()
-{
-    if (demo_settings.contains("demo_windowmaximize")) {
-        return demo_settings["demo_windowmaximize"].toBool();
-    }
-    else {
-        return false;
-    }
-}
-
-bool SettingsManager::GetDemoModeMultiplayer()
-{
-    if (demo_settings.contains("demo_multiplayer")) {
-        return demo_settings["demo_multiplayer"].toBool();
-    }
-    else {
-        return true;
-    }
-}
-
-QString SettingsManager::GetDemoModeLaunchURL()
-{
-    if (demo_settings.contains("demo_launchurl")) {
-        return demo_settings["demo_launchurl"].toString();
-    }
-    else {
-        return "";
-    }
-}
-
-bool SettingsManager::GetDemoModeGrabCursor()
-{
-    if (demo_settings.contains("demo_grabcursor")) {
-        return demo_settings["demo_grabcursor"].toBool();
-    }
-    else {
-        return false;
-    }
-}
-
-bool SettingsManager::GetDemoModeBuiltinSounds()
-{
-    if (demo_settings.contains("demo_builtinsounds")) {
-        return demo_settings["demo_builtinsounds"].toBool();
-    }
-    else {
-        return true;
-    }
-}
-
-bool SettingsManager::GetDemoModeBuiltinSkyboxes()
-{
-    if (demo_settings.contains("demo_builtinskyboxes")) {
-        return demo_settings["demo_builtinskyboxes"].toBool();
-    }
-    else {
-        return true;
-    }
 }
 
 bool SettingsManager::GetViveTrackpadMovement()
