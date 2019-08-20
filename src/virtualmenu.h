@@ -246,7 +246,7 @@ public:
     bool GetDoBack();
     bool GetDoForward();
     bool GetDoReload();
-    bool GetDoEscapeToHome();
+    bool GetDoReset();
     bool GetDoSetUserID();
     QString GetEnteredUserID();
     bool GetDoExit();
@@ -297,7 +297,7 @@ private:
     bool do_back;
     bool do_forward;
     bool do_reload;
-    bool do_escape_to_home;
+    bool do_reset;
     bool do_exit;
     bool do_create_portal;
     QString create_portal_url;

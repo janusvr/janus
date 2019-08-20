@@ -32,9 +32,7 @@ enum FadeState {
     FADE_FORWARD_PLAYER1,
     FADE_FORWARD_PLAYER2,
     FADE_TELEPORT1,
-    FADE_TELEPORT2,
-    FADE_POCKET1,
-    FADE_POCKET2
+    FADE_TELEPORT2
 };
 
 enum JVR_GameState {
@@ -153,9 +151,6 @@ public:
     QString GetSelected(const int i);   
 
     void SetGamepadButtonPress(const bool b);
-
-    void StartEscapeToHome();
-    void EscapeToHome();
 
     void SaveScreenThumb(const QString out_filename);
 

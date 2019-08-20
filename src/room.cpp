@@ -1188,11 +1188,6 @@ void Room::UpdateObjects(QPointer <Player> player, MultiPlayerManager *multi_pla
 {
     page->Update();
 
-    //update player entrance position if uninitialized/unchanged
-    if (entrance_object && player_lastxform.isIdentity()) {
-        player_lastxform = entrance_object->GetModelMatrixLocal();
-    }
-
     QPointF pos_pt(player->GetProperties()->GetPos()->toQVector3D().x(),
                    player->GetProperties()->GetPos()->toQVector3D().z());
 
@@ -2715,17 +2710,6 @@ void Room::UpdateCode(const QString code)
     page->Clear();
     page->SetURL(props->GetURL());
     page->SetCode(code);
-}
-
-//player_lastxform stores the player's last transform while in this room (used for putting the player back when teleporting to/from this Room)
-void Room::SetPlayerLastTransform(const QMatrix4x4 & m)
-{
-    player_lastxform = m;
-}
-
-QMatrix4x4 Room::GetPlayerLastTransform() const
-{
-    return player_lastxform;
 }
 
 void Room::SetEntranceObject(QPointer <RoomObject> o)
@@ -4652,14 +4636,6 @@ QList <QPointer <Room> > Room::GetAllChildren() {
         cs += children[i]->GetAllChildren();
     }
     return cs;
-}
-
-QPointer <Room> Room::GetLastChild() const {
-    return last_child;
-}
-
-void Room::SetLastChild(QPointer <Room> r) {
-    last_child = r;
 }
 
 void Room::AddChild(QPointer <Room> r) {

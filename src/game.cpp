@@ -594,32 +594,18 @@ void Game::DrawFadingGL()
     case FADE_FORWARD_PLAYER1:
     case FADE_FORWARD_PLAYER2:
     case FADE_TELEPORT1:
-    case FADE_TELEPORT2:
-    case FADE_POCKET1:
-    case FADE_POCKET2:
+    case FADE_TELEPORT2:    
     {
-        float duration = 1000.0f;
-
-        if (fadestate == FADE_TELEPORT1 || fadestate == FADE_TELEPORT2 || fadestate == FADE_POCKET1 || fadestate == FADE_POCKET2) {
-            duration = 250.0f;
-        }
-
+        const float duration = (fadestate == FADE_TELEPORT1 || fadestate == FADE_TELEPORT2) ? 250.0f : 1000.0f;
         const float alpha = (fadestate == FADE_RELOAD1 ||
                              fadestate == FADE_RESETPLAYER1 ||
                              fadestate == FADE_FORWARD_PLAYER1 ||
-                             fadestate == FADE_TELEPORT1 ||
-                             fadestate == FADE_POCKET1) ? (float(fade_time.elapsed()) / duration) : 1.0f - (float(fade_time.elapsed()) / duration);
+                             fadestate == FADE_TELEPORT1) ? (float(fade_time.elapsed()) / duration) : 1.0f - (float(fade_time.elapsed()) / duration);
 
         shader->SetAmbient(QVector3D(1,1,1));
         shader->SetDiffuse(QVector3D(1,1,1));
-        shader->SetEmission(QVector3D(0,0,0));
-        if (fadestate == FADE_POCKET1 || fadestate == FADE_POCKET2) {
-            shader->SetConstColour(QVector4D(1,1,1,alpha));
-        }
-        else {
-            shader->SetConstColour(QVector4D(0,0,0,alpha));
-        }
-//        qDebug() << "alpha" << alpha << MathUtil::ModelMatrix() << MathUtil::ViewMatrix();
+        shader->SetEmission(QVector3D(0,0,0));        
+        shader->SetConstColour(QVector4D(0,0,0,alpha));
         shader->SetUseTextureAll(false);
         shader->SetUseLighting(false);
         shader->UpdateObjectUniforms();
@@ -676,10 +662,17 @@ void Game::DrawFadingGL()
                 fade_time.start();
                 fadestate = FADE_FORWARD_PLAYER2;
 
-                if (env->GetCurRoom() && env->GetCurRoom()->GetLastChild()) {
-                    env->NavigateToRoom(player, env->GetCurRoom()->GetLastChild());
+                bool moved_forward = false;
+                if (env->GetCurRoom()) {
+                    //navigate "forward" to last of current room's child rooms
+                    QList <QPointer <Room> > & children = env->GetCurRoom()->GetChildren();
+                    if (!children.isEmpty() && children.last()) {
+                        env->NavigateToRoom(player, children.last());
+                        moved_forward = true;
+                    }
                 }
-                else {
+
+                if (!moved_forward) {
                     ResetPlayer();
                 }
             }
@@ -694,15 +687,7 @@ void Game::DrawFadingGL()
                 break;
             case FADE_TELEPORT2:
                 fadestate = FADE_NONE;
-                break;
-            case FADE_POCKET1:
-                fade_time.start();
-                fadestate = FADE_POCKET2;
-                EscapeToHome();
-                break;
-            case FADE_POCKET2:
-                fadestate = FADE_NONE;
-                break;
+                break;            
             default:
                 break;
             }
@@ -3360,42 +3345,6 @@ QPointer <AssetWebSurface> Game::GetWebSurfaceSelected()
     return QPointer <AssetWebSurface> ();
 }
 
-void Game::StartEscapeToHome()
-{
-    fade_time.start();
-    fadestate = FADE_POCKET1;
-}
-
-void Game::EscapeToHome()
-{
-    QMatrix4x4 player_xform = player->GetTransform();
-    player_xform.rotate(180.0f, 0, 1, 0);
-    env->GetCurRoom()->SetPlayerLastTransform(player_xform);
-
-    QMatrix4x4 m;
-    if (env->GetCurRoom() == env->GetRootRoom() && env->GetLastRoom()) {
-        QPointer <Room> r = env->GetLastRoom();
-        if (r && r->GetEntranceObject()) {
-            m = r->GetPlayerLastTransform();
-            if (m == QMatrix4x4()) {
-                m.setColumn(3, QVector4D(r->GetEntranceObject()->GetPos(), 1));
-            }
-            env->NavigateToRoom(player, r);
-        }
-    }
-    else {
-        env->NavigateToRoom(player, env->GetRootRoom());
-    }
-
-    player->GetProperties()->SetPos(m.column(3).toVector3D());
-    player->GetProperties()->SetDir(m.column(2).toVector3D());
-    player->UpdateDir();
-
-    ClearSelection(0);
-    ClearSelection(1);
-    SetPrivateWebsurfacesVisible(false);
-}
-
 void Game::SetWindowSize(const QSize s)
 {
     win_size = s;
@@ -4051,8 +4000,7 @@ void Game::UpdateVirtualMenu()
         if (virtualmenu->GetDoReload()) {
             env->ReloadRoom();
         }
-        if (virtualmenu->GetDoEscapeToHome()) {
-//            StartEscapeToHome();
+        if (virtualmenu->GetDoReset()) {
             env->Reset();
         }
         if (virtualmenu->GetDoSetUserID()) {

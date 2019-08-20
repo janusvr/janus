@@ -162,10 +162,7 @@ public:
     bool RunKeyPressEvent(QKeyEvent * e, QPointer <Player> player, MultiPlayerManager * multi_players);
     bool RunKeyReleaseEvent(QKeyEvent * e, QPointer <Player> player, MultiPlayerManager * multi_players);
 
-    unsigned int GetRoomNumTris() const;    
-
-    void SetPlayerLastTransform(const QMatrix4x4 & m); //remmebers player's last position
-    QMatrix4x4 GetPlayerLastTransform() const;   
+    unsigned int GetRoomNumTris() const;       
 
     void StartURLRequest();    
 
@@ -224,8 +221,6 @@ public:
     QPointer <Room> GetParent() const;
     QList <QPointer <Room> > & GetChildren();
     QList <QPointer <Room> > GetAllChildren();
-    QPointer <Room> GetLastChild() const;
-    void SetLastChild(QPointer <Room> r);
 
     void AddChild(QPointer <Room> r);
     void RemoveChild(QPointer <Room> r);    
@@ -315,9 +310,7 @@ private:
     QPointer <RoomPhysics> physics;
     QPointer <QScriptEngine> script_engine;
 
-    PerformanceLogger perf_logger;
-
-    QMatrix4x4 player_lastxform;
+    PerformanceLogger perf_logger;   
 
     QString room_template;
 

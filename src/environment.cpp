@@ -62,8 +62,7 @@ void Environment::Reset()
     //setup root
     rootnode = new Room();
     rootnode->GetProperties()->SetURL(launch_url_is_custom ? launch_url : SettingsManager::GetHomeURL());
-    curnode = rootnode;
-    lastnode = rootnode;
+    curnode = rootnode;    
 
     emit RoomsChanged();
 }
@@ -101,9 +100,7 @@ bool Environment::ClearRoom(QPointer <RoomObject> p)
 //    qDebug() << "Environment::ClearRoom" << p;
     QPointer <Room> r = curnode->GetConnectedRoom(p);
     if (r && r != curnode && r->GetReady()) {
-        if (r != curnode->GetLastChild()) {
-            curnode->RemoveChild(r);
-        }
+        curnode->RemoveChild(r);
         r->Clear();
         emit RoomsChanged();
         return true;
@@ -471,11 +468,6 @@ void Environment::MovePlayer(QPointer <RoomObject> portal, QPointer <Player> pla
 
         player->GetProperties()->SetPos(p0); // + new_vel * player->GetF("delta_time"));
         player->GetProperties()->SetVel(QVector3D(0,0,0));
-//        player->SetV("impulse_vel", QVector3D(0,0,0));
-    }
-
-    if (curnode->GetParent() != room) {
-        curnode->SetLastChild(room);
     }
 
     SetCurRoom(player, room);
@@ -494,7 +486,7 @@ void Environment::Update_CrossPortals(QPointer <Player> player)
                 QPointer <Room> r = curnode->GetConnectedRoom(each_portal);
                 QPointer <RoomObject> p2 = curnode->GetConnectedPortal(each_portal);
 
-                //only consider if portal is non null, open, active, visible
+                //only consider if portal is non null, open, active, visible                
                 if (each_portal->GetProperties()->GetOpen() && each_portal->GetProperties()->GetActive() && each_portal->GetProperties()->GetVisible()) {
 
                     //only go through if the room is ready, and the portal is open
@@ -643,7 +635,9 @@ void Environment::Update2(QPointer <Player> player, MultiPlayerManager *multi_pl
     //load rooms
     QList <QPointer <Room> > rooms = rootnode->GetAllChildren();
     for (QPointer <Room> & r : rooms) {
+//        qDebug() << "update2" << r << r->GetLoaded() << r->GetProcessing() << r->GetProcessed();
         if (r && r->GetLoaded() && r->GetProcessing() && !r->GetProcessed()) {
+//            qDebug() << "update2 CREATEROOM" << r << r->GetLoaded() << r->GetProcessing() << r->GetProcessed();
 
             //create room            
             //59.6 - Resolve 302 URL with whatever existing URL was
@@ -832,7 +826,7 @@ void Environment::Update2(QPointer <Player> player, MultiPlayerManager *multi_pl
     //deallocation
     for (QPointer <Room> & r : rooms) {
         //60.0 - we deallocate very conservatively, only when Room has completed loading ("ready for screenshot")
-        if (r && r->GetReady() && !visible_rooms.contains(r->GetURL()) && r != curnode && r != lastnode) { //deallocate
+        if (r && r->GetReady() && !visible_rooms.contains(r->GetURL()) && r != curnode) { //deallocate
             r->Clear();
             emit RoomsChanged();
         }
@@ -840,7 +834,6 @@ void Environment::Update2(QPointer <Player> player, MultiPlayerManager *multi_pl
 
     //update objects only for adjacent rooms    
     for  (QPointer <Room> & r : visible_rooms) {
-//        qDebug() << "Environment::Update2 visrooms" << r->GetURL();
         if (r) {
             const bool player_in_room = (r == curnode);
             r->UpdateObjects(player, multi_players, player_in_room);
@@ -944,21 +937,12 @@ void Environment::SetCurRoom(QPointer <Player> player, QPointer <Room> r)
     curnode = r;
     curnode->SetPlayerInRoom(player);    
 
-    if (curnode != rootnode) {
-        lastnode = curnode;
-    }
-
     emit RoomsChanged();
 }
 
 QPointer <Room> Environment::GetCurRoom()
 {
     return curnode;
-}
-
-QPointer <Room> Environment::GetLastRoom()
-{
-    return lastnode;
 }
 
 QPointer <Room> Environment::GetRootRoom()

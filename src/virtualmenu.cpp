@@ -11,7 +11,7 @@ VirtualMenu::VirtualMenu() :
     do_back(false),
     do_forward(false),
     do_reload(false),
-    do_escape_to_home(false),
+    do_reset(false),
     do_exit(false),
     do_create_portal(false),
     do_bookmark_add(false),
@@ -311,7 +311,7 @@ void VirtualMenu::mouseReleaseEvent(const QString selected)
             do_reload = true;
         }
         else if (selected == "__home") {
-            do_escape_to_home = true;
+            do_reset = true;
         }
         else if (selected == "__bookmarks") {
             menu_index = VirtualMenuIndex_BOOKMARKS;
@@ -532,10 +532,10 @@ bool VirtualMenu::GetDoReload()
     }
 }
 
-bool VirtualMenu::GetDoEscapeToHome()
+bool VirtualMenu::GetDoReset()
 {
-    if (do_escape_to_home) {
-        do_escape_to_home = false;
+    if (do_reset) {
+        do_reset = false;
         return true;
     }
     else {

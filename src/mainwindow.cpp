@@ -253,14 +253,6 @@ void MainWindow::Update()
         topbarwidget->setVisible(vis);
     }
 
-    //59.3 - disable home toggle button if there is no other current viewed room to toggle to
-    if (game->GetEnvironment()->GetLastRoom().isNull() && button_home->isVisible()) {
-        button_home->setVisible(false);
-    }
-    else if (game->GetEnvironment()->GetLastRoom() && !button_home->isVisible()) {
-        button_home->setVisible(true);
-    }
-
     const int value = game->GetEnvironment()->GetCurRoom()->GetProgress()*100.0f;
     if (progressbar->value() != value) {
         progressbar->setValue(value);
@@ -916,7 +908,6 @@ void MainWindow::ActionReload()
 
 void MainWindow::ActionHome()
 {
-//    game->StartEscapeToHome();
     game->GetEnvironment()->Reset();
 }
 

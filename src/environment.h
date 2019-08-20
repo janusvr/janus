@@ -45,8 +45,7 @@ public:
     void NavigateToRoom(QPointer <Player>, QPointer <Room> r);
 
     void SetCurRoom(QPointer <Player>, QPointer <Room> r);
-    QPointer <Room> GetCurRoom();
-    QPointer <Room> GetLastRoom();
+    QPointer <Room> GetCurRoom();    
     QPointer <Room> GetRootRoom();
 
     void MovePlayer(QPointer <RoomObject> portal, QPointer <Player> player, const bool set_player_to_portal);
@@ -67,8 +66,7 @@ private:
     void DrawRoomWithinPortalStencilGL(QPointer <RoomObject> portal, QPointer <Player> player, MultiPlayerManager*  multi_players, const bool render_left_eye);
 
     QPointer <Room> rootnode; //navigation root/launch url
-    QPointer <Room> curnode; //pointer node player is at
-    QPointer <Room> lastnode; //last node player was at
+    QPointer <Room> curnode; //pointer node player is at    
 
     QVector3D player_lasteyepoint;
 
