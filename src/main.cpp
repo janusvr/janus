@@ -26,14 +26,11 @@ void DisplayHelp()
     std::cout << "    -port       - PORT is a number that specifies the port of the server to connect to\n";
     std::cout << "    -adapter    - X specifies the screen that the Janus window will be positioned on\n";
     std::cout << "    -render     - MODE specifies render mode\n";
-    std::cout << "                  (can be: 2d, sbs, sbs_reverse, ou3d, cube, equi, rift, vive)\n";
-    std::cout << "    -gl         - MODE specifies render mode,\n";
-    std::cout << "                  (can be: 3.3, 4.4, 4.4EXT, FORCE4.4EXT\n";
+    std::cout << "                  (can be: 2d, sbs, sbs_reverse, ou3d, cube, equi, rift, vive)\n";    
     std::cout << "    -window     - launch as a window instead of fullscreen\n";
     std::cout << "    -width      - set width of JanusVR window in windowed mode\n";
     std::cout << "    -height     - set height of JanusVR window in windowed mode\n";
-    std::cout << "    -novsync    - run JanusVR without V-sync\n";
-    std::cout << "    -pos        - position in space (X,Y,Z) to start in\n\n";
+    std::cout << "    -novsync    - run JanusVR without V-sync\n";    
     std::cout << "    -output_cubemap     - save out 2k x 2k per face cubemap face images with filename\n";
     std::cout << "                          prefix X from [pos] at  [url], then exit\n";
     std::cout << "    -output_equi        - same as output_cubemap but also saves out an 8k x 4k\n";
@@ -46,13 +43,12 @@ void DisplayHelp()
 
 bool isCommandArg2(QString arg)
 {
-    bool const isServer = (QString::compare(arg, "-server", Qt::CaseInsensitive) == 0);
-    bool const isPort   = (QString::compare(arg, "-port", Qt::CaseInsensitive) == 0);
-    bool const isCubemap = (QString::compare(arg, "-output_cubemap", Qt::CaseInsensitive) == 0);
-    bool const isEqui = (QString::compare(arg, "-output_equi", Qt::CaseInsensitive) == 0);
-    bool const isAd = (QString::compare(arg, "-ad", Qt::CaseInsensitive) == 0);
+    const bool isServer = (QString::compare(arg, "-server", Qt::CaseInsensitive) == 0);
+    const bool isPort   = (QString::compare(arg, "-port", Qt::CaseInsensitive) == 0);
+    const bool isCubemap = (QString::compare(arg, "-output_cubemap", Qt::CaseInsensitive) == 0);
+    const bool isEqui = (QString::compare(arg, "-output_equi", Qt::CaseInsensitive) == 0);
 
-    return (isServer || isPort || isCubemap || isEqui || isAd);
+    return (isServer || isPort || isCubemap || isEqui);
 }
 
 void ProcessCmdLineArgs1(int argc, char *argv[])
@@ -61,10 +57,7 @@ void ProcessCmdLineArgs1(int argc, char *argv[])
     if (argc > 1) {
         for (int i=1; i<argc; ++i) {
             const QString eacharg(argv[i]);
-            if (isCommandArg2(eacharg))
-            {
-                // Skip over 2 args if this one is used later,
-                // this avoids reading cubemap paths as a custom URL
+            if (isCommandArg2(eacharg)) {
                 ++i;
                 continue;
             }
@@ -116,7 +109,6 @@ void ProcessCmdLineArgs1(int argc, char *argv[])
                 }
                 else if (QString::compare(eacharg2, "rift", Qt::CaseInsensitive) == 0) {
                     d = MODE_RIFT;
-                    //m_linear_framebuffer = true;
                 }
                 else if (QString::compare(eacharg2, "vive", Qt::CaseInsensitive) == 0) {
                     d = MODE_VIVE;
@@ -139,15 +131,12 @@ void ProcessCmdLineArgs1(int argc, char *argv[])
                 continue;
             }
             else {
-//                qDebug() << "ProcessCmdLineArgs1 url" << argv[i];
                 Environment::SetLaunchURLIsCustom(true);
                 Environment::SetLaunchURL(QString(argv[i]));
                 continue;
             }
         }
     }
-    //MainWindow::use_custom_url = true;
-    //MainWindow::custom_url = QString("http://janusvr.com");
 }
 
 void ProcessCmdLineArgs2(int argc, char *argv[])
@@ -179,17 +168,7 @@ void ProcessCmdLineArgs2(int argc, char *argv[])
             }
         }
     }
-    //MainWindow::output_cubemap = true;
-    //MainWindow::output_cubemap_filename_prefix = QString("example3");
 }
-
-#ifdef WIN32 //59.3 - declspec and following definitions are Windows only
-extern "C"
-{
-    __declspec(dllexport) DWORD NvOptimusEnablement = 1;
-    __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
-}
-#endif
 
 int main(int argc, char *argv[])
 {

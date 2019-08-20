@@ -1123,9 +1123,7 @@ QVector3D MathUtil::CosInterp(QVector3D p1, QVector3D p2, float i)
 
 float MathUtil::GetAngleBetweenRadians(const QVector3D & v1, const QVector3D & v2)
 {
-
     return acosf(QVector3D::dotProduct(v1.normalized(), v2.normalized()));
-
 }
 
 float MathUtil::GetSignedAngleBetweenRadians(const QVector3D & v1, const QVector3D & v2)
@@ -1176,35 +1174,29 @@ QVector3D MathUtil::GetRotatedAxis(const float anglerad, const QVector3D & vec, 
 
 void MathUtil::SphereToCartesian(const float thetadeg, const float phideg, const float r, QVector3D & p)
 {
-
     const float thetarad = MathUtil::DegToRad(thetadeg);
     const float phirad= MathUtil::DegToRad(phideg);
 
     p.setX( r * sinf(phirad) * cosf(thetarad) );
     p.setY( r * cosf(phirad) );
     p.setZ( r * sinf(phirad) * sinf(thetarad) );
-
 }
 
 void MathUtil::CartesianToSphere(const QVector3D & p, float & thetadeg, float & phideg, float & r)
 {
-
     thetadeg = MathUtil::RadToDeg(atan2f(p.z(), p.x()));
     phideg = MathUtil::RadToDeg(acosf(p.y() / p.length()));
     r = p.length();
-
 }
 
 void MathUtil::NormSphereToCartesian(const float thetadeg, const float phideg, QVector3D & p)
 {
-
     const float thetarad = MathUtil::DegToRad(thetadeg);
     const float phirad = MathUtil::DegToRad(phideg);
 
     p.setX( sinf(phirad) * cosf(thetarad) );
     p.setY( cosf(phirad) );
     p.setZ( sinf(phirad) * sinf(thetarad) );
-
 }
 
 void MathUtil::NormCartesianToSphere(const QVector3D & p, float & thetadeg, float & phideg)
@@ -1220,22 +1212,15 @@ QVector3D MathUtil::GetNormalColour(const QVector3D & n)
 
 bool MathUtil::LinePlaneIntersection(const QVector3D & p0, const QVector3D & n, const QVector3D & l0, const QVector3D & l1, QVector3D & intersect)
 {
-
     //http://en.wikipedia.org/wiki/Line-plane_intersection
-    //if (QVector3D::dotProduct((l1-l0).normalized(), n) < 0.0001f) {
-    //    return false;
-    //}
-
     const float p0n = QVector3D::dotProduct(p0, n);
     const float l0n = QVector3D::dotProduct(l0, n);
     const float l1n = QVector3D::dotProduct(l1, n);
 
     const float interp = (p0n - l0n) / (l1n - l0n);
-    //qDebug() << interp;
     intersect = l0 + (l1 - l0) * interp;
 
     return true;
-
 }
 
 bool isPointInsideTriangle(const Triangle3D & tri, const QVector3D & pt)
@@ -1339,7 +1324,6 @@ bool MathUtil::testIntersectionLineLine(const QVector2D &_p1, const QVector2D &_
 
 bool MathUtil::testIntersectionTriSphere(const Triangle3D & tri, const QVector3D &_triNormal, const Sphere3D &_sphere, const QVector3D &_sphereVel, float & _distTravel, QVector3D & _reaction)
 {
-
     _distTravel = FLT_MAX;
 
     QVector3D nvelo = _sphereVel.normalized();
@@ -1361,27 +1345,20 @@ bool MathUtil::testIntersectionTriSphere(const Triangle3D & tri, const QVector3D
     }
 
     if (h > _sphere.rad) {
-
         h -= _sphere.rad;
 
-//        if (dot != 0) { //bugfix: 32.5 ninja update (seems to stop people falling through faces)
-            float t = -h / dot; //t is the distance until a collision occurs with this triangle/plane
-            QVector3D onPlane = _sphere.cent + nvelo * t;
-            //QVector3D onPlane = _sphere.cent + _sphereVel * t; //release 21.20 candidate correction
-            if (isPointInsideTriangle(tri, onPlane)) { //this is the inside triangle test
-                if (t < _distTravel) { //distTravel is FLT_MAX - so this is always true???
-                    _distTravel = t;
-                    _reaction = _triNormal;
-                    col = 0;
-                }
+        float t = -h / dot; //t is the distance until a collision occurs with this triangle/plane
+        QVector3D onPlane = _sphere.cent + nvelo * t;
+        if (isPointInsideTriangle(tri, onPlane)) { //this is the inside triangle test
+            if (t < _distTravel) { //distTravel is FLT_MAX - so this is always true???
+                _distTravel = t;
+                _reaction = _triNormal;
+                col = 0;
             }
-//        }
-
+        }
     }
 
-
     // pass2: sphere VS triangle vertices
-
     if (col == -1) {
         for (int i = 0; i < 3; i++) {
             QVector3D seg_pt0 = tri.p[i];
@@ -1433,8 +1410,7 @@ bool MathUtil::testIntersectionTriSphere(const Triangle3D & tri, const QVector3D
 
             QVector3D pt0 = plane.project(_sphere.cent); // center of the sphere slice (a circle)
 
-            QVector3D onLine;
-            //float h = distancePointToLine(pt0, edge0, edge1, onLine);
+            QVector3D onLine;            
             distancePointToLine(pt0, edge0, edge1, onLine);
             QVector3D v = (onLine - pt0).normalized();
             QVector3D pt1 = v * r + pt0; // point on the sphere that will maybe collide with the edge
@@ -1495,10 +1471,6 @@ bool MathUtil::testIntersectionTriSphere(const Triangle3D & tri, const QVector3D
         _reaction.normalize();
     }
 
-//    if (col >= 0 && _distTravel < 0.5f) {
-//        qDebug() << "MathUtil::testIntersectionTriSphere() - Collision type" << col << _distTravel << _reaction;
-//    }
-
     return (col != -1);
 }
 
@@ -1514,7 +1486,6 @@ float MathUtil::GetVectorComponent(const QVector3D & v, const int i)
     }
 
     return 0.0f;
-
 }
 
 void MathUtil::FlushErrorLog()
@@ -1589,14 +1560,12 @@ QVector3D MathUtil::huecycle(double val)
 
 QVector3D MathUtil::GetOrthoVec(const QVector3D & v)
 {
-
     if (fabsf(QVector3D::dotProduct(v,QVector3D(1,0,0))) > 0.9f) {
         return QVector3D::crossProduct(v, QVector3D(0,1,0)).normalized();
     }
     else {
         return QVector3D::crossProduct(v, QVector3D(1,0,0)).normalized();
     }
-
 }
 
 

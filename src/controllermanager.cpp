@@ -4,7 +4,6 @@ QPointer <AssetObject> ControllerManager::vive_obj;
 QVector <QPointer <AssetObject> > ControllerManager::touch_obj;
 QVector <QPointer <AssetObject> > ControllerManager::wmxr_obj;
 QPointer <AssetObject> ControllerManager::laser_obj;
-QPointer <AssetObject> ControllerManager::sphere_obj;
 
 ControllerManager::ControllerManager() :
     haptics(true)
@@ -49,13 +48,6 @@ ControllerManager::ControllerManager() :
         laser_obj->SetSrc(MathUtil::GetApplicationURL(), QString("assets/controllers/cursor/IonCannon.dae"));
         laser_obj->Load();
     }
-
-    //sphere
-    if (sphere_obj.isNull()) {
-        sphere_obj = new AssetObject();
-        sphere_obj->SetSrc(MathUtil::GetApplicationURL(), QString("assets/primitives/sphere.obj"));
-        sphere_obj->Load();
-    }
 }
 
 ControllerManager::~ControllerManager()
@@ -75,9 +67,6 @@ ControllerManager::~ControllerManager()
     }
     if (laser_obj) {
         delete laser_obj;
-    }
-    if (sphere_obj) {
-        delete sphere_obj;
     }
 }
 
@@ -458,9 +447,5 @@ void ControllerManager::UpdateAssets()
     if (laser_obj) {
         laser_obj->Update();
         laser_obj->UpdateGL();
-    }
-    if (sphere_obj) {
-        sphere_obj->Update();
-        sphere_obj->UpdateGL();
     }
 }

@@ -15,19 +15,13 @@ private:
 public:
 	AssetImageDataQ();
 
-	void ClearPixelData()
-	{
-		AssetImageData::ClearPixelData();
+    void ClearPixelData();
 
-		left_imgs.resize(0);
-		right_imgs.resize(0);
-	}
+    QVector<QImage> GetLeftImages();
+    void SetLeftImages(QVector<QImage> value);
 
-	QVector<QImage> GetLeftImages() { return left_imgs; }
-	void SetLeftImages(QVector<QImage> value) { left_imgs = value; }
-
-	QVector<QImage> GetRightImages() { return right_imgs; }
-	void SetRightImages(QVector<QImage> value) { right_imgs = value; }
+    QVector<QImage> GetRightImages();
+    void SetRightImages(QVector<QImage> value);
 };
 
 #endif // ASSETIMAGEDATAQ_H

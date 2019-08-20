@@ -16,7 +16,6 @@
 #include "contentimporter.h"
 #include "textureimporterqimage.h"
 #include "textureimportercmft.h"
-#include "textureimportergli.h"
 
 enum class CUBEMAP_TYPE : unsigned long
 {
@@ -52,7 +51,6 @@ public:
     QPointer <TextureHandle> GetTextureHandle(const bool left_eye);
 
     bool GetFinished() const;
-    bool GetTransparent() const; 
 
     QPointer<AssetImageData> GetTextureData();
 
@@ -71,37 +69,21 @@ public:
 
 private:
 
-	static void InitializeImporters();
-	static QVector<ContentImporter*> importers;
-
     void LoadImageDataThread();
     void DrawImageGL(QPointer <AssetShader> shader, const bool left_eye);    
     void LoadTextures();
     void UnloadTextures();
     void CreateTexture(QPointer<AssetImageData> data, QPointer <DOMNode> props);
 
-    enum class IMAGE_FORMAT : unsigned long
-    {
-        DDS,
-        KTX,
-        KMG,
-        UNINITIALIZED
-    };
+    static QVector<ContentImporter*> importers;
+    static int anisotropic_max;
 
     QPointer<AssetImageData> textureData;
 	bool load_gli; // temporary
-
     int tex_index;    
-
     float aspect;
-
-    bool transparent;
-    int max_img_resolution;
     int next_frame_time;
-
-    QTime time;
-
-    static int anisotropic_max;    
+    QTime time;   
 };
 
 #endif // ASSETIMAGE_H

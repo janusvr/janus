@@ -116,7 +116,6 @@ SOURCES += \
     src/spinanimation.cpp \
     src/textgeom.cpp \
     src/textureimportercmft.cpp \    
-    src/textureimportergli.cpp \
     src/textureimporterqimage.cpp \
     src/webasset.cpp \
     src/virtualmenu.cpp
@@ -179,7 +178,6 @@ HEADERS += \
     src/spinanimation.h \
     src/textgeom.h \
     src/textureimportercmft.h \    
-    src/textureimportergli.h \
     src/textureimporterqimage.h \    
     src/webasset.h \
     src/virtualmenu.h

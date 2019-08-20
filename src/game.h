@@ -134,7 +134,7 @@ public:
     void StartResetPlayerForward();
     void StartTeleportPlayer();
     void StartReloadPortal();
-    void StartReinitializeEnvironment();
+
     void SetDoExit(const bool b);
     bool GetDoExit() const;
 

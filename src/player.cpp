@@ -269,17 +269,12 @@ void Player::SetViewGL(const bool render_left_eye, const float eye_ipd, const QM
     QVector3D eye_point = props->GetEyePoint();
     props->SetGlobalHeadPos(eye_point);
 
-//    if (view_decoupled || (!walkLeft && !walkRight && !walkForward && !walkBack) || QString::compare("cube", this->GetHMDType()) == 0) {
-        //view decoupled, forward dir is fixed with player's theta
-        const float theta_rad = theta * MathUtil::_PI_OVER_180;
-        QVector3D dir = MathUtil::GetRotatedAxis(-theta_rad, QVector3D(0,0,-1), QVector3D(0, 1, 0));
-        dir.setY(props->GetViewDir()->toQVector3D().y());
-        dir.normalize();
-        props->SetDir(dir);
-//    }
-//    else {
-//        props->SetDir(GetViewDir());
-//    }
+    //view decoupled, forward dir is fixed with player's theta
+    const float theta_rad = theta * MathUtil::_PI_OVER_180;
+    QVector3D dir = MathUtil::GetRotatedAxis(-theta_rad, QVector3D(0,0,-1), QVector3D(0, 1, 0));
+    dir.setY(props->GetViewDir()->toQVector3D().y());
+    dir.normalize();
+    props->SetDir(dir);
 
     //get the view matrix (current modelview matrix)
     QVector3D x = rotated_xform.column(0).toVector3D();

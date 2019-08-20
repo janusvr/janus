@@ -63,8 +63,6 @@ MainWindow::MainWindow()
 
     setMinimumSize(QSize(800, 600));
 
-    //setSurfaceType(QSurface::OpenGLSurface);
-
     //Initialize HMD (if present)
     DisplayMode disp_mode = GLWidget::GetDisplayMode();
 #ifdef WIN32        

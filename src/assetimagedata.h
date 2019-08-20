@@ -8,49 +8,10 @@
 
 class AssetImageData : public QObject
 {
-private:
-	int width;
-	int height;
-	uchar pixelSize;
-
-	int frameLoop;
-	QVector<int> delays;
-
-    QVector<QByteArray> left_frames;
-    QVector<QByteArray> right_frames;
-
-	QVector<uint> left_textures;
-    QVector<QPointer<TextureHandle>> left_texture_handles;
-	QVector<uint> right_textures;
-    QVector<QPointer<TextureHandle>> right_texture_handles;
-
-	int uploadedTextures;
-	int totalTextures;
-
-	QString source;
-
-	bool is_hdr;
-
 public:
-	AssetImageData() :
-		width(0),
-		height(0),
-		pixelSize(0),
-		frameLoop(-1),
-		delays(0),
-		left_frames(0),
-		right_frames(0),
-		left_textures(0),
-		right_textures(0),
-		uploadedTextures(0),
-		totalTextures(0),
-		is_hdr(false)
-	{
-	}
 
-	AssetImageData(const AssetImageData& source);
-	//AssetImageData& operator=(AssetImageData other);
-
+    AssetImageData();
+	AssetImageData(const AssetImageData& source);	
 	~AssetImageData();
 
     bool IsUploadFinished(); // Talking about GPU data upload
@@ -110,6 +71,30 @@ public:
     QPointer<TextureHandle> GetRightTextureHandle(int index);
 
     QImage::Format format;
+
+private:
+
+    int width;
+    int height;
+    uchar pixelSize;
+
+    int frameLoop;
+    QVector<int> delays;
+
+    QVector<QByteArray> left_frames;
+    QVector<QByteArray> right_frames;
+
+    QVector<uint> left_textures;
+    QVector<QPointer<TextureHandle>> left_texture_handles;
+    QVector<uint> right_textures;
+    QVector<QPointer<TextureHandle>> right_texture_handles;
+
+    int uploadedTextures;
+    int totalTextures;
+
+    QString source;
+
+    bool is_hdr;
 };
 
 #endif

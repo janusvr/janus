@@ -113,8 +113,7 @@ private:
     static QPointer <AssetObject> vive_obj;
     static QVector <QPointer <AssetObject> > touch_obj;    
     static QVector <QPointer <AssetObject> > wmxr_obj;
-    static QPointer <AssetObject> laser_obj;
-    static QPointer <AssetObject> sphere_obj;
+    static QPointer <AssetObject> laser_obj;    
 };
 
 #endif // CONTROLLERMANAGER_H

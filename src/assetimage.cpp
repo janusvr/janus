@@ -5,25 +5,20 @@ QPointer<TextureHandle> AssetImage::null_cubemap_tex_handle = nullptr;
 QPointer<TextureHandle> AssetImage::null_image_tex_handle = nullptr;
 QVector<ContentImporter*> AssetImage::importers;
 
-void AssetImage::InitializeImporters()
-{
-    AssetImage::importers = QVector<ContentImporter*>(2);
-    AssetImage::importers[0] = new TextureImporterQImage();    
-    AssetImage::importers[1] = new TextureImporterCMFT();
-    //AssetImage::importers[2] = new TextureImporterGLI(); // TODO: for now GLI is just a plugin in the end, if we fail to load in any other way
-}
-
 AssetImage::AssetImage() :    
     load_gli(false),
     tex_index(0),
-    aspect(0.7f),
-    transparent(false),
-    max_img_resolution(1024),    
+    aspect(0.7f), 
     next_frame_time(-1)
 {
     props->SetType(TYPE_ASSETIMAGE);
 
-    InitializeImporters();
+    if (importers.isEmpty()) {
+        AssetImage::importers = QVector<ContentImporter*>(2);
+        AssetImage::importers[0] = new TextureImporterQImage();
+        AssetImage::importers[1] = new TextureImporterCMFT();
+    }
+
     Unload();   
 
     time.start();
@@ -310,11 +305,6 @@ bool AssetImage::GetFinished() const
     return textureData->IsUploadFinished();
 }
 
-bool AssetImage::GetTransparent() const
-{
-    return transparent;
-}
-
 QPointer <TextureHandle> AssetImage::GetTextureHandle(const bool left_eye)
 {
     if (textureData.isNull()) {
@@ -522,8 +512,7 @@ void AssetImage::LoadImageDataThread()
     textureData = static_cast<AssetImageData *>(LoadAssetImage(buffer, extension, props, load_gli).data());
     SetProcessed(true);
 
-    if (textureData.isNull())
-    {        
+    if (textureData.isNull()) {
         return; //56.0 - we will load with gli instead (don't clear the webasset data)
     }
     ClearData();
@@ -551,10 +540,10 @@ void AssetImage::LoadTextures()
         const bool tex_mipmap = props->GetTexMipmap();
         const bool tex_clamp = props->GetTexClamp();
         TextureHandle::ALPHA_TYPE tex_alpha = TextureHandle::ALPHA_TYPE::UNDEFINED;
-        QString const tex_alpha_string = props->GetTexAlpha();
+        const QString tex_alpha_string = props->GetTexAlpha();
 
         TextureHandle::COLOR_SPACE tex_colorspace = TextureHandle::COLOR_SPACE::SRGB;
-        QString const tex_colorspace_string = props->GetTexColorspace();
+        const QString tex_colorspace_string = props->GetTexColorspace();
 
         if (tex_colorspace_string.contains("sRGB")) {
             tex_colorspace = TextureHandle::COLOR_SPACE::SRGB;
@@ -640,8 +629,6 @@ void AssetImage::CreateTexture(QPointer<AssetImageData> data, QPointer <DOMNode>
 
     int current = data->GetUploadedTextures();
 
-    //uint ltex = 0;
-    //uint rtex = 0;
     QPointer<TextureHandle> ltex_handle(nullptr);
     QPointer<TextureHandle> rtex_handle(nullptr);
 
@@ -667,21 +654,13 @@ void AssetImage::CreateTexture(QPointer<AssetImageData> data, QPointer <DOMNode>
     }
     else
     {
-
         ltex_handle = Renderer::m_pimpl->CreateTextureFromAssetImageData(data, true, tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
-
         rtex_handle = Renderer::m_pimpl->CreateTextureFromAssetImageData(data, false, tex_mipmap, tex_linear, tex_clamp, tex_alpha, tex_colorspace);
     }
 
-    //auto ltex_handle = TextureManager::GetTextureHandle(ltex);
-    //auto rtex_handle = TextureManager::GetTextureHandle(rtex);
     if (ltex_handle)
     {
         data->SetUploadedTexture(ltex_handle, (rtex_handle == nullptr) ? ltex_handle : rtex_handle);
-    }
-    else
-    {
-//        qDebug() << "TextureManager::CreateTexture() - ltex_handle is NULL";
     }
 
     // If we have uploaded all the textures, clear out the CPU copy of the pixel data

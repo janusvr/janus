@@ -1,8 +1,19 @@
 #include "assetimagedata.h"
 
-bool AssetImageData::IsUploadSubmitted()
+AssetImageData::AssetImageData() :
+    width(0),
+    height(0),
+    pixelSize(0),
+    frameLoop(-1),
+    delays(0),
+    left_frames(0),
+    right_frames(0),
+    left_textures(0),
+    right_textures(0),
+    uploadedTextures(0),
+    totalTextures(0),
+    is_hdr(false)
 {
-	return uploadedTextures >= totalTextures;	
 }
 
 AssetImageData::AssetImageData(const AssetImageData& ):
@@ -20,14 +31,14 @@ AssetImageData::AssetImageData(const AssetImageData& ):
     right_frames = QVector<QByteArray>(0);
 }
 
-/*AssetImageData& AssetImageData::operator=(AssetImageData other)
-{
-	return *this;
-}*/
-
 AssetImageData::~AssetImageData()
 {
     ClearPixelData();
+}
+
+bool AssetImageData::IsUploadSubmitted()
+{
+    return uploadedTextures >= totalTextures;
 }
 
 bool AssetImageData::IsUploadFinished()
@@ -206,55 +217,6 @@ bool AssetImageData::HasFrameData(int index, bool is_left)
         (left_frames.size() > index && !left_frames[index].isEmpty() ) :
         (right_frames.size() > index && !right_frames[index].isEmpty());
 }
-
-
-/*void AssetImageData::SetTexture(int index, uint id, bool is_left)
-{
-	if (is_left)
-	{
-		SetLeftTexture(index, id);
-	}
-	else
-	{
-		SetRightTexture(index, id);
-	}
-}
-
-void AssetImageData::SetLeftTexture(int index, uint id)
-{
-	if (index >= 0)
-	{
-		left_textures.resize(index + 1);
-		left_textures[index] = id;
-	}
-}
-
-void AssetImageData::SetLeftTextureHandle(int index, QPointer<TextureHandle> id)
-{
-    if (index >= 0)
-    {
-        left_texture_handles.resize(index + 1);
-        left_texture_handles[index] = id;
-    }
-}
-
-void AssetImageData::SetRightTexture(int index, uint id)
-{
-	if (index >= 0)
-	{
-		right_textures.resize(index + 1);
-		right_textures[index] = id;
-	}
-}
-
-void AssetImageData::SetRightTextureHandle(int index, QPointer<TextureHandle> id)
-{
-    if (index >= 0)
-    {
-        right_texture_handles.resize(index + 1);
-        right_texture_handles[index] = id;
-    }
-}*/
 
 QVector<int> AssetImageData::GetImageDelays()
 {
