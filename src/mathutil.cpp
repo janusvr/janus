@@ -3009,3 +3009,13 @@ QByteArray MathUtil::LoadAssetFile(const QString path)
     f.close();
     return b;
 }
+
+void MathUtil::BillboardModelMatrix()
+{
+    //billboard by rotation about y-axis - z is vector from model to camera
+    const QVector4D z = MathUtil::ViewMatrix().inverted().column(3) - MathUtil::ModelMatrix().column(3);
+    QMatrix4x4 m;
+    m.rotate(atan2f(z.x(), z.z()) * MathUtil::_180_OVER_PI,0,1,0);
+    m.setColumn(3, MathUtil::ModelMatrix().column(3));
+    MathUtil::LoadModelMatrix(m);
+}

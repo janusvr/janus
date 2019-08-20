@@ -1891,6 +1891,7 @@ public:
     static void LoadModelMatrix(const QMatrix4x4 m);
     static void MultModelMatrix(const QMatrix4x4 m);
     static QMatrix4x4 & ModelMatrix();
+    static void BillboardModelMatrix();
 
     static void LoadRoomMatrix(const QMatrix4x4 m);
     static QMatrix4x4 & RoomMatrix();

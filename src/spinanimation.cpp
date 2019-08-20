@@ -69,12 +69,8 @@ void SpinAnimation::DrawIconGL(QPointer <AssetShader> shader, const bool billboa
 
         MathUtil::PushModelMatrix();
         if (billboard) {
-            const QVector3D p = MathUtil::ModelMatrix().column(3).toVector3D();
-            QMatrix4x4 m = MathUtil::ViewMatrix().transposed();
-            m.setColumn(3, QVector4D(p, 1));
-            m.setRow(3, QVector4D(0,0,0,1));
-            m.scale(icon_scale);
-            MathUtil::LoadModelMatrix(m);
+            MathUtil::BillboardModelMatrix();
+            MathUtil::ModelMatrix().scale(icon_scale);
         }
 
         shader->UpdateObjectUniforms();

@@ -4642,12 +4642,7 @@ void RoomObject::DrawGhostUserIDChat(QPointer <AssetShader> shader)
     MathUtil::ModelMatrix().scale(1.0f/s.x(), 1.0f/s.y(), 1.0f/s.z());
     MathUtil::ModelMatrix().translate(userid_pos + QVector3D(0,2.0f,0));
 
-    //billboard/auto-face
-    const QVector3D p = MathUtil::ModelMatrix().column(3).toVector3D();
-    QMatrix4x4 m = MathUtil::ViewMatrix().transposed();
-    m.setColumn(3, QVector4D(p, 1));
-    m.setRow(3, QVector4D(0,0,0,1));
-    MathUtil::LoadModelMatrix(m);
+    MathUtil::BillboardModelMatrix();
 
     //draw grey box
     MathUtil::PushModelMatrix();
