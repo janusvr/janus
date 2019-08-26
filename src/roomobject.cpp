@@ -1528,6 +1528,15 @@ QString RoomObject::GetAvatarCode() const
     return avatar_code;
 }
 
+QMatrix4x4 RoomObject::GetRotationMatrix() const
+{
+    QMatrix4x4 m;
+    m.setColumn(0, GetXDir());
+    m.setColumn(1, GetYDir());
+    m.setColumn(2, GetZDir());
+    return m;
+}
+
 void RoomObject::SetSelected(const bool b)
 {
     selected = b;

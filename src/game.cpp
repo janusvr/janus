@@ -2424,7 +2424,7 @@ void Game::SaveRoom(const QString out_filename)
         if (out_filename.right(3).toLower() != "htm"
                 && out_filename.right(4).toLower() != "html"
                 && out_filename.right(4).toLower() != "json") {
-            qDebug() << "Game::SaveFireBoxRoom() - error: cannot overwrite non-html/json files on local filesystem";
+            qDebug() << "Game::SaveRoom() - error: cannot overwrite non-html/json files on local filesystem";
             return;
         }
 
@@ -2448,6 +2448,22 @@ void Game::SaveRoom(const QString out_filename)
 
     //add URL to saved file to workspaces list
     bookmarks->AddWorkspace(QUrl(out_filename).toString(), r->GetProperties()->GetTitle());
+}
+
+void Game::ExportRoomAFrame(const QString out_filename)
+{
+    QFileInfo check_file(out_filename);
+    if (check_file.exists()) {
+        if (out_filename.right(3).toLower() != "htm"
+                && out_filename.right(4).toLower() != "html") {
+            qDebug() << "Game::ExportRoomAFrame() - error: cannot overwrite non-html files on local filesystem";
+            return;
+        }
+    }
+
+    if (env->GetCurRoom()->SaveAFrame(out_filename)) {
+        SoundManager::Play(SOUND_SAVED, false, player->GetProperties()->GetPos()->toQVector3D(), 1.0f);
+    }
 }
 
 void Game::UpdateCursorAndTeleportTransforms()

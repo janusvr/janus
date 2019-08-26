@@ -2190,6 +2190,25 @@ bool Room::SaveJSON(const QString & filename)
     return true;
 }
 
+bool Room::SaveAFrame(const QString & filename)
+{
+    QFile file(filename);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qDebug() << "Room::SaveAFrame(): File " << filename << " can't be saved";
+        return false;
+    }
+
+    QTextStream ofs(&file);
+
+    ofs.setRealNumberNotation(QTextStream::FixedNotation);
+    ofs << GetAFrameCode();
+
+    file.close();
+
+    qDebug() << "Room::SaveAFrame() - File" << filename << "saved.";
+    return true;
+}
+
 QVariantMap Room::GetJSONCode(const bool show_defaults) const
 {
     QVariantMap root;
@@ -2446,6 +2465,155 @@ QVariantMap Room::GetJSONCode(const bool show_defaults) const
     root.insert("FireBoxRoom", fireboxroom);
 
     return root;
+}
+
+QString Room::GetAFrameCode() const
+{
+    QString s;
+    s+="<html>\n";
+    s+="  <head>\n";
+    s+="    <meta charset=\"utf-8\">\n";
+    s+="    <title>Janus to A-Frame exporter</title>\n";
+    s+="    <meta name=\"description\" content=\"Janus to A-Frame export\">\n";
+    s+="    <script src=\"https://aframe.io/releases/0.9.2/aframe.min.js\"></script>\n";
+    s+="  </head>\n";
+    s+="  <body>\n";
+    s+="    <a-scene background=\"color: #FAFAFA\">\n"; //Does A-Frame support custom skyboxes?
+
+    //examples
+//    <a-assets>
+//        <a-asset-item id="tree" src="/path/to/tree.gltf"></a-asset-item>
+//      </a-assets>
+    s+="      <a-assets>\n";
+    for (const QPointer <AssetObject> & o : assetobjects) {
+        if (o && !o->GetProperties()->GetPrimitive()) {
+            s+="        <a-asset-item";
+            s+=" id=" + MathUtil::GetStringAsString(o->GetProperties()->GetID()+"-obj");
+            s+=" src=" + MathUtil::GetStringAsString(o->GetProperties()->GetSrcURL());
+            s+="></a-asset-item>\n";
+
+            const QString mtl_str = o->GetProperties()->GetMTL();
+            if (!mtl_str.isEmpty()) {
+                s+="        <a-asset-item";
+                s+=" id=" + MathUtil::GetStringAsString(o->GetProperties()->GetID()+"-mtl");
+                s+=" src=" + MathUtil::GetStringAsString(mtl_str);
+                s+="></a-asset-item>\n";
+            }
+        }
+    }
+    s+="      </a-assets>\n";
+
+    //examples
+//    <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" shadow></a-box>\n";
+//    <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
+//    <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
+//    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" shadow></a-plane>
+    for (const QPointer <RoomObject> & obj : envobjects) {
+        if (obj && (obj->GetType() != TYPE_LINK || (obj->GetType() == TYPE_LINK && obj != GetEntranceObject() && obj->GetSaveToMarkup()))) {
+
+            switch (obj->GetType()) {
+            case TYPE_OBJECT:
+            {
+                QString tag_name = "a-entity";
+                if (obj->GetProperties()->GetID() == "cube") {
+                    tag_name = "a-box";
+                }
+                else if (obj->GetProperties()->GetID() == "sphere") {
+                    tag_name = "a-sphere";
+                }
+                else if (obj->GetProperties()->GetID() == "cylinder") {
+                    tag_name = "a-cylinder";
+                }
+                else if (obj->GetProperties()->GetID() == "plane") {
+                    tag_name = "a-plane";
+                }
+                else if (obj->GetProperties()->GetID() == "cone") {
+                    tag_name = "a-cone";
+                }
+
+                const QVector3D scale = obj->GetProperties()->GetScale()->toQVector3D();
+
+                QVector3D pos = obj->GetProperties()->GetPos()->toQVector3D();
+                if (tag_name == "a-cone" || tag_name == "a-cylinder") {
+                    pos = pos + obj->GetProperties()->GetYDir()->toQVector3D() * scale.y() * 0.5f;
+                }
+
+                s+="      <" + tag_name;
+
+                //<a-entity gltf-model="#tree"></a-entity>
+                //<a-scene>
+//                <a-assets>
+//                  <a-asset-item id="tree-obj" src="/path/to/tree.obj"></a-asset-item>
+//                  <a-asset-item id="tree-mtl" src="/path/to/tree.mtl"></a-asset-item>
+//                </a-assets>
+
+//                <a-entity obj-model="obj: #tree-obj; mtl: #tree-mtl"></a-entity>
+//              </a-scene>
+                if (tag_name == "a-entity") {
+                    const QString id = obj->GetProperties()->GetID();
+                    if (assetobjects.contains(id) && assetobjects[id]) {
+                        const QString src_url = assetobjects[id]->GetProperties()->GetSrcURL();
+                        if (src_url.right(4).toLower() == "gltf") {
+                            s+=" gltf-model=\"#"+id+"-obj\"";
+                        }
+                        else if (src_url.right(3).toLower() == "obj") {
+                            const QString mtl_str = assetobjects[id]->GetProperties()->GetMTL();
+                            if (mtl_str.isEmpty()) {
+                                s+=" obj-model=\"obj: #"+id+"-obj\"";
+                            }
+                            else {
+                                s+=" obj-model=\"obj: #"+id+"-obj; mtl: #"+id+"-mtl\"";
+                            }
+                        }
+                    }
+                }
+
+                s+=" position=" + MathUtil::GetVectorAsString(pos);
+
+                float x, y, z;
+                QMatrix4x4 m = obj->GetRotationMatrix();
+                MathUtil::MatrixToEulerAngles(m, x, y, z);
+                x = MathUtil::RadToDeg(x);
+                y = MathUtil::RadToDeg(y);
+                z = MathUtil::RadToDeg(z);
+                s+=" rotation=" + MathUtil::GetVectorAsString(QVector3D(z, x, y));
+                s+=" color=" + MathUtil::GetColourAsString(MathUtil::GetVector4AsColour(obj->GetProperties()->GetColour()->toQVector4D()));
+
+                if (scale.x() != 1.0f) {
+                    s+=" width="+MathUtil::GetFloatAsString(scale.x());
+                }
+                if (scale.y() != 1.0f) {
+                    s+=" height="+MathUtil::GetFloatAsString(scale.y());
+                }
+                if (scale.z() != 1.0f) {
+                    s+=" depth="+MathUtil::GetFloatAsString(scale.z());
+                }
+                if (tag_name == "a-cylinder") {
+                    s+=" radius="+MathUtil::GetFloatAsString(0.5f * qMin(scale.x(), scale.z()));
+                }
+                if (tag_name == "a-cone") {
+                    s+=" radius-bottom="+MathUtil::GetFloatAsString(0.5f * qMin(scale.x(), scale.z()));
+                }
+
+                if (obj->GetProperties()->GetCullFace() == "none" ||
+                        obj->GetProperties()->GetCullFace().isEmpty()) {
+                    s+=" material=\"side: double\"";
+                }
+
+                s+=" shadow>";
+                s+="</" + tag_name + ">\n";
+            }
+                break;
+            default:
+                break;
+            }
+        }
+    }
+
+    s+="    </a-scene>\n";
+    s+="  </body>\n";
+    s+="</html>\n";
+    return s;
 }
 
 bool Room::RunKeyPressEvent(QKeyEvent * e, QPointer <Player> player, MultiPlayerManager * multi_players)

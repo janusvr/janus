@@ -125,6 +125,8 @@ public:
 
     static qsreal NextUUID();    
 
+    QMatrix4x4 GetRotationMatrix() const;
+
     void SetSelected(const bool b);
     bool GetSelected() const;
 

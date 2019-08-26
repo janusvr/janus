@@ -619,6 +619,10 @@ void MainWindow::SetupMenuWidgets()
     importRemoteAct->setStatusTip(tr("Import JML code from a remote HTML file"));
     connect(importRemoteAct, &QAction::triggered, this, &MainWindow::ActionImportRemote);
 
+    exportAFrameAct = new QAction(tr("Export (A-Frame)..."), this);
+    exportAFrameAct->setStatusTip(tr("Export A-Frame code"));
+    connect(exportAFrameAct, &QAction::triggered, this, &MainWindow::ActionExportAFrame);
+
     saveThumbAct = new QAction(tr("Save Thumbnail"), this);
     saveThumbAct->setShortcut(QKeySequence(Qt::SHIFT+Qt::Key_F7));
     saveThumbAct->setStatusTip(tr("Save thumbnail image"));
@@ -723,10 +727,12 @@ void MainWindow::SetupMenuWidgets()
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
     fileMenu->addSeparator();
+    fileMenu->addAction(saveThumbAct);
+    fileMenu->addSeparator();
     fileMenu->addAction(importLocalAct);
     fileMenu->addAction(importRemoteAct);
     fileMenu->addSeparator();
-    fileMenu->addAction(saveThumbAct);
+    fileMenu->addAction(exportAFrameAct);
 
     windowMenu = new QMenu("Window", this);
     windowMenu->addAction(codeEditorAct);
@@ -830,6 +836,14 @@ void MainWindow::ActionImportRemote()
                                          "http://www.janusvr.com", &ok);
     if (ok && !url.isEmpty()) {
         game->DoImport(url);
+    }
+}
+
+void MainWindow::ActionExportAFrame()
+{
+    QString filename = QFileDialog::getSaveFileName(this, "Export (A-Frame)...", MathUtil::GetWorkspacePath(), tr("HTML (*.html)"));
+    if (!filename.isNull()) {
+        game->ExportRoomAFrame(filename);
     }
 }
 

@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 # Define version
-__VERSION=66.3
+__VERSION=66.4
 
 #JamesMcCrae: define this when doing Oculus-submitted builds
 #DEFINES += OCULUS_SUBMISSION_BUILD

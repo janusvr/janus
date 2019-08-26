@@ -158,6 +158,7 @@ public:
     void CreateNewWorkspace(const QString name);
     QPointer <RoomObject> CreatePortal(const QUrl url, const bool send_multi);
     void SaveRoom(const QString out_filename);
+    void ExportRoomAFrame(const QString out_filename);
 
     void SendChatMessage(const QString s);    
 

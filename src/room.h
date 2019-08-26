@@ -152,8 +152,8 @@ public:
 
     bool SaveXML(const QString & filename);
     void SaveXML(QTextStream & ofs);
-
     bool SaveJSON(const QString & filename);
+    bool SaveAFrame(const QString & filename);
 
     void OnCollisionEnter(QPointer <RoomObject> envobject, QPointer <RoomObject> other_envobject, QPointer <Player> player);
     void OnCollisionExit(QPointer <RoomObject> envobject, QPointer <RoomObject> other_envobject, QPointer <Player> player);
@@ -239,6 +239,7 @@ public:
 private:   
 
     QVariantMap GetJSONCode(const bool show_defaults) const;
+    QString GetAFrameCode() const;
 
     void LinkToAssets(QPointer <RoomObject> o);    
 

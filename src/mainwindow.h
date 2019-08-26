@@ -102,6 +102,7 @@ public slots:
     void ActionSaveAs();
     void ActionImportLocal();
     void ActionImportRemote();
+    void ActionExportAFrame();
     void ActionSaveThumb();
     void ActionSaveScreenshot();
     void ActionSaveEqui();
@@ -187,6 +188,7 @@ private:
     QAction *saveAsAct;
     QAction *importLocalAct;
     QAction *importRemoteAct;
+    QAction *exportAFrameAct;
     QAction *saveThumbAct;
     QAction *saveScreenshotAct;
     QAction *saveEquiAct;
