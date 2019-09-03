@@ -2470,6 +2470,7 @@ QVariantMap Room::GetJSONCode(const bool show_defaults) const
 QString Room::GetAFrameCode() const
 {
     QString s;
+    s+="<!DOCTYPE html>\n";
     s+="<html>\n";
     s+="  <head>\n";
     s+="    <meta charset=\"utf-8\">\n";
@@ -2478,7 +2479,24 @@ QString Room::GetAFrameCode() const
     s+="    <script src=\"https://aframe.io/releases/0.9.2/aframe.min.js\"></script>\n";
     s+="  </head>\n";
     s+="  <body>\n";
-    s+="    <a-scene background=\"color: #FAFAFA\">\n"; //Does A-Frame support custom skyboxes?
+    s+="    <a-scene background=\"color: #FAFAFA\"";
+    if (props->GetFog()) {
+        //<a-scene fog="type: linear; color: #AAA"></a-scene>
+        s+=" fog=\"";
+        if (props->GetFogMode() == "linear") {
+            s+="type: linear";
+            s+="; near: " + QString::number(props->GetFogStart());
+            s+="; far: " + QString::number(props->GetFogEnd());
+        }
+        else { //exp/exp2 cases
+            s+="type: exponential";
+            s+="; density: " + QString::number(props->GetFogDensity());
+            s+="\"";
+        }
+        s+="; color: " + MathUtil::GetColourAsString(MathUtil::GetVector4AsColour(props->GetFogCol()->toQVector4D()), false);
+        s+="\"";
+    }
+    s+=">\n"; //TODO: A-Frame cubemap skybox support (A-Frame a-sky component currently only supports equirectangular source images)
 
     //examples
 //    <a-assets>
@@ -2500,7 +2518,7 @@ QString Room::GetAFrameCode() const
                 s+="></a-asset-item>\n";
             }
         }
-    }
+    }            
     s+="      </a-assets>\n";
 
     //examples
