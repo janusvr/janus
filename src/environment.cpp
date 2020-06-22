@@ -42,6 +42,7 @@ QString Environment::GetLaunchURL()
 
 void Environment::DeleteAllRooms()
 {
+    qDebug() << "Environment::DeleteAllRooms";
     if (rootnode) {
         QList <QPointer <Room> > nodes = rootnode->GetAllChildren();
         for (int i=0; i<nodes.size(); ++i) {
@@ -54,7 +55,8 @@ void Environment::DeleteAllRooms()
 }
 
 void Environment::Reset()
-{    
+{
+    qDebug() << "Environment::Reset";
     qsrand(QDateTime::currentMSecsSinceEpoch() % 1000);
 
     DeleteAllRooms();
@@ -69,7 +71,7 @@ void Environment::Reset()
 
 QPointer <Room> Environment::AddRoom(QPointer <RoomObject> p)
 {
-//    qDebug() << "Environment::AddRoom" << p;
+    //qDebug() << "Environment::AddRoom" << p;
     if (p.isNull()) {
         return NULL;
     }
@@ -87,7 +89,7 @@ QPointer <Room> Environment::AddRoom(QPointer <RoomObject> p)
         r->GetEntranceObject()->GetProperties()->SetOpen(true);
         r->GetProperties()->SetURL(p->GetURL());
         curnode->AddChild(r);
-//        qDebug() << "Environment::AddNewRoom creating child" << r << curnode;
+        //qDebug() << "Environment::AddNewRoom creating child" << r << curnode;
     }
 
     emit RoomsChanged();
@@ -97,7 +99,7 @@ QPointer <Room> Environment::AddRoom(QPointer <RoomObject> p)
 
 bool Environment::ClearRoom(QPointer <RoomObject> p)
 {
-//    qDebug() << "Environment::ClearRoom" << p;
+    qDebug() << "Environment::ClearRoom" << p;
     QPointer <Room> r = curnode->GetConnectedRoom(p);
     if (r && r != curnode && r->GetReady()) {
         curnode->RemoveChild(r);
@@ -210,9 +212,9 @@ void Environment::draw_child_rooms(MultiPlayerManager*  multi_players, QPointer 
         if (each_portal && each_portal->GetType() == TYPE_LINK) {
             if (each_portal->GetProperties()->GetOpen() && each_portal->GetProperties()->GetVisible()) {
                 StencilFunc newFunc = StencilFunc(StencilTestFuncion::EQUAL, StencilReferenceValue(i+1), StencilMask(0xffffffff));
-//                qDebug() << "Environement[554] Drawing Room within Portal " << each_portal << each_portal->GetURL() << "SetStencilFunc: EQUAL " << (i+1) << " 0xffffffff";
+                //qDebug() << "Environement[554] Drawing Room within Portal " << each_portal << each_portal->GetURL() << "SetStencilFunc: EQUAL " << (i+1) << " 0xffffffff";
                 renderer->SetStencilFunc(newFunc);
-    //            qDebug() << "  drawing" << each_portal;
+                //qDebug() << "  drawing" << each_portal;
                 DrawRoomWithinPortalStencilGL(each_portal, player, multi_players, render_left_eye);
             }
             ++i;
@@ -416,12 +418,14 @@ void Environment::DrawRoomWithinPortalStencilGL(QPointer <RoomObject> portal, QP
 }
 
 void Environment::ReloadRoom()
-{    
+{
+    qDebug() << "Environment:(L420):ReloadRoom 1 " << sizeof(curnode);
     if (curnode.isNull() || !curnode->GetReady()) {
         return;
     }
     curnode->Clear();
     curnode->GetProperties()->SetReloaded(true);
+    qDebug() << "Environment:(L426):ReloadRoom 2 " << sizeof(curnode);
 }
 
 void Environment::UpdateRoomCode(const QString & code)
@@ -452,14 +456,14 @@ void Environment::MovePlayer(QPointer <RoomObject> portal, QPointer <Player> pla
         QVector3D z1 = portal->GetZDir();
         QVector3D z2 = p2->GetZDir();
 
-    //    qDebug() << "Environment::MovePlayer" << p0;
+        //qDebug() << "Environment::MovePlayer" << p0;
         z1.setY(0.0f);
         z1.normalize();
         z2.setY(0.0f);
         z2.normalize();
         const float angle = MathUtil::GetSignedAngleBetweenRadians(-z2, z1); //note: d1 and d2 swapped
         player->SpinView(angle * MathUtil::_180_OVER_PI, false);
-//        qDebug() << "Environment::MovePlayer" << p2 << set_player_to_portal;
+        //qDebug() << "Environment::MovePlayer" << p2 << set_player_to_portal;
 
         QVector3D l = portal->GetLocal(player->GetProperties()->GetPos()->toQVector3D());
         l.setX(-l.x()); //mirror flip going through portal ("left side" of entrance is "right side" locally on exit)
@@ -635,9 +639,9 @@ void Environment::Update2(QPointer <Player> player, MultiPlayerManager *multi_pl
     //load rooms
     QList <QPointer <Room> > rooms = rootnode->GetAllChildren();
     for (QPointer <Room> & r : rooms) {
-//        qDebug() << "update2" << r << r->GetLoaded() << r->GetProcessing() << r->GetProcessed();
+        //qDebug() << "update2" << r << r->GetLoaded() << r->GetProcessing() << r->GetProcessed();
         if (r && r->GetLoaded() && r->GetProcessing() && !r->GetProcessed()) {
-//            qDebug() << "update2 CREATEROOM" << r << r->GetLoaded() << r->GetProcessing() << r->GetProcessed();
+            //qDebug() << "update2 CREATEROOM" << r << r->GetLoaded() << r->GetProcessing() << r->GetProcessed();
 
             //create room            
             //59.6 - Resolve 302 URL with whatever existing URL was
@@ -753,7 +757,7 @@ void Environment::Update2(QPointer <Player> player, MultiPlayerManager *multi_pl
                         p2->SetTitle(r->GetProperties()->GetTitle());
                     }
                     p2->SetURL("", r->GetProperties()->GetURL());
-//                    qDebug() << "Environment::Update2 p2 URL" << r->GetProperties()->GetURL();
+                    //qDebug() << "Environment::Update2 p2 URL" << r->GetProperties()->GetURL();
 
                     QPointer <AssetImage> thumb_a = p2->GetThumbAssetImage();
                     if (r && thumb_a) {
@@ -861,7 +865,7 @@ void Environment::Update2(QPointer <Player> player, MultiPlayerManager *multi_pl
                     if (c.isNull()) {
                         c = multi_players->AddConnection(server, port);
                     }
-//                    qDebug() << server << port << url << c << c->logged_in << c->retries;
+                    //qDebug() << server << port << url << c << c->logged_in << c->retries;
                     multi_players->AddSubscribeURL(c, url);
                 }
             }
@@ -887,7 +891,7 @@ void Environment::Update2(QPointer <Player> player, MultiPlayerManager *multi_pl
     }
 
     //59.9 - update script logs (and optionally print to chat)
-    //    qDebug() << "script_print_log size" << ScriptBuiltins::script_print_log.size();
+    //qDebug() << "script_print_log size" << ScriptBuiltins::script_print_log.size();
     if (!ScriptBuiltins::script_print_log.empty()) {
         for (int i=0; i<ScriptBuiltins::script_print_log.size(); ++i) {
             if (ScriptBuiltins::script_print_log[i].output_to_chat) {
@@ -957,7 +961,7 @@ QPointer <Room> Environment::GetRootRoom()
 void Environment::UpdateQueuedFunctions(QPointer <Room> r)
 {
     QList <QScriptValue> & queued_funcs = r->GetQueuedFunctions();
-//    qDebug() << "Environment::UpdateQueuedFunctions" << queued_funcs.size();
+    //qDebug() << "Environment::UpdateQueuedFunctions" << queued_funcs.size();
 
     //do queued functions
     for (int i=0; i<queued_funcs.size(); ++i) {

@@ -3198,11 +3198,11 @@ QPointer<TextureHandle> Renderer::CreateTextureFromGLIData(const QByteArray & ba
     }
 
     // Populate Data
-    for (int Layer = 0; Layer < Texture.layers(); ++Layer)
+    for (long unsigned int Layer = 0; Layer < Texture.layers(); ++Layer)
     {
-        for (int Face = 0; Face < Texture.faces(); ++Face)
+        for (long unsigned int Face = 0; Face < Texture.faces(); ++Face)
         {
-            for (int Level = 0; Level < Texture.levels(); ++Level)
+            for (long unsigned int Level = 0; Level < Texture.levels(); ++Level)
             {
                 // If we've disabled mipmaps skip over any in the file.
                 if (tex_mipmap == false && Level != 0)

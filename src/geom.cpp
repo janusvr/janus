@@ -17,7 +17,7 @@ void GeomData::AddMaterial(const QString mat)
 
 void GeomData::AddTriangle(const QString mat, uint32_t const mesh_UUID, GeomTriangle t)
 {
-    if (materials[mat].triangles.size() <= mesh_UUID)
+    if (materials[mat].triangles.size() <= (int)mesh_UUID)
     {
         materials[mat].triangles.resize(mesh_UUID + 1);
         materials[mat].triangles[mesh_UUID].reserve(256);
@@ -81,7 +81,7 @@ GeomMaterial & GeomData::GetMaterial(const QString mat)
 
 QVector<GeomTriangle> & GeomData::GetTriangles(const QString mat, uint32_t const mesh_UUID)
 {
-    if (materials[mat].triangles.size() <= mesh_UUID)
+    if (materials[mat].triangles.size() <= (int)mesh_UUID)
     {
         materials[mat].triangles.push_back(QVector<GeomTriangle>());
     }
@@ -90,7 +90,7 @@ QVector<GeomTriangle> & GeomData::GetTriangles(const QString mat, uint32_t const
 
 GeomVBOData & GeomData::GetVBOData(const QString mat, uint32_t const mesh_UUID)
 {
-    if (materials[mat].vbo_data.size() <= mesh_UUID)
+    if (materials[mat].vbo_data.size() <= (int)mesh_UUID)
     {
         materials[mat].vbo_data.push_back(GeomVBOData());
     }
@@ -843,7 +843,8 @@ void Geom::Update()
 //                qDebug() << "Geom::Update()" << path << s << s3 << scene->mNumTextures;
                 if (s3.left(1) == "*") { //62.3 - hacky fix for Assimp where it uses a special asterisk indexing scheme
                     const unsigned int t_ind = s3.mid(1).toInt();
-                    if (t_ind >= 0 && t_ind <scene->mNumTextures) {
+                    //if (t_ind >= 0 && t_ind <scene->mNumTextures) {
+                    if (t_ind <scene->mNumTextures) {
                         tex_index = t_ind;
                     }
                 }
@@ -1258,7 +1259,7 @@ void Geom::UpdateAnimation()
 
 QString Geom::GetProcessedNodeName(const QString s)
 {
-//    return s;
+    //return s;
     QString n = s.toLower();
     if (n.contains(":")) {
         n = n.right(n.length() - n.lastIndexOf(":") - 1);
@@ -1268,7 +1269,7 @@ QString Geom::GetProcessedNodeName(const QString s)
 
 void Geom::PrepareVBOs()
 {
-//    qDebug() << "Geom::PrepareVBOs()" << scene << ready;
+    //qDebug() << "Geom::PrepareVBOs()" << scene << ready;
     if (scene == NULL)
     {
         ready = true;
@@ -1288,7 +1289,7 @@ void Geom::PrepareVBOs()
         for (unsigned int i=0; i<scene->mAnimations[0]->mNumChannels; ++i)
         {
             QString orig_s = GetProcessedNodeName(scene->mAnimations[0]->mChannels[i]->mNodeName.C_Str());
-//            qDebug() << "Geom::PrepareVBOs()" << path << orig_s;
+            //qDebug() << "Geom::PrepareVBOs()" << path << orig_s;
             anims[orig_s] = scene->mAnimations[0]->mChannels[i];
         }
     }
@@ -1331,7 +1332,7 @@ void Geom::PrepareVBOs()
         {
 
             //TODO - save specific indexes so some bones can have special transforms applied to them
-//            qDebug() << "Adding bone!" << nd->mName.C_Str() << "index" << node_list.size();
+            //qDebug() << "Adding bone!" << nd->mName.C_Str() << "index" << node_list.size();
             const QString node_name = GetProcessedNodeName(nd->mName.C_Str());
             bone_to_node[node_name] = node_list.size();
             node_list.push_back(nd);
@@ -1360,7 +1361,7 @@ void Geom::PrepareVBOs()
     {
         aiNode * nd = nodes_to_process.back();
         nodes_to_process.pop_back();
-//        qDebug() << "mName" << mesh->mName.C_Str() << n;        
+        //qDebug() << "mName" << mesh->mName.C_Str() << n;        
         //62.9 - ad-hoc decentraland convention to reserve nodes with name "_collider" for collision only
         if (QString(nd->mName.C_Str()).contains("_collider")) {
             continue;
@@ -1373,7 +1374,7 @@ void Geom::PrepareVBOs()
         const QMatrix4x4 m = m_p * m3;
 
         //process meshes
-//        qDebug() << "Geom::PrepareVBOs()" << nd->mNumMeshes;
+        //qDebug() << "Geom::PrepareVBOs()" << nd->mNumMeshes;
         for (unsigned int n=0; n < nd->mNumMeshes; ++n)
         {
 
@@ -1407,7 +1408,7 @@ void Geom::PrepareVBOs()
                 if (match_name.isEmpty())
                 {
                     GeomMaterial & mat = data.GetMaterial(mat_name);
-//                    qDebug() << "create material" << mat_name << scene->mNumTextures;
+                    //qDebug() << "create material" << mat_name << scene->mNumTextures;
                     create_material(mtl, mat);
                 }
                 else
@@ -1618,7 +1619,7 @@ void Geom::PrepareVBOs()
 
             // Add new transform for this mesh this is the object-space to instance-space transform for this instance
             vbo_data.m_instance_transforms.push_back(m);
-//            qDebug() << "instance xform" << path << mesh->mName.C_Str() << m3 << m;
+            //qDebug() << "instance xform" << path << mesh->mName.C_Str() << m3 << m;
 
             // Increment nTris by the triangle count of this mesh if we are creating a new instance of it.
             // TODO: Perhaps this should store the number of triangles loaded rather than drawn, as that number will vary
