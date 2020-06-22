@@ -40,65 +40,48 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------------------
 */
-/** @file color4.h
- *  @brief RGBA color structure, including operators when compiling in C++
- */
-#pragma once
-#ifndef AI_COLOR4D_H_INC
-#define AI_COLOR4D_H_INC
 
-#include "defs.h"
+/** @file ZipArchiveIOSystem.h
+ *  @brief Implementation of IOSystem to read a ZIP file from another IOSystem
+*/
 
-#ifdef __cplusplus
+#ifndef AI_ZIPARCHIVEIOSYSTEM_H_INC
+#define AI_ZIPARCHIVEIOSYSTEM_H_INC
 
-// ----------------------------------------------------------------------------------
-/** Represents a color in Red-Green-Blue space including an
-*   alpha component. Color values range from 0 to 1. */
-// ----------------------------------------------------------------------------------
-template <typename TReal>
-class aiColor4t
-{
-public:
-    aiColor4t() AI_NO_EXCEPT : r(), g(), b(), a() {}
-    aiColor4t (TReal _r, TReal _g, TReal _b, TReal _a)
-        : r(_r), g(_g), b(_b), a(_a) {}
-    explicit aiColor4t (TReal _r) : r(_r), g(_r), b(_r), a(_r) {}
-    aiColor4t (const aiColor4t& o) = default;
+#include <assimp/IOStream.hpp>
+#include <assimp/IOSystem.hpp>
 
-public:
-    // combined operators
-    const aiColor4t& operator += (const aiColor4t& o);
-    const aiColor4t& operator -= (const aiColor4t& o);
-    const aiColor4t& operator *= (TReal f);
-    const aiColor4t& operator /= (TReal f);
+namespace Assimp {
+    class ZipArchiveIOSystem : public IOSystem {
+    public:
+        //! Open a Zip using the proffered IOSystem
+        ZipArchiveIOSystem(IOSystem* pIOHandler, const char *pFilename, const char* pMode = "r");
+        ZipArchiveIOSystem(IOSystem* pIOHandler, const std::string& rFilename, const char* pMode = "r");
+        virtual ~ZipArchiveIOSystem();
+        bool Exists(const char* pFilename) const override;
+        char getOsSeparator() const override;
+        IOStream* Open(const char* pFilename, const char* pMode = "rb") override;
+        void Close(IOStream* pFile) override;
 
-public:
-    // comparison
-    bool operator == (const aiColor4t& other) const;
-    bool operator != (const aiColor4t& other) const;
-    bool operator <  (const aiColor4t& other) const;
+        // Specific to ZIP
+        //! The file was opened and is a ZIP
+        bool isOpen() const;
 
-    // color tuple access, rgba order
-    inline TReal operator[](unsigned int i) const;
-    inline TReal& operator[](unsigned int i);
+        //! Get the list of all files with their simplified paths
+        //! Intended for use within Assimp library boundaries
+        void getFileList(std::vector<std::string>& rFileList) const;
 
-    /** check whether a color is (close to) black */
-    inline bool IsBlack() const;
+        //! Get the list of all files with extension (must be lowercase)
+        //! Intended for use within Assimp library boundaries
+        void getFileListExtension(std::vector<std::string>& rFileList, const std::string& extension) const;
 
-public:
+        static bool isZipArchive(IOSystem* pIOHandler, const char *pFilename);
+        static bool isZipArchive(IOSystem* pIOHandler, const std::string& rFilename);
 
-    // Red, green, blue and alpha color values
-    TReal r, g, b, a;
-};  // !struct aiColor4D
+    private:
+        class Implement;
+        Implement *pImpl = nullptr;
+    };
+} // Namespace Assimp
 
-typedef aiColor4t<ai_real> aiColor4D;
-
-#else
-
-struct aiColor4D {
-    ai_real r, g, b, a;
-};
-
-#endif // __cplusplus
-
-#endif // AI_COLOR4D_H_INC
+#endif // AI_ZIPARCHIVEIOSYSTEM_H_INC
