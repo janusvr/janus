@@ -136,13 +136,16 @@ private:
     QImage image;
 
     bool tex_alpha;
+    bool load_started;
+    bool loaded;
+    float progress;
 	QPointer<TextureHandle> m_texture_handle;
 
     WebHitTestResult hit_test_result[2];
 
-    bool load_started;
-    bool loaded;
-    float progress;    
+    //bool load_started;
+    //bool loaded;
+    //float progress;    
 
     bool update_texture;
 
