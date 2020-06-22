@@ -52,7 +52,7 @@ float SoundManager::GetMicLevel()
 
 void SoundManager::Load(QString device_id, QString capture_device_id)
 {
-    qDebug() << "SoundManager::Load()";
+    //qDebug() << "SoundManager::Load()";
 
     //qDebug() << "Playback" << GetDevices(ALC_DEVICE_SPECIFIER);
     bool closed_playback = false;
@@ -65,7 +65,7 @@ void SoundManager::Load(QString device_id, QString capture_device_id)
 
             device = NULL;
 
-            qDebug() << "SoundManager::Load() - Playback device closed";
+            //qDebug() << "SoundManager::Load() - Playback device closed";
         }
         closed_playback = true;
     }
@@ -76,7 +76,7 @@ void SoundManager::Load(QString device_id, QString capture_device_id)
 
             device_input = NULL;
 
-            qDebug() << "SoundManager::Load() - Capture device closed";
+            //qDebug() << "SoundManager::Load() - Capture device closed";
 
             capture_device_enabled = false;
         }
@@ -150,7 +150,7 @@ void SoundManager::Load(QString device_id, QString capture_device_id)
                 }
                 threshold_past = false;
 
-//                Analytics::PostEvent("voip", "init");
+                //Analytics::PostEvent("voip", "init");
                 capture_device_enabled = true;
 
                 alcCaptureStart(device_input);
@@ -222,7 +222,7 @@ QVariantList SoundManager::GetDevices(ALenum specifier)
 
     if (alcIsExtensionPresent(NULL, "ALC_ENUMERATION_EXT") == AL_TRUE)
     {
-        while(devices && *devices !=NULL)
+        while(devices && *devices !=0)//NULL)
         {
             device_list.push_back(devices);
             devices += strlen(devices) + 1;
@@ -257,9 +257,9 @@ void SoundManager::Play(const SOUND_EFFECT index, const bool loop, const QVector
 
     sounds[index]->SetupOutput(new_sound_object->GetMediaContext(), false);
 
-    //        new_sound_object->Play();
+    //new_sound_object->Play();
 
-    //        qDebug() << "SoundManager::Play3D(): queueing" << set << index;
+    //qDebug() << "SoundManager::Play3D(): queueing" << set << index;
     sound_objects_queued_to_play.push_back(new_sound_object);
 }
 
@@ -334,7 +334,7 @@ bool SoundManager::GetCaptureDeviceEnabled()
 }
 
 void SoundManager::Update(QPointer <Player> player)
-{            
+{
     const QVector3D pos = player->GetProperties()->GetPos()->toQVector3D()
             + player->GetProperties()->GetLocalHeadPos()->toQVector3D(); //+ player->GetEyePoint(); //+ player->GetHeadPos();
     alListener3f(AL_POSITION, pos.x(), pos.y(), pos.z());
@@ -429,7 +429,7 @@ void SoundManager::Update(QPointer <Player> player)
         }
     }
 
-//    qDebug() << "SoundManager::Update()" << sound_objects_queued_to_play.size();
+    //qDebug() << "SoundManager::Update()" << sound_objects_queued_to_play.size();
     for (int i=0; i<sound_objects_queued_to_play.size(); ++i) {
         if (sound_objects_queued_to_play[i]) {
             QPointer <AssetSound> snd = sound_objects_queued_to_play[i]->GetAssetSound();
@@ -460,10 +460,10 @@ void SoundManager::Update(QPointer <Player> player)
         }
     }
 
-//    ALenum err = alGetError();
-//    if (err != AL_NO_ERROR) {
-//        qDebug() << "SoundManager::Update() - Error occurred: " << err;
-//    }
+    //ALenum err = alGetError();
+    //if (err != AL_NO_ERROR) {
+    //    qDebug() << "SoundManager::Update() - Error occurred: " << err;
+    //}
 }
 
 QList <QByteArray> SoundManager::GetMicBuffers()
