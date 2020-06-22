@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 # Define version
-__VERSION=66.4
+__VERSION=66.5
 
 #JamesMcCrae: define this when doing Oculus-submitted builds
 #DEFINES += OCULUS_SUBMISSION_BUILD
@@ -251,8 +251,10 @@ unix:LIBS += -L"$$PWD/resources/openvr/lib/linux64"
 unix:LIBS += -lopenvr_api
 
 # OpenAL
-INCLUDEPATH += "./resources/openal-soft-1.17.2/include"
-win32:LIBS += -L"$$PWD/resources/openal-soft-1.17.2/libs/Win64"
+#INCLUDEPATH += "./resources/openal-soft-1.17.2/include"
+#win32:LIBS += -L"$$PWD/resources/openal-soft-1.17.2/libs/Win64"
+INCLUDEPATH += "./resources/openal-soft-1.20.1/include"
+win32:LIBS += -L"$$PWD/resources/openal-soft-1.20.1/libs/Win64"
 win32:LIBS += -lOpenAL32
 
 # OpenSSL
