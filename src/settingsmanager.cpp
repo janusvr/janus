@@ -58,7 +58,8 @@ void SettingsManager::LoadSettings()
     settings["vivetrackpadmovement"] = false;
     settings["homeurl"] = QString("https://vesta.janusvr.com/");
     settings["websurfaceurl"] = QString("https://google.com");
-    settings["renderportalrooms"] = true;   
+    settings["renderportalrooms"] = true;
+    settings["pathtovoicefiles"] = QString("assets/sounds/female/");
 
     const QString filename = MathUtil::GetAppDataPath() + "settings.json";
 
@@ -369,4 +370,9 @@ QString SettingsManager::GetWebsurfaceURL()
 bool SettingsManager::GetRenderPortalRooms()
 {
     return settings["renderportalrooms"].toBool();
+}
+
+QString SettingsManager::GetVoicePath()
+{
+    return settings["pathtovoicefiles"].toString();
 }
