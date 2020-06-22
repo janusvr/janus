@@ -90,7 +90,7 @@ RoomObject::RoomObject() :
 
 RoomObject::~RoomObject()
 {
-//    qDebug() << "RoomObject::~RoomObject()" << this;
+    //qDebug() << "RoomObject::~RoomObject()" << this;
     --objects_allocated;
     Clear();
 
@@ -288,7 +288,7 @@ void RoomObject::initializeGL()
 
 void RoomObject::SetType(const ElementType t)
 {
-//    qDebug() << "RoomObject::SetType" << t;
+    //qDebug() << "RoomObject::SetType" << t;
     props->SetType(t);
 
     if (t == TYPE_LINK) {
@@ -305,7 +305,7 @@ void RoomObject::SetType(const ElementType t)
             portal_text->GetProperties()->SetLighting(false);
         }
     }
-//    qDebug() << "RoomObject::SetType"  << GetJSID() << GetID() << "allocated" << objects_allocated << "type" << GetType();
+    //qDebug() << "RoomObject::SetType"  << GetJSID() << GetID() << "allocated" << objects_allocated << "type" << GetType();
 }
 
 ElementType RoomObject::GetType() const
@@ -345,7 +345,7 @@ void RoomObject::SetProperties(QVariantMap d)
 
 bool RoomObject::GetRaycastIntersection(const QMatrix4x4 transform, QList <QVector3D> & int_verts, QList <QVector3D> & int_normals, QList <QVector2D> & int_texcoords)
 {
-//    qDebug() << "RoomObject::GetRaycastIntersection" << this->GetID() << this->GetCollisionID();
+    //qDebug() << "RoomObject::GetRaycastIntersection" << this->GetID() << this->GetCollisionID();
     const bool visible = props->GetVisible();
     const bool edit_mode_enabled = SettingsManager::GetEditModeEnabled();
     const bool edit_mode_icons_enabled = SettingsManager::GetEditModeIconsEnabled();
@@ -625,7 +625,7 @@ bool RoomObject::GetRaycastIntersection(const QMatrix4x4 transform, QList <QVect
                 const float y_dot = fabsf(QVector3D::dotProduct(int_pt - cent, y.normalized()));
 
                 if (x_dot < x.length() && y_dot < y.length()) {
-    //                qDebug() << "DOT PRODS ARE LESS THAN 1!" << x << y << x_dot << y_dot;
+                    //qDebug() << "DOT PRODS ARE LESS THAN 1!" << x << y << x_dot << y_dot;
                     int_verts.push_back(int_pt);
                     int_normals.push_back(m.column(2).toVector3D().normalized());
                     int_texcoords.push_back(QVector2D(x_dot, y_dot));
@@ -826,7 +826,7 @@ void RoomObject::Update(const double dt_sec)
 
         props->SetCollisionPos((bmin+bmax)*0.5f);
         props->SetCollisionScale(bmax - bmin);
-//        SetCollisionStatic(false);
+        //SetCollisionStatic(false);
 
         rescale_on_load_done = true;
     }
@@ -937,7 +937,7 @@ void RoomObject::Update(const double dt_sec)
                     for (int i=0; i<g->GetNumFrames(); ++i) {
                         GhostFrame & f2 = g->GetFrameByIndex(i);
                         if (!f2.sound_buffers.isEmpty()) {
-//                            qDebug() << "Room::Update voip1" << this->GetS("id") << f2.sound_buffers.size();
+                            //qDebug() << "Room::Update voip1" << this->GetS("id") << f2.sound_buffers.size();
                             sound_buffers += f2.sound_buffers;
                             f2.sound_buffers.clear();
                             //59.0 - commented out intentionally, play VOIP packets even if player is in another room
@@ -955,7 +955,7 @@ void RoomObject::Update(const double dt_sec)
                     if (cur_ghost_frame_index+1 < g->GetNumFrames()) {
                         GhostFrame & f2 = g->GetFrameByIndex(cur_ghost_frame_index+1);
                         if (!f2.sound_buffers.isEmpty()) {
-//                            qDebug() << "Room::Update voip2" << this->GetS("id")<< f2.sound_buffers.size();
+                            //qDebug() << "Room::Update voip2" << this->GetS("id")<< f2.sound_buffers.size();
                             sound_buffers += f2.sound_buffers;
                             //59.0 - commented out intentionally, play VOIP packets even if player is in another room
                             if (!player_in_room && !player_in_adjacent_room) {
@@ -964,20 +964,20 @@ void RoomObject::Update(const double dt_sec)
                         }
                     }
                 }
-                //                qDebug() << "Got sound buffers" << sound_buffers.size();
+                //qDebug() << "Got sound buffers" << sound_buffers.size();
 
                 //make the ghost chat
                 SetChatMessage(ghost_frame.chat_message);
 
                 //change the ghost's avatar
-//                if (SettingsManager::GetUpdateCustomAvatars()) {
+                //if (SettingsManager::GetUpdateCustomAvatars()) {
                     if (!ghost_frame.avatar_data.isEmpty()
                             && QString::compare(ghost_frame.avatar_data.left(13), "<FireBoxRoom>") == 0
                             && QString::compare(GetAvatarCode(), ghost_frame.avatar_data) != 0) {
                         const QString id = props->GetID();
                         const QString js_id = props->GetJSID();
                         const bool loop = props->GetLoop();
-//                        qDebug() << this << "setting data:" << ghost_frame.avatar_data;
+                        //qDebug() << this << "setting data:" << ghost_frame.avatar_data;
                         LoadGhost(ghost_frame.avatar_data);
                         SetAvatarCode(ghost_frame.avatar_data);
 
@@ -986,7 +986,7 @@ void RoomObject::Update(const double dt_sec)
                         props->SetJSID(js_id);
                         props->SetLoop(loop);
                     }
-//                }
+                //}
 
                 //room edits/deletes
                 if (!ghost_frame.room_edits.isEmpty()) {
@@ -1044,181 +1044,182 @@ void RoomObject::Update(const double dt_sec)
                 }
             }
         }
+    /*
+            const QVector3D s = GetScale();
+            const QVector3D zdir = GetZDir();
 
-//            const QVector3D s = GetScale();
-//            const QVector3D zdir = GetZDir();
+            const float angle = -(90.0f - atan2f(zdir.z(), zdir.x()) * MathUtil::_180_OVER_PI);
 
-//            const float angle = -(90.0f - atan2f(zdir.z(), zdir.x()) * MathUtil::_180_OVER_PI);
+            QMatrix4x4 m0;
+            m0.rotate(angle, 0, 1, 0);
+            m0.scale(s.x(), s.y(), s.z());
+            m0 *= ghost_frame.head_xform;
 
-//            QMatrix4x4 m0;
-////            m0.rotate(angle, 0, 1, 0);
-//////            m0.scale(s.x(), s.y(), s.z());
-////            m0 *= ghost_frame.head_xform;
+            m0 = ghost_frame.head_xform;
+            m0.rotate(angle, 0, 1, 0);
+            m0.scale(1.0f / s.x(), 1.0f / s.y(), 1.0f / s.z());
+            m0.setColumn(3, QVector4D(m0.column(3).x() / s.x(),
+                         m0.column(3).y() / s.y(),
+                         m0.column(3).z() / s.z(),
+                         1));
 
-//            m0 = ghost_frame.head_xform;
-//            m0.rotate(angle, 0, 1, 0);
-////            m0.scale(1.0f / s.x(), 1.0f / s.y(), 1.0f / s.z());
-//            m0.setColumn(3, QVector4D(m0.column(3).x() / s.x(),
-//                         m0.column(3).y() / s.y(),
-//                         m0.column(3).z() / s.z(),
-//                         1));
+            qDebug() << "xform" << m0;
+            m0.translate(0,5,0);
+            m0.scale(1.0f / s.x(), 1.0f / s.y(), 1.0f / s.z());
+            const QVector3D head_pos = ghost_frame.head_xform.column(3).toVector3D();
 
-////            qDebug() << "xform" << m0;
-////            m0.translate(0,5,0);
-////            m0.scale(1.0f / s.x(), 1.0f / s.y(), 1.0f / s.z());
-//            const QVector3D head_pos = ghost_frame.head_xform.column(3).toVector3D();
+            if (QString::compare(hmd_type, QStringLiteral("vive")) == 0) {
+                qDebug() << "global xform" << m0.column(3);
+                body_fbx->SetGlobalTransform("Head", m0);
 
-//            if (QString::compare(hmd_type, QStringLiteral("vive")) == 0) {
-////                qDebug() << "global xform" << m0.column(3);
-//                body_fbx->SetGlobalTransform("Head", m0);
+                QMatrix4x4 m1;
+                m1.setToIdentity();
 
-//                QMatrix4x4 m1;
-//                m1.setToIdentity();
+                m1.rotate(angle, 0, 1, 0);
+                m1.translate(QVector3D(head_pos.x() / s.x(),  (head_pos.y() - 0.55f) / s.y(), head_pos.z() / s.z()));
 
-//                m1.rotate(angle, 0, 1, 0);
-//                m1.translate(QVector3D(head_pos.x() / s.x(),  (head_pos.y() - 0.55f) / s.y(), head_pos.z() / s.z()));
+                const float head_angle = (90.0f - atan2f(ghost_frame.head_xform.column(2).z(), ghost_frame.head_xform.column(2).x()) * MathUtil::_180_OVER_PI);
+                m1.rotate(head_angle, 0, 1, 0);
+                body_fbx->SetGlobalTransform("Hips", m1);
+            }
+            else {
+                body_fbx->SetRelativeTransform("Head", m0);
+            }        
 
-//                const float head_angle = (90.0f - atan2f(ghost_frame.head_xform.column(2).z(), ghost_frame.head_xform.column(2).x()) * MathUtil::_180_OVER_PI);
-//                m1.rotate(head_angle, 0, 1, 0);
-//                body_fbx->SetGlobalTransform("Hips", m1);
-//            }
-//            else {
-//                body_fbx->SetRelativeTransform("Head", m0);
-//            }        
+            QList <QString> finger_names;
+            finger_names.push_back("Thumb");
+            finger_names.push_back("Index");
+            finger_names.push_back("Middle");
+            finger_names.push_back("Ring");
+            finger_names.push_back("Pinky");
 
-//            QList <QString> finger_names;
-//            finger_names.push_back("Thumb");
-//            finger_names.push_back("Index");
-//            finger_names.push_back("Middle");
-//            finger_names.push_back("Ring");
-//            finger_names.push_back("Pinky");
+            for (int i=0; i<2; ++i) {
+                LeapHand & hand = ((i == 0) ? ghost_frame.hands.first : ghost_frame.hands.second);
+                if (hand.is_active) {
 
-//            for (int i=0; i<2; ++i) {
-//                LeapHand & hand = ((i == 0) ? ghost_frame.hands.first : ghost_frame.hands.second);
-//                if (hand.is_active) {
+                    QMatrix4x4 head_basis;
 
-//                    QMatrix4x4 head_basis;
+                    if ((QString::compare(hmd_type, QStringLiteral("vive")) == 0 ||
+                            QString::compare(hmd_type, QStringLiteral("rift")) == 0)
+                            && !hand.finger_tracking) { //55.2 - override if using Leap Motion (i.e. finger tracking)
+                        head_basis = m0;
+                        //use identity matrix for head basis
+                        //for some reason finger tracking can be true??
+                    }
+                    else {
+                        if (!hand.finger_tracking) {
+                            head_basis.setColumn(3, QVector4D(eye_pos, 1));
+                        }
+                        else {
+                            head_basis = ghost_frame.head_xform;
+                            head_basis.setColumn(3, QVector4D(head_pos + eye_pos, 1));
+                            head_basis.rotate(angle, 0, 1, 0);
+                        }
 
-//                    if ((QString::compare(hmd_type, QStringLiteral("vive")) == 0 ||
-//                            QString::compare(hmd_type, QStringLiteral("rift")) == 0)
-//                            && !hand.finger_tracking) { //55.2 - override if using Leap Motion (i.e. finger tracking)
-////                        head_basis = m0;
-//                        //use identity matrix for head basis
-//                        //for some reason finger tracking can be true??
-//                    }
-//                    else {
-//                        if (!hand.finger_tracking) {
-//                            head_basis.setColumn(3, QVector4D(eye_pos, 1));
-//                        }
-//                        else {
-//                            head_basis = ghost_frame.head_xform;
-////                            head_basis.setColumn(3, QVector4D(head_pos + eye_pos, 1));
-////                            head_basis.rotate(angle, 0, 1, 0);
-//                        }
+                        //56.0 - commented all this arm stuff out until it can be given a proper pass.... bugs out vive and rift with gamepad or non-tracked controllers
+                        if (hand.finger_tracking) {
 
-//                        //56.0 - commented all this arm stuff out until it can be given a proper pass.... bugs out vive and rift with gamepad or non-tracked controllers
-//                        if (hand.finger_tracking) {
+                            head_basis = QMatrix4x4();
+                            if (hand.finger_tracking_leap_hmd) {
+                                head_basis.setColumn(3, QVector4D(eye_pos, 1));
+                            }
+                            else {
+                                head_basis.setColumn(3, QVector4D(head_pos + eye_pos, 1));
+                            }
 
-//                            head_basis = QMatrix4x4();
-//                            if (hand.finger_tracking_leap_hmd) {
-//                                head_basis.setColumn(3, QVector4D(eye_pos, 1));
-//                            }
-//                            else {
-//                                head_basis.setColumn(3, QVector4D(head_pos + eye_pos, 1));
-//                            }
+                            const QString prefix = ((i == 0) ? "Left" : "Right");
 
-//                            const QString prefix = ((i == 0) ? "Left" : "Right");
+                            QVector3D b0, b1, b2;
+                            b0 = body_fbx->GetGlobalBindPose(prefix+"Arm").column(3).toVector3D();
+                            b1 = body_fbx->GetGlobalBindPose(prefix+"ForeArm").column(3).toVector3D();
+                            b2 = body_fbx->GetGlobalBindPose(prefix+"Hand").column(3).toVector3D();
 
-//                            QVector3D b0, b1, b2;
-//                            b0 = body_fbx->GetGlobalBindPose(prefix+"Arm").column(3).toVector3D();
-//                            b1 = body_fbx->GetGlobalBindPose(prefix+"ForeArm").column(3).toVector3D();
-//                            b2 = body_fbx->GetGlobalBindPose(prefix+"Hand").column(3).toVector3D();
+                            QVector3D p0, p2;
+                            p0 = body_fbx->GetFinalPose(prefix+"Arm").column(3).toVector3D();
+                            p2 = head_basis * hand.basis.column(3).toVector3D();
+                            p2.setX(p2.x() / s.x());
+                            p2.setY(p2.y() / s.y());
+                            p2.setZ(p2.z() / s.z());
 
-//                            QVector3D p0, p2;
-//                            p0 = body_fbx->GetFinalPose(prefix+"Arm").column(3).toVector3D();
-//                            p2 = head_basis * hand.basis.column(3).toVector3D();
-//                            p2.setX(p2.x() / s.x());
-//                            p2.setY(p2.y() / s.y());
-//                            p2.setZ(p2.z() / s.z());
+                            const float l0 = (b1-b0).lengthSquared();
+                            const float l1 = (b2-b1).lengthSquared();
 
-//                            const float l0 = (b1-b0).lengthSquared();
-//                            const float l1 = (b2-b1).lengthSquared();
+                            //set for forearm
+                            double a0 = (1.0 - ((l0-l1)) / (p2-p0).lengthSquared()) * 0.5;
+                            QVector3D c0 = p0 * a0 + p2 * (1.0 - a0); //circle centre point
+                            const float r = sqrtf(l0 - (c0-p0).lengthSquared()); //circle radius of intersecting spheres on p0,p2 with rads l0,l1
 
-//                            //set for forearm
-//                            double a0 = (1.0 - ((l0-l1)) / (p2-p0).lengthSquared()) * 0.5;
-//                            QVector3D c0 = p0 * a0 + p2 * (1.0 - a0); //circle centre point
-//                            const float r = sqrtf(l0 - (c0-p0).lengthSquared()); //circle radius of intersecting spheres on p0,p2 with rads l0,l1
+                            QVector3D p1;
+                            if (sqrtf(l0) + sqrtf(l1) < (p2-p0).length()) { //in case hands are further than the arms' reaech
+                                p1 = (p0 + p2) * 0.5;
+                            }
+                            else {
+                                p1 = c0 - MathUtil::GetOrthoVec((p2-p0).normalized()) * r;
+                            }
 
-//                            QVector3D p1;
-//                            if (sqrtf(l0) + sqrtf(l1) < (p2-p0).length()) { //in case hands are further than the arms' reaech
-//                                p1 = (p0 + p2) * 0.5;
-//                            }
-//                            else {
-//                                p1 = c0 - MathUtil::GetOrthoVec((p2-p0).normalized()) * r;
-//                            }
+                            //setup arm joint
+                            QVector3D m00 = (p1 - p0).normalized();
+                            QVector3D m01 = MathUtil::GetOrthoVec(m00);
+                            QVector3D m02 = QVector3D::crossProduct(m00, m01).normalized();
+                            QVector3D m03 = p0;
 
-//                            //setup arm joint
-//                            QVector3D m00 = (p1 - p0).normalized();
-//                            QVector3D m01 = MathUtil::GetOrthoVec(m00);
-//                            QVector3D m02 = QVector3D::crossProduct(m00, m01).normalized();
-//                            QVector3D m03 = p0;
+                            if (i == 1) {
+                                m00 *= -1.0f;
+                                m02 *= -1.0f;
+                            }
 
-//                            if (i == 1) {
-//                                m00 *= -1.0f;
-//                                m02 *= -1.0f;
-//                            }
+                            QMatrix4x4 m0;
+                            m0.setColumn(0, m00);
+                            m0.setColumn(1, m01);
+                            m0.setColumn(2, m02);
+                            m0.setColumn(3, m03);
+                            m0.setRow(3, QVector4D(0,0,0,1));
 
-//                            QMatrix4x4 m0;
-//                            m0.setColumn(0, m00);
-//                            m0.setColumn(1, m01);
-//                            m0.setColumn(2, m02);
-//                            m0.setColumn(3, m03);
-//                            m0.setRow(3, QVector4D(0,0,0,1));
+                            body_fbx->SetGlobalTransform(prefix + "Arm", m0);
 
-//                            body_fbx->SetGlobalTransform(prefix + "Arm", m0);
+                            //setup forearm joint
+                            QVector3D m10 = (p2 - p1).normalized();
+                            QVector3D m11 = MathUtil::GetOrthoVec(m10);
+                            QVector3D m12 = QVector3D::crossProduct(m10, m11).normalized();
+                            QVector3D m13 = p1;
 
-//                            //setup forearm joint
-//                            QVector3D m10 = (p2 - p1).normalized();
-//                            QVector3D m11 = MathUtil::GetOrthoVec(m10);
-//                            QVector3D m12 = QVector3D::crossProduct(m10, m11).normalized();
-//                            QVector3D m13 = p1;
+                            if (i == 1) {
+                                m10 *= -1.0f;
+                                m11 *= -1.0f;
+                            }
 
-//                            if (i == 1) {
-//                                m10 *= -1.0f;
-//                                m11 *= -1.0f;
-//                            }
+                            QMatrix4x4 m1;
+                            m1.setColumn(0, m10);
+                            m1.setColumn(1, m11);
+                            m1.setColumn(2, m12);
+                            m1.setColumn(3, m13);
+                            m1.setRow(3, QVector4D(0,0,0,1));
 
-//                            QMatrix4x4 m1;
-//                            m1.setColumn(0, m10);
-//                            m1.setColumn(1, m11);
-//                            m1.setColumn(2, m12);
-//                            m1.setColumn(3, m13);
-//                            m1.setRow(3, QVector4D(0,0,0,1));
+                            body_fbx->SetGlobalTransform(prefix + "ForeArm", m1);
 
-//                            body_fbx->SetGlobalTransform(prefix + "ForeArm", m1);
+                            //set for hand
+                            QMatrix4x4 m = head_basis * hand.basis;
+                            m.data()[12] /= s.x();
+                            m.data()[13] /= s.y();
+                            m.data()[14] /= s.z();
+                            body_fbx->SetGlobalTransform(prefix + "Hand", m);
 
-//                            //set for hand
-//                            QMatrix4x4 m = head_basis * hand.basis;
-//                            m.data()[12] /= s.x();
-//                            m.data()[13] /= s.y();
-//                            m.data()[14] /= s.z();
-//                            body_fbx->SetGlobalTransform(prefix + "Hand", m);
-
-//                            //do fingers only if it's leap motion
-//                            for (int j=0; j<finger_names.size(); ++j) {
-//                                for (int k=0; k<4; ++k) {
-//                                    QMatrix4x4 m = head_basis * hand.fingers[j][k];
-//                                    m.data()[12] /= s.x();
-//                                    m.data()[13] /= s.y();
-//                                    m.data()[14] /= s.z();
-//                                    body_fbx->SetGlobalTransform(prefix+"Hand"+finger_names[j]+QString::number(k), m);
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
+                            //do fingers only if it's leap motion
+                            for (int j=0; j<finger_names.size(); ++j) {
+                                for (int k=0; k<4; ++k) {
+                                    QMatrix4x4 m = head_basis * hand.fingers[j][k];
+                                    m.data()[12] /= s.x();
+                                    m.data()[13] /= s.y();
+                                    m.data()[14] /= s.z();
+                                    body_fbx->SetGlobalTransform(prefix+"Hand"+finger_names[j]+QString::number(k), m);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    */
     }
         break;
 
@@ -1239,7 +1240,7 @@ void RoomObject::Update(const double dt_sec)
 
     case TYPE_LINK:
         if (props->GetDrawText() && (GetURL() != portal_last_url || GetTitle() != portal_last_title)) {
-    //        qDebug() << "Portal::DrawDecorationsGL() updating text" << object->GetURL() << last_url;
+            //qDebug() << "Portal::DrawDecorationsGL() updating text" << object->GetURL() << last_url;
             if (portal_text) {
                 portal_text->SetText(QString("<p align=\"center\">") + GetTitle() + QString("<br><font color=\"#0000ff\">") + GetURL() + QString("</font></p>"), false);
             }
@@ -1262,19 +1263,19 @@ void RoomObject::UpdateMedia()
         alGenSources(1, &openal_stream_source);
     }
 
-//    const ElementType obj_type = GetType();
+    //const ElementType obj_type = GetType();
 
     const bool positional_env = SettingsManager::GetPositionalEnvEnabled();
     const bool positional_voip = SettingsManager::GetPositionalVOIPEnabled();
     const float gain_env = SettingsManager::GetVolumeEnv()/100.0f;
-//    const float gain_voip = SettingsManager::GetVolumeVOIP()/100.0f;
+    //const float gain_voip = SettingsManager::GetVolumeVOIP()/100.0f;
 
     if (openal_stream_source > 0) {
         const QVector3D pos = GetPos() + QVector3D(0, 1.6f, 0);
         const QVector3D vel = GetVel();
         const QVector3D dir = GetZDir();
         const QVector3D scale = GetScale();
-//        const float dist = qMax(scale.x(), qMax(scale.y(), scale.z()));
+        //const float dist = qMax(scale.x(), qMax(scale.y(), scale.z()));
 
         if (positional_voip) {
             alSourcei(openal_stream_source, AL_SOURCE_RELATIVE, AL_FALSE);
@@ -1289,10 +1290,10 @@ void RoomObject::UpdateMedia()
 
         alSourcei(openal_stream_source, AL_LOOPING, props->GetLoop() ? AL_TRUE : AL_FALSE);
         //60.0 - commented these out as they are problematic for VOIP
-//        alSourcef(openal_stream_source, AL_PITCH, GetF("pitch"));
-//        alSourcef(openal_stream_source, AL_GAIN, 2.0f * gain_voip * GetF("gain"));
-//        alSourcef(openal_stream_source, AL_ROLLOFF_FACTOR, 3.0f);
-//        alSourcef(openal_stream_source, AL_REFERENCE_DISTANCE, dist);
+        //alSourcef(openal_stream_source, AL_PITCH, GetF("pitch"));
+        //alSourcef(openal_stream_source, AL_GAIN, 2.0f * gain_voip * GetF("gain"));
+        //alSourcef(openal_stream_source, AL_ROLLOFF_FACTOR, 3.0f);
+        //alSourcef(openal_stream_source, AL_REFERENCE_DISTANCE, dist);
 
         if (dir != QVector3D(0,0,1) && positional_voip) {
             alSource3f(openal_stream_source, AL_DIRECTION, dir.x(), dir.y(), dir.z());
@@ -1313,7 +1314,7 @@ void RoomObject::UpdateMedia()
         //qDebug() << availBuffers;
         if (availBuffers > 0) {
             QVector<ALuint> buffHolder;
-//                buffHolder.reserve(SoundManager::buffer_input_pool.size()); // An array to hold catch the unqueued buffers
+            //buffHolder.reserve(SoundManager::buffer_input_pool.size()); // An array to hold catch the unqueued buffers
             buffHolder.resize(availBuffers); //49.50 crash with audio on Windows
             alSourceUnqueueBuffers(openal_stream_source, availBuffers, buffHolder.data());
             for (int i=0;i<availBuffers;++i) {
@@ -1343,10 +1344,10 @@ void RoomObject::UpdateMedia()
                 alGetSourcei(openal_stream_source, AL_SOURCE_STATE, &sState);
                 if (sState != AL_PLAYING) {
                     alSourcePlay(openal_stream_source);
-//                    qDebug() << "RoomObject::UpdateMedia() playing" << this->GetS("id") << openal_stream_source;
+                    //qDebug() << "RoomObject::UpdateMedia() playing" << this->GetS("id") << openal_stream_source;
                 }
 
-//                qDebug() << "RoomObject::UpdateMedia() buffer input queue" << this->GetS("id") << sound_buffers.size() << SoundManager::buffer_input_queue.size();
+                //qDebug() << "RoomObject::UpdateMedia() buffer input queue" << this->GetS("id") << sound_buffers.size() << SoundManager::buffer_input_queue.size();
 
                 sound_buffers.pop_front();
             }
@@ -1482,7 +1483,7 @@ QHash <QString, QPointer <AssetShader> > RoomObject::GetGhostAssetShaders()
 
 void RoomObject::SetGhostAssetObjects(const QHash <QString, QPointer <AssetObject> > & a)
 {
-//    qDebug() << "RoomObject::SetGhostAssetObjects()" << a;
+    //qDebug() << "RoomObject::SetGhostAssetObjects()" << a;
     ghost_assetobjs = a;
 }
 
@@ -1665,7 +1666,7 @@ QPointer <AssetImage> RoomObject::GetAssetLightmap()
 
 void RoomObject::SetAssetObject(const QPointer <AssetObject> a)
 {
-//    qDebug() << "RoomObject::SetAssetObject" << this << a;
+    //qDebug() << "RoomObject::SetAssetObject" << this << a;
     assetobject = a;
 }
 
@@ -1694,11 +1695,11 @@ void RoomObject::SetBlendAssetObject(const int i, const QPointer <AssetObject> a
     //qDebug() << "EnvObject::SetBlend0AssetObject()!" << a->GetID();
     if (i >= 0 && i < 4) {        
         assetobject_blendshapes[i] = a;
-//        QPointer <AssetObject> o = assetobject;
-//        QPointer <AssetObject> b = assetobject_blendshapes[i];
-//        if (o && o->GetGeomOBJ() && b && b->GetGeomOBJ()) {
-//            o->GetGeomOBJ()->SetBlendShape(i, b->GetGeomOBJ());
-//        }
+        //QPointer <AssetObject> o = assetobject;
+        //QPointer <AssetObject> b = assetobject_blendshapes[i];
+        //if (o && o->GetGeomOBJ() && b && b->GetGeomOBJ()) {
+        //    o->GetGeomOBJ()->SetBlendShape(i, b->GetGeomOBJ());
+        //}
     }
 }
 
@@ -1943,17 +1944,18 @@ void RoomObject::UpdateMatrices()
     }
 
     model_matrix_global = model_matrix_parent * model_matrix_local * MathUtil::ModelMatrix();
+    /*
+    model_matrix_local.optimize();
+    model_matrix_global.optimize();
 
-//    model_matrix_local.optimize();
-//    model_matrix_global.optimize();
-
-//    if (this->GetParentObject() || selected) {
-//        qDebug() << "id" << this->GetID()
-//                 << "model" << MathUtil::ModelMatrix()
-//                 << "local" << model_matrix_local
-//                 << "global" << model_matrix_global;
-//        qDebug() << "done";
-//    }
+    if (this->GetParentObject() || selected) {
+        qDebug() << "id" << this->GetID()
+                 << "model" << MathUtil::ModelMatrix()
+                 << "local" << model_matrix_local
+                 << "global" << model_matrix_global;
+        qDebug() << "done";
+    }
+    */
 }
 
 void RoomObject::DrawCursorGL(QPointer <AssetShader> shader)
@@ -2006,20 +2008,20 @@ void RoomObject::DrawCursorGL(QPointer <AssetShader> shader)
 
 void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, const QVector3D & player_pos)
 {    
-//        qDebug() << "RoomObject::DrawGL()" << GetID() << GetJSID() << GetScale() << GetType() << assetobject << assetobject->GetFinished();
+    //qDebug() << "RoomObject::DrawGL()" << GetID() << GetJSID() << GetScale() << GetType() << assetobject << assetobject->GetFinished();
     if (shader.isNull() || !shader->GetCompiled() || !props->GetVisible()) {
         return;
     }
 
     const ElementType t = GetType();
     const QColor col = MathUtil::GetVector4AsColour(props->GetColour()->toQVector4D());
-//    qDebug() << "draw" << this << col << t;
+    //qDebug() << "draw" << this << col << t;
     const QColor chromakey_col = MathUtil::GetVector4AsColour(props->GetChromaKeyColour()->toQVector4D());
     const bool edit_mode_enabled = SettingsManager::GetEditModeEnabled();
     const bool edit_mode_icons_enabled = SettingsManager::GetEditModeIconsEnabled();
 
     const QVector3D pos = GetPos();
-//    qDebug() << "RoomObject::DrawGL" << GetS("_type") << GetS("id") << GetV("pos") << GetV("xdir") << GetV("ydir") << GetV("zdir") << GetV("scale");
+    //qDebug() << "RoomObject::DrawGL" << GetS("_type") << GetS("id") << GetV("pos") << GetV("xdir") << GetV("ydir") << GetV("zdir") << GetV("scale");
 
     const QString cf = props->GetCullFace();
     if (cf == "front") {
@@ -2031,13 +2033,13 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
     else {
         Renderer::m_pimpl->SetDefaultFaceCullMode(FaceCullMode::BACK);
     }
-//    qDebug() << "cull_face"<< this << cf;
+    //qDebug() << "cull_face"<< this << cf;
 
     const QString body_id = props->GetBodyID();
     const QString head_id = props->GetHeadID();
 
     //get the model matrix (not including the view portion)            
-    //    qDebug() << "setting colour" << QVector4D(col.redF(), col.greenF(), col.blueF(), col.alphaF());
+    //qDebug() << "setting colour" << QVector4D(col.redF(), col.greenF(), col.blueF(), col.alphaF());
     shader->SetAmbient(QVector3D(1,1,1));
     shader->SetDiffuse(QVector3D(1,1,1));
     shader->SetEmission(QVector3D(0,0,0));
@@ -2050,7 +2052,7 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
     shader->SetTiling(props->GetTiling()->toQVector4D());
     shader->SetDrawLayer(props->GetDrawLayer());
 
-//    qDebug() << "draw layer" << this << GetI("draw_layer");
+    //qDebug() << "draw layer" << this << GetI("draw_layer");
 
     // This allows us to sort objects based on their bounding spheres in the Ren
     float scale_fac = 1.0f;
@@ -2235,7 +2237,7 @@ void RoomObject::DrawGL(QPointer <AssetShader> shader, const bool left_eye, cons
                     MathUtil::ModelMatrix().rotate(180,0,1,0);
                     MathUtil::ModelMatrix().scale(1.0f/s.x(), 1.0f/s.y(), 1.0f/s.z());
 
-    //                qDebug() << MathUtil::ModelMatrix() << ghost_frame.hands.first.basis << ghost_frame.hands.second.basis;
+                    //qDebug() << MathUtil::ModelMatrix() << ghost_frame.hands.first.basis << ghost_frame.hands.second.basis;
                     if (ghost_frame.hands.first.is_active) {
                         ControllerManager::DrawGhostGL(shader, 0, ghost_frame.hmd_type, ghost_frame.hands.first.basis);
                     }
@@ -2530,7 +2532,7 @@ void RoomObject::SetText(const QString & s)
 
 void RoomObject::SetText(const QString & s, const bool add_markup)
 {
-//    qDebug() << "EnvObject::SetText" << s;
+    //qDebug() << "EnvObject::SetText" << s;
     props->SetText(s);
 
     const ElementType t = GetType();
@@ -2632,7 +2634,7 @@ void RoomObject::Pause()
 
 void RoomObject::Play()
 {
-//    qDebug() << "RoomObject::Play()" << this->GetID() << this->GetJSID() << this->GetPos();
+    //qDebug() << "RoomObject::Play()" << this->GetID() << this->GetJSID() << this->GetPos();
     const ElementType t = GetType();
     if (t == TYPE_SOUND || t == TYPE_LINK || t == TYPE_OBJECT) {
         if (assetsound) {
@@ -2821,7 +2823,7 @@ void RoomObject::ReadXMLCode(const QString & str)
 
 QString RoomObject::GetXMLCode(const bool show_defaults) const
 {        
-//    qDebug() << "RoomObject::GetXMLCode" << this << props->GetJSID();
+    //qDebug() << "RoomObject::GetXMLCode" << this << props->GetJSID();
     const ElementType t = props->GetType();
     const QString t_str = DOMNode::ElementTypeToTagName(t);
 
@@ -2841,9 +2843,11 @@ QString RoomObject::GetXMLCode(const bool show_defaults) const
     if (show_defaults || props->GetOnClick().length() > 0) {
         code_str += " onclick=" + MathUtil::GetStringAsString(props->GetOnClick());
     }
-    //    if ((show_defaults && !network_optimize) || GetOnCollision().length() > 0) {
-    //        code_str += " oncollision=" + MathUtil::GetStringAsString(GetOnCollision());
-    //    }
+    /*
+    if ((show_defaults && !network_optimize) || GetOnCollision().length() > 0) {
+        code_str += " oncollision=" + MathUtil::GetStringAsString(GetOnCollision());
+    }
+    */
     if (show_defaults || GetInterpTime() != 0.1f) {
         code_str += " interp_time=" + MathUtil::GetFloatAsString(GetInterpTime());
     }
@@ -3494,14 +3498,14 @@ QVariantMap RoomObject::GetJSONCode(const bool show_defaults) const
 
 void RoomObject::SetURL(const QString & base, const QString & s)
 {
-//    qDebug() << "RoomObject::SetURL" << this << base << s;
+    //qDebug() << "RoomObject::SetURL" << this << base << s;
     props->SetBaseURL(base);
     props->SetURL(s);
 
     //do extra stuff - if this is a link, has an attached websurface, etc.
     if (GetType() == TYPE_LINK) {
         if (QString::compare(s, "workspaces") != 0 && QString::compare(s, "bookmarks") != 0) {
-//            qDebug() << "RoomObject::SetURL setting url" << base << s;
+            //qDebug() << "RoomObject::SetURL setting url" << base << s;
             QUrl base_url(base);
             QString resolved_url = QUrl::fromPercentEncoding(base_url.resolved(s).toString().toLatin1());
             props->SetURL(resolved_url);
@@ -3812,7 +3816,7 @@ void RoomObject::DrawPortalFrameGL(QPointer <AssetShader> shader)
         return;
     }
 
-//    qDebug() << "RoomObject::DrawPortalFrameGL" << linear_gradient_img;
+    //qDebug() << "RoomObject::DrawPortalFrameGL" << linear_gradient_img;
     if (linear_gradient_img.isNull()) {
         return;
     }   
@@ -4292,7 +4296,7 @@ float RoomObject::GetTimeElapsed() const
 
 void RoomObject::LoadGhost_Helper(const int depth, const QVariantMap & d, QPointer <RoomObject> parent_object, QHash <QString, QPointer <AssetObject> > & asset_obj_list,  QHash <QString, QPointer <AssetShader> > & asset_shader_list)
 {    
-//    qDebug() << "RoomObject::LoadGhost_Helper() - GOT HERE1" << this->GetJSID() << this->GetID();
+    //qDebug() << "RoomObject::LoadGhost_Helper() - GOT HERE1" << this->GetJSID() << this->GetID();
     if (depth >= 32) {
         return;
     }
@@ -4368,8 +4372,8 @@ void RoomObject::LoadGhost_Helper(const int depth, const QVariantMap & d, QPoint
 
 void RoomObject::LoadGhost(const QString & data)
 {
-//    qDebug() << "RoomObject::LoadGhost" << data;
-//    return;
+    //qDebug() << "RoomObject::LoadGhost" << data;
+    //return;
     child_objects.clear(); //54.8 - prevent userid.txt from filling up with child objects
 
     HTMLPage avatar_page;
@@ -4395,7 +4399,7 @@ void RoomObject::DoGhostMoved(const QVariantMap & m)
     GhostFrame frame0;
     GhostFrame frame1;
 
-//    qDebug() << "RoomObject::DoGhostMoved doing ghost moved" << userid << roomid << GetURL();
+    //qDebug() << "RoomObject::DoGhostMoved doing ghost moved" << userid << roomid << GetURL();
     time_elapsed = 0.0f;   
 
     //Set sample rate
@@ -4505,7 +4509,7 @@ void RoomObject::SetParentObject(QPointer <RoomObject> p)
 
 void RoomObject::AppendChild(QPointer <RoomObject> child)
 {
-//    qDebug()<<"RoomObject::AppendChild() - Appended"<<child->GetJSID()<<"to"<<GetJSID();
+    //qDebug()<<"RoomObject::AppendChild() - Appended"<<child->GetJSID()<<"to"<<GetJSID();
     child_objects.push_back(child);
     child->SetParentObject(this);
 }
