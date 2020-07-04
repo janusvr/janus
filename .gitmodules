@@ -7,3 +7,6 @@
 [submodule "resources/openal-soft"]
 	path = resources/openal-soft
 	url = https://github.com/panmarco83/openal-soft.git
+[submodule "resources/openssl"]
+	path = resources/openssl
+	url = https://github.com/panmarco83/openssl.git
