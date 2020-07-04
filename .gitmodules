@@ -1,3 +1,6 @@
 [submodule "resources/assimp"]
 	path = resources/assimp
 	url = https://github.com/panmarco83/assimp.git
+[submodule "resources/openvr"]
+	path = resources/openvr
+	url = https://github.com/panmarco83/openvr.git
