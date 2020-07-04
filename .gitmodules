@@ -1,15 +1,20 @@
 [submodule "resources/assimp"]
 	path = resources/assimp
 	url = https://github.com/panmarco83/assimp.git
+	ignore = dirty
 [submodule "resources/openvr"]
 	path = resources/openvr
 	url = https://github.com/panmarco83/openvr.git
+	ignore = dirty
 [submodule "resources/openal-soft"]
 	path = resources/openal-soft
 	url = https://github.com/panmarco83/openal-soft.git
+	ignore = dirty
 [submodule "resources/openssl"]
 	path = resources/openssl
 	url = https://github.com/panmarco83/openssl.git
+	ignore = dirty
 [submodule "resources/opus"]
 	path = resources/opus
 	url = https://github.com/panmarco83/opus.git
+	ignore = dirty

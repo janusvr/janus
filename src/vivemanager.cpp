@@ -239,10 +239,15 @@ void ViveManager::Update()
         }
     }
 
+    // This function is not present in openvr v1.12.5,
+    // it does not seem to cause any direct problems by
+    // only commenting it out but needs further investigation.
+    /*
     if (m_pHMD->IsInputFocusCapturedByAnotherProcess()) {
         //qDebug() << "ViveRenderer::UpdateEyePoses() - Input captured by another process!";
         return;
     }
+    */
 
     //update controller states    
     if (controller_ind_left < vr::k_unMaxTrackedDeviceCount) {

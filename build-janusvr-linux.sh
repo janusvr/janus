@@ -48,9 +48,11 @@ echo -e "\n[*] Building JanusVR Native binary distribution with $NPROC processor
 qmake FireBox.pro -spec linux-g++ CONFIG+=release CONFIG+=force_debug_info
 time { make -j$NPROC; }
 
+
 # remove previous build attempts in case of failed compilations
 echo -e "\n[*] Deleting build dir $BUILD_DIR"
 rm -rf $BUILD_DIR
+
 
 echo -e "\n[*] Creating directory for build distribution in $BUILD_DIR..."
 mkdir -p $BUILD_DIR
@@ -58,9 +60,35 @@ cp -v janusvr $BUILD_DIR
 ln -v -s $(pwd)/assets $BUILD_DIR/assets
 cp -v -r dependencies/linux/* $BUILD_DIR
 
+
+echo -e "\n[*] Building ASSIMP"
+cd resources/assimp/
+mkdir build
+cd build
+cmake ..
+make -j $(nproc --ignore=4)
+cd ../../../
+echo -e "\n[*] Copying assimp to $BUILD_DIR"
+cp resources/assimp/build/code/libassimp.so.5.0.0 $BUILD_DIR
+cd $BUILD_DIR
+ln -s libassimp.so.5.0.0 libassimp.so.5
+ln -s libassimp.so.5.0.0 libassimp.so
+cd ../../
+
+echo -e "\n[*] Building OpenVR to $BUILD_DIR"
+cd resources/openvr/
+mkdir build
+cd build
+cmake ..
+make -j $(nproc --ignore=4)
+cd ../../../
+cp resources/openvr/bin/linux64/libopenvr_api.so $BUILD_DIR
+
+
 echo -e "\n[#] PATCH 1: Adding depedencies from OS to distribution directory"
 cp -v /usr/lib/x86_64-linux-gnu/libBulletDynamics.so.2.87	$BUILD_DIR
 cp -v /usr/lib/x86_64-linux-gnu/libBulletCollision.so.2.87	$BUILD_DIR
 cp -v /usr/lib/x86_64-linux-gnu/libLinearMath.so.2.87		$BUILD_DIR
+
 
 echo -e "\n[*] Done! Please run 'janusvr' from $BUILD_DIR"

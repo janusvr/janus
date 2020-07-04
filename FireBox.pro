@@ -251,24 +251,24 @@ unix:LIBS += -L"$$PWD/resources/openvr/lib/linux64"
 unix:LIBS += -lopenvr_api
 
 # OpenAL
-INCLUDEPATH += "./resources/openal-soft-1.17.2/include"
-win32:LIBS += -L"$$PWD/resources/openal-soft-1.17.2/libs/Win64"
+INCLUDEPATH += "./resources/openal-soft/include"
+win32:LIBS += -L"$$PWD/resources/openal-soft/libs/Win64"
 win32:LIBS += -lOpenAL32
 
 # OpenSSL
-INCLUDEPATH +="./resources/openssl-1.1/x64/include"
-win32:LIBS += -L"$$PWD/resources/openssl-1.1/x64/lib"
+INCLUDEPATH +="./resources/openssl/x64/include"
+win32:LIBS += -L"$$PWD/resources/openssl/x64/lib"
 win32:LIBS += -llibcrypto -llibssl
-OPENSSL_LIBS ='-L"$$PWD/resources/openssl-1.1/x64/lib" -llibcrypto -llibssl'
+OPENSSL_LIBS ='-L"$$PWD/resources/openssl/x64/lib" -llibcrypto -llibssl'
 CONFIG += openssl-linked
 
 # Opus
-INCLUDEPATH +="./resources/opus-1.2.1/include"
+INCLUDEPATH +="./resources/opus/include"
 CONFIG(debug) {
-    win32:LIBS += -L"$$PWD/resources/opus-1.2.1/win32/VS2015/x64/debug"
+    win32:LIBS += -L"$$PWD/resources/opus/win32/VS2015/x64/debug"
 }
 CONFIG(release) {
-    win32:LIBS += -L"$$PWD/resources/opus-1.2.1/win32/VS2015/x64/release"
+    win32:LIBS += -L"$$PWD/resources/opus/win32/VS2015/x64/release"
 }
 LIBS += -lopus
 
