@@ -4,3 +4,6 @@
 [submodule "resources/openvr"]
 	path = resources/openvr
 	url = https://github.com/panmarco83/openvr.git
+[submodule "resources/openal-soft"]
+	path = resources/openal-soft
+	url = https://github.com/panmarco83/openal-soft.git
