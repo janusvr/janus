@@ -10,3 +10,6 @@
 [submodule "resources/openssl"]
 	path = resources/openssl
 	url = https://github.com/panmarco83/openssl.git
+[submodule "resources/opus"]
+	path = resources/opus
+	url = https://github.com/panmarco83/opus.git
