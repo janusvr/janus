@@ -451,6 +451,12 @@ void SettingsWindow::SlotResetAvatar()
     Update();
 }
 
+void SettingsWindow::SlotReloadAvatar()
+{
+    game->ReloadAvatar();
+    Update();
+}
+
 void SettingsWindow::SlotSetViveTrackpadMovement()
 {
     SettingsManager::settings["vivetrackpadmovement"] = checkbox_vivetrackpadmovement->isChecked();

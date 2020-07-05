@@ -48,6 +48,7 @@ public slots:
     void SlotSetPositionalVoip();
     void SlotSetInvertPitch();
     void SlotResetAvatar();
+    void SlotReloadAvatar();
     void SlotSetViveTrackpadMovement();
     void SlotSetRenderPortalRooms();
 
@@ -92,6 +93,7 @@ private:
     QCheckBox * checkbox_antialiasing;
     QCheckBox * checkbox_enhanceddepthprecision;
     QPushButton * button_resetavatar;
+    QPushButton * button_reloadavatar;
     QCheckBox * checkbox_vivetrackpadmovement;
     QLineEdit * lineedit_homeurl;
     QLineEdit * lineedit_websurfaceurl;
