@@ -7,3 +7,6 @@
 [submodule "resources/openssl-1.1.1g"]
 	path = resources/openssl-1.1.1g
 	url = git@github.com:panmarco83/openssl.git
+[submodule "resources/openvr-1.12.5"]
+	path = resources/openvr-1.12.5
+	url = git@github.com:panmarco83/openvr.git
