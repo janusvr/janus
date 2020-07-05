@@ -80,7 +80,7 @@ void SettingsManager::LoadSettings()
     //54.5 - force sounds on, even if toggled off last usage
     settings["sounds"] = true;
 
-//    qDebug() << ba;
+    //qDebug() << ba;
     qDebug() << "SettingsManager::LoadSettings() - Loaded" << settings.size() << "settings.";
 }
 

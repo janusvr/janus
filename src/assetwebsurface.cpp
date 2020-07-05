@@ -8,7 +8,7 @@ AssetWebSurface::AssetWebSurface() :
     m_texture_handle(nullptr),
     update_texture(false)
 {
-//    qDebug() << "AssetWebSurface::AssetWebSurface" << this;        
+    //qDebug() << "AssetWebSurface::AssetWebSurface" << this;        
     webview = new QWebEngineView();    
     connect(webview, SIGNAL(loadStarted()), this, SLOT(LoadStarted()));
     connect(webview, SIGNAL(loadProgress(int)), this, SLOT(LoadProgress(int)));
@@ -25,7 +25,7 @@ AssetWebSurface::~AssetWebSurface()
     disconnect(&timer);
     timer.stop();
 
-//    qDebug() << "AssetWebSurface::~AssetWebSurface()" << this;
+    //qDebug() << "AssetWebSurface::~AssetWebSurface()" << this;
     if (webview) {
         webview->hide();
         webview->deleteLater();
@@ -55,7 +55,7 @@ void AssetWebSurface::SetProperties(const QVariantMap & d)
 
 void AssetWebSurface::SetSrc(const QString & base, const QString & u)
 {
-//    qDebug() << "AssetWebSurface::SetSrc()" << base << u;
+    //qDebug() << "AssetWebSurface::SetSrc()" << base << u;
     Asset::SetSrc(base, u);
     if (original_url.isEmpty()) {
         original_url = props->GetSrcURL();
@@ -64,7 +64,7 @@ void AssetWebSurface::SetSrc(const QString & base, const QString & u)
 
 void AssetWebSurface::Load()
 {
-//    qDebug() << "AssetWebSurface::Load()" << props->GetSrcURL();
+    //qDebug() << "AssetWebSurface::Load()" << props->GetSrcURL();
     if (webview) {        
         webview->load(props->GetSrcURL());
     }
@@ -107,10 +107,10 @@ bool AssetWebSurface::GetFinished() const
 
 void AssetWebSurface::SetURL(const QString & u)
 {
-//    qDebug() << "AssetWebSurface::SetURL()" << u;
+    //qDebug() << "AssetWebSurface::SetURL()" << u;
     QUrl url(u);
     if (webview && webview->url() != url) {
-//        webview->setHtml(QString(), QUrl()); //32.9: fixes a bug relating to being at HTTPS link
+        //webview->setHtml(QString(), QUrl()); //32.9: fixes a bug relating to being at HTTPS link
         webview->setUrl(url);
         if (original_url.isEmpty()) {
             original_url = u;
@@ -120,7 +120,7 @@ void AssetWebSurface::SetURL(const QString & u)
 
 QString AssetWebSurface::GetURL() const
 {
-//    qDebug() << "AssetWebSurface::GetURL()" << u;
+    //qDebug() << "AssetWebSurface::GetURL()" << u;
     if (webview) {
         return webview->url().toString();
     }
@@ -166,7 +166,7 @@ QUrl AssetWebSurface::GetLinkClicked(const int cursor_index)
 
 void AssetWebSurface::mousePressEvent(QMouseEvent * e, const int )
 {
-//    qDebug() << "AssetWebSurface::mousePressEvent" << this << e->pos();    
+    //qDebug() << "AssetWebSurface::mousePressEvent" << this << e->pos();    
     if (webview) {
         QMouseEvent * e2 = new QMouseEvent(QEvent::MouseButtonPress, e->pos(), e->button(), e->buttons(), e->modifiers());
         SendWebViewMouseEvent(e2);
@@ -175,7 +175,7 @@ void AssetWebSurface::mousePressEvent(QMouseEvent * e, const int )
 
 void AssetWebSurface::mouseMoveEvent(QMouseEvent * e, const int cursor_index)
 {
-//    qDebug() << "AssetWebSurface::mouseMoveEvent" << this << e->pos();    
+    //qDebug() << "AssetWebSurface::mouseMoveEvent" << this << e->pos();    
     if (webview) {        
         QMouseEvent * e2 = new QMouseEvent(QEvent::MouseMove, e->pos(), e->button(), e->buttons(), e->modifiers());
         SendWebViewMouseEvent(e2);
@@ -184,7 +184,7 @@ void AssetWebSurface::mouseMoveEvent(QMouseEvent * e, const int cursor_index)
 
 void AssetWebSurface::mouseReleaseEvent(QMouseEvent * e, const int cursor_index)
 {
-//    qDebug() << "AssetWebSurface::mouseReleaseEvent" << this << e->pos();    
+    //qDebug() << "AssetWebSurface::mouseReleaseEvent" << this << e->pos();    
     if (webview) {
         QMouseEvent * e2 = new QMouseEvent(QEvent::MouseButtonRelease, e->pos(), e->button(), e->buttons(), e->modifiers());
         SendWebViewMouseEvent(e2);
@@ -295,7 +295,7 @@ void AssetWebSurface::UpdateImage()
 
 void AssetWebSurface::LoadStarted()
 {
-//    qDebug() << "AssetWebSurface::LoadStarted()";
+    //qDebug() << "AssetWebSurface::LoadStarted()";
     load_started = true;
     loaded = false;
     webview->showMinimized();
@@ -303,13 +303,13 @@ void AssetWebSurface::LoadStarted()
 
 void AssetWebSurface::LoadProgress(int p)
 {
-//    qDebug() << "AssetWebSurface::LoadProgress" << p;
+    //qDebug() << "AssetWebSurface::LoadProgress" << p;
     progress = float(p) / 100.0f;
 }
 
 void AssetWebSurface::LoadFinished(bool b)
 {
-//    qDebug() << "AssetWebSurface::LoadFinished()" << b;
+    //qDebug() << "AssetWebSurface::LoadFinished()" << b;
     loaded = true;
     progress = 1.0f;   
 }
@@ -321,7 +321,7 @@ void AssetWebSurface::UpdateGL()
     }
 
     if (update_texture) {
-//        qDebug() << "AssetWebSurface::UpdateGL()" << webview->size();
+        //qDebug() << "AssetWebSurface::UpdateGL()" << webview->size();
         update_texture = false;
 
         if (m_texture_handle == nullptr || m_texture_handle == AssetImage::null_image_tex_handle) {
@@ -353,7 +353,7 @@ QPointer<QWebEngineView> AssetWebSurface::GetWebView()
 
 bool AssetWebSurface::GetTextEditing()
 {
-//    return webview ? webview->getTextEditing() : false;
+    //return webview ? webview->getTextEditing() : false;
     return webview->hasFocus();
 }
 

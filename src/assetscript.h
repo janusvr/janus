@@ -48,8 +48,8 @@ public:
 
     QList<QPointer <RoomObject> > UpdateAsynchronousCreatedObjects(QHash <QString, QPointer <RoomObject> > & envobjects);
 
-//    QList<QPointer <RoomObject> > OnCollisionWithPlayer(QPointer<ObjectProperties> obj, Player & player,  Room & room, QHash <QString, QPointer <RoomObject> > & objects);
-//    QList<QPointer <RoomObject> > OnCollision(QPointer<ObjectProperties> obj1, QPointer<ObjectProperties> obj2, QHash <QString, QPointer <RoomObject> > & objects);
+    //QList<QPointer <RoomObject> > OnCollisionWithPlayer(QPointer<ObjectProperties> obj, Player & player,  Room & room, QHash <QString, QPointer <RoomObject> > & objects);
+    //QList<QPointer <RoomObject> > OnCollision(QPointer<ObjectProperties> obj1, QPointer<ObjectProperties> obj2, QHash <QString, QPointer <RoomObject> > & objects);
 
     QList<QPointer <RoomObject> > OnKeyEvent(QString name, QKeyEvent * e, QHash <QString, QPointer <RoomObject> > & objects, QPointer <Player> player, QMap<QString, DOMNode *> remote_players, bool * defaultPrevented);
 

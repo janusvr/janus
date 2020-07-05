@@ -61,7 +61,7 @@ public:
     void UpdateTextureHandleData(TextureHandle* p_handle, uint const p_level, uint const p_x_offset, uint const p_y_offset, uint const p_width, uint const p_height, int const p_pixel_format, int const p_pixel_type, void* const p_pixel_data, uint32_t const p_data_size);
     void GenerateTextureHandleMipMap(TextureHandle* p_handle);
 
-//    	 Mesh Handle (VAO)
+    // Mesh Handle (VAO)
     void CreateMeshHandleForGeomVBOData(GeomVBOData &p_VBO_data);    
     QPointer<MeshHandle> CreateMeshHandle(VertexAttributeLayout p_layout);        
     void BindMeshHandle(QPointer <MeshHandle> p_mesh_handle);

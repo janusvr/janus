@@ -113,7 +113,7 @@ void AssetImage::initializeGL()
         null_image_data->SetSource("null_image");
 
         // will use the function in the child to transfer the data to the GPU        
-//        qDebug() << "m_pimpl" << Renderer::m_pimpl;
+        //qDebug() << "m_pimpl" << Renderer::m_pimpl;
         AssetImage::null_image_tex_handle = Renderer::m_pimpl->CreateTextureFromAssetImageData(null_image_data, true, true, true, false, TextureHandle::ALPHA_TYPE::NONE, TextureHandle::COLOR_SPACE::SRGB);
         for (uint32_t i = 0; i < ASSETSHADER_NUM_TEXTURES; ++i)
         {
@@ -146,7 +146,7 @@ void AssetImage::initializeGL()
 
 void AssetImage::CreateFromData(const QByteArray & b)
 {
-//    qDebug() << "AssetImage::CreateFromData" << b.size();
+    //qDebug() << "AssetImage::CreateFromData" << b.size();
     SetData(b);
     SetStarted(true);
     SetLoaded(true);
@@ -168,7 +168,7 @@ void AssetImage::CreateFromText(const QString & s, const float font_size, const 
 
     QFont font = text_doc.defaultFont();
     //59.0 - size of font is device independent
-//    font.setPointSize(font_size);
+    //font.setPointSize(font_size);
     font.setPixelSize(font_size);
     font.setStyleStrategy(QFont::PreferAntialias);
     text_doc.setDefaultFont(font);
@@ -235,13 +235,13 @@ void AssetImage::CreateFromText(const QString & s, const float font_size, const 
 
 void AssetImage::Load()
 {    
-//    qDebug() << "AssetImage::Load()" << src_url;
+    //qDebug() << "AssetImage::Load()" << src_url;
     if (props->GetSrc().left(5) == "data:") {
         WebAsset::Load(QUrl(props->GetSrc()));
     }
     else {
         if (props->GetSrcURL().isEmpty()) {
-//            qDebug() << "AssetImage::Load() ERROR: Tried to load with an empty url" << props->GetID() << props->GetSrc();
+            //qDebug() << "AssetImage::Load() ERROR: Tried to load with an empty url" << props->GetID() << props->GetSrc();
             SetLoaded(true);
             SetProcessed(true);
             SetFinished(true);
@@ -411,7 +411,7 @@ bool AssetImage::UpdateGL()
     }
 
     if (GetLoaded() && !GetProcessing()) {
-//        qDebug() << "AssetImage::UpdateGL() starting thread" << src_url;
+        //qDebug() << "AssetImage::UpdateGL() starting thread" << src_url;
         SetProcessing(true);
         if (!GetError()) {
             QtConcurrent::run(this, &AssetImage::LoadImageDataThread); //49.25 - do image loading from a non-UI thread
@@ -504,7 +504,7 @@ void AssetImage::LoadImageDataThread()
         return;
     }
 
-//    qDebug() << "AssetImage::LoadImageDataThread() started" << src_url;
+    //qDebug() << "AssetImage::LoadImageDataThread() started" << src_url;
     QString web_asset_url = GetURL().toString();
     QString extension = web_asset_url.right(web_asset_url.size() - (web_asset_url.lastIndexOf(".") +1));
     const QByteArray& buffer = GetData();
@@ -517,7 +517,7 @@ void AssetImage::LoadImageDataThread()
     }
     ClearData();
     aspect = float(textureData->GetHeight()) / float(textureData->GetWidth());
-//    qDebug() << "AssetImage::LoadImageDataThread() completed" << src_url;
+    //qDebug() << "AssetImage::LoadImageDataThread() completed" << src_url;
 }
 
 void AssetImage::LoadTextures()

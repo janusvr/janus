@@ -59,7 +59,7 @@ HierarchyWindow::HierarchyWindow(Game * g) :
     delete_object_pushbutton.setText("Remove Selected");
     delete_object_pushbutton.setMaximumHeight(30);
 
-//    QWidget * w = new QWidget(this);
+    //QWidget * w = new QWidget(this);
     QGridLayout * v = new QGridLayout();
     v->addWidget(&create_object_pushbutton,0,0);
     v->addWidget(&create_text_pushbutton,0,1);
@@ -74,12 +74,12 @@ HierarchyWindow::HierarchyWindow(Game * g) :
     v->addWidget(&delete_object_pushbutton,5,0,1,2);
 
     v->addWidget(&tree_widget,6,0,1,2);
-//    w->setLayout(v);
+    //w->setLayout(v);
     v->setSpacing(0);
     v->setMargin(1);
 
-//    setWindowTitle("Hierarchy");
-//    setMinimumSize(300, 400);
+    //setWindowTitle("Hierarchy");
+    //setMinimumSize(300, 400);
     //setCentralWidget(w);
     this->setLayout(v);
 
@@ -151,7 +151,7 @@ void HierarchyWindow::Update()
     if (sel.length() > 0) {
         if (tree_widget.selectedItems().isEmpty() || tree_widget.selectedItems().first()->text(0) != sel) {
             QList <QTreeWidgetItem *> items = tree_widget.findItems(sel, Qt::MatchExactly | Qt::MatchRecursive, 0);
-//            qDebug() << "find it?" << sel << items.size();
+            //qDebug() << "find it?" << sel << items.size();
             if (!items.isEmpty()) {
                 tree_widget.clearSelection();
                 items.first()->setSelected(true);
@@ -200,8 +200,8 @@ void HierarchyWindow::CreateObject()
     const QString new_jsid = game->GetEnvironment()->GetCurRoom()->AddRoomObject(o);
 
 
-//    game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
-//    game->SetState(JVR_STATE_)
+    //game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
+    //game->SetState(JVR_STATE_)
 }
 
 void HierarchyWindow::CreateText()
@@ -244,7 +244,7 @@ void HierarchyWindow::CreateParagraph()
     o->GetProperties()->SetText("Paragraph");
 
     const QString new_jsid = game->GetEnvironment()->GetCurRoom()->AddRoomObject(o);
-//    game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
+    //game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
 }
 
 void HierarchyWindow::CreateLink()
@@ -266,7 +266,7 @@ void HierarchyWindow::CreateLink()
     o->GetProperties()->SetTitle("Janus VR");
 
     const QString new_jsid = game->GetEnvironment()->GetCurRoom()->AddRoomObject(o);
-//    game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
+    //game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
 }
 
 void HierarchyWindow::CreateImage()
@@ -301,7 +301,7 @@ void HierarchyWindow::CreateSound()
     o->GetProperties()->SetPos(p);
 
     const QString new_jsid = game->GetEnvironment()->GetCurRoom()->AddRoomObject(o);
-//    game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
+    //game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
 }
 
 void HierarchyWindow::CreateVideo()
@@ -321,7 +321,7 @@ void HierarchyWindow::CreateVideo()
     o->GetProperties()->SetDir(d);
 
     const QString new_jsid = game->GetEnvironment()->GetCurRoom()->AddRoomObject(o);
-//    game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
+    //game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
 }
 
 void HierarchyWindow::CreateGhost()
@@ -336,7 +336,7 @@ void HierarchyWindow::CreateGhost()
     o->GetProperties()->SetPos(p);
 
     const QString new_jsid = game->GetEnvironment()->GetCurRoom()->AddRoomObject(o);
-//    game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
+    //game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
 }
 
 void HierarchyWindow::CreateParticle()
@@ -360,7 +360,7 @@ void HierarchyWindow::CreateParticle()
     o->GetProperties()->SetLoop(true);
 
     const QString new_jsid = game->GetEnvironment()->GetCurRoom()->AddRoomObject(o);
-//    game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
+    //game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
 }
 
 void HierarchyWindow::CreateLight()
@@ -377,19 +377,19 @@ void HierarchyWindow::CreateLight()
     o->GetProperties()->SetLightRange(5.0f);
 
     const QString new_jsid = game->GetEnvironment()->GetCurRoom()->AddRoomObject(o);
-//    game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
+    //game->SetSelected(game->GetEnvironment()->GetCurRoom(), new_jsid, true);
 }
 
 void HierarchyWindow::RowsInserted(const QModelIndex & parent, int start, int end)
 {
-//    qDebug() << "HierarchyWindow::RowsInserted" << start << end;
+    //qDebug() << "HierarchyWindow::RowsInserted" << start << end;
     if (cur_room) {
-//        QHash <QString, QPointer <RoomObject> > & envobjects = cur_room->GetRoomObjects();
+        //QHash <QString, QPointer <RoomObject> > & envobjects = cur_room->GetRoomObjects();
         QMap <int, QVariant> item_data = tree_widget.model()->itemData(parent);
         if (item_data.isEmpty()) {
             return;
         }
-//
+
         QList<QTreeWidgetItem *> items = tree_widget.findItems(item_data.first().toString(), Qt::MatchExactly, 0);
         if (items.isEmpty()) {
             return;
@@ -422,7 +422,7 @@ void HierarchyWindow::RowsInserted(const QModelIndex & parent, int start, int en
 
 void HierarchyWindow::ItemSelectionChanged()
 {
-//    qDebug() << "HierarchyWindow::ItemSelectionChanged";
+    //qDebug() << "HierarchyWindow::ItemSelectionChanged";
     if (cur_room) {        
         QHash <QString, QPointer <RoomObject> > envobjects = cur_room->GetRoomObjects();        
         for (QPointer <RoomObject> & o : envobjects) {
@@ -434,7 +434,7 @@ void HierarchyWindow::ItemSelectionChanged()
         QList <QTreeWidgetItem *> items = tree_widget.selectedItems();
         for (int i=0; i<items.size(); ++i) {
             const QString js_id = items[i]->text(0);
-//            qDebug() << "testing" << js_id << envobjects.contains(js_id) << envobjects[js_id];
+            //qDebug() << "testing" << js_id << envobjects.contains(js_id) << envobjects[js_id];
             if (envobjects.contains(js_id) && envobjects[js_id]) {
                 envobjects[js_id]->SetSelected(true);
                 game->SetSelected(cur_room, js_id, true); //set's game's selected val, to trigger propertieswindow

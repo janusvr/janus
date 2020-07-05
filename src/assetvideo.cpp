@@ -98,7 +98,7 @@ void AssetVideo::DrawGL(MediaContext * ctx, QPointer <AssetShader> shader, const
         textureSet.SetTextureHandle(0, tex_id_right, 2);
     }
 
-//    qDebug() << "AssetVideo::DrawVideoGL()" << GetTextureGL(left_eye) << aspect;
+    //qDebug() << "AssetVideo::DrawVideoGL()" << GetTextureGL(left_eye) << aspect;
     MathUtil::ModelMatrix().scale(1, aspect_ratio, 1);
 
     shader->UpdateObjectUniforms();
@@ -181,7 +181,7 @@ TextureHandle* AssetVideo::GetTextureHandle(MediaContext * ctx, const bool left_
 float AssetVideo::GetAspectRatio(MediaContext * ctx) const
 {
     const float v = media_player.GetAspectRatio(ctx);
-//    qDebug() << "AssetVideo::GetAspectRatio" << v;
+    //qDebug() << "AssetVideo::GetAspectRatio" << v;
     return v;
 }
 

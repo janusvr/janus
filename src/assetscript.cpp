@@ -20,7 +20,7 @@ QPointer <QScriptEngine> AssetScript::GetNewScriptEngine(QPointer <Room> r)
     QPointer <QScriptEngine> se = new QScriptEngine();
     se->setProcessEventsInterval(1);
 
-    //    qRegisterMetaType<ScriptableVector>("Vector");
+    //qRegisterMetaType<ScriptableVector>("Vector");
 
     qScriptRegisterMetaType(se, PlayerToScriptValue, PlayerFromScriptValue);
     qScriptRegisterMetaType(se, DOMNodeToScriptValue, DOMNodeFromScriptValue);
@@ -38,7 +38,7 @@ QPointer <QScriptEngine> AssetScript::GetNewScriptEngine(QPointer <Room> r)
     global_scope.setProperty("console", console);
     console.setProperty("log", se->newFunction(MyConsoleLog));
 
-//    global_scope.setProperty("room", se->toScriptValue<DOMNode *>(r->GetProperties().data()));
+    //global_scope.setProperty("room", se->toScriptValue<DOMNode *>(r->GetProperties().data()));
     QScriptValue roomObject = global_scope.property("room");
     roomObject.setProperty("preventDefault", se->newFunction(PreventDefault));
     roomObject.setProperty("openLink", se->newFunction(OpenLink));
@@ -89,7 +89,7 @@ QPointer <QScriptEngine> AssetScript::GetNewScriptEngine(QPointer <Room> r)
 void AssetScript::Load()
 {    
     //53.12 - Setup cookies here, as by now the proper base_url which defines the right domain is set
-//    qDebug() << "AssetScript::Load()" << src_url;
+    //qDebug() << "AssetScript::Load()" << src_url;
     QUrl cookieDomain = QUrl(props->GetBaseURL());
     foreach (QNetworkCookie cookie, CookieJar::cookie_jar->cookiesForUrl(cookieDomain)) {
         roomObject.property("cookies").setProperty(QString(cookie.name()), QScriptValue(script_engine, QString(cookie.value())));
@@ -148,7 +148,7 @@ bool AssetScript::HasRoomProperty(const QString & name)
 
 bool AssetScript::HasRoomFunction(const QString & name)
 {
-//    qDebug() << "AssetScript::HasRoomFunction" << roomObject.toString();
+    //qDebug() << "AssetScript::HasRoomFunction" << roomObject.toString();
     return roomObject.property(name).isFunction();
 }
 
@@ -159,14 +159,14 @@ bool AssetScript::HasRoomFunctionContains(const QString & name, const QString & 
 
 QScriptValue AssetScript::RunScriptCode(const QString & code)
 {
-//    qDebug() << "AssetScript::RunScriptCode() " << code;
+    //qDebug() << "AssetScript::RunScriptCode() " << code;
     last_code = code;
     return script_engine->evaluate(code, props->GetSrc());
 }
 
 QScriptValue AssetScript::RunFunction(const QString & name, const QScriptValueList & args)
 {
-//    qDebug() << "AssetScript::RunFunction" << this->GetFullURL() << name;
+    //qDebug() << "AssetScript::RunFunction" << this->GetFullURL() << name;
     last_code = name;
     QScriptValue fn = GetGlobalProperty(name);
     if (!fn.isFunction()) {
@@ -260,19 +260,19 @@ void AssetScript::HandleCookieChanges()
         QNetworkCookie newCookie(itr.name().toLatin1(), itr.value().toString().toLatin1());
         newCookie.setDomain(cookieDomain);
         newCookie.setPath("/");
-//        qDebug() << "AssetScript::HandleCookieChanges(): Adding a new cookie" << cookieDomain << itr.name() << itr.value().toString();
+        //qDebug() << "AssetScript::HandleCookieChanges(): Adding a new cookie" << cookieDomain << itr.name() << itr.value().toString();
         newCookies << newCookie;
     }
 
     //add the new list of cookies, via the pointer set to the global cookie jar
     if (!newCookies.isEmpty()) {
         //Note: do not change from base_url (doesn't work using base_url.host())
-//        qDebug() << "AssetScript::HandleCookieChanges()" << newCookies.first().domain() << newCookies << base_url;
+    //qDebug() << "AssetScript::HandleCookieChanges()" << newCookies.first().domain() << newCookies << base_url;
         CookieJar::cookie_jar->setCookiesFromUrl(newCookies, QUrl(props->GetBaseURL()));
         CookieJar::cookie_jar->SaveToDisk();
     }
 
-//    cookies->PrintAllCookies();
+    //cookies->PrintAllCookies();
     roomObject.setProperty("_new_cookies", script_engine->newObject());
 }
 
@@ -291,10 +291,10 @@ void AssetScript::HandleParentChanges(QHash <QString, QPointer <RoomObject> > & 
         QString oldParentJSID = itr.value().property("old_parent_id").toString();
         QString newParentJSID = itr.value().property("new_parent_id").toString();
 
-//        qDebug() << "AssetScript::HandleParentChanges()" << jsid << oldParentJSID << newParentJSID;
+        //qDebug() << "AssetScript::HandleParentChanges()" << jsid << oldParentJSID << newParentJSID;
         if (envobjects.contains(jsid))  //make sure the object is not freshly created
         {
-//            qDebug()<<jsid<<"underwent a DOM change";
+            //qDebug()<<jsid<<"underwent a DOM change";
             if (envobjects.contains(oldParentJSID))     //this should always be true
                 envobjects[oldParentJSID]->RemoveChildByJSID(jsid);
 
@@ -334,7 +334,7 @@ void AssetScript::WipeRemovedObjects(QHash <QString, QPointer <RoomObject> > & e
 
 QList<QPointer <RoomObject> > AssetScript::FlushNewObjects()
 {        
-//    qDebug() << "AssetScript::FlushNewObjects()" << this;
+    //qDebug() << "AssetScript::FlushNewObjects()" << this;
     QList<QPointer <RoomObject> > objectsAdded;
     QScriptValueIterator itr(roomObject.property("_new_ids"));
     while (itr.hasNext()) {
@@ -354,7 +354,7 @@ QList<QPointer <RoomObject> > AssetScript::FlushNewObjects()
         QPointer <RoomObject> newObject = RoomObject::CreateFromProperties(newDOMNode);
         newObject->SetType(newDOMNode->GetType());
 
-//        qDebug() << "AssetScript::FlushNewObjects()" << newObject << newObject->GetProperties()->GetTypeAsString() << newId << newObject->GetProperties()->GetJSID();
+        //qDebug() << "AssetScript::FlushNewObjects()" << newObject << newObject->GetProperties()->GetTypeAsString() << newId << newObject->GetProperties()->GetJSID();
         room->GetRoomObjects()[newId] = newObject;
         objectsAdded << newObject;
     }
@@ -375,7 +375,7 @@ void AssetScript::SetJSCode(const QString code)
 void AssetScript::Update()
 {
     if (GetLoaded() && !GetProcessing() && !GetError()) {
-//        qDebug() << "AssetScript::Update() - Running script code" << this->GetFullURL();
+        //qDebug() << "AssetScript::Update() - Running script code" << this->GetFullURL();
         //60.0 - bugfix, CLEAR onLoad/update remnants from previous script before injecting,
         //       otherwise there is a bug with multiple erroneous function calls
         roomObject.setProperty("onLoad", QScriptValue());
@@ -406,13 +406,13 @@ void AssetScript::Update()
         SetProcessing(true);
         SetProcessed(true);
         SetFinished(true);
-//        webasset.ClearData();
+        //webasset.ClearData();
     }
 }
 
 QList<QPointer <RoomObject> > AssetScript::UpdateAsynchronousCreatedObjects(QHash <QString, QPointer <RoomObject> > & envobjects)
 {
-//    qDebug() << "AssetScript::UpdateAsynchronousCreatedObjects()";
+    //qDebug() << "AssetScript::UpdateAsynchronousCreatedObjects()";
     ProcessNewAssets();
     HandleCookieChanges();
     HandleParentChanges(envobjects);
@@ -434,7 +434,7 @@ void AssetScript::UpdateInternalDataStructures(QPointer <Player> player, QMap <Q
             dom_map[o->GetProperties()->GetJSID()] = o->GetProperties().data();
         }
     }
-    //    qDebug() << "AssetScript::UpdateInternalDataStructures" << dom_map;
+    //qDebug() << "AssetScript::UpdateInternalDataStructures" << dom_map;
 
     if (!global_scope.property("player").isValid()) {
         global_scope.setProperty("player", script_engine->toScriptValue(player->GetProperties().data()));
@@ -445,7 +445,7 @@ void AssetScript::UpdateInternalDataStructures(QPointer <Player> player, QMap <Q
     global_scope.setProperty("__dom", script_engine->toScriptValue(dom_map));
     roomObject.setProperty("objects", script_engine->toScriptValue(dom_map));
     //remote player map
-//    qDebug() << "AssetScript::UpdateInternalDataStructures" << remote_players << remote_players.size();
+    //qDebug() << "AssetScript::UpdateInternalDataStructures" << remote_players << remote_players.size();
     roomObject.setProperty("players", script_engine->toScriptValue(remote_players));
     roomObject.setProperty("playerCount", remote_players.size());
 }
@@ -467,91 +467,93 @@ QList<QPointer <RoomObject> > AssetScript::RunFunctionOnObjects(const QString & 
 
     UpdateInternalDataStructures(player, remote_players);
     RunFunction(fnName, args);
-//    qDebug() << "AssetScript::RunFunctionOnObjects" << this << fnName;
+    //qDebug() << "AssetScript::RunFunctionOnObjects" << this << fnName;
     return UpdateAsynchronousCreatedObjects(envobjects);
 }
+/*
+QList<QPointer <RoomObject> > AssetScript::OnCollisionWithPlayer(QPointer<ObjectProperties> obj, Player & player, Room & room, QHash <QString, QPointer <RoomObject> > & objects)
+{
+    if (obj.isNull()) {
+        MathUtil::ErrorLog("Couldn't handle collision, one or more objects involved undefined");
+        return QList<QPointer <RoomObject> >();
+    }
 
-//QList<QPointer <RoomObject> > AssetScript::OnCollisionWithPlayer(QPointer<ObjectProperties> obj, Player & player, Room & room, QHash <QString, QPointer <RoomObject> > & objects)
-//{
-//    if (obj.isNull()) {
-//        MathUtil::ErrorLog("Couldn't handle collision, one or more objects involved undefined");
-//        return QList<QPointer <RoomObject> >();
-//    }
+    // call first with player, obj then again with obj2, obj1 so both cases can be handled
+    QScriptValue playerScript = GetGlobalProperty("player");
+    QScriptValue objScript = global_scope.property("__dom").property(obj->GetJSID());
 
-//    // call first with player, obj then again with obj2, obj1 so both cases can be handled
-//    QScriptValue playerScript = GetGlobalProperty("player");
-//    QScriptValue objScript = global_scope.property("__dom").property(obj->GetJSID());
+    QList<QPointer <RoomObject> > addedObjects;
 
-//    QList<QPointer <RoomObject> > addedObjects;
+    // general onCollision event
+    if (HasRoomFunction("onCollision")) {
+        addedObjects += RunFunctionOnObjects("room.onCollision", objects, player, room, QScriptValueList() << objScript << playerScript);
+        if (obj.isNull()) {
+            return addedObjects;
+        }
+        addedObjects += RunFunctionOnObjects("room.onCollision", objects, player, room, QScriptValueList() << playerScript << objScript);
+        if (obj.isNull()) {
+            return addedObjects;
+        }
+    }
 
-//    // general onCollision event
-//    if (HasRoomFunction("onCollision")) {
-//        addedObjects += RunFunctionOnObjects("room.onCollision", objects, player, room, QScriptValueList() << objScript << playerScript);
-//        if (obj.isNull()) {
-//            return addedObjects;
-//        }
-//        addedObjects += RunFunctionOnObjects("room.onCollision", objects, player, room, QScriptValueList() << playerScript << objScript);
-//        if (obj.isNull()) {
-//            return addedObjects;
-//        }
-//    }
+    // player oncollision Property
+    if (player.GetOnCollision().length() > 0) {
+        addedObjects += RunFunctionOnObjects(player.GetOnCollision(), objects, player, room,QScriptValueList() << objScript);
+        if (obj.isNull()) {
+            return addedObjects;
+        }
+    }
 
-//    // player oncollision Property
-//    if (player.GetOnCollision().length() > 0) {
-//        addedObjects += RunFunctionOnObjects(player.GetOnCollision(), objects, player, room,QScriptValueList() << objScript);
-//        if (obj.isNull()) {
-//            return addedObjects;
-//        }
-//    }
+    // object oncollision Property
+    if (obj->oncollision.length() > 0) {
+        addedObjects += RunFunctionOnObjects(obj->oncollision, objects, player, room, QScriptValueList() << objScript << playerScript);
+    }
 
-//    // object oncollision Property
-//    if (obj->oncollision.length() > 0) {
-//        addedObjects += RunFunctionOnObjects(obj->oncollision, objects, player, room, QScriptValueList() << objScript << playerScript);
-//    }
+    return addedObjects;
+}
+*/
+/*
+QList<QPointer <RoomObject> > AssetScript::OnCollision(QPointer<ObjectProperties> obj1, QPointer<ObjectProperties> obj2, QHash <QString, QPointer <RoomObject> > & objects)
+{
+    if (obj1 == 0 || obj2 == 0) {
+        MathUtil::ErrorLog("Couldn't handle collision, one or more objects involved undefined");
+        return QList<QPointer <RoomObject> >();
+    }
 
-//    return addedObjects;
-//}
+    QScriptValue obj1Script = global_scope.property("__dom").property(obj1->GetJSID());
+    QScriptValue obj2Script = global_scope.property("__dom").property(obj2->GetJSID());
+    QList<QPointer <RoomObject> > addedObjects;
 
-//QList<QPointer <RoomObject> > AssetScript::OnCollision(QPointer<ObjectProperties> obj1, QPointer<ObjectProperties> obj2, QHash <QString, QPointer <RoomObject> > & objects)
-//{
-//    if (obj1 == 0 || obj2 == 0) {
-//        MathUtil::ErrorLog("Couldn't handle collision, one or more objects involved undefined");
-//        return QList<QPointer <RoomObject> >();
-//    }
+    // general onCollision event
+    if (HasRoomFunction("onCollision")) {
+        addedObjects += RunFunctionOnObjects("room.onCollision", objects, QScriptValueList() << obj1Script << obj2Script);
+        if (obj1 == 0 || obj2 == 0) {
+            return addedObjects;
+        }
+        addedObjects += RunFunctionOnObjects("room.onCollision", objects, QScriptValueList() << obj2Script << obj1Script);
+        if (obj1 == 0 || obj2 == 0) {
+            return addedObjects;
+        }
+    }
 
-//    QScriptValue obj1Script = global_scope.property("__dom").property(obj1->GetJSID());
-//    QScriptValue obj2Script = global_scope.property("__dom").property(obj2->GetJSID());
-//    QList<QPointer <RoomObject> > addedObjects;
+    // first object oncollision Property
+    QString collisionCallback1 = obj1->oncollision;
+    if (collisionCallback1.length() > 0) {
+        addedObjects += RunFunctionOnObjects(collisionCallback1, objects, QScriptValueList() << obj1Script << obj2Script);
+        if (obj1 == 0 || obj2 == 0) {
+            return addedObjects;
+        }
+    }
 
-//    // general onCollision event
-//    if (HasRoomFunction("onCollision")) {
-//        addedObjects += RunFunctionOnObjects("room.onCollision", objects, QScriptValueList() << obj1Script << obj2Script);
-//        if (obj1 == 0 || obj2 == 0) {
-//            return addedObjects;
-//        }
-//        addedObjects += RunFunctionOnObjects("room.onCollision", objects, QScriptValueList() << obj2Script << obj1Script);
-//        if (obj1 == 0 || obj2 == 0) {
-//            return addedObjects;
-//        }
-//    }
+    // second object oncollision Property
+    QString collisionCallback2 = obj2->oncollision;
+    if (collisionCallback2.length() > 0) {
+        addedObjects += RunFunctionOnObjects(collisionCallback2, objects, QScriptValueList() << obj2Script << obj1Script);
+    }
 
-//    // first object oncollision Property
-//    QString collisionCallback1 = obj1->oncollision;
-//    if (collisionCallback1.length() > 0) {
-//        addedObjects += RunFunctionOnObjects(collisionCallback1, objects, QScriptValueList() << obj1Script << obj2Script);
-//        if (obj1 == 0 || obj2 == 0) {
-//            return addedObjects;
-//        }
-//    }
-
-//    // second object oncollision Property
-//    QString collisionCallback2 = obj2->oncollision;
-//    if (collisionCallback2.length() > 0) {
-//        addedObjects += RunFunctionOnObjects(collisionCallback2, objects, QScriptValueList() << obj2Script << obj1Script);
-//    }
-
-//    return addedObjects;
-//}
+    return addedObjects;
+}
+*/
 
 QList<QPointer <RoomObject> > AssetScript::OnKeyEvent(QString name, QKeyEvent * e, QHash <QString, QPointer <RoomObject> > & objects, QPointer <Player> player, QMap <QString, DOMNode *> remote_players, bool * defaultPrevented)
 {
@@ -588,10 +590,10 @@ QString AssetScript::GetJSCode()
 
 QList <QPointer <RoomObject> > AssetScript::DoRoomLoad(QHash <QString, QPointer <RoomObject> > & envobjects, QPointer <Player> player, QMap <QString, DOMNode *> remote_players)
 {
-//    qDebug() << "AssetScript::DoRoomLoad" << this;
+    //qDebug() << "AssetScript::DoRoomLoad" << this;
     UpdateInternalDataStructures(player, remote_players);
     if (room_load_fn.isFunction()) {
-//        qDebug() << "AssetScript::DoRoomLoad" << this << room_load_fn.toString();
+        //qDebug() << "AssetScript::DoRoomLoad" << this << room_load_fn.toString();
         room_load_fn.call(roomObject);
     }
     return UpdateAsynchronousCreatedObjects(envobjects);

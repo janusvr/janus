@@ -73,7 +73,7 @@ void WebAsset::InitializeState()
 
 void WebAsset::Load(const QUrl & u)
 {
-//    qDebug() << "WebAsset::Load" << u;    
+    //qDebug() << "WebAsset::Load" << u;    
     reply = DoHTTPGet(u);
     reply->setParent(NULL);
 
@@ -211,7 +211,7 @@ int WebAsset::GetStatusCode() const
 
 void WebAsset::SetURL(const QUrl u)
 {
-//    qDebug() << "WebAsset::SetURL" << u;
+    //qDebug() << "WebAsset::SetURL" << u;
     url = u;
 }
 
@@ -222,7 +222,7 @@ QUrl WebAsset::GetURL() const
 
 void WebAsset::ProcessThread()
 {
-//    qDebug() << "WebAsset::ProcessThread()";
+    //qDebug() << "WebAsset::ProcessThread()";
     if (reply && status_code != -1) {
         status_code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
         QUrl redirect_url = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
@@ -244,7 +244,7 @@ void WebAsset::ProcessThread()
         else {
             redirect_url.setFragment(url.fragment());
             redirect_url = url.resolved(redirect_url);
-//            qDebug() << "WebAsset::ProcessThread() - REDIRECTION detected" << redirect_url << status_code << url.fragment();
+            //qDebug() << "WebAsset::ProcessThread() - REDIRECTION detected" << redirect_url << status_code << url.fragment();
             reply->close();
             Load(redirect_url);
             redirected = true;
@@ -271,7 +271,7 @@ void WebAsset::downloadProgress( qint64 bytesReceived, qint64 bytesTotal )
 
 void WebAsset::slotError(QNetworkReply::NetworkError)
 {
-//    qDebug() << "WebAsset::slotError()" << url.toString();
+    //qDebug() << "WebAsset::slotError()" << url.toString();
     error_str = QString("Error: loading \"") + url.toString() + "\"";
     MathUtil::ErrorLog(error_str);
     loaded = true;    
@@ -281,7 +281,7 @@ void WebAsset::slotError(QNetworkReply::NetworkError)
 
 void WebAsset::slotSslErrors(QList <QSslError>)
 {
-//    qDebug() << "WebAsset::slotSslError()" << url.toString();
+    //qDebug() << "WebAsset::slotSslError()" << url.toString();
     error_str = QString("Error: loading \"") + url.toString() + "\"";
     MathUtil::ErrorLog(error_str);
     loaded = true;    
@@ -310,9 +310,9 @@ QPointer <QNetworkReply> WebAsset::DoHTTPGet(const QUrl & u)
         }
 
         //59.9 - Remove referer header, this was redundant (always the URL being requested)
-//        if (s.length() > 0) {
-//            request.setRawHeader("Referer", s.toLatin1());
-//        }
+        /*if (s.length() > 0) {
+            request.setRawHeader("Referer", s.toLatin1());
+        }*/
 
         request.setAttribute(QNetworkRequest::HttpPipeliningAllowedAttribute, true);
         if (!use_cache || suppress_cache) {
@@ -330,7 +330,7 @@ QPointer <QNetworkReply> WebAsset::DoHTTPGet(const QUrl & u)
 
 void WebAsset::DoHTTPPost(const QUrl & u, const QByteArray & b)
 {
-//    qDebug() << "WebAsset::DoHTTPPost() sending: " << b << b.size();
+    //qDebug() << "WebAsset::DoHTTPPost() sending: " << b << b.size();
     if (manager) {
         InitializeState();
         url = u;
@@ -353,7 +353,7 @@ void WebAsset::DoHTTPPost(const QUrl & u, const QByteArray & b)
 
 void WebAsset::DoHTTPPut(const QUrl & u, const QByteArray & b)
 {
-//    qDebug() << "WebAsset::DoHTTPPut() sending: " << b << b.size();
+    //qDebug() << "WebAsset::DoHTTPPut() sending: " << b << b.size();
     if (manager) {
         InitializeState();
         url = u;
@@ -376,7 +376,7 @@ void WebAsset::DoHTTPPut(const QUrl & u, const QByteArray & b)
 
 void WebAsset::DoHTTPDelete(const QUrl & u)
 {
-//    qDebug() << "WebAsset::DoHTTPDelete() sending: " << b << b.size();
+    //qDebug() << "WebAsset::DoHTTPDelete() sending: " << b << b.size();
     if (manager) {
         InitializeState();
         url = u;
@@ -478,7 +478,7 @@ void WebAsset::ReadyRead()
     if (reply) {
         ba += reply->readAll();
     }
-//    qDebug() << "WebAsset::ReadyRead()" << ba.size() << url;
+    //qDebug() << "WebAsset::ReadyRead()" << ba.size() << url;
 }
 
 bool WebAsset::GetRedirected() const

@@ -92,7 +92,7 @@ PROCESSING_STATE FilteredCubemapManager::GetProcessingState(qint64 p_key)
 void FilteredCubemapManager::RemoveFromProcessing(qint64 p_key, bool p_delete_cubemaps)
 {
     mutex.lock();
-//    qDebug() << "INFO: FilteredCubemapManager::remove_from_processing key" << p_key << " delete_cubemaps" << p_delete_cubemaps;
+    //qDebug() << "INFO: FilteredCubemapManager::remove_from_processing key" << p_key << " delete_cubemaps" << p_delete_cubemaps;
 
     const auto itr = m_pending_cubemaps.find(p_key);
     if (itr != m_pending_cubemaps.end())
@@ -126,7 +126,7 @@ void FilteredCubemapManager::GenerateRadianceAndIrradianceMaps(qint64 p_key, Cub
 {
     Q_UNUSED(p_key);
 
-// STAGE 2: Generate radiance and irradiance cubemaps with CMFT then save to local DDS files for use in room.
+    // STAGE 2: Generate radiance and irradiance cubemaps with CMFT then save to local DDS files for use in room.
     // Load dds files from memory into cmft
     cmft::Image image_face_list_radiance[6];
     bool image_loaded = false;
@@ -139,7 +139,7 @@ void FilteredCubemapManager::GenerateRadianceAndIrradianceMaps(qint64 p_key, Cub
         && cmft::imageLoad(image_face_list_radiance[4], p_cubemaps->m_dds_data[4].data(), p_cubemaps->m_dds_data[4].size(), cmftFormat)
         && cmft::imageLoad(image_face_list_radiance[5], p_cubemaps->m_dds_data[5].data(), p_cubemaps->m_dds_data[5].size(), cmftFormat);
 
-//    qDebug() << "FilteredCubemapManager::GenerateRadianceAndIrradianceMaps image_loaded" << image_loaded;
+    //qDebug() << "FilteredCubemapManager::GenerateRadianceAndIrradianceMaps image_loaded" << image_loaded;
 
     // Create cmft cubemap from face images
     cmft::Image radiance_image;
@@ -150,7 +150,7 @@ void FilteredCubemapManager::GenerateRadianceAndIrradianceMaps(qint64 p_key, Cub
         cmft::imageCubemapFromFaceList(irradiance_image, image_face_list_radiance);
     }
 
-// IRRADIANCE FILTERING
+    // IRRADIANCE FILTERING
     // Resize if requested.
     if (irradiance_image.m_width != 64)
     {
@@ -176,7 +176,7 @@ void FilteredCubemapManager::GenerateRadianceAndIrradianceMaps(qint64 p_key, Cub
         cmft::imageApplyGamma(irradiance_image, 0.45f);
     }
 
-// RADIANCE FILTERING
+    // RADIANCE FILTERING
     // Resize to 256 to keep processing time in check
     if (radiance_image.m_width != 256)
     {
@@ -229,7 +229,7 @@ void FilteredCubemapManager::GenerateRadianceAndIrradianceMaps(qint64 p_key, Cub
     p_cubemaps->m_processing_state = PROCESSING_STATE::READY;
     *p_processing_active = false;
     mutex.unlock();
-//    qDebug() << "INFO: FilteredCubemapManager::radiance_irradiance_filter completed key" << p_key << p_cubemaps->m_cube_maps[0].toStdString().c_str() << p_cubemaps->m_cube_maps[1].toStdString().c_str();
+    //qDebug() << "INFO: FilteredCubemapManager::radiance_irradiance_filter completed key" << p_key << p_cubemaps->m_cube_maps[0].toStdString().c_str() << p_cubemaps->m_cube_maps[1].toStdString().c_str();
 }
 
 void FilteredCubemapManager::RemoveTemporaryFiles(Cubemaps& p_cubemaps)

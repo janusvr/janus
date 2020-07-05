@@ -10,14 +10,14 @@ ScriptableVector::ScriptableVector(float x, float y, float z, QObject * parent) 
     QObject(parent),
     vector_data(x, y, z, 1.0f)
 {
-//    qDebug() << "Calling SCRIPTABLE VECTOR constructor with" << x << y << z << "1.0 hardcoded";
+    //qDebug() << "Calling SCRIPTABLE VECTOR constructor with" << x << y << z << "1.0 hardcoded";
 }
 
 ScriptableVector::ScriptableVector(float x, float y, float z, float w, QObject * parent) :
     QObject(parent),
     vector_data(x, y, z, w)
 {
-//    qDebug() << "Calling SCRIPTABLE VECTOR constructor with" << x << y << z << w;
+    //qDebug() << "Calling SCRIPTABLE VECTOR constructor with" << x << y << z << w;
 }
 
 ScriptableVector::~ScriptableVector()
@@ -28,7 +28,7 @@ ScriptableVector::~ScriptableVector()
 ScriptableVector& ScriptableVector::operator= (const ScriptableVector & source)
 {
     vector_data = source.vector_data;
-//    qDebug() << "Calling SCRIPTABLE VECTOR assignment operator!" << vector_data << source.vector_data;
+    //qDebug() << "Calling SCRIPTABLE VECTOR assignment operator!" << vector_data << source.vector_data;
     return *this;
 }
 

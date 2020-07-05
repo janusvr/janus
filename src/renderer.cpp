@@ -1440,7 +1440,7 @@ void Renderer::InitializeGLObjects()
 
 void Renderer::InitializeState()
 {
-//    qDebug() << "Renderer::InitializeState()";
+    //qDebug() << "Renderer::InitializeState()";
     // Misc Enables
     MathUtil::glFuncs->glEnable(GL_MULTISAMPLE);
     MathUtil::glFuncs->glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
@@ -3091,12 +3091,12 @@ QPointer<TextureHandle> Renderer::CreateTextureFromGLIData(const QByteArray & ba
     }
 
 
-//    GLenum internal_format = (tex_colorspace == TextureHandle::COLOR_SPACE::LINEAR)
-//            ? (static_cast<GLenum>(Format.Internal))
-//            : ((static_cast<GLenum>(Format.Internal) == GL_RGB8)
-//                ? GL_SRGB8
-//                : (static_cast<GLenum>(Format.Internal))
-//            );
+    //GLenum internal_format = (tex_colorspace == TextureHandle::COLOR_SPACE::LINEAR)
+    //  ? (static_cast<GLenum>(Format.Internal))
+    //  : ((static_cast<GLenum>(Format.Internal) == GL_RGB8)
+    //  ? GL_SRGB8
+    //  : (static_cast<GLenum>(Format.Internal))
+    //);
 
     GLuint texture_id = 0;
     MathUtil::glFuncs->glGenTextures(1, &texture_id);
@@ -4291,8 +4291,8 @@ QPointer<ProgramHandle> Renderer::GetDefaultPortalShaderProgram()
 
 QPointer<ProgramHandle> Renderer::CompileAndLinkShaderProgram(QByteArray & p_vertex_shader, QString p_vertex_shader_path, QByteArray & p_fragment_shader, QString p_fragment_shader_path)
 {
-//    qDebug() << "Renderer::CompileAndLinkShaderProgram" << this;        
-    //    qDebug() << "Renderer::CompileAndLinkShaderProgram2";
+    //qDebug() << "Renderer::CompileAndLinkShaderProgram" << this;        
+    //qDebug() << "Renderer::CompileAndLinkShaderProgram2";
     GLuint program_id = 0;
     QPointer<ProgramHandle> p_abstract_program = CreateProgramHandle(program_id);
 
@@ -4448,8 +4448,8 @@ QPointer<ProgramHandle> Renderer::CompileAndLinkShaderProgram(QByteArray & p_ver
 
 void Renderer::UpgradeShaderSource(QByteArray & p_shader_source, bool p_is_vertex_shader)
 {
-//    p_shader_source.replace("uniform vec4 iUseSkelAnim;",  "uniform vec4 iUseFlags;");
-//    p_shader_source.replace("uniform vec4 iUseLighting;",  "");
+    //    p_shader_source.replace("uniform vec4 iUseSkelAnim;",  "uniform vec4 iUseFlags;");
+    //    p_shader_source.replace("uniform vec4 iUseLighting;",  "");
     p_shader_source.replace("#version 310 es","#version 330 core");
     p_shader_source.replace("#ifdef GL_FRAGMENT_PRECISION_HIGH\r\n      precision highp float;\r\n#else\r\n      precision mediump float;\r\n#endif\r\n","");
     p_shader_source.replace("uniform lowp","uniform");
@@ -4643,7 +4643,7 @@ void Renderer::Render()
         }
 
         const bool do_VR = (m_hmd_manager != nullptr && m_hmd_manager->GetEnabled() == true);
-//        qDebug() << "Renderer::DecoupledRender()" << m_is_initialized << m_shutting_down;
+        //qDebug() << "Renderer::DecoupledRender()" << m_is_initialized << m_shutting_down;
 
         auto texture_size = (m_hmd_manager != nullptr && m_hmd_manager->GetEnabled() == true)
                 ? m_hmd_manager->GetTextureSize()

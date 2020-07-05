@@ -18,7 +18,7 @@ public:
 
     void setSource(const QUrl &name)
     {
-//        qDebug() << "ss" << name;
+        //qDebug() << "ss" << name;
         emit LinkClicked(name.toString());
     }
 

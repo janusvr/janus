@@ -22,7 +22,7 @@ struct TextureBuffer
         texSize = size;
         texSize.w *= 2;
 
-//        ovrResult result = ovr_CreateSwapTextureSetGL(hmd, GL_RBGA8, size.w, size.h, &TextureSet);
+        //ovrResult result = ovr_CreateSwapTextureSetGL(hmd, GL_RBGA8, size.w, size.h, &TextureSet);
         ovrTextureSwapChainDesc desc = {};
                     desc.Type = ovrTexture_2D;
                     desc.ArraySize = 1;

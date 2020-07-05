@@ -92,7 +92,7 @@ TextureHandle* PerformanceLogger::GetFrameSamplesTextureHandle()
     QVector<QRect> main_thread_cpu_time_rects;
     main_thread_cpu_time_rects.reserve(max_frame_samples);
 
-//    qDebug() << frame_samples;
+    //qDebug() << frame_samples;
     for (int i=0; i<frame_samples.size(); ++i) {
         QRect gpu_r(i, 0, 1, frame_samples[i].render_thread_gpu_time);
         QRect cpu_r(i, 0, 1, frame_samples[i].render_thread_cpu_time);

@@ -101,18 +101,18 @@ GeomIOStream::GeomIOStream() :
     buffer(NULL),
     webasset(NULL)
 {
-//    qDebug() << "GeomIOStream::GeomIOStream()" << this << url;
+    //qDebug() << "GeomIOStream::GeomIOStream()" << this << url;
 }
 
 GeomIOStream::~GeomIOStream()
 {
     Close();
-//    qDebug() << "GeomIOStream::~GeomIOStream()" << this << url;
+    //qDebug() << "GeomIOStream::~GeomIOStream()" << this << url;
 }
 
 void GeomIOStream::SetData(const QByteArray & b)
 {
-//    qDebug() << "GeomIOStream::SetData" << url << b.size();
+    //qDebug() << "GeomIOStream::SetData" << url << b.size();
     ba = b;
     buffer = new QBuffer(&ba);
     buffer->open(QBuffer::ReadOnly);
@@ -120,7 +120,7 @@ void GeomIOStream::SetData(const QByteArray & b)
 
 void GeomIOStream::SetUrl(QUrl u)
 {
-//    qDebug() << "GeomIOStream::SetUrl" << this << u;
+    //qDebug() << "GeomIOStream::SetUrl" << this << u;
     url = u;
 }
 
@@ -192,7 +192,7 @@ size_t GeomIOStream::Write(const void *pvBuffer, size_t pSize, size_t pCount)
 
 void GeomIOStream::Close()
 {
-//    qDebug() << "GeomIOStream::Close()" << url;
+    //qDebug() << "GeomIOStream::Close()" << url;
     if (buffer) {
         if (buffer->isOpen()) {
             buffer->close();
@@ -254,7 +254,7 @@ void GeomIOSystem::SetShuttingDown(const bool b)
 
 float GeomIOSystem::UpdateRequests()
 {
-//    qDebug() << "GeomIOSystem::UpdateRequests()" << base_path << this; // this << streams.size();
+    //qDebug() << "GeomIOSystem::UpdateRequests()" << base_path << this; // this << streams.size();
     int num_streams = 0;
     float progress = 0.0f;
 
@@ -275,7 +275,7 @@ float GeomIOSystem::UpdateRequests()
 
 Assimp::IOStream * GeomIOSystem::Open(const char *pFile, const char *)
 {
-//    qDebug() << "GeomIOSystem::Open1" << pFile;
+    //qDebug() << "GeomIOSystem::Open1" << pFile;
     return Open(pFile);
 }
 
@@ -286,7 +286,7 @@ Assimp::IOStream * GeomIOSystem::Open(const std::string & pFile, const std::stri
 
 Assimp::IOStream * GeomIOSystem::Open(const char *pFile)
 {
-//    qDebug() << "GeomIOSystem::Open" << pFile;
+    //qDebug() << "GeomIOSystem::Open" << pFile;
     QString p(pFile);
     QUrl u;
 
@@ -323,20 +323,20 @@ Assimp::IOStream * GeomIOSystem::Open(const char *pFile)
     s->SetUrl(u);
 
     if (data_cache.contains(u_str)) {
-//        qDebug() << "GeomIOSystem::Open Cache hit!" << u_str;
+    //qDebug() << "GeomIOSystem::Open Cache hit!" << u_str;
         s->SetData(data_cache[u_str]);
         return s;
     }
 
     streams.push_back(s);
-//    qDebug() << " pushed back stream" << streams.size() << data_cache.size();
+    //qDebug() << " pushed back stream" << streams.size() << data_cache.size();
 
     QTime load_time;
     load_time.start();
 
     float load_progress = 0.0f;
 
-//    qDebug() << "GeomIOSystem::Open" << pFile;
+    //qDebug() << "GeomIOSystem::Open" << pFile;
     while (!shutting_down) //release 60.0 - shutting down, it is critical we exit these loops, otherwise active threads do not allow the application to exit cleanly
     {
         QPointer <WebAsset> w = s->GetWebAsset();
@@ -365,7 +365,7 @@ Assimp::IOStream * GeomIOSystem::Open(const char *pFile)
         QThread::yieldCurrentThread();
     };
 
-//    qDebug() << "GeomIOSystem::Open" << this << streams.size() << pFile;
+    //qDebug() << "GeomIOSystem::Open" << this << streams.size() << pFile;
     QPointer <WebAsset> w = s->GetWebAsset();
     if (w && w->GetLoaded() && !w->GetError()) {
         if (u_str.right(7).toLower().contains(".obj") && !mtl_file_path.isEmpty()) {
@@ -399,18 +399,18 @@ Assimp::IOStream * GeomIOSystem::Open(const char *pFile)
 
 void GeomIOSystem::Close(Assimp::IOStream *pFile)
 {
-//    qDebug() << "GeomIOSystem::Close" << this << streams.size();
+    //qDebug() << "GeomIOSystem::Close" << this << streams.size();
     for (int i=0; i<streams.size(); ++i) {
         if (streams[i].data() == pFile) {
-//            qDebug() << "GeomIOSystem::Close" << this << streams.size();
+            //qDebug() << "GeomIOSystem::Close" << this << streams.size();
             //streams[i]->Close();
             delete streams[i];
             streams[i] = NULL;
         }
     }
-//    if (dynamic_cast<GeomIOStream *>(pFile)) {
-//        dynamic_cast<GeomIOStream *>(pFile)->Close();
-//    }
+    //if (dynamic_cast<GeomIOStream *>(pFile)) {
+    //    dynamic_cast<GeomIOStream *>(pFile)->Close();
+    //}
 }
 
 bool GeomIOSystem::ComparePaths(const char *one, const char *second) const
@@ -431,7 +431,7 @@ bool GeomIOSystem::Exists(const std::string &pFile) const
 bool GeomIOSystem::Exists(const char *pFile) const
 {
     Q_UNUSED(pFile)
-//    qDebug() << "GeomIOSystem::Exists" << pFile;
+    //qDebug() << "GeomIOSystem::Exists" << pFile;
     return true;
 }
 
@@ -475,7 +475,7 @@ Geom::Geom() :
     anim_speed(1.0f),
     loop(false)
 {
-//    qDebug() << "Geom::Geom()" << this;
+    //qDebug() << "Geom::Geom()" << this;
     time.start();
     skin_joints.resize(ASSETSHADER_MAX_JOINTS);
     final_poses.resize(ASSETSHADER_MAX_JOINTS);
@@ -484,8 +484,8 @@ Geom::Geom() :
 
 Geom::~Geom()
 {
-//    qDebug() << "Geom::~Geom()" << this;
-//    delete iosystem; //59.9 - should we delete this iosystem?  memleak if we don't
+    //qDebug() << "Geom::~Geom()" << this;
+    //delete iosystem; //59.9 - should we delete this iosystem?  memleak if we don't
 }
 
 void Geom::SetPath(const QString & p)
@@ -515,7 +515,7 @@ bool Geom::GetStarted() const
 
 float Geom::GetProgress() const
 {
-//    qDebug() << "Geom::GetProgress()" << path << progress;
+    //qDebug() << "Geom::GetProgress()" << path << progress;
     return (error ? 1.0f : progress);
 }
 
@@ -627,7 +627,7 @@ bool Geom::GetCenter() const
 void Geom::SetMesh(const QVariantMap & property_list)
 {
     //parse the information into a file that assimp can load
-//    qDebug() << "Geom::SetMesh" << property_list;
+    //qDebug() << "Geom::SetMesh" << property_list;
     const QVariantList verts = property_list["mesh_verts"].toList();
     const QVariantList ns = property_list["mesh_normals"].toList();
     const QVariantList uvs = property_list["mesh_uvs"].toList();
@@ -680,7 +680,7 @@ void Geom::SetMesh(const QVariantMap & property_list)
     }
 
     ofs.flush();
-//    qDebug() << mesh_data;
+    //qDebug() << mesh_data;
 }
 
 bool Geom::GetHasMeshData() const
@@ -730,7 +730,7 @@ void Geom::Load()
     //scene = importer.ReadFile(base_path.toLocal8Bit().data(), aiProcessPreset_TargetRealtime_Fast);
     auto post_process_flags =
         aiProcess_LimitBoneWeights
-//        | aiProcess_GenNormals
+        //| aiProcess_GenNormals
         | aiProcess_GenSmoothNormals //59.13 - this flag is necessary for smooth normal generation
         | aiProcess_GenUVCoords
         | aiProcess_Triangulate
@@ -739,11 +739,11 @@ void Geom::Load()
         | aiProcess_SplitLargeMeshes
         | aiProcess_ValidateDataStructure
             //62.3 - enabling some of these messes up our FBX support
-//        | aiProcess_OptimizeGraph // SLOW
+        //| aiProcess_OptimizeGraph // SLOW
         //| aiProcess_OptimizeMeshes // SLOW
-//        | aiProcess_RemoveRedundantMaterials // SLOW
-//        | aiProcess_ImproveCacheLocality // SLOW
-//        | aiProcess_FindInstances // SLOWW
+        //| aiProcess_RemoveRedundantMaterials // SLOW
+        //| aiProcess_ImproveCacheLocality // SLOW
+        //| aiProcess_FindInstances // SLOWW
             ;
 
     //59.4 - catch exceptions in assimp
@@ -780,14 +780,14 @@ void Geom::Load()
         MathUtil::ErrorLog(error_str);// + "File: " + path);
     }
 
-//    qDebug() << "Geom::Load completed" << path;
+    //qDebug() << "Geom::Load completed" << path;
 }
 
 void Geom::Unload()
 {
     //iosystem.Clear();
-//    importer.FreeScene(); //called automatically by destructor
-//    scene = NULL;
+    //importer.FreeScene(); //called automatically by destructor
+    //scene = NULL;
     /*if (scene) {
         delete scene;
         scene = nullptr;
@@ -811,7 +811,7 @@ void Geom::Unload()
 
 void Geom::Update()
 {
-//    qDebug() << "Geom::Update()" << path << ready << iosystem;
+    //qDebug() << "Geom::Update()" << path << ready << iosystem;
     if (scene && ready && !textures_started) {
         textures_started = true;
 
@@ -820,10 +820,10 @@ void Geom::Update()
         for (int i=0; i<mat_names.size(); ++i) {
             GeomMaterial & mat = data.GetMaterial(mat_names[i]);
 
-//            qDebug() << "Geom::Update()" << path << mat_names[i] << i << mat.textures.size();
+            //qDebug() << "Geom::Update()" << path << mat_names[i] << i << mat.textures.size();
             for (int j=0; j<mat.textures.size(); ++j) {
                 QString s = mat.textures[j].filename.trimmed();
-//                qDebug() << "unprocessed path" << s;
+                //qDebug() << "unprocessed path" << s;
                 s = QUrl::toPercentEncoding(s,":/"); // params for exclude/include
                 s = s.replace("\\", "/");
                 s = s.replace("%5C", "/");               
@@ -840,7 +840,7 @@ void Geom::Update()
                 int tex_index = -1;
 
 
-//                qDebug() << "Geom::Update()" << path << s << s3 << scene->mNumTextures;
+                //qDebug() << "Geom::Update()" << path << s << s3 << scene->mNumTextures;
                 if (s3.left(1) == "*") { //62.3 - hacky fix for Assimp where it uses a special asterisk indexing scheme
                     const unsigned int t_ind = s3.mid(1).toInt();
                     //if (t_ind >= 0 && t_ind <scene->mNumTextures) {
@@ -859,7 +859,7 @@ void Geom::Update()
                 }
 
                 if (tex_index >= 0) {
-//                    qDebug() << "Geom::Update() * test" << ok << tex_index << scene->mNumTextures << s+"."+QString(scene->mTextures[tex_index]->achFormatHint);
+                    //qDebug() << "Geom::Update() * test" << ok << tex_index << scene->mNumTextures << s+"."+QString(scene->mTextures[tex_index]->achFormatHint);
                     aiTexture * t = scene->mTextures[tex_index];
                     unsigned int size_data = 0;
 
@@ -894,7 +894,7 @@ void Geom::Update()
 
                 }
                 else if (!s.isEmpty()) {
-//                    qDebug() << "External texture" << s;
+                    //qDebug() << "External texture" << s;
                     QPointer <AssetImage> new_img = new AssetImage();
                     new_img->GetProperties()->SetTexClamp(tex_clamp);
                     new_img->GetProperties()->SetTexLinear(tex_linear);
@@ -928,7 +928,7 @@ void Geom::Update()
 
                 if (img) {
                     if (img->GetError()) {
-//                        qDebug() << "img error";
+                        //qDebug() << "img error";
                         //59.0 - ad-hoc fix for broken texture (just use first un-broken one)
                         for (int k=0; k<mat_names.size(); ++k) {
                             if (i == k) {
@@ -938,7 +938,7 @@ void Geom::Update()
                             for (int l=0; l<data.GetMaterial(mat_names[k]).textures.size(); ++l) {
                                 QPointer <AssetImage> new_img = data.GetMaterial(mat_names[k]).textures[l].img;
                                 if (new_img && !new_img->GetError()) {
-//                                    qDebug() << "found match" << i << j << k << l;                                    
+                                    //qDebug() << "found match" << i << j << k << l;                                    
                                     mat.textures[j].img = new_img;
                                     tex_ready = false;
                                     break;
@@ -947,13 +947,13 @@ void Geom::Update()
                         }
                     }
                     else if (!img->GetFinished()) {
-//                        qDebug() << "img unfinished" << img->GetS("src");
+                        //qDebug() << "img unfinished" << img->GetS("src");
                         tex_ready = false;
                         break;
                     }
 
                     if (img->GetFinished() || img->GetError()) {
-//                        qDebug() << "img applying progress" << img->GetProgress();
+                        //qDebug() << "img applying progress" << img->GetProgress();
                         nProgressTextures += img->GetProgress();
                     }
                 }
@@ -985,7 +985,7 @@ void Geom::Update()
 
 bool Geom::UpdateGL()
 {
-//    qDebug() << "Geom::UpdateGL()" << path << ready << textures_ready;
+    //qDebug() << "Geom::UpdateGL()" << path << ready << textures_ready;
     if (!ready) {
         return false;
     }
@@ -1014,7 +1014,7 @@ void Geom::SetMaterialTexture(const QString & tex_url, const int channel)
 
 void Geom::DrawGL(QPointer <AssetShader> shader, const QColor col)
 {
-//    qDebug() << "Geom::DrawGL" << path << ready << error << shader;
+    //qDebug() << "Geom::DrawGL" << path << ready << error << shader;
     if (!ready || error || shader == NULL || !shader->GetCompiled()) {
         return;
     }
@@ -1195,7 +1195,7 @@ bool Geom::GetUsesTexFile() const
 
 void Geom::SetLinkAnimation(QPointer <Geom> anim)
 {
-//    qDebug() << "GeomFBX::SetLinkAnimation" << anim_fbx;
+    //qDebug() << "GeomFBX::SetLinkAnimation" << anim_fbx;
     //to link animations means we need to find model<->model one to one correspondences based on the long long int id's...
     if (!anim.isNull() && linked_anim != anim && anim->GetReady()) {
         linked_anim = anim;
@@ -1225,12 +1225,12 @@ void Geom::UpdateAnimation()
 
         //const QPointer <Geom> geom = (linked_anim ? linked_anim : QPointer <Geom> (this)); //58.0 - this causes a crash for some reason
         const QPointer <Geom> geom = linked_anim;
-//        Geom * geom = linked_anim ? linked_anim.data() : this;
+        //Geom * geom = linked_anim ? linked_anim.data() : this;
 
-//        qDebug() << "Geom::UpdateAnimation()" << base_path << geom->scene;
+        //qDebug() << "Geom::UpdateAnimation()" << base_path << geom->scene;
         if (geom && geom->scene && geom->scene->mNumAnimations > 0) {
 
-//            qDebug() << "Geom::UpdateAnimation() anim" << base_path << geom->scene << geom->scene->mNumAnimations << geom->scene->mAnimations[0];
+            //qDebug() << "Geom::UpdateAnimation() anim" << base_path << geom->scene << geom->scene->mNumAnimations << geom->scene->mAnimations[0];
             aiAnimation * a = geom->scene->mAnimations[0];
 
             //t0 and t1 expressed in seconds
@@ -1714,16 +1714,16 @@ void Geom::get_bounding_box_for_node(const struct aiNode* nd,
 
 void Geom::SetupMaterialPath(const struct aiMaterial *mtl, GeomMaterial & mat, aiTextureType t, const int i)
 {
-//    qDebug() << "Geom::SetupMaterialPath mtlfilepath" << mtl_file_path;
+    //qDebug() << "Geom::SetupMaterialPath mtlfilepath" << mtl_file_path;
     aiString texturePath;
     mtl->GetTexture(t, 0, &texturePath);
-//    qDebug() << "Geom::SetupMaterialPath" << mtl_file_path << i << texturePath.C_Str();
+    //qDebug() << "Geom::SetupMaterialPath" << mtl_file_path << i << texturePath.C_Str();
     if (t != aiTextureType_NONE && mtl->GetTextureCount(t) > 0 && mtl->GetTexture(t, 0, &texturePath) == AI_SUCCESS)
     {        
         const QString s(texturePath.C_Str());
         mat.textures[i].filename_unresolved = s;
 
-//        qDebug() << "Geom::SetupMaterialPath" << i << s;
+        //qDebug() << "Geom::SetupMaterialPath" << i << s;
         //58.0 - look for any external images in a place relative to the material path, if specified
         QUrl u;
         if (mtl_file_path.isEmpty()) {
@@ -1738,7 +1738,7 @@ void Geom::SetupMaterialPath(const struct aiMaterial *mtl, GeomMaterial & mat, a
             }
         }
         mat.textures[i].filename = u.resolved(s).toString();
-//        qDebug() << "Geom::SetupMaterialPath" << mat.textures[i].filename;
+        //qDebug() << "Geom::SetupMaterialPath" << mat.textures[i].filename;
     }
 }
 
@@ -1805,7 +1805,7 @@ void Geom::create_material(const struct aiMaterial *mtl, GeomMaterial & mat)
          mat.kd.setAlphaF(transparency);
     }
 
-//    qDebug() << path << mtl << str.C_Str() << mat.kd << transparency; //mat.ka << mat.kd << mat.ks << mat.ke << mat.ns << transparency;
+    //qDebug() << path << mtl << str.C_Str() << mat.kd << transparency; //mat.ka << mat.kd << mat.ks << mat.ke << mat.ns << transparency;
 
     SetupMaterialPath(mtl, mat, aiTextureType_DIFFUSE, 0);
     SetupMaterialPath(mtl, mat, aiTextureType_SPECULAR, 1);
@@ -1817,7 +1817,7 @@ void Geom::create_material(const struct aiMaterial *mtl, GeomMaterial & mat)
     SetupMaterialPath(mtl, mat, aiTextureType_AMBIENT, 5); // map_ka is used as a lightmap for mtl
     SetupMaterialPath(mtl, mat, aiTextureType_LIGHTMAP, 8);
     SetupMaterialPath(mtl, mat, aiTextureType_EMISSIVE, 6);
-//    qDebug() << base_path << mtl << mtl->GetTextureCount(aiTextureType_DIFFUSE);
+    //qDebug() << base_path << mtl << mtl->GetTextureCount(aiTextureType_DIFFUSE);
 }
 
 void Geom::color4_to_float4(const aiColor4D *c, float f[4])
@@ -1974,7 +1974,7 @@ QMatrix4x4 Geom::aiToQMatrix4x4(const aiMatrix4x4 & m2)
 
 void Geom::CalculateFinalPoses()
 {
-//    qDebug() << bone_offset_matrix;
+    //qDebug() << bone_offset_matrix;
     skin_joints.clear();
     skin_joints.resize(ASSETSHADER_MAX_JOINTS);
 
@@ -2024,16 +2024,18 @@ void Geom::CalculateFinalPoses()
         if (bone_to_boneid.contains(node_name)) { //its a bone
 
             const unsigned int bone_id = bone_to_boneid[node_name];
-//            if we can't find the animation, just multiply by the base transform
-//            anim associated with the bone can be either (call bone name X):
-//              X
-//              X_$assimpfbx$_Y
+            /*
+                if we can't find the animation, just multiply by the base transform
+                anim associated with the bone can be either (call bone name X):
+                  X
+                  X_$assimpfbx$_Y
 
-//             where y is a specific ordered set of transformations as defined by FBX
-//            Local Transform = Translation * RotationOffset * RotationPivot * PreRotation
-//                               * Rotation * PostRotation * RotationPivotInverse * ScalingOffset
-//                               * ScalingPivot * Scaling * ScalingPivotInverse
-//             where multiply is right to left.
+                where y is a specific ordered set of transformations as defined by FBX
+                Local Transform = Translation * RotationOffset * RotationPivot * PreRotation
+                                   * Rotation * PostRotation * RotationPivotInverse * ScalingOffset
+                                   * ScalingPivot * Scaling * ScalingPivotInverse
+                where multiply is right to left.
+            */
 
 
 #ifdef __linux__
@@ -2103,7 +2105,7 @@ void Geom::CalculateFinalPoses()
         //add the children to process list
         for (unsigned int n = 0; n < nd->mNumChildren; ++n) {
             if (nd->mChildren[n])  {
-//                qDebug() << node_name << nd->mChildren[n]->mName.C_Str();
+                //qDebug() << node_name << nd->mChildren[n]->mName.C_Str();
                 nodes_to_process.push_back(nd->mChildren[n]);
                 nodes_parent_xforms.push_back(globalTransform);
             }
@@ -2163,7 +2165,7 @@ QMatrix4x4 Geom::GetGlobalTransform(const QString & bone_name) const
 
 void Geom::ClearTransforms()
 {
-    //    extra_relative_transforms.clear();
+    //extra_relative_transforms.clear();
     extra_global_transforms.clear();
     extra_global_rotation_transforms.clear();
 }

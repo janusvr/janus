@@ -192,14 +192,14 @@ void VirtualMenu::Update()
         MathUtil::GetPartyModeData() = QJsonDocument::fromJson(ba).toVariant().toMap()["data"].toList();
         partymode_data_request.SetProcessed(true);
         ConstructSubmenus();        
-//        qDebug() << MathUtil::GetPartyModeData();
+        //qDebug() << MathUtil::GetPartyModeData();
     }
 
     if (search_data_request.GetLoaded() && !search_data_request.GetProcessed()) {
         const QByteArray & ba = search_data_request.GetData();
         search_data = QJsonDocument::fromJson(ba).toVariant().toMap()["data"].toList();
         search_data_request.SetProcessed(true);
-//        qDebug() << "VirtualMenu::Update()" << search_data;
+        //qDebug() << "VirtualMenu::Update()" << search_data;
         ConstructSubmenus();
     }
 }
@@ -457,7 +457,7 @@ void VirtualMenu::mouseReleaseEvent(const QString selected)
     case VirtualMenuIndex_KEYBOARD:
         if (websurface && selected.length() > 2) {
             QString text = selected.right(selected.length()-2);
-//            qDebug() << "virtual kb text" << text;
+            //qDebug() << "virtual kb text" << text;
             if (selected == "__backspace") {
                 QKeyEvent * e = new QKeyEvent(QKeyEvent::KeyPress, Qt::Key_Backspace, Qt::NoModifier);
                 QKeyEvent * e2 = new QKeyEvent(QKeyEvent::KeyRelease, Qt::Key_Backspace, Qt::NoModifier);
@@ -770,7 +770,7 @@ void VirtualMenu::ConstructSubmenuBookmarks()
         QVariantList list = bookmarkmanager->GetBookmarks() + bookmarkmanager->GetWorkspaces();
         num_bookmarks = list.length();
 
-//        qDebug() << "VirtualMenu::ConstructSubmenuBookmarks()" << cur_bookmark << num_bookmarks;
+        //qDebug() << "VirtualMenu::ConstructSubmenuBookmarks()" << cur_bookmark << num_bookmarks;
         if (cur_bookmark > 0) {
             QMatrix4x4 m_down = modelmatrix;
             m_down.translate(-1.35f, 1.25f, 0.0f);
@@ -855,17 +855,19 @@ void VirtualMenu::ConstructSubmenuAvatar()
         }
     }
 
-//    m = modelmatrix;
-//    m.translate(0,1.2f,1);
-//    m.rotate(-30.0f, 1, 0, 0);
-//    m.translate(-0.1f, -0.5f, 0);
-//    m.scale(0.6f, 0.4f, 1);
-//    AddNewButton(VirtualMenuIndex_SEARCH, "__space", " ", m);
+    /*
+    m = modelmatrix;
+    m.translate(0,1.2f,1);
+    m.rotate(-30.0f, 1, 0, 0);
+    m.translate(-0.1f, -0.5f, 0);
+    m.scale(0.6f, 0.4f, 1);
+    AddNewButton(VirtualMenuIndex_SEARCH, "__space", " ", m);
+    */
 }
 
 void VirtualMenu::ConstructSubmenuSocial()
 {
-//    qDebug() << "VirtualMenu::ConstructSubmenuSocial()";
+    //qDebug() << "VirtualMenu::ConstructSubmenuSocial()";
     QVariantList & d = MathUtil::GetPartyModeData();
     num_users = d.size();
 
@@ -954,7 +956,7 @@ void VirtualMenu::ConstructSubmenuKeyboard()
 
 void VirtualMenu::UpdatePartyModeList()
 {
-//    qDebug() << "VirtualMenu::UpdatePartyModeList()";
+    //qDebug() << "VirtualMenu::UpdatePartyModeList()";
     //if not visible
     if (!MathUtil::GetPartyModeData().isEmpty()) {
         if (!visible || menu_index != VirtualMenuIndex_SOCIAL) {

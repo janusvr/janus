@@ -150,7 +150,7 @@ void SoundManager::Load(QString device_id, QString capture_device_id)
                 }
                 threshold_past = false;
 
-//                Analytics::PostEvent("voip", "init");
+                //Analytics::PostEvent("voip", "init");
                 capture_device_enabled = true;
 
                 alcCaptureStart(device_input);
@@ -256,18 +256,20 @@ void SoundManager::Play(const SOUND_EFFECT index, const bool loop, const QVector
 
     sounds[index]->SetupOutput(new_sound_object->GetMediaContext(), false);
 
-    //        new_sound_object->Play();
+    //new_sound_object->Play();
 
-    //        qDebug() << "SoundManager::Play3D(): queueing" << set << index;
+    //qDebug() << "SoundManager::Play3D(): queueing" << set << index;
     sound_objects_queued_to_play.push_back(new_sound_object);
 }
 
 void SoundManager::StopAll()
 {
     //55.7 Note: below code only stops qmediaplayer backend sounds
-    /*for (int i=0; i<sounds.size(); ++i) {
+    /*
+    for (int i=0; i<sounds.size(); ++i) {
         sounds[i]->Stop(0);
-    }*/
+    }
+    */
 
     for (int i=0; i<sound_objects.size(); ++i) {
         if (sound_objects[i]) {
@@ -424,11 +426,11 @@ void SoundManager::Update(QPointer <Player> player)
         if (player->GetSpeaking()) {
             input_mic_level = MathUtil::GetSoundLevel(bufferdata_input);
             input_mic_buffers.push_back(AudioUtil::encode(bufferdata_input).toBase64());
-            //                qDebug() << "inputmicbuffers size" << input_mic_buffers.size();
+            //qDebug() << "inputmicbuffers size" << input_mic_buffers.size();
         }
     }
 
-//    qDebug() << "SoundManager::Update()" << sound_objects_queued_to_play.size();
+    //qDebug() << "SoundManager::Update()" << sound_objects_queued_to_play.size();
     for (int i=0; i<sound_objects_queued_to_play.size(); ++i) {
         if (sound_objects_queued_to_play[i]) {
             QPointer <AssetSound> snd = sound_objects_queued_to_play[i]->GetAssetSound();
@@ -459,10 +461,12 @@ void SoundManager::Update(QPointer <Player> player)
         }
     }
 
-//    ALenum err = alGetError();
-//    if (err != AL_NO_ERROR) {
-//        qDebug() << "SoundManager::Update() - Error occurred: " << err;
-//    }
+    /*
+    ALenum err = alGetError();
+    if (err != AL_NO_ERROR) {
+        qDebug() << "SoundManager::Update() - Error occurred: " << err;
+    }
+    */
 }
 
 QList <QByteArray> SoundManager::GetMicBuffers()

@@ -81,7 +81,7 @@ void SocialWindow::Update()
     if (players_list != players) {
         players_list = players;
 
-//        qDebug() << "SocialWindow::Update()" << players_list;
+        //qDebug() << "SocialWindow::Update()" << players_list;
         //repopulate the party mode stuff
         table_roomusers->setSortingEnabled(false);
         table_roomusers->clearContents();
@@ -158,7 +158,7 @@ void SocialWindow::PartyModeListSelection()
                     player->SetFollowModeUserID(id);
                 }
             }
-//            qDebug() << "  " << player->GetS("follow_mode_userid");
+            //qDebug() << "  " << player->GetS("follow_mode_userid");
             UpdatePartyModeTable();
         }
         else {
@@ -199,7 +199,7 @@ void SocialWindow::SetFocusOnChatEntry(const bool b)
 
 void SocialWindow::OpenLinkClicked(QString s)
 {
-//    qDebug() << "SocialWindow::LinkClicked" << s;
+    //qDebug() << "SocialWindow::LinkClicked" << s;
     game->CreatePortal(s, true);
 }
 

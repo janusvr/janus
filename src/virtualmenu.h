@@ -68,7 +68,7 @@ struct VirtualMenuIconButton
         button->GetProperties()->SetJSID(js_id);
         button->GetProperties()->SetID("cube");
         button->GetProperties()->SetCollisionID("cube");
-//        button->GetProperties()->SetColour(QVector4D(0,0,0,0.25f));
+        //button->GetProperties()->SetColour(QVector4D(0,0,0,0.25f));
 
         overlay = new RoomObject();
         overlay->SetType(TYPE_OBJECT);
@@ -109,12 +109,12 @@ struct VirtualMenuImageButton
         button->GetProperties()->SetCollisionID("cube");
         button->GetProperties()->SetLighting(false);
         button->GetProperties()->SetURL(url);
-//        button->GetProperties()->SetColour(QVector4D(0,0,0,0.25f));
+        //button->GetProperties()->SetColour(QVector4D(0,0,0,0.25f));
 
         label = new RoomObject();
         label->SetType(TYPE_TEXT);
         label->SetInterfaceObject(true);
-//        label->SetFixedSize(true, 0.05f);
+        //label->SetFixedSize(true, 0.05f);
         label->SetText(url);
         label->GetProperties()->SetColour(QVector4D(0.25, 0.25, 1.0f, 1.0f));
 
@@ -151,7 +151,7 @@ struct VirtualMenuImageUserButton
         button->GetProperties()->SetCollisionID("cube");
         button->GetProperties()->SetLighting(false);
         button->GetProperties()->SetURL(url);
-//        button->GetProperties()->SetColour(QVector4D(0,0,0,0.25f));
+        //button->GetProperties()->SetColour(QVector4D(0,0,0,0.25f));
 
         labelurl = new RoomObject();
         labelurl->SetType(TYPE_TEXT);

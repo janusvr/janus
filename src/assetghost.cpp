@@ -63,7 +63,7 @@ void AssetGhost::LoadDataThread()
         return;
     }
 
-//    qDebug() << "AssetGhost::LoadDataThread()" << url;
+    //qDebug() << "AssetGhost::LoadDataThread()" << url;
     const QByteArray & ba = GetData();
     QTextStream ifs(ba);
 
@@ -120,7 +120,7 @@ void AssetGhost::LoadDataThread()
         }
     }
 
-//    qDebug() << "AssetGhost::LoadDataThread() - Loaded frames/packets:" << frames.size() << packets.size();
+    //qDebug() << "AssetGhost::LoadDataThread() - Loaded frames/packets:" << frames.size() << packets.size();
     SetProcessed(true);
     ClearData();
 }
@@ -222,7 +222,7 @@ void AssetGhost::ConvertPacketToFrame(const QVariantMap & map, GhostFrame & fram
     QVariantMap m = map;
     frame.userid = m["userId"].toString();
     frame.roomid = m["roomId"].toString();
-//    qDebug() << "AssetGhost::ConvertPacketToFrame()" << frame.userid << frame.roomid;
+    //qDebug() << "AssetGhost::ConvertPacketToFrame()" << frame.userid << frame.roomid;
 
     if (QString::compare(m["method"].toString(), "chat") == 0) {
         frame.chat_message = m["data"].toString();
@@ -289,12 +289,14 @@ void AssetGhost::ConvertPacketToFrame(const QVariantMap & map, GhostFrame & fram
     }       
 
     //65.2 - ignoring possibility of head translation for now
-//    if (m.contains("head_pos")) {
-//        QStringList list = m["head_pos"].toString().split(" ");
-//        if (list.size() >= 3) {
-//            frame.head_xform.setColumn(3, QVector4D(list[0].toFloat(), list[1].toFloat(), list[2].toFloat(), 1));
-//        }
-//    }
+    /*
+    if (m.contains("head_pos")) {
+        QStringList list = m["head_pos"].toString().split(" ");
+        if (list.size() >= 3) {
+            frame.head_xform.setColumn(3, QVector4D(list[0].toFloat(), list[1].toFloat(), list[2].toFloat(), 1));
+        }
+    }
+    */
 
     frame.SetHeadXForm(y, z);
 
@@ -349,13 +351,13 @@ void AssetGhost::ConvertPacketToFrame(const QVariantMap & map, GhostFrame & fram
     }
 
     if (m.contains("room_edit")) {
-//        qDebug() << "AssetGhost::ConvertPacketToFrame INCOMING ROOM EDIT" << m["room_edit"].toString();
+        //qDebug() << "AssetGhost::ConvertPacketToFrame INCOMING ROOM EDIT" << m["room_edit"].toString();
         frame.room_edits.push_back(MathUtil::DecodeString(m["room_edit"].toString()));
         frame.editing = true;
     }
 
     if (m.contains("room_delete")) {
-//        qDebug() << "AssetGhost::ConvertPacketToFrame - INCOMING ROOM DELETE" << MathUtil::DecodeString(m["room_delete"].toString());
+        //qDebug() << "AssetGhost::ConvertPacketToFrame - INCOMING ROOM DELETE" << MathUtil::DecodeString(m["room_delete"].toString());
         frame.room_deletes.push_back(MathUtil::DecodeString(m["room_delete"].toString()));
     }
 

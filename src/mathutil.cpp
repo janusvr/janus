@@ -982,7 +982,7 @@ bool MathUtil::InitializeGLContext()
     qDebug() << "MathUtil::InitializeGLContext()" << c;
 
 	if (c == NULL) {
-//		QMessageBox::critical(NULL, "Error", "Cannot create platform OpenGL context!");
+        //QMessageBox::critical(NULL, "Error", "Cannot create platform OpenGL context!");
         qDebug() << "MathUtil::InitializeGLContext() - current context NULL, failed!";
 		return false;
     }
@@ -990,7 +990,7 @@ bool MathUtil::InitializeGLContext()
     glFuncs = c->extraFunctions();
 
 	if (glFuncs == NULL) {
-//		QMessageBox::critical(NULL, "Error", "Could not obtain required OpenGL context (version 3.3).  Ensure your graphics hardware is capable of supporting OpenGL 3.3, and necessary drivers are installed.");
+        //QMessageBox::critical(NULL, "Error", "Could not obtain required OpenGL context (version 3.3).  Ensure your graphics hardware is capable of supporting OpenGL 3.3, and necessary drivers are installed.");
         qDebug() << "MathUtil::InitializeGLContext() - Could not obtain required OpenGL context (version 3.3).  Ensure your graphics hardware is capable of supporting OpenGL 3.3, and necessary drivers are installed.";
 		return false;
 	}
@@ -1524,7 +1524,7 @@ void MathUtil::ErrorLog(const QString line)
 
     const QString s = QString("[") + QDateTime::currentDateTime().toString() + "] " + line;
     error_log_msgs.push_back(s);
-//    qDebug() << "MathUtil::ErrorLog" << s;
+    //qDebug() << "MathUtil::ErrorLog" << s;
 }
 
 QString MathUtil::GetCurrentDateTimeAsString() {
@@ -1961,14 +1961,14 @@ QString MathUtil::GetAppDataPath()
 
 QString MathUtil::GetApplicationPath()
 {
-    //    qDebug() << QCoreApplication::applicationDirPath() + "/";
+    //qDebug() << QCoreApplication::applicationDirPath() + "/";
     return QCoreApplication::applicationDirPath() + "/";
 }
 
 QString MathUtil::GetApplicationURL()
 {
-//    qDebug() << QUrl::fromLocalFile(QCoreApplication::applicationDirPath() + "/").toString();
-    //    qDebug() << QCoreApplication::applicationDirPath() + "/";
+    //qDebug() << QUrl::fromLocalFile(QCoreApplication::applicationDirPath() + "/").toString();
+    //qDebug() << QCoreApplication::applicationDirPath() + "/";
     return QUrl::fromLocalFile(QCoreApplication::applicationDirPath() + "/").toString();
 }
 
@@ -2563,7 +2563,7 @@ QOpenGLTexture* MathUtil::CreateTextureGL(QImage & img, const bool tex_mipmap, c
 QOpenGLTexture * MathUtil::CreateTextureGL(const QSize s, const bool tex_mipmap, const bool tex_linear, const bool tex_clamp)
 {
     QOpenGLTexture *texture = new QOpenGLTexture(QOpenGLTexture::Target2D);
-//    texture->create();
+    //texture->create();
     texture->setFormat(QOpenGLTexture::RGBA8_UNorm);
     texture->setSize(s.width(), s.height());
 
@@ -2867,7 +2867,7 @@ float MathUtil::GetSoundLevel(const QByteArray & b)
     unsigned long int accumulated = 0;
     for (int i=0; i<b.size(); i+=sizeof(signed short)) {
         accumulated += abs((signed short)(b.data()[i]));
-//        qDebug() << i << abs((signed short)(b.data()[i]));
+        //qDebug() << i << abs((signed short)(b.data()[i]));
     }
     float f = float(accumulated) / float(b.size()) / 40.0f;
     return qMin(f, 1.0f);
@@ -2875,7 +2875,7 @@ float MathUtil::GetSoundLevel(const QByteArray & b)
 
 QMatrix4x4 MathUtil::GetRotationMatrixFromEuler(const QVector3D rotation, const QString rotation_order)
 {
-//    qDebug() << "MathUtil::GetRotationMatrixFromEuler" << rotation << rotation_order;
+    //qDebug() << "MathUtil::GetRotationMatrixFromEuler" << rotation << rotation_order;
     QMatrix4x4 rot_mat;
     if (rotation_order.length() != 3) {
         return rot_mat;
@@ -2936,7 +2936,7 @@ ElementType MathUtil::AssetTypeFromFilename(const QString filename)
     QFileInfo f(s);
     QString suffix = f.suffix();
 
-//    qDebug() << "AssetTypeFromFilename testing suffix" << filename << suffix;
+    //qDebug() << "AssetTypeFromFilename testing suffix" << filename << suffix;
     if (MathUtil::img_extensions.contains(suffix)) {
         return TYPE_ASSETIMAGE;
     }

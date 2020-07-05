@@ -16,12 +16,12 @@ void AssetShader::SetSrc(const QString & base, const QString & src, const QStrin
     if (!vertex_src.isEmpty()) {
         vertex_src_url = QUrl(props->GetBaseURL()).resolved(vertex_src);
     }
-//    qDebug() << "AssetShader::SetSrc" << this << GetS("_src_url") << vertex_src_url;
+    //qDebug() << "AssetShader::SetSrc" << this << GetS("_src_url") << vertex_src_url;
 }
 
 void AssetShader::Load()
 {
-//    qDebug() << "AssetShader::Load()" << this << GetS("_src_url");
+    //qDebug() << "AssetShader::Load()" << this << GetS("_src_url");
     if (!props->GetSrcURL().isEmpty()) {
         WebAsset::Load(QUrl(props->GetSrcURL()));
     }
@@ -100,7 +100,7 @@ void AssetShader::CompileShaderProgram()
     if (!GetLoaded() || !vertex_webasset.GetLoaded() || GetCompiledNoCompile()) {
         return;
     }      
-//    qDebug() << "AssetShader::CompileShaderProgram()"  << this;
+    //qDebug() << "AssetShader::CompileShaderProgram()"  << this;
     QByteArray fragment_src = QByteArray(GetData());
     QByteArray vertex_src = QByteArray(vertex_webasset.GetData());
     m_program_handle = Renderer::m_pimpl->CompileAndLinkShaderProgram(vertex_src, vertex_src_url_str, fragment_src, props->GetSrcURL());

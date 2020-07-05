@@ -2,14 +2,14 @@
 
 ScriptableXmlHttpRequest::ScriptableXmlHttpRequest(QScriptEngine * e)
 {
-//    qDebug() << "ScriptableXmlHttpRequest::ScriptableXmlHttpRequest()" << this << e;
+    //qDebug() << "ScriptableXmlHttpRequest::ScriptableXmlHttpRequest()" << this << e;
     script_engine = e;
     connect(&webasset, SIGNAL(Finished()), this, SLOT(Finished()));
 }
 
 ScriptableXmlHttpRequest::~ScriptableXmlHttpRequest()
 {
-//    qDebug() << "ScriptableXmlHttpRequest::~ScriptableXmlHttpRequest()";
+    //qDebug() << "ScriptableXmlHttpRequest::~ScriptableXmlHttpRequest()";
 }
 
 void ScriptableXmlHttpRequest::SetScriptValue(QScriptValue v)
@@ -19,14 +19,14 @@ void ScriptableXmlHttpRequest::SetScriptValue(QScriptValue v)
 
 QScriptValue ScriptableXmlHttpRequest::addEventListener(QScriptValue event, QScriptValue function)
 {
-//    qDebug() << "ScriptableXmlHttpRequest::addEventListener()";
+    //qDebug() << "ScriptableXmlHttpRequest::addEventListener()";
     event_listeners[event.toString().toLower()].push_back(function);
     return QScriptValue();
 }
 
 QScriptValue ScriptableXmlHttpRequest::removeEventListener(QScriptValue event, QScriptValue function)
 {
-//    qDebug() << "ScriptableXmlHttpRequest::removeEventListener()";
+    //qDebug() << "ScriptableXmlHttpRequest::removeEventListener()";
     if (event_listeners.contains(event.toString().toLower())) {
         QList <QScriptValue> & l = event_listeners[event.toString().toLower()];
         for (int i=0; i<l.size(); ++i) {
@@ -42,7 +42,7 @@ QScriptValue ScriptableXmlHttpRequest::removeEventListener(QScriptValue event, Q
 
 QScriptValue ScriptableXmlHttpRequest::open(QScriptValue m, QScriptValue u)
 {
-//    qDebug() << "ScriptableXmlHttpRequest::open()" << m.toString() << u.toString();
+    //qDebug() << "ScriptableXmlHttpRequest::open()" << m.toString() << u.toString();
     method = m.toString().toLower();
     url = u.toString();
     return QScriptValue();
@@ -50,7 +50,7 @@ QScriptValue ScriptableXmlHttpRequest::open(QScriptValue m, QScriptValue u)
 
 QScriptValue ScriptableXmlHttpRequest::send()
 {
-//    qDebug() << "ScriptableXmlHttpRequest::send()";
+    //qDebug() << "ScriptableXmlHttpRequest::send()";
     if (!QUrl(url).isLocalFile()) {
         webasset.SetURL(url);
         const QString m = method.toLower();
@@ -85,12 +85,12 @@ QScriptValue ScriptableXmlHttpRequest::send(QScriptValue s)
 void ScriptableXmlHttpRequest::Finished()
 {
     responseText = webasset.GetData();
-//    qDebug() << "ScriptableXmlHttpRequest::Finished()" << responseText;
+    //qDebug() << "ScriptableXmlHttpRequest::Finished()" << responseText;
 
     if (event_listeners.contains("load")) {
         QList <QScriptValue> & l = event_listeners["load"];
         for (int i=0; i<l.size(); ++i) {
-//            qDebug() << "load event listeners calling:" << l[i].toString();
+            //qDebug() << "load event listeners calling:" << l[i].toString();
             if (script_engine) {
                 QScriptValueList args;
                 QScriptValue ev = script_engine->newObject();

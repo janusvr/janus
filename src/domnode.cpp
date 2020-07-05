@@ -176,7 +176,7 @@ DOMNode::DOMNode(QObject *parent) : QObject(parent)
 
 DOMNode::~DOMNode()
 {
-//    qDebug() << "DOMNode::~DOMNode()" << this;
+    //qDebug() << "DOMNode::~DOMNode()" << this;
     for (QList <QPointer <DOMNode> >::iterator it = children_nodes.begin(); it!=children_nodes.end(); ++it) {
         if (!it->isNull()) {
             delete *it;
@@ -797,22 +797,22 @@ void DOMNode::SetParent(DOMNode *parent)
 
 void DOMNode::SetLeftSibling(DOMNode *node)
 {
-//    if (engine())
-//    {
-//        context()->throwError("The leftSibling property is read-only.");
-//        return;
-//    }
+    //if (engine())
+    //{
+    //    context()->throwError("The leftSibling property is read-only.");
+    //    return;
+    //}
 
     left_sibling = QPointer <DOMNode>(node);
 }
 
 void DOMNode::SetRightSibling(DOMNode *node)
 {
-//    if (engine())
-//    {
-//        context()->throwError("The rightSibling property is read-only.");
-//        return;
-//    }
+    //if (engine())
+    //{
+    //    context()->throwError("The rightSibling property is read-only.");
+    //    return;
+    //}
     right_sibling = QPointer <DOMNode>(node);
 }
 
@@ -843,12 +843,12 @@ QList <DOMNode *> DOMNode::GetChildren() const
     for (int i=0; i<children_nodes.size(); ++i)
     {
         //trick to ensure that deleted objects currently in "dirty" state are not returned.
-//        qDebug()<<children_nodes[i]->GetJSID()<<children_nodes[i]->IsDirty();
+        //qDebug()<<children_nodes[i]->GetJSID()<<children_nodes[i]->IsDirty();
         if (children_nodes[i] && !children_nodes[i]->IsDirty()) {
             unguarded_children.append(children_nodes[i].data());
         }
     }
-//    qDebug() << "DOMNode::GetChildren()" << children_nodes.size() << unguarded_children.size();
+    //qDebug() << "DOMNode::GetChildren()" << children_nodes.size() << unguarded_children.size();
     return unguarded_children;
 }
 
@@ -913,7 +913,7 @@ DOMNode * DOMNode::removeChild(QString jsid)
             roomObject.property("appendChild").call(roomObject, engine()->toScriptValue <DOMNode *>(child.data()));
         }
 
-//        qDebug()<<jsid<<"detached from parent"<<GetJSID();
+        //qDebug()<<jsid<<"detached from parent"<<GetJSID();
         return child.data();
     }
     else
@@ -1049,7 +1049,7 @@ void DOMNode::SetDir(const QVector3D & d)
 
 void DOMNode::SetRotation(const QVector3D & v)
 {
-//    qDebug() << "DOMNode::SetRotation rotation found!" << v;
+    //qDebug() << "DOMNode::SetRotation rotation found!" << v;
     rotation->SetFromOther(v);
 
     const QMatrix4x4 m = MathUtil::GetRotationMatrixFromEuler(rotation->toQVector3D(), rotation_order);
@@ -1061,7 +1061,7 @@ void DOMNode::SetRotation(const QVector3D & v)
 void DOMNode::SetRotation(ScriptableVector *&v)
 {
     if (v) {
-//        qDebug() << "DOMNode::SetRotation" << v->GetX() << v->GetY() << v->GetZ();
+        //qDebug() << "DOMNode::SetRotation" << v->GetX() << v->GetY() << v->GetZ();
         *rotation = *v;
 
         const QMatrix4x4 m = MathUtil::GetRotationMatrixFromEuler(rotation->toQVector3D(), rotation_order);
@@ -1113,7 +1113,7 @@ void DOMNode::SetAccel(const QVector3D & v)
 void DOMNode::SetColour(ScriptableVector * c)
 {
     if (c) {
-        //        qDebug() << "DOMNode::SetColour" << c->toString();
+        //qDebug() << "DOMNode::SetColour" << c->toString();
         col->SetX(qMax(qMin(c->GetX(), 1.0f), 0.0f));
         col->SetY(qMax(qMin(c->GetY(), 1.0f), 0.0f));
         col->SetZ(qMax(qMin(c->GetZ(), 1.0f), 0.0f));
@@ -1868,7 +1868,7 @@ void DOMNode::SetVisible(const bool b)
 
 void DOMNode::SetURL(const QString & s)
 {
-//    qDebug() << "DOMNode::SetURL" << s;
+    //qDebug() << "DOMNode::SetURL" << s;
     if (!url_changed && url != s) {
         url_changed = true;
     }
@@ -2893,5 +2893,5 @@ void DOMNode::SetXDirs(const QVector3D & x, const QVector3D & y, const QVector3D
     //re-orthgonalize/ortho-normalize
     SetYDir((dy - dz * QVector3D::dotProduct(dy, dz)).normalized());
     SetXDir(QVector3D::crossProduct(dy, dz));
-//    qDebug() << "setting xdirs" << x << y << z << GetXDir()->toQVector3D() << GetYDir()->toQVector3D() << GetZDir()->toQVector3D();
+    //qDebug() << "setting xdirs" << x << y << z << GetXDir()->toQVector3D() << GetYDir()->toQVector3D() << GetZDir()->toQVector3D();
 }

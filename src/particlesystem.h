@@ -52,7 +52,7 @@ private:
     QTime p_time;
     float p_time_elapsed;
     int p_emitted;
-//    int p_to_draw;
+    //int p_to_draw;
 
     QPointer <AssetObject> emitter_mesh;
 
