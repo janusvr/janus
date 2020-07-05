@@ -3214,7 +3214,7 @@ void Room::Create_Youtube()
     SetCubemap(r1, CUBEMAP_TYPE::IRRADIANCE);
 
     QPointer <AssetObject> new_asset_obj(new AssetObject());
-    new_asset_obj->SetSrc(translator_path, "youtube/youtube.dae.gz");
+    new_asset_obj->SetSrc(translator_path, "youtube/youtube.dae");
     new_asset_obj->GetProperties()->SetID("main");
     AddAssetObject(new_asset_obj);
 
