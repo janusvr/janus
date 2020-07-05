@@ -833,7 +833,7 @@ void MainWindow::ActionImportRemote()
     QString url = QInputDialog::getText(this, tr("Import (Remote URL)"),
                                          tr("Specify URL of HTML file (local or remote) containing JML code:"),
                                          QLineEdit::Normal,
-                                         "http://www.janusvr.com", &ok);
+                                         "https://www.janusxr.org", &ok);
     if (ok && !url.isEmpty()) {
         game->DoImport(url);
     }

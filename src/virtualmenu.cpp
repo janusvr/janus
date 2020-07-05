@@ -183,7 +183,7 @@ void VirtualMenu::Update()
     if (menu_index == VirtualMenuIndex_SEARCH && do_search && !entered_search.isEmpty() && entered_search_time.elapsed() > 250) {
         do_search = false;
         if (!search_data_request.GetStarted() || search_data_request.GetProcessed()) {
-            search_data_request.Load(QUrl("https://vesta.janusvr.com/api/search?query=" + entered_search));
+            search_data_request.Load(QUrl("https://vesta.janusxr.org/api/search?query=" + entered_search));
         }
     }   
 
@@ -894,7 +894,7 @@ void VirtualMenu::ConstructSubmenuSocial()
         const QString userid = map["userId"].toString();
         const QString url = map["url"].toString();
 
-        const QString thumb_id = "https://thumbnails.janusvr.com/" + MathUtil::MD5Hash(url) + "/thumb.jpg";
+        const QString thumb_id = "https://thumbnails.janusxr.org/" + MathUtil::MD5Hash(url) + "/thumb.jpg";
         AddNewImageUserButton(VirtualMenuIndex_SOCIAL, "__user"+QString::number(i), userid, url, thumb_id, m);
     }
 }
@@ -963,7 +963,7 @@ void VirtualMenu::UpdatePartyModeList()
     }
 
     if (!partymode_data_request.GetStarted() || partymode_data_request.GetProcessed()) {
-        partymode_data_request.Load(QUrl("https://vesta.janusvr.com/api/party_mode"));
+        partymode_data_request.Load(QUrl("https://vesta.janusxr.org/api/party_mode"));
     }
 }
 
