@@ -1,0 +1,40 @@
+var ff = {
+percent:100
+,isSphere:true
+,isActive:false
+};
+
+room.update = function(delta_time)
+{
+
+
+	if(player.pos.z > 0 )
+	{
+		if(ff.percent > 100)
+		{
+			ff.percent = 100;
+		ff.isActive = false;
+		}
+		else
+		{
+			ff.percent += delta_time/10;
+
+		}
+	}
+	else if(player.pos.z < 0 && ff.isActive == false)
+	{
+		if(ff.percent < 0)
+		{
+			ff.percent = 0 ;
+			
+		ff.isActive = true;
+
+		}
+		else
+		{
+			ff.percent -= delta_time/10;
+
+		}
+	}
+	room.objects["plane"].blend0 = (ff.percent/100);
+}
