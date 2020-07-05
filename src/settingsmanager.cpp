@@ -49,7 +49,7 @@ void SettingsManager::LoadSettings()
     settings["partymode"] = true;
     settings["perflog"] = true;
     settings["playbackdevice"] = QString("Default device");
-    settings["capturedevice"] = QString("Default device");        
+    settings["capturedevice"] = QString("Default device");
     settings["micalwayson"] = false;
     settings["micsensitivity"] = -20.0f;
     settings["ui"] = true;
@@ -58,7 +58,8 @@ void SettingsManager::LoadSettings()
     settings["vivetrackpadmovement"] = false;
     settings["homeurl"] = QString("https://vesta.janusvr.com/");
     settings["websurfaceurl"] = QString("https://google.com");
-    settings["renderportalrooms"] = true;   
+    settings["renderportalrooms"] = true;
+    settings["pathtovoicefiles"] = QString("assets/sounds/female/");
 
     const QString filename = MathUtil::GetAppDataPath() + "settings.json";
 
@@ -369,4 +370,14 @@ QString SettingsManager::GetWebsurfaceURL()
 bool SettingsManager::GetRenderPortalRooms()
 {
     return settings["renderportalrooms"].toBool();
+}
+
+QString SettingsManager::GetVoicePath()
+{
+    return settings["pathtovoicefiles"].toString();
+}
+
+void SetVoicePath( const QString new_voice )
+{
+    // To be implemented with settings window
 }
