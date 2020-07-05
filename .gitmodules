@@ -4,3 +4,6 @@
 [submodule "resources/openal-soft-1.20.1"]
 	path = resources/openal-soft-1.20.1
 	url = git@github.com:panmarco83/openal-soft.git
+[submodule "resources/openssl-1.1.1g"]
+	path = resources/openssl-1.1.1g
+	url = git@github.com:panmarco83/openssl.git
