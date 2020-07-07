@@ -58,6 +58,9 @@ public:
     static QString GetWebsurfaceURL();
     static bool GetRenderPortalRooms();
 
+    static QString GetVoicePath();
+    static void SetVoicePath( const QString new_voice );
+
     static void SetLaunchURL(const QString & s);
     static QString GetLaunchURL();
 

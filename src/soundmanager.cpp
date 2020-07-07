@@ -181,7 +181,8 @@ void SoundManager::Load(QString device_id, QString capture_device_id)
 
             for (int i=0; i<SOUND_COUNT; ++i) {
                 QPointer <AssetSound> snd = new AssetSound();
-                QString filename = "assets/sounds/female/" + QString::number(i) + QString(".wav");
+                QString filename =  SettingsManager::GetVoicePath() + QString::number(i) + QString(".wav");
+                //QString filename = "assets/sounds/female/" + QString::number(i) + QString(".wav");
                 snd->SetSrc(MathUtil::GetApplicationURL(), filename);
                 sounds[i] = snd;
             }
