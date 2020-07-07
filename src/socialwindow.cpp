@@ -131,7 +131,7 @@ void SocialWindow::UpdatePartyModeList()
     }
 
     if (!partymode_data_request.GetStarted() || partymode_data_request.GetProcessed()) {
-        partymode_data_request.Load(QUrl("https://vesta.janusvr.com/api/party_mode"));
+        partymode_data_request.Load(QUrl("https://vesta.janusxr.org/api/party_mode"));
     }
 }
 

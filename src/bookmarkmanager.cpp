@@ -57,7 +57,7 @@ void BookmarkManager::AddBookmark(const QString url, const QString title, const 
         else if (url.contains("vimeo.com")) {
             thumb = QString(translator_path + "vimeo/thumb.jpg");
         }
-        else if (url.contains("vesta.janusvr.com")) {
+        else if (url.contains("vesta.janusxr.org")) {
             thumb = QString(translator_path + "default/vesta.jpg");
         }
         else if (url.contains("vrsites.com")) {
@@ -178,12 +178,12 @@ void BookmarkManager::LoadBookmarks()
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         qDebug() << "BookmarkManager::LoadBookmarks() - File" << filename << "not found, generating.";
         const QString path = MathUtil::GetApplicationURL() + "assets/3dui/thumbs/";
-        AddBookmark("https://vesta.janusvr.com", "VESTA - JanusVR User Community", path+"28.jpg");
+        AddBookmark("https://vesta.janusxr.org", "VESTA - JanusVR User Community", path+"28.jpg");
         AddBookmark("https://www.reddit.com/r/janusVR/", "Reddit r/janusVR", path+"29.jpg");
         AddBookmark("https://www.youtube.com", "YouTube", path+"27.jpg");
-        AddBookmark("https://www.janusvr.com/newlobby/index.html", "JanusVR Lobby", path+"30.jpg");
-        AddBookmark("https://vesta.janusvr.com/sandbox", "Vesta Sandbox", path+"31.jpg");
-        AddBookmark("https://janusvr.com/help", "JanusVR Help", path+"32.jpg");
+        AddBookmark("https://www.janusxr.org/newlobby/index.html", "JanusVR Lobby", path+"30.jpg");
+        AddBookmark("https://vesta.janusxr.org/sandbox", "Vesta Sandbox", path+"31.jpg");
+        AddBookmark("https://janusxr.org/help", "JanusVR Help", path+"32.jpg");
         SaveBookmarks();
     }
     else {

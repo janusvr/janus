@@ -262,7 +262,7 @@ void HierarchyWindow::CreateLink()
     o->GetProperties()->SetJSID(game->GetGlobalUUID());
     o->GetProperties()->SetPos(p);
     o->GetProperties()->SetDir(d);
-    o->GetProperties()->SetURL("http://janusvr.com");
+    o->GetProperties()->SetURL("https://janusxr.org");
     o->GetProperties()->SetTitle("Janus VR");
 
     const QString new_jsid = game->GetEnvironment()->GetCurRoom()->AddRoomObject(o);

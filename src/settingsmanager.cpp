@@ -35,7 +35,7 @@ void SettingsManager::LoadSettings()
     settings["invertpitch"] = false;
     settings["avatarlighting"] = true;
     settings["launchurl"] = QString("");
-    settings["server"] = QString("presence.janusvr.com");
+    settings["server"] = QString("presence.janusxr.org");
     settings["port"] = 5567; //65.5 - prefer encrypted connection
     settings["rate"] = 200;
     settings["fov"] = 70.0f;
@@ -56,7 +56,7 @@ void SettingsManager::LoadSettings()
     settings["FPSLimitRender"] = 0;
     settings["FPSLimitUpdate"] = 0;
     settings["vivetrackpadmovement"] = false;
-    settings["homeurl"] = QString("https://vesta.janusvr.com/");
+    settings["homeurl"] = QString("https://vesta.janusxr.org/");
     settings["websurfaceurl"] = QString("https://google.com");
     settings["renderportalrooms"] = true;   
 

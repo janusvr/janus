@@ -1276,7 +1276,7 @@ void MultiPlayerManager::LoadAvatarData(const bool load_userid)
         anim_names.push_back("walk_right");
 
         const int character = qrand() % avatar_names.size();
-        const QString base_url = "http://www.janusvr.com/avatars/animated/";
+        const QString base_url = "https://www.janusxr.org/avatars/animated/";
 
         QPointer <AssetObject> body_obj = new AssetObject();
         body_obj->GetProperties()->SetID("body");

@@ -2143,7 +2143,7 @@ void Room::SaveXML(QTextStream & ofs)
     ofs << "</Room>\n";
     ofs << "</FireBoxRoom>\n";
     ofs << "-->\n";
-    ofs << "<script src=\"https://web.janusvr.com/janusweb.js\"></script>\n";
+    ofs << "<script src=\"https://web.janusxr.org/janusweb.js\"></script>\n";
     ofs << "<script>elation.janusweb.init({url: document.location.href})</script>\n";
     ofs << "</body>\n";
     ofs << "</html>";
