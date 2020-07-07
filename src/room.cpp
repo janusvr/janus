@@ -3182,7 +3182,9 @@ void Room::Create_Flickr()
 
 void Room::Create_Youtube()
 {
+    qDebug() << "Room::Create_Youtube()";
     const QString translator_path = MathUtil::GetTranslatorPath();
+    SetRoomTemplate("room_plane");
 
     QString replace_url = props->GetURL();
     replace_url.replace("/watch?v=", "/embed/");
@@ -3212,7 +3214,7 @@ void Room::Create_Youtube()
     SetCubemap(r1, CUBEMAP_TYPE::IRRADIANCE);
 
     QPointer <AssetObject> new_asset_obj(new AssetObject());
-    new_asset_obj->SetSrc(translator_path, "youtube/youtube.dae.gz");
+    new_asset_obj->SetSrc(translator_path, "youtube/youtube.dae");
     new_asset_obj->GetProperties()->SetID("main");
     AddAssetObject(new_asset_obj);
 
@@ -3222,7 +3224,7 @@ void Room::Create_Youtube()
     AddAssetObject(new_asset_obj);
 
     new_asset_obj = new AssetObject();
-    new_asset_obj->SetSrc(translator_path, "youtube/youtubeNolight.dae.gz");
+    new_asset_obj->SetSrc(translator_path, "youtube/youtubeNolight.dae");
     new_asset_obj->GetProperties()->SetID("mainL");
     AddAssetObject(new_asset_obj);
 
@@ -3238,25 +3240,25 @@ void Room::Create_Youtube()
     AddAssetWebSurface(new_ws);   
 
     if (entrance_object) {
-        entrance_object->GetProperties()->SetPos(QVector3D(0,0.2f,0.0f)); //56.0- fix falling through floor
+        entrance_object->GetProperties()->SetPos(QVector3D(0,1.6f,0.0f)); //56.0- fix falling through floor
         entrance_object->SetDir(QVector3D(0,0,1));
     }
 
     QPointer <RoomObject> new_obj = RoomObject::CreateObject("", "main", QColor(255,255,255), true);
-    new_obj->GetProperties()->SetPos(QVector3D(0,0,0));
+    new_obj->GetProperties()->SetPos(QVector3D(0.0f,1.5f,0.0f));
     new_obj->GetProperties()->SetXDirs(QVector3D(0.707107f, 0, -0.707106f), QVector3D(0,1,0), QVector3D(0.707106f, 0, 0.707107f));
     new_obj->GetProperties()->SetScale(QVector3D(1, 1.1f, 1));
     new_obj->GetProperties()->SetCollisionID("maincol");
     AddRoomObject(new_obj);
 
     new_obj = RoomObject::CreateObject("", "mainL", QColor(255,255,255), false);
-    new_obj->GetProperties()->SetPos(QVector3D(0,0,0));
+    new_obj->GetProperties()->SetPos(QVector3D(0.0f,1.5f,0.0f));
     new_obj->GetProperties()->SetXDirs(QVector3D(0.707107f, 0, -0.707106f), QVector3D(0,1,0), QVector3D(0.707106f, 0, 0.707107f));
     new_obj->GetProperties()->SetScale(QVector3D(1, 1.1f, 1));
     AddRoomObject(new_obj);
 
     new_obj = RoomObject::CreateObject("", "screen", QColor(255,255,255), false);
-    new_obj->GetProperties()->SetPos(QVector3D(0,0,0));
+    new_obj->GetProperties()->SetPos(QVector3D(0.0f,1.5f,0.0f));
     new_obj->GetProperties()->SetXDirs(QVector3D(0.707107f, 0, -0.707106f), QVector3D(0,1,0), QVector3D(0.707106f, 0, 0.707107f));
     new_obj->GetProperties()->SetScale(QVector3D(1, 1.1f, 1));
     new_obj->GetProperties()->SetWebsurfaceID("webscreen");
@@ -3820,12 +3822,14 @@ void Room::Create_WebSurface()
     QPointer <AssetImage> assetrad(new AssetImage());
     assetrad->GetProperties()->SetID("Annotated_skybox_radiance");
     assetrad->SetSrc(translator_path, "web/paralleogramEqui_radiance256.dds");
+    //assetrad->SetSrc(translator_path, "web/black_radiance.dds");
     assetrad->GetProperties()->SetTexClamp(false);
     assetrad->GetProperties()->SetTexLinear(true);
     AddAssetImage(assetrad);
 
     QPointer <AssetImage> assetirrad(new AssetImage());
     assetirrad->GetProperties()->SetID("Annotated_skybox_Irradiance");
+    //assetirrad->SetSrc(translator_path, "web/black_irradiance.dds");
     assetirrad->SetSrc(translator_path, "web/paralleogramEqui_irradiance64.dds");
     assetirrad->GetProperties()->SetTexClamp(false);
     assetirrad->GetProperties()->SetTexLinear(true);
@@ -3838,10 +3842,59 @@ void Room::Create_WebSurface()
     SetCubemap(r0, CUBEMAP_TYPE::RADIANCE);
     SetCubemap(r1, CUBEMAP_TYPE::IRRADIANCE);
 
+
+
+    /*
+        QPointer <AssetObject> assetobj0(new AssetObject());
+        assetobj0->SetSrc(translator_path, "web/bamboo.dae.gz");
+        assetobj0->GetProperties()->SetID("bamboo");
+        AddAssetObject(assetobj0);
+
+        QPointer <AssetObject> assetobj1(new AssetObject());
+        assetobj1->SetSrc(translator_path, "web/paintings2.dae");
+        assetobj1->GetProperties()->SetID("paintings");
+        AddAssetObject(assetobj1);
+
+        QPointer <AssetObject> assetobjcol(new AssetObject());
+        assetobjcol->SetSrc(translator_path, "web/Collisionmesh.obj");
+        assetobjcol->GetProperties()->SetID("collision");
+        AddAssetObject(assetobjcol);
+
+        QPointer <AssetObject> assetobj3(new AssetObject());
+        assetobj3->SetSrc(translator_path, "web/Room_mesh.dae");
+        assetobj3->GetProperties()->SetID("room-mesh");
+        AddAssetObject(assetobj3);
+
+        QPointer <AssetObject> tvbackframeobj(new AssetObject());
+        tvbackframeobj->SetSrc(translator_path, "web/tvback_frame.dae");
+        tvbackframeobj->GetProperties()->SetID("tv_back_frame");
+        AddAssetObject(tvbackframeobj);
+
+        QPointer <AssetObject> tvbackobj(new AssetObject());
+        tvbackobj->SetSrc(translator_path, "web/tvback.obj");
+        tvbackobj->GetProperties()->SetID("tv_back");
+        AddAssetObject(tvbackobj);
+
+        QPointer <AssetObject> assetobj2(new AssetObject());
+        assetobj2->SetSrc(translator_path, "web/screen3.obj");
+        assetobj2->GetProperties()->SetID("3screens");
+        AddAssetObject(assetobj2);
+    */
+
     QPointer <AssetObject> assetobj0(new AssetObject());
-    assetobj0->SetSrc(translator_path, "web/bamboo.dae.gz");
+    assetobj0->SetSrc(translator_path, "web/bamboo.dae");
     assetobj0->GetProperties()->SetID("class");
     AddAssetObject(assetobj0);
+
+    QPointer <AssetObject> assetobj1(new AssetObject());
+    assetobj1->SetSrc(translator_path, "web/ParallelogramFinal.dae");
+    assetobj1->GetProperties()->SetID("class3");
+    AddAssetObject(assetobj1);
+
+    QPointer <AssetObject> assetobj2(new AssetObject());
+    assetobj2->SetSrc(translator_path, "web/ParallelogramFinalNoLight.dae");
+    assetobj2->GetProperties()->SetID("class3s");
+    AddAssetObject(assetobj2);
 
     QPointer <AssetObject> assetobjcol(new AssetObject());
     assetobjcol->SetSrc(translator_path, "web/Collisionmesh.obj");
@@ -3849,19 +3902,10 @@ void Room::Create_WebSurface()
     AddAssetObject(assetobjcol);
 
     QPointer <AssetObject> assetobj3(new AssetObject());
-    assetobj3->SetSrc(translator_path, "web/ParallelogramFinal.dae.gz");
-    assetobj3->GetProperties()->SetID("class3");
+    assetobj3->SetSrc(translator_path, "web/screen3.obj");
+    assetobj3->GetProperties()->SetID("screen2");
     AddAssetObject(assetobj3);
 
-    QPointer <AssetObject> assetobj3s(new AssetObject());
-    assetobj3s->SetSrc(translator_path, "web/ParallelogramFinalNolight.dae.gz");
-    assetobj3s->GetProperties()->SetID("class3s");
-    AddAssetObject(assetobj3s);
-
-    QPointer <AssetObject> assetobj2(new AssetObject());
-    assetobj2->SetSrc(translator_path, "web/screen3.obj");
-    assetobj2->GetProperties()->SetID("screen2");
-    AddAssetObject(assetobj2);
 
     QPointer <RoomObject> obj0 = RoomObject::CreateObject("", "class3", QColor(255,255,255), true);
     obj0->GetProperties()->SetCollisionID("collision");
@@ -3871,23 +3915,23 @@ void Room::Create_WebSurface()
     obj0->GetProperties()->SetLocked(true);
     AddRoomObject(obj0);
 
-    QPointer <RoomObject> obj1 = RoomObject::CreateObject("", "class3s", QColor(255,255,255), false);
+    QPointer <RoomObject> obj1 = RoomObject::CreateObject("", "class3s", QColor(255,255,255), true);
     obj1->GetProperties()->SetPos(QVector3D(0.0f, 0.0f, 0.0f));
     obj1->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
     obj1->GetProperties()->SetScale(QVector3D(1.1f, 1.1f, 1.1f));
     obj1->GetProperties()->SetLocked(true);
     AddRoomObject(obj1);
 
-    QPointer <RoomObject> obj5 = RoomObject::CreateObject("", "screen2", QColor(255,255,255), false);
-    obj5->GetProperties()->SetWebsurfaceID("web1");
-    obj5->GetProperties()->SetPos(QVector3D(0.0f, 0.0f, 0.0f));
-    obj5->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
-    obj5->GetProperties()->SetScale(QVector3D(1.09f,1.09f,1.09f));
-    obj5->GetProperties()->SetLighting(false);
-    obj5->GetProperties()->SetLocked(true);
-    AddRoomObject(obj5);
+    QPointer <RoomObject> obj2 = RoomObject::CreateObject("", "screen2", QColor(255,255,255), false);
+    obj2->GetProperties()->SetWebsurfaceID("web1");
+    obj2->GetProperties()->SetPos(QVector3D(0.0f, 0.0f, 0.0f));
+    obj2->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
+    obj2->GetProperties()->SetScale(QVector3D(1.1f, 1.1f, 1.1f));
+    obj2->GetProperties()->SetLocked(true);
+    AddRoomObject(obj2);
 
-    QPointer <RoomObject> obj6 = RoomObject::CreateObject("", "class", QColor(255,255,255), true);
+
+    QPointer <RoomObject> obj6 = RoomObject::CreateObject("", "class", QColor(255,255,255), false);
     obj6->GetProperties()->SetPos(QVector3D(-3.62f, 0.0f, 0.0f));
     obj6->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
     obj6->GetProperties()->SetScale(QVector3D(1.1f, 1.1f, 1.1f));
@@ -3895,7 +3939,7 @@ void Room::Create_WebSurface()
     obj6->GetProperties()->SetLocked(true);
     AddRoomObject(obj6);
 
-    QPointer <RoomObject> obj7 = RoomObject::CreateObject("", "class", QColor(255,255,255), true);
+    QPointer <RoomObject> obj7 = RoomObject::CreateObject("", "class", QColor(255,255,255), false);
     obj7->GetProperties()->SetPos(QVector3D(-1.7f, 0.0f, 0.0f));
     obj7->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
     obj7->GetProperties()->SetScale(QVector3D(1.1f, 1.1f, 1.1f));
@@ -3903,7 +3947,7 @@ void Room::Create_WebSurface()
     obj7->GetProperties()->SetLocked(true);
     AddRoomObject(obj7);
 
-    QPointer <RoomObject> obj8 = RoomObject::CreateObject("", "class", QColor(255,255,255), true);
+    QPointer <RoomObject> obj8 = RoomObject::CreateObject("", "class", QColor(255,255,255), false);
     obj8->GetProperties()->SetPos(QVector3D(-5.521f, 0.0f, 0.0f));
     obj8->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
     obj8->GetProperties()->SetScale(QVector3D(1.1f ,1.1f, 1.1f));
@@ -3911,13 +3955,87 @@ void Room::Create_WebSurface()
     obj8->GetProperties()->SetLocked(true);
     AddRoomObject(obj8);
 
-    QPointer <RoomObject> obj9 = RoomObject::CreateObject("", "class", QColor(255,255,255), true);
+    QPointer <RoomObject> obj9 = RoomObject::CreateObject("", "class", QColor(255,255,255), false);
     obj9->GetProperties()->SetPos(QVector3D(0,0,0));
     obj9->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
     obj9->GetProperties()->SetScale(QVector3D(1.1f ,1.1f, 1.1f));
     obj9->GetProperties()->SetCullFace("none");
     obj9->GetProperties()->SetLocked(true);
     AddRoomObject(obj9);
+
+    /*
+        QPointer <RoomObject> obj0 = RoomObject::CreateObject("main_room_js", "room-mesh", QColor(255,255,255), true);
+        obj0->GetProperties()->SetCollisionID("collision");
+        obj0->GetProperties()->SetPos(QVector3D(0.0f, 0.0f, 0.0f));
+        obj0->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
+        obj0->GetProperties()->SetScale(QVector3D(1.1f, 1.1f, 1.1f));
+        obj0->GetProperties()->SetLocked(true);
+        AddRoomObject(obj0);
+
+        QPointer <RoomObject> obj1 = RoomObject::CreateObject("", "tv_back_frame", QColor(255,255,255), true);
+        obj1->GetProperties()->SetPos(QVector3D(0.0f, 0.0f, 0.0f));
+        obj1->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
+        obj1->GetProperties()->SetScale(QVector3D(1.1f, 1.1f, 1.1f));
+        obj1->GetProperties()->SetLocked(true);
+        AddRoomObject(obj1);
+
+        QPointer <RoomObject> obj2 = RoomObject::CreateObject("", "tv_back", QColor(255,255,255), false);
+        obj2->GetProperties()->SetWebsurfaceID("web1");
+        obj2->GetProperties()->SetPos(QVector3D(0.0f, 0.0f, 0.0f));
+        obj2->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
+        obj2->GetProperties()->SetScale(QVector3D(1.1f, 1.1f, 1.1f));
+        obj2->GetProperties()->SetLocked(true);
+        AddRoomObject(obj2);
+
+        QPointer <RoomObject> obj4 = RoomObject::CreateObject("paintings_js", "paintings", QColor(255,255,255), false);
+        obj4->GetProperties()->SetPos(QVector3D(0.0f, 0.0f, 0.0f));
+        obj4->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
+        obj4->GetProperties()->SetScale(QVector3D(1.1f, 1.1f, 1.1f));
+        obj4->GetProperties()->SetCullFace("none");
+        obj4->GetProperties()->SetLocked(true);
+        AddRoomObject(obj4);
+
+        QPointer <RoomObject> obj5 = RoomObject::CreateObject("3screens_js", "3screens", QColor(255,255,255), false);
+        obj5->GetProperties()->SetWebsurfaceID("web1");
+        obj5->GetProperties()->SetPos(QVector3D(0.0f, 0.0f, 0.0f));
+        obj5->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
+        obj5->GetProperties()->SetScale(QVector3D(1.09f,1.09f,1.09f));
+        obj5->GetProperties()->SetLighting(false);
+        obj5->GetProperties()->SetLocked(true);
+        AddRoomObject(obj5);
+        
+        QPointer <RoomObject> obj6 = RoomObject::CreateObject("", "bamboo", QColor(255,255,255), false);
+        obj6->GetProperties()->SetPos(QVector3D(-3.62f, 0.0f, 0.0f));
+        obj6->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
+        obj6->GetProperties()->SetScale(QVector3D(1.1f, 1.1f, 1.1f));
+        obj6->GetProperties()->SetCullFace("none");
+        obj6->GetProperties()->SetLocked(true);
+        AddRoomObject(obj6);
+
+        QPointer <RoomObject> obj7 = RoomObject::CreateObject("", "bamboo", QColor(255,255,255), false);
+        obj7->GetProperties()->SetPos(QVector3D(-1.7f, 0.0f, 0.0f));
+        obj7->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
+        obj7->GetProperties()->SetScale(QVector3D(1.1f, 1.1f, 1.1f));
+        obj7->GetProperties()->SetCullFace("none");
+        obj7->GetProperties()->SetLocked(true);
+        AddRoomObject(obj7);
+
+        QPointer <RoomObject> obj8 = RoomObject::CreateObject("", "bamboo", QColor(255,255,255), false);
+        obj8->GetProperties()->SetPos(QVector3D(-5.521f, 0.0f, 0.0f));
+        obj8->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
+        obj8->GetProperties()->SetScale(QVector3D(1.1f ,1.1f, 1.1f));
+        obj8->GetProperties()->SetCullFace("none");
+        obj8->GetProperties()->SetLocked(true);
+        AddRoomObject(obj8);
+
+        QPointer <RoomObject> obj9 = RoomObject::CreateObject("", "bamboo", QColor(255,255,255), false);
+        obj9->GetProperties()->SetPos(QVector3D(0,0,0));
+        obj9->SetDir(QVector3D(0.0f, 0.0f, 1.0f));
+        obj9->GetProperties()->SetScale(QVector3D(1.1f ,1.1f, 1.1f));
+        obj9->GetProperties()->SetCullFace("none");
+        obj9->GetProperties()->SetLocked(true);
+        AddRoomObject(obj9);
+    */
 
     GetProperties()->SetVisible(false);
 }
