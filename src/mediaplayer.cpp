@@ -13,15 +13,17 @@ MediaPlayer::MediaPlayer() :
         const char * const vlc_args[] = {
             "--intf=dummy", // Don't use any interface
             "--quiet",
-//            "--ignore-config",        // Don't use VLC's config
-//            "--extraintf=logger", // Don't use any interface
-//            "--verbose=0",  // Be verbose
-//            "--v=0",
-//            "--file-logging",
-//            "--logfile=vlc_log.txt",
-//            "--logmode=text",
-//            "--log-verbose=1",
-//            "-q",
+            /*
+            "--ignore-config",        // Don't use VLC's config
+            "--extraintf=logger", // Don't use any interface
+            "--verbose=0",  // Be verbose
+            "--v=0",
+            "--file-logging",
+            "--logfile=vlc_log.txt",
+            "--logmode=text",
+            "--log-verbose=1",
+            "-q",
+            */
             "--no-ts-trust-pcr" // Fixes playback for some .m3u8 files
         };
 
@@ -662,8 +664,8 @@ void MediaPlayer::unlock(void *data, void *id, void *const *)
         ctx->img[1] = nullptr;
     }
 
-//    ctx->img[0]->save(MathUtil::GetScreenshotPath() + "out-" + MathUtil::GetCurrentDateTimeAsString() + ".png", "png", 90);
-//    qDebug() << "ctx->img" << ctx->img[0]->format();
+    //ctx->img[0]->save(MathUtil::GetScreenshotPath() + "out-" + MathUtil::GetCurrentDateTimeAsString() + ".png", "png", 90);
+    //qDebug() << "ctx->img" << ctx->img[0]->format();
 
     ctx->update_tex = true;
 

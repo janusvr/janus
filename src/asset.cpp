@@ -4,7 +4,7 @@ Asset::Asset()
 {        
     props = new DOMNode();
     props->SetType(TYPE_ASSET);
-//    qDebug() << "Asset::Asset()" << props;
+    //qDebug() << "Asset::Asset()" << props;
 
     //60.0 - make js_id property invalid for Assets
     props->SetJSID("");
@@ -12,7 +12,7 @@ Asset::Asset()
 
 void Asset::SetSrc(const QString & base, const QString & src_str)
 {
-//    qDebug() << "Asset::SetSrc" << base << src_str;
+    //qDebug() << "Asset::SetSrc" << base << src_str;
     props->SetBaseURL(base);
     if (src_str.right(5) == "data:") {
         props->SetSrc(src_str);
@@ -22,7 +22,7 @@ void Asset::SetSrc(const QString & base, const QString & src_str)
     else {
         props->SetSrc(src_str.trimmed());
         props->SetSrcURL(QUrl(base).resolved(src_str).toString());
-//        qDebug() << " resolved" << QUrl(base).resolved(src_str).toString();
+        //qDebug() << " resolved" << QUrl(base).resolved(src_str).toString();
         SetURL(props->GetSrcURL());
     }
 }

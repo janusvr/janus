@@ -60,7 +60,7 @@ QPointer<DOMNode> Player::GetProperties()
 
 void Player::UpdateDir()
 {
-//    qDebug() << "Player::UpdateDir()" << GetV("dir");
+    //qDebug() << "Player::UpdateDir()" << GetV("dir");
     props->SetDir(props->GetDir()->toQVector3D().normalized());    
     MathUtil::NormCartesianToSphere(props->GetDir()->toQVector3D(), theta, phi);    
 }
@@ -398,7 +398,7 @@ void Player::Update(const float move_speed)
         hand_update_time = 0.0;
     }    
 
-//    qDebug() << "Player::Update() delta_t" << delta_t;
+    //qDebug() << "Player::Update() delta_t" << delta_t;
     const float rotation_speed = SettingsManager::GetRotationSpeed();
     if (SettingsManager::GetComfortMode() && hmd_enabled) {
         if (comfort_spinleft) {
@@ -474,7 +474,7 @@ void Player::Update(const float move_speed)
         }
     }
 
-//    qDebug() << "Player::Update() impulse velocity" << scale_velx << scale_vely << impulse_vel << walk_forward << walk_back << walk_left << walk_right;
+    //qDebug() << "Player::Update() impulse velocity" << scale_velx << scale_vely << impulse_vel << walk_forward << walk_back << walk_left << walk_right;
     if (flying) {
         props->SetAnimID("fly");
     }

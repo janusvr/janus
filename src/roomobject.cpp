@@ -1044,7 +1044,7 @@ void RoomObject::Update(const double dt_sec)
                 }
             }
         }
-    /*
+        /*
             const QVector3D s = GetScale();
             const QVector3D zdir = GetZDir();
 
@@ -1219,7 +1219,7 @@ void RoomObject::Update(const double dt_sec)
                 }
             }
         }
-    */
+        */
     }
         break;
 

@@ -32,7 +32,7 @@ QByteArray AudioUtil::encode(QByteArray decoded)
 
     //these crash if encoder is NULL
     opus_encoder_ctl(encoder, OPUS_SET_MAX_BANDWIDTH(OPUS_BANDWIDTH_MEDIUMBAND));
-//        opus_encoder_ctl(encoder, OPUS_SET_BITRATE(48000)); //4KB/sec
+    //opus_encoder_ctl(encoder, OPUS_SET_BITRATE(48000)); //4KB/sec
 
     //Encode a frame
     const unsigned int s = AudioUtil::_FRAME_SIZE*AudioUtil::_CHANNELS;
@@ -43,14 +43,14 @@ QByteArray AudioUtil::encode(QByteArray decoded)
     int max_size = 4000; //4000
     QByteArray encoded(max_size, '\0');
     const int len = opus_encode(encoder, in, AudioUtil::_FRAME_SIZE, (unsigned char *)encoded.data(), max_size);
-//    qDebug() << "encode len" << decoded.length() << len;
+    //qDebug() << "encode len" << decoded.length() << len;
     if (len < 0) {
         //qDebug("ERROR: Failed to encode: %s\n", opus_strerror(len));
         return QByteArray();
     }
 
     encoded.resize(len);
-//    encoded.squeeze();
+    //encoded.squeeze();
 
     //Return encoded data
     return encoded;
@@ -87,7 +87,7 @@ QByteArray AudioUtil::decode(QByteArray encoded)
     }
 
     decoded.resize(len * sizeof(opus_int16));
-//    decoded.squeeze();
+    //decoded.squeeze();
 
     //Return decoded data
     return decoded;

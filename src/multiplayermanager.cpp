@@ -31,7 +31,7 @@ ServerConnection::ServerConnection(const QString &s, int p) :
 
 void ServerConnection::connected()
 {
-//    qDebug() << "ServerConnection::connected()" << tcpsocket->peerName();
+    //qDebug() << "ServerConnection::connected()" << tcpsocket->peerName();
 }
 
 void ServerConnection::disconnected()
@@ -65,7 +65,7 @@ void ServerConnection::textMessageReceived(QString b) {
 }
 
 void ServerConnection::readPendingDatagrams() {
-//    qDebug() << "ServerConnection::readPendingDatagrams";
+    //qDebug() << "ServerConnection::readPendingDatagrams";
     while (udpsocket && udpsocket->hasPendingDatagrams()) {
         QByteArray datagram;
         datagram.resize(udpsocket->pendingDatagramSize());
@@ -80,7 +80,7 @@ void ServerConnection::readPendingDatagrams() {
 
 void ServerConnection::SendTextMessage(const QString & s)
 {
-//    qDebug() << "ServerConnection::SendTextMessage" << s;
+    //qDebug() << "ServerConnection::SendTextMessage" << s;
     if (tcpsocket && tcpsocket->isValid()) {
         tcpsocket->sendTextMessage(s);
     }
@@ -226,7 +226,7 @@ void MultiPlayerManager::Update(QPointer <Player> player, const QString & url, c
         if (user_ghost->GetGhostAssetObjects().contains(user_ghost->GetProperties()->GetBodyID())) {
             QPointer <AssetObject> body_assetobj = user_ghost->GetGhostAssetObjects()[user_ghost->GetProperties()->GetBodyID()];
             if (body_assetobj && body_assetobj->GetGeom() && user_ghost->GetGhostAssetObjects().contains(user_ghost->GetProperties()->GetAnimID())) {
-//                qDebug() << "MultiPlayerManager::Update" << player->GetAnimID();
+                //qDebug() << "MultiPlayerManager::Update" << player->GetAnimID();
                 body_assetobj->GetGeom()->SetLinkAnimation(user_ghost->GetGhostAssetObjects()[user_ghost->GetProperties()->GetAnimID()]->GetGeom());
                 body_assetobj->GetGeom()->SetLoop(true);
             }
@@ -249,7 +249,7 @@ void MultiPlayerManager::Update(QPointer <Player> player, const QString & url, c
     bool send_updates = false;
     const float update_time_secs = float(update_time.elapsed()) / 1000.0f;
     if (update_time_secs > RoomObject::GetRate()) {
-//        qDebug() << "MultiPlayerManager::Update() - sending move packet";
+        //qDebug() << "MultiPlayerManager::Update() - sending move packet";
         update_time.restart();
         send_updates = true;        
     }
@@ -267,16 +267,16 @@ void MultiPlayerManager::Update(QPointer <Player> player, const QString & url, c
         QList <AssetRecordingPacket> l = a->GetPackets();
         unsigned int sample_rate = a->GetProperties()->GetSampleRate();
 
-//        qDebug() << "MultiPlayerManager::Update() recordingpackets" << l.size();
+        //qDebug() << "MultiPlayerManager::Update() recordingpackets" << l.size();
         for (int j=0; j<l.size(); ++j) {
-//            qDebug() << j << l[j].pPacket;
+            //qDebug() << j << l[j].pPacket;
             QJsonDocument doc = QJsonDocument::fromJson(l[j].pPacket.toUtf8());
             QJsonObject obj = doc.object();
 
-//            qDebug() << "MultiPlayerManager::Update() recordingdoc" << obj;
+            //qDebug() << "MultiPlayerManager::Update() recordingdoc" << obj;
 
             QString method = obj.value(QString("method")).toString();
-//            qDebug() << "MultiPlayerManager::Update() recordingmethod" << method;
+            //qDebug() << "MultiPlayerManager::Update() recordingmethod" << method;
 
             QJsonObject dataObject = obj.value("data").toObject();
             QVariantMap m = dataObject.toVariantMap();
@@ -284,11 +284,11 @@ void MultiPlayerManager::Update(QPointer <Player> player, const QString & url, c
 
             if (QString::compare(method, "user_moved") == 0) {
                 DoUserMoved(m);
-//                qDebug() << "MultiPlayerManager::Update() - user_moved" << obj.value("data").toString();
+                //qDebug() << "MultiPlayerManager::Update() - user_moved" << obj.value("data").toString();
             }
             else if (QString::compare(method, "user_chat") == 0) {
                 DoUserChat(m);
-//                qDebug() << "MultiPlayerManager::Update() - user_chat" << obj.value("data").toString();
+                //qDebug() << "MultiPlayerManager::Update() - user_chat" << obj.value("data").toString();
             }
             else if (QString::compare(method, "user_portal") == 0 || QString::compare(method, "new_portal") == 0) {
                 DoUserPortal(m);
@@ -296,7 +296,7 @@ void MultiPlayerManager::Update(QPointer <Player> player, const QString & url, c
         }
     }
 
-//    qDebug() << "MultiPlayerManager::Update" << enabled << url << name;    
+    //qDebug() << "MultiPlayerManager::Update" << enabled << url << name;    
     if (enabled) {
 
         DoSocketConnect();
@@ -313,7 +313,7 @@ void MultiPlayerManager::Update(QPointer <Player> player, const QString & url, c
                 QJsonObject obj = doc.object();
 
                 QString method = obj.value(QString("method")).toString();
-//                qDebug() << "method" << method;
+                //qDebug() << "method" << method;
 
                 QJsonObject dataObject = obj.value("data").toObject();
                 QVariantMap m = dataObject.toVariantMap();
@@ -338,11 +338,11 @@ void MultiPlayerManager::Update(QPointer <Player> player, const QString & url, c
                 else if (QString::compare(method, "user_moved") == 0) {
                     //update position of this player
                     DoUserMoved(m);
-//                    qDebug() << "MultiPlayerManager::Update() - user_moved" << obj.value("data").toString();
+                    //qDebug() << "MultiPlayerManager::Update() - user_moved" << obj.value("data").toString();
                 }
                 else if (QString::compare(method, "user_chat") == 0) {
                     DoUserChat(m);
-//                    qDebug() << "MultiPlayerManager::Update() - user_chat" << obj.value("data").toString();
+                    //qDebug() << "MultiPlayerManager::Update() - user_chat" << obj.value("data").toString();
                 }
                 else if (QString::compare(method, "user_portal") == 0 || QString::compare(method, "new_portal") == 0) {
                     DoUserPortal(m);
@@ -400,7 +400,7 @@ void MultiPlayerManager::Update(QPointer <Player> player, const QString & url, c
 
                     //update my position every x ms
                     if (send_updates) { //54.2 - patch to prevent server spamming
-//                        qDebug() << s.update_time.elapsed() << s.rooms[sendIndex].rate;
+                        //qDebug() << s.update_time.elapsed() << s.rooms[sendIndex].rate;
                         s->last_packet = GetMovePacket(player);
                         if (s->udpsocket && s->serverudpport > 0 && s->last_packet.size() <= 4096) {
                             s->udpsocket->writeDatagram(s->last_packet.toLatin1(), s->tcpsocket->peerAddress(), s->serverudpport);
@@ -446,7 +446,7 @@ void MultiPlayerManager::Update(QPointer <Player> player, const QString & url, c
         if (p) {
             //release 60.0 - 30+ second timeout delay... if too short, a long avatar load may trigger the timeout, avatar is deleted, then load started, then deleted, on and on...
             if (p->GetTimeElapsed() > RoomObject::GetLogoffRate() + 30.0f) {
-//                qDebug() << "MultiplayerManager::Update()  removing";
+                //qDebug() << "MultiplayerManager::Update()  removing";
                 players_to_remove.push_back(playerIndex.key());
             }
             else {
@@ -454,7 +454,7 @@ void MultiPlayerManager::Update(QPointer <Player> player, const QString & url, c
                 const bool player_in_room = (QString::compare(p->GetURL(), cur_url_id) == 0);
                 const bool player_in_adjacent_room = adjacent_urls.contains(p->GetURL());
 
-//                qDebug() << "MultiplayerManager::Update() setting player" << playerIndex.key() << player->GetProperties()->GetID() << p->GetURL() << "cur_url" << cur_url << "cur_url_id" << cur_url_id << QString::number(MathUtil::hash(cur_url), 16) <<  "in room" << player_in_room << player_in_adjacent_room;
+                //qDebug() << "MultiplayerManager::Update() setting player" << playerIndex.key() << player->GetProperties()->GetID() << p->GetURL() << "cur_url" << cur_url << "cur_url_id" << cur_url_id << QString::number(MathUtil::hash(cur_url), 16) <<  "in room" << player_in_room << player_in_adjacent_room;
                 p->SetPlayerInRoom(player_in_room);
                 p->SetPlayerInAdjacentRoom(player_in_adjacent_room);
 
@@ -464,8 +464,8 @@ void MultiPlayerManager::Update(QPointer <Player> player, const QString & url, c
 
                 p->Update(delta_time);
                 if (current_in_room.contains(p) && !players_in_room.contains(playerIndex.key())){
-    //                Analytics::PostEvent("user", "joined", player->GetID());
-//                    qDebug() << "MultiPlayerManager::Update() pushing back userenter" << p << p->GetProperties()->GetID();
+                    //Analytics::PostEvent("user", "joined", player->GetID());
+                    //qDebug() << "MultiPlayerManager::Update() pushing back userenter" << p << p->GetProperties()->GetID();
                     on_player_enter_events.push_back(p);
                     players_in_room[playerIndex.key()] = p;
                 }
@@ -487,8 +487,8 @@ void MultiPlayerManager::Update(QPointer <Player> player, const QString & url, c
     for (playerIndex = players_in_room.begin(); playerIndex != players_in_room.end(); ++playerIndex) {
         QPointer <RoomObject> p = playerIndex.value();
         if (!current_in_room.contains(p)){
-//            Analytics::PostEvent("user","left",player->GetID());
-//            qDebug() << "MultiPlayerManager::Update() pushing back userleft" << p << p->GetProperties()->GetID();
+            //Analytics::PostEvent("user","left",player->GetID());
+            //qDebug() << "MultiPlayerManager::Update() pushing back userleft" << p << p->GetProperties()->GetID();
             players_to_remove.push_back(playerIndex.key());
         }
     }
@@ -579,7 +579,7 @@ void MultiPlayerManager::DrawGL(QPointer <AssetShader> shader, const QVector3D &
 
 void MultiPlayerManager::SetAvatarFromGhost(QPointer <RoomObject> new_ghost)
 {
-//    qDebug() << "MultiPlayerManager::SetAvatarFromGhost()";
+    //qDebug() << "MultiPlayerManager::SetAvatarFromGhost()";
     if (user_ghost && new_ghost) {
         user_ghost->SetGhostAssetObjects(new_ghost->GetGhostAssetObjects());
         user_ghost->SetChildObjects(new_ghost->GetChildObjects());
@@ -789,7 +789,7 @@ bool MultiPlayerManager::SetChatMessage(QPointer <Player> player, const QString 
     }
     else {
         //qDebug() << "MultiPlayerManager::SetTextMessage() " << s;
-//        Analytics::PostEvent("player", "chat");
+        //Analytics::PostEvent("player", "chat");
         chat_message = s.toHtmlEscaped(); //60.0 adds escape characters for double quotes, etc., so they send properly
         AddChatMessage(user_ghost->GetProperties()->GetID() + QString(" ") + s, QColor(64,192,64));
         return true;
@@ -816,7 +816,7 @@ void MultiPlayerManager::SetRoomEdit(const QPointer <RoomObject> o)
 
 void MultiPlayerManager::SetRoomDeleteCode(const QString & s)
 {
-//    qDebug() << "MultiPlayerManager::SetRoomDeleteCode(const QString & s)" << s;
+    //qDebug() << "MultiPlayerManager::SetRoomDeleteCode(const QString & s)" << s;
     MathUtil::room_delete_code += s;
 }
 
@@ -833,7 +833,7 @@ QList <QPointer <RoomObject> > MultiPlayerManager::GetPlayersInRoom(const QStrin
     for (it=players.begin(); it!=players.end(); ++it) {
         QPointer <RoomObject> player = it.value();
         if (player && QString::compare(player->GetURL(), url_md5) == 0) {
-//            qDebug() << "MultiPlayerManager::GetPlayersInRoom()" << it.value()->GetID() << it.value()->GetTimeElapsed();
+            //qDebug() << "MultiPlayerManager::GetPlayersInRoom()" << it.value()->GetID() << it.value()->GetTimeElapsed();
             ps.push_back(player);
         }
     }
@@ -848,7 +848,7 @@ QMap <QString, DOMNode *> MultiPlayerManager::GetPlayersInRoomDOMNodeMap(const Q
     for (it=players.begin(); it!=players.end(); ++it) {
         QPointer <RoomObject> player = it.value();
         if (player && player->GetProperties() && QString::compare(player->GetURL(), url_md5) == 0) {
-//            qDebug() << "MultiPlayerManager::GetPlayersInRoomDOMNodeMap()" << player->GetProperties()->GetID(); //<< it.value()->GetTimeElapsed();
+            //qDebug() << "MultiPlayerManager::GetPlayersInRoomDOMNodeMap()" << player->GetProperties()->GetID(); //<< it.value()->GetTimeElapsed();
             ps[player->GetProperties()->GetID()] = player->GetProperties().data();
         }
     }
@@ -877,8 +877,8 @@ QString MultiPlayerManager::GetLogonPacket(const QString & userId, const QString
     s += "\"version\":\"" + QString(__JANUS_VERSION) + "\", ";
     s += "\"roomId\":\"" + url_id + "\"";
     s += "}}\n";
-//    qDebug() << s;
-//    qDebug() << "MultiPlayerManager::GetLogonPacket" << s;
+    //qDebug() << s;
+    //qDebug() << "MultiPlayerManager::GetLogonPacket" << s;
     return s;
 }
 
@@ -888,7 +888,7 @@ QString MultiPlayerManager::GetSubscribePacket(QPointer <Player> player, const Q
 {
     //When you wish to start receiving events about a room (you are in that room or looking through a portal)
     //{"method":"subscribe", "data": { "roomId": "345678354764987457" }}
-//    qDebug() << "MultiPlayerManager::GetSubscribePacket" << url_id;
+    //qDebug() << "MultiPlayerManager::GetSubscribePacket" << url_id;
     QString s = QString("{\"method\":\"subscribe\", \"data\":{");
     s += "\"userId\":\"" + player->GetProperties()->GetUserID() + "\", ";
     s += "\"roomId\":\"" + url_id + "\"";
@@ -933,25 +933,25 @@ QString MultiPlayerManager::GetMovePacket_Helper(QPointer <Player> player)
     }
 
     if (!mic_buffers.isEmpty()) {
-
-//        QByteArray buffer;
-//        for (int i=0; i<mic_buffers.size(); ++i) {
-//            buffer += mic_buffers[i];
-//        }
-//        QByteArray encoded = AudioUtil::encode(buffer);
-
-//        QByteArray encoded;
-//        for (int i=0; i<mic_buffers.size(); ++i) {
-//            encoded += AudioUtil::encode(mic_buffers[i]);
-//        }
-//        QByteArray encoded = AudioUtil::encode(buffer);
-
-//        qDebug() << "coding" << buffer.size() << encoded.size();
-//        packet += ",\"audio_opus\":\"" + encoded.toBase64() + "\"";
-//        packet += ",\"audio\":\"" + buffer.toBase64() + "\""; //Old
-
+        /*
+        QByteArray buffer;
         for (int i=0; i<mic_buffers.size(); ++i) {
-//            qDebug() << " sending packet" << "audio_opus"+QString::number(i) << "bytes" << mic_buffers[i].size();
+            buffer += mic_buffers[i];
+        }
+        QByteArray encoded = AudioUtil::encode(buffer);
+
+        QByteArray encoded;
+        for (int i=0; i<mic_buffers.size(); ++i) {
+            encoded += AudioUtil::encode(mic_buffers[i]);
+        }
+        QByteArray encoded = AudioUtil::encode(buffer);
+
+        qDebug() << "coding" << buffer.size() << encoded.size();
+        packet += ",\"audio_opus\":\"" + encoded.toBase64() + "\"";
+        packet += ",\"audio\":\"" + buffer.toBase64() + "\""; //Old
+        */
+        for (int i=0; i<mic_buffers.size(); ++i) {
+            //qDebug() << " sending packet" << "audio_opus"+QString::number(i) << "bytes" << mic_buffers[i].size();
             packet += ",\"audio_opus"+QString::number(i)+ "\":\"" + mic_buffers[i] + "\"";
         }
         packet += ",\"sound_level\":" + MathUtil::GetFloatAsString(SoundManager::GetMicLevel());
@@ -962,30 +962,30 @@ QString MultiPlayerManager::GetMovePacket_Helper(QPointer <Player> player)
         packet += ",\"typing\":\"true\"";
     }
     else {
-        //add a leap motion packet (if there's activity)
+        // add a leap motion packet (if there's activity)
         if (player->GetHand(0).is_active) {
             packet += ",\"hand0\":" + player->GetHand(0).GetJSON();
         }
 
-        //add a leap motion packet (if there's activity)
+        // add a leap motion packet (if there's activity)
         if (player->GetHand(1).is_active) {
             packet += ",\"hand1\":" +  player->GetHand(1).GetJSON();
         }
     }
 
-    //add an avatar packet
+    // add an avatar packet
     if (avatar_update) {
         packet += ",\"avatar\":\"" + avatar_data_encoded + "\"";
 
     }
 
-    //send room edit packet
+    // send room edit packet
     if (!room_edit_objs.isEmpty() || !room_edit_assets.isEmpty()) {
-        //room edit assets
+        // room edit assets
         packet += ",\"room_edit\":\"";
         packet += room_edit_assets;
 
-        //room edit objects
+        // room edit objects
         for (int i=0; i<room_edit_objs.size(); ++i) {
             if (room_edit_objs[i]) {
                  //packet += MathUtil::EncodeString(room_edit_objs[i]->GetXMLCode(true));
@@ -993,12 +993,12 @@ QString MultiPlayerManager::GetMovePacket_Helper(QPointer <Player> player)
             }
         }
 
-        //close part of packet
+        // close part of packet
         packet += "\"";
-//        qDebug() << "send packet" << packet;
+        //qDebug() << "send packet" << packet;
     }
 
-    //send room delete packet
+    // send room delete packet
     if (MathUtil::room_delete_code.length() > 0) {
         packet += ",\"room_delete\":\"" + MathUtil::EncodeString(MathUtil::room_delete_code) + "\"";
     }
@@ -1008,9 +1008,9 @@ QString MultiPlayerManager::GetMovePacket_Helper(QPointer <Player> player)
 
 QString MultiPlayerManager::GetUnsubscribePacket(QPointer <Player> player, const QString & url_id)
 {
-    //When you wish to start receiving events about a room (you are in that room or looking through a portal)
-    //{"method":"subscribe", "data": { "roomId": "345678354764987457" }}
-//    qDebug() << "MultiPlayerManager::GetUnsubscribePacket" << url_id;
+    // When you wish to start receiving events about a room (you are in that room or looking through a portal)
+    // {"method":"subscribe", "data": { "roomId": "345678354764987457" }}
+    //qDebug() << "MultiPlayerManager::GetUnsubscribePacket" << url_id;
     QString s("{\"method\":\"unsubscribe\", \"data\":{");
     s += "\"userId\":\"" + player->GetProperties()->GetUserID() + "\", ";
     s += "\"roomId\":\"" + url_id + "\"";
@@ -1020,9 +1020,9 @@ QString MultiPlayerManager::GetUnsubscribePacket(QPointer <Player> player, const
 
 QString MultiPlayerManager::GetEnterRoomPacket(QPointer <Player> player, const bool room_allows_party_mode)
 {
-    //When you pass through a portal:
-    //{"method":"enter_room", "data": { "roomId": "345678354764987457" }}
-//    qDebug() << "MultiPlayerManager::GetEnterRoomPacket" << cur_url_id << "party_mode enabled for room?" << room_allows_party_mode;
+    // When you pass through a portal:
+    // {"method":"enter_room", "data": { "roomId": "345678354764987457" }}
+    //qDebug() << "MultiPlayerManager::GetEnterRoomPacket" << cur_url_id << "party_mode enabled for room?" << room_allows_party_mode;
     QString s = "{\"method\":\"enter_room\", \"data\":{";
     s += "\"userId\":\"" + player->GetProperties()->GetUserID() + "\", ";
     s += "\"roomId\":\"" + cur_url_id + "\"";    
@@ -1035,16 +1035,27 @@ QString MultiPlayerManager::GetEnterRoomPacket(QPointer <Player> player, const b
         s += ", \"partyMode\":\"false\"";
     }
     s += "}}\n";
-//    qDebug() << s;
+    //qDebug() << s;
     return s;
 }
 
-//emulates a processed chat packet received from the server
+// emulates a processed chat packet received from the server
 QString MultiPlayerManager::GetUserChatPacket(QPointer <Player> player, const QString & chat_message)
 {
-    //{"method":"user_chat","data":{"roomId":"29621ebc54db600dd06fb6d2b0b76055",
-        //                              "userId":"Mecha_Cloudy_james",
-        //                              "message":{"data":"acknowledge","_userId":"Mecha_Cloudy_james","_userList":[]}}}
+    /*
+    {
+        "method":"user_chat",
+        "data":{
+            "roomId":"29621ebc54db600dd06fb6d2b0b76055",
+            "userId":"Mecha_Cloudy_james",
+            "message":{
+                "data":"acknowledge",
+                "_userId":"Mecha_Cloudy_james",
+                "_userList":[]
+            }
+        }
+    }
+    */
     QString packet = "{\"method\":\"user_chat\",\"data\":{";
     packet += "\"roomId\":\"" + cur_url_id + "\", ";
     packet += "\"userId\":\"" + player->GetProperties()->GetUserID() + "\", ";
@@ -1053,14 +1064,21 @@ QString MultiPlayerManager::GetUserChatPacket(QPointer <Player> player, const QS
     return packet;
 }
 
-//emulates a processed show portal packet received from server
+// emulates a processed show portal packet received from server
 QString MultiPlayerManager::GetUserPortalPacket(QPointer <Player> player)
 {
-    //{"method":"user_portal","data":{"roomId":"29621ebc54db600dd06fb6d2b0b76055",
-    //"userId":"Mecha_Cloudy_james",
-    //"url":"http://google.com",
-    //"pos":"0.17338 0 1.21804",
-    //"fwd":"-0.561532 0 0.72741"}}
+    /*
+    {
+        "method":"user_portal",
+        "data":{
+            "roomId":"29621ebc54db600dd06fb6d2b0b76055",
+            "userId":"Mecha_Cloudy_james",
+            "url":"http://google.com",
+            "pos":"0.17338 0 1.21804",
+            "fwd":"-0.561532 0 0.72741"
+        }
+    }
+    */
     const QVector3D d = -QVector3D(player->GetProperties()->GetDir()->toQVector3D().x(),
                                    0.0f,
                                    player->GetProperties()->GetDir()->toQVector3D().z());
@@ -1158,14 +1176,14 @@ void MultiPlayerManager::DoUserMoved(const QVariantMap & m)
     const QString userid = m["userId"].toString();
     const QString roomid = m["roomId"].toString();
 
-//    qDebug() << "MultiPlayerManager::DoUserMoved() " << userid;
+    //qDebug() << "MultiPlayerManager::DoUserMoved() " << userid;
     QPointer <RoomObject> cur_player;
     if (players.contains(userid) && players[userid]) {
         cur_player = players[userid];
     }
     else {
         cur_player = new RoomObject();
-//        qDebug() << "MULTI NEW PLAYER!" << cur_player << userid << roomid;
+        //qDebug() << "MULTI NEW PLAYER!" << cur_player << userid << roomid;
         cur_player->SetType(TYPE_GHOST);
         cur_player->GetProperties()->SetID(userid);
         cur_player->GetProperties()->SetLoop(false);
@@ -1211,10 +1229,10 @@ void MultiPlayerManager::DoUserPortal(const QVariantMap & m)
 void MultiPlayerManager::DoUserDisconnected(const QVariantMap & )
 {
     //no-op... user will just time out after 10 seconds
-//    const QString userid = m["userId"].toString();
-//    if (players.contains(userid) && players[usreid]) {
+    //const QString userid = m["userId"].toString();
+    //if (players.contains(userid) && players[usreid]) {
 
-//    }
+    //}
 }
 
 void MultiPlayerManager::DoUserChat(const QVariantMap & m)
@@ -1291,7 +1309,7 @@ void MultiPlayerManager::LoadAvatarData(const bool load_userid)
             QPointer <AssetObject> anim_obj(new AssetObject());
             anim_obj->GetProperties()->SetID(anim_names[i]);
             anim_obj->SetSrc(base_url, base_url + avatar_names[character] + "/" + anim_names[i] + ".fbx.gz");
-//            anim_obj->Load();
+            //anim_obj->Load();
             asset_obj_list[anim_names[i]] = anim_obj;
         }
 
@@ -1758,7 +1776,7 @@ QPointer <ServerConnection> MultiPlayerManager::GetConnection(const QString & se
 QPointer <ServerConnection> MultiPlayerManager::AddConnection(const QString & server, const int port)
 {
     ServerConnection * c = new ServerConnection(server, port);
-//    qDebug() << "MultiPlayerManager::AddConnection" << server << port;
+    //qDebug() << "MultiPlayerManager::AddConnection" << server << port;
 
     const QString host = QUrl(c->tcpserver).host();
     if (WebAsset::auth_list.contains(host)) {
@@ -1781,7 +1799,7 @@ void MultiPlayerManager::AddSubscribeURL(QPointer <ServerConnection> c, const QS
         r.id = MathUtil::MD5Hash(url);
         r.sent_subscribe = false;
         c->rooms[url] = r;
-//        qDebug() << "MultiPlayerManager::AddSubscribeURL" << c->tcpserver << c->tcpport << url;
+        //qDebug() << "MultiPlayerManager::AddSubscribeURL" << c->tcpserver << c->tcpport << url;
     }
 }
 
@@ -1797,7 +1815,7 @@ void MultiPlayerManager::RemoveSubscribeURL(QPointer <Player> player, QPointer <
         s->SendTextMessage(s->last_packet);
         s->rooms[url].sent_subscribe = false;
         s->rooms.remove(url);
-//        qDebug() << "MultiPlayerManager::RemoveSubscribeURL" << c->tcpserver << c->tcpport << url;
+        //qDebug() << "MultiPlayerManager::RemoveSubscribeURL" << c->tcpserver << c->tcpport << url;
     }
 }
 
@@ -1810,7 +1828,7 @@ void MultiPlayerManager::RemoveConnection(QPointer <ServerConnection> s)
     if (s->rooms.empty()) {
         s->Disconnect();
         connection_list.removeAll(s);
-//        qDebug() << "MultiPlayerManager::RemoveConnection" << c->tcpserver << c->tcpport;
+        //qDebug() << "MultiPlayerManager::RemoveConnection" << c->tcpserver << c->tcpport;
     }
 }
 

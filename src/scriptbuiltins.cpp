@@ -33,16 +33,16 @@ QScriptValue CreateObject(QScriptContext * context, QScriptEngine * engine)
         propsHash = engine->newObject();
     }
     propsHash.setProperty("type", typeName);
-//    qDebug() << "CreateObject" << typeName << propsHash.toString() << propsHash.property("js_id").toString() << propsHash.property("url").toString();
+    //qDebug() << "CreateObject" << typeName << propsHash.toString() << propsHash.property("js_id").toString() << propsHash.property("url").toString();
 
     // if the user didn't specify a javascript id for the object, generate one
     if (!propsHash.property("js_id").isValid()) {
         propsHash.setProperty("js_id", QString::number(RoomObject::NextUUID()));        
     }
-//    qDebug() << "CreateObject2" << typeName << propsHash.toString() << propsHash.property("js_id").toString() << propsHash.property("url").toString();
+    //qDebug() << "CreateObject2" << typeName << propsHash.toString() << propsHash.property("js_id").toString() << propsHash.property("url").toString();
     QScriptValue newId = propsHash.property("js_id");
 
-//    QScriptValue existingNode = roomObject.property("getObjectById").call(roomObject, QScriptValueList()<< QScriptValue(newId));
+    //QScriptValue existingNode = roomObject.property("getObjectById").call(roomObject, QScriptValueList()<< QScriptValue(newId));
     QScriptValue existingNode = engine->globalObject().property("__dom").property(newId.toString());
     if (existingNode.isValid()) {
         context->throwError(QString("An object with the specified js_id '") + newId.toString() + QString("' already exists!"));
@@ -57,10 +57,10 @@ QScriptValue CreateObject(QScriptContext * context, QScriptEngine * engine)
         roomObject.setProperty("_new_ids", newIds);
     }    
     newIds.property("push").call(newIds, QScriptValueList() << newId);
-//    qDebug() << "CreateObject pushing" << newId.toString();
+    //qDebug() << "CreateObject pushing" << newId.toString();
 
     QPointer <DOMNode> newNode = new DOMNode();
-//    newNode->setProperty("type", typeName); //60.1 - needed so DOMNodeFromScriptValue sets the correct type via SetType()
+    //newNode->setProperty("type", typeName); //60.1 - needed so DOMNodeFromScriptValue sets the correct type via SetType()
     newNode->SetType(DOMNode::StringToElementType(typeName));
     DOMNodeFromScriptValue(propsHash, newNode);    
     QScriptValue newDOMNodeScriptValue = engine->newQObject(newNode, QScriptEngine::QtOwnership, QScriptEngine::AutoCreateDynamicProperties);    
@@ -72,13 +72,13 @@ QScriptValue CreateObject(QScriptContext * context, QScriptEngine * engine)
         roomObject.property("objects").setProperty(newId.toString(), newDOMNodeScriptValue);
     }
     else {
-//        qDebug() << "CreateObject with specific parent used!" << parentValue.toVariant();
+        //qDebug() << "CreateObject with specific parent used!" << parentValue.toVariant();
         parentValue.property("appendChild").call(parentValue, QScriptValueList() << newDOMNodeScriptValue);
         engine->globalObject().property("__dom").setProperty(newId.toString(), newDOMNodeScriptValue);
-//        roomObject.property("objects").setProperty(newId.toString(), newDOMNodeScriptValue);
+        //roomObject.property("objects").setProperty(newId.toString(), newDOMNodeScriptValue);
     }
 
-//    qDebug() << "CreateObject" << newNode->GetJSID();
+    //qDebug() << "CreateObject" << newNode->GetJSID();
     return newDOMNodeScriptValue;
 }
 
@@ -91,7 +91,7 @@ QScriptValue RemoveObject(QScriptContext * context, QScriptEngine * engine)
     }
 
     QScriptValue cuedRemoveObject = engine->newObject();
-    //get the js_id of the object if object passed, otherwise it's a string for the js_id
+    // get the js_id of the object if object passed, otherwise it's a string for the js_id
     if (obj) {
         cuedRemoveObject.setProperty("name", obj->property("js_id").toString());
     }
@@ -132,7 +132,7 @@ QScriptValue AddCookie(QScriptContext * context, QScriptEngine * engine)
 
 QScriptValue XmlHttpRequestConstructor(QScriptContext * , QScriptEngine * engine)
 {
-//    qDebug() << "XmlHttpRequestConstructor";
+    //qDebug() << "XmlHttpRequestConstructor";
     ScriptableXmlHttpRequest * xhr = new ScriptableXmlHttpRequest(engine);
     QScriptValue v = engine->newQObject(xhr, QScriptEngine::QtOwnership);
     xhr->SetScriptValue(v);
@@ -256,7 +256,7 @@ QScriptValue ScriptSeekVideo(QScriptContext * context, QScriptEngine * engine)
     cuedSoundObject.setProperty("op", "seekVideo");
     if (context->argumentCount() >= 2) {
         cuedSoundObject.setProperty("pos", context->argument(1).toNumber());
-//        qDebug() << "ScriptSeekVideo" << context->argument(1).toNumber();
+        //qDebug() << "ScriptSeekVideo" << context->argument(1).toNumber();
     }
     else {
         cuedSoundObject.setProperty("pos", QScriptValue(0.0f));
@@ -334,17 +334,17 @@ QScriptValue GetObjectById(QScriptContext * context, QScriptEngine *engine)
     if (engine->globalObject().property("__dom").isValid())
     {
         if (engine->globalObject().property("__dom").property(id).isValid()) {
-//            qDebug() << "GetObjectById id" << id << "exists!";
+            //qDebug() << "GetObjectById id" << id << "exists!";
             return engine->globalObject().property("__dom").property(id);
         }
         else {
-//            qDebug() << "GetObjectById id" << id << "undefined!";
+            //qDebug() << "GetObjectById id" << id << "undefined!";
             return engine->undefinedValue();
         }
     }
     else
     {
-//        qDebug()<<"DOM is undefined!";
+        //qDebug()<<"DOM is undefined!";
         return engine->undefinedValue();
     }
 }
@@ -407,7 +407,7 @@ QScriptValue LoadNewAsset(QScriptContext *context, QScriptEngine *engine)
         globalObject.setProperty("__new_assets", newAssets);
     }
 
-//    qDebug() << "LoadNewAsset" << assetProps.toVariant().toMap();
+    //qDebug() << "LoadNewAsset" << assetProps.toVariant().toMap();
     QScriptValue asset = engine->newObject();
 
     asset.setProperty(QString("type"), assetType);
@@ -450,7 +450,7 @@ QScriptValue VectorConstructor(QScriptContext * context, QScriptEngine * engine)
         }
     }
 
-//    qDebug() << "VectorConstructor" << x << y << z << w;
+    //qDebug() << "VectorConstructor" << x << y << z << w;
     const QScriptValue result;
     //return engine->newQObject(result, new ScriptableVector(x, y, z, w), QScriptEngine::ScriptOwnership);
     return engine->newQObject(result, new ScriptableVector(x, y, z, w), QScriptEngine::QtOwnership);
@@ -550,9 +550,9 @@ QScriptValue Add(QScriptContext * context, QScriptEngine * )
 {
     QScriptValue v1 = context->argument(0);
 
-//    qDebug() << "before" << v1.property("x").toNumber() << v1.property("y").toNumber() << v1.property("z").toNumber();
+    //qDebug() << "before" << v1.property("x").toNumber() << v1.property("y").toNumber() << v1.property("z").toNumber();
     if (context->argumentCount() == 4 && context->argument(1).isNumber() && context->argument(2).isNumber() && context->argument(3).isNumber()) {
-//        qDebug() << "1";
+        //qDebug() << "1";
         const float fx = context->argument(1).toNumber();
         const float fy = context->argument(2).toNumber();
         const float fz = context->argument(3).toNumber();
@@ -561,14 +561,14 @@ QScriptValue Add(QScriptContext * context, QScriptEngine * )
         v1.setProperty("z", v1.property("z").toNumber() + fz);
     }
     else if (context->argumentCount() == 2 && context->argument(1).isNumber()) {
-//        qDebug() << "2";
+        //qDebug() << "2";
         const float f = context->argument(1).toNumber();
         v1.setProperty("x", v1.property("x").toNumber() + f);
         v1.setProperty("y", v1.property("y").toNumber() + f);
         v1.setProperty("z", v1.property("z").toNumber() + f);
     }
     else {
-//        qDebug() << "3";
+        //qDebug() << "3";
         QScriptValue v1 = context->argument(0);
         QScriptValue v2 = context->argument(1);
 
@@ -576,7 +576,7 @@ QScriptValue Add(QScriptContext * context, QScriptEngine * )
         v1.setProperty("y", v1.property("y").toNumber() + v2.property("y").toNumber());
         v1.setProperty("z", v1.property("z").toNumber() + v2.property("z").toNumber());
     }
-//    qDebug() << "result" << v1.property("x").toNumber() << v1.property("y").toNumber() << v1.property("z").toNumber();
+    //qDebug() << "result" << v1.property("x").toNumber() << v1.property("y").toNumber() << v1.property("z").toNumber();
 
     return v1;
 }

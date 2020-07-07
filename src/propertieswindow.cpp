@@ -234,7 +234,7 @@ PropertiesWindow::PropertiesWindow(Game * g) :
     collision_scale = new PropertiesWindowVectorWidget;
     connect(collision_scale, SIGNAL(valueChanged()), this, SLOT(SetSyncOnObject()));
 
-//    setWindowTitle("Properties");
+    //setWindowTitle("Properties");
 
     QVBoxLayout * layout = new QVBoxLayout();
     layout->setAlignment(Qt::AlignTop);
@@ -251,7 +251,7 @@ PropertiesWindow::PropertiesWindow(Game * g) :
     object_groupbox->setLayout(object_layout);
     object_groupbox->setTitle("PROPERTIES");
     object_groupbox->setMinimumHeight(24*object_layout->rowCount()+24);
-//    object_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    //object_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 
     QFormLayout * xform_layout = new QFormLayout();
     xform_groupbox = new QGroupBox();
@@ -261,7 +261,7 @@ PropertiesWindow::PropertiesWindow(Game * g) :
     xform_groupbox->setLayout(xform_layout);
     xform_groupbox->setTitle("TRANSFORM");
     xform_groupbox->setMinimumHeight(24*xform_layout->rowCount()+24);
-//    xform_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    //xform_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 
     QFormLayout * appear_layout = new QFormLayout();
     appear_groupbox = new QGroupBox();
@@ -273,7 +273,7 @@ PropertiesWindow::PropertiesWindow(Game * g) :
     appear_groupbox->setLayout(appear_layout);
     appear_groupbox->setTitle("APPEARANCE");
     appear_groupbox->setMinimumHeight(24*appear_layout->rowCount()+24);
-//    appear_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    //appear_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 
     QFormLayout * light_layout = new QFormLayout();
     light_layout->addRow("Intensity", light_intensity);
@@ -285,7 +285,7 @@ PropertiesWindow::PropertiesWindow(Game * g) :
     light_groupbox->setTitle("LIGHT");
     light_groupbox->setVisible(false);
     light_groupbox->setMinimumHeight(24*light_layout->rowCount()+24);
-//    light_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    //light_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 
     QFormLayout * link_layout = new QFormLayout();
     link_layout->addRow("URL", link_url);
@@ -306,7 +306,7 @@ PropertiesWindow::PropertiesWindow(Game * g) :
     sound_groupbox->setTitle("SOUND");
     sound_groupbox->setVisible(false);
     sound_groupbox->setMinimumHeight(24*sound_layout->rowCount()+24);
-//    sound_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    //sound_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 
     QFormLayout * particle_layout = new QFormLayout();
     particle_layout->addRow("image_id", particle_imageid);
@@ -328,7 +328,7 @@ PropertiesWindow::PropertiesWindow(Game * g) :
     particle_groupbox->setTitle("PARTICLES");
     particle_groupbox->setVisible(false);
     particle_groupbox->setMinimumHeight(24*particle_layout->rowCount()+24);
-//    particle_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    //particle_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 
     QFormLayout * collider_layout = new QFormLayout();
     collider_layout->addRow("Type", collision_type);
@@ -339,7 +339,7 @@ PropertiesWindow::PropertiesWindow(Game * g) :
     collision_groupbox->setTitle("COLLISION");
     collision_groupbox->setVisible(false);
     collision_groupbox->setMinimumHeight(24*collider_layout->rowCount()+24);
-//    collision_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    //collision_groupbox->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 
     layout->addWidget(object_groupbox);
     layout->addWidget(xform_groupbox);
@@ -772,7 +772,7 @@ void PropertiesWindow::SetCollisionType(const QString s)
 
 void PropertiesWindow::AddChildObject(const QString child_type)
 {
-//    qDebug() << "PropertiesWindow::AddChildObject" << index;
+    //qDebug() << "PropertiesWindow::AddChildObject" << index;
     if (cur_object) {
         QPointer <RoomObject> o = new RoomObject();
         o->SetParentObject(cur_object);

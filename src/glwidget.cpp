@@ -18,7 +18,7 @@ GLWidget::GLWidget()
 
 GLWidget::~GLWidget()
 {
-//    qDebug() << "GLWidget::~GLWidget()";
+    //qDebug() << "GLWidget::~GLWidget()";
     //delete Renderer::m_pimpl;
 }
 
@@ -60,7 +60,7 @@ void GLWidget::SetDefaultProjectionPersp(const float fov, const float aspect, co
 
 void GLWidget::SetGrab(const bool b)
 {
-//    qDebug() << "GLWidget::SetGrab" << b;
+    //qDebug() << "GLWidget::SetGrab" << b;
     grabbed = b;
 
     if (b) {
@@ -351,13 +351,13 @@ void GLWidget::initializeGL()
 
 void GLWidget::resizeGL(int , int )
 {
-//    qDebug() << "GLWidget::resizeGL" << w << h;
+    //qDebug() << "GLWidget::resizeGL" << w << h;
     SetupFramebuffer();
 }
 
 void GLWidget::paintGL()
 {
-//    qDebug() << "GLWidget::paintGL()" << disp_mode;
+    //qDebug() << "GLWidget::paintGL()" << disp_mode;
     if (game == nullptr || game->GetEnvironment() == nullptr || game->GetEnvironment()->GetCurRoom() == nullptr) {
         return;
     }

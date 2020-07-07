@@ -73,8 +73,8 @@ void ParticleSystem::Update(QPointer <DOMNode> props, const double dt_sec)
         {
             if (p_emitted < target_emitted)
             {
-//                qDebug() << "CREATING PARTICLE" << p_emitted << p_target_emitted << "rate" << props->GetRate() << "count" << props->GetCount();
-//                qDebug() << "vel and randvel" << props->GetVel()->toQVector3D() << props->GetRandVel()->toQVector3D();
+                //qDebug() << "CREATING PARTICLE" << p_emitted << p_target_emitted << "rate" << props->GetRate() << "count" << props->GetCount();
+                //qDebug() << "vel and randvel" << props->GetVel()->toQVector3D() << props->GetRandVel()->toQVector3D();
 
                 if (emitter_mesh && emitter_mesh->GetGeom() && emitter_mesh->GetGeom()->GetData().GetNumMaterials() > 0)
                 {
@@ -197,7 +197,7 @@ void ParticleSystem::Update(QPointer <DOMNode> props, const double dt_sec)
     }
 
     if (msec_passed >= 1000) {
-//        qDebug() << "p_emitted" << p_emitted;
+        //qDebug() << "p_emitted" << p_emitted;
         p_time.restart();
         p_emitted = 0;
     }
@@ -211,7 +211,7 @@ void ParticleSystem::Update(QPointer <DOMNode> props, const double dt_sec)
 
 void ParticleSystem::DrawGL(QPointer <AssetShader> shader, const QVector3D eye_pos, QPointer <AssetObject> obj)
 {
-    //    qDebug() << "ParticleSystem::DrawGL" << vbo_id;
+    //qDebug() << "ParticleSystem::DrawGL" << vbo_id;
     // draw
     this->eye_pos = eye_pos;   
 
@@ -222,7 +222,7 @@ void ParticleSystem::DrawGL(QPointer <AssetShader> shader, const QVector3D eye_p
         const int count = particles.size();
         for (int j=0; j<count; ++j)
         {
-//            const int i = ((j + p_to_draw) % count);
+            //const int i = ((j + p_to_draw) % count);
             const int i = j;
             const Particle & p = particles[i];
 
@@ -275,7 +275,7 @@ void ParticleSystem::DrawGL(QPointer <AssetShader> shader, const QVector3D eye_p
 
 void ParticleSystem::CreateVBO()
 {
-    //    qDebug() << "ParticleSystem::CreateVBO()";
+    //qDebug() << "ParticleSystem::CreateVBO()";
 	uint32_t const particle_count = particles.size();
     uint32_t const verts_per_particle = 4;
     uint32_t const indices_per_particle = 6;

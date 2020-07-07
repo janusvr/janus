@@ -52,7 +52,7 @@ bool ViveManager::Initialize()
         SetHMDString("vive");
     }
 
-//    qDebug() << "ViveRenderer::Initialize() - Captured input focus?" << m_pHMD->CaptureInputFocus();
+    //qDebug() << "ViveRenderer::Initialize() - Captured input focus?" << m_pHMD->CaptureInputFocus();
     m_pHMD->GetRecommendedRenderTargetSize( &m_nRenderWidth, &m_nRenderHeight );
 
     // Add 4 render target size per-eye so that we have 8 pixels of buffer between the viewports
@@ -106,7 +106,7 @@ void ViveManager::InitializeGL()
     //currently targeting standing
     //m_pCompositor->SetTrackingSpace(vr::TrackingUniverseSeated);
     m_pCompositor->SetTrackingSpace(tracking_origin);
-//    m_pCompositor->ShowMirrorWindow();
+    //m_pCompositor->ShowMirrorWindow();
 }
 
 void ViveManager::Shutdown()

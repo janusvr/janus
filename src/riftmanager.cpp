@@ -203,7 +203,7 @@ void RiftManager::Update()
     last_controller_xform[1] = controller_xform[1];
     controller_xform[0] = (using_touch[0] ? (m * GetMatrixFromPose(hmdState.HandPoses[0].ThePose, false)) : QMatrix4x4());
     controller_xform[1] = (using_touch[1] ? (m * GetMatrixFromPose(hmdState.HandPoses[1].ThePose, false)) : QMatrix4x4());
-//    qDebug() << "using touch" << using_touch[0] << using_touch[1] << controller_transform[0] << controller_transform[1];
+    //qDebug() << "using touch" << using_touch[0] << using_touch[1] << controller_transform[0] << controller_transform[1];
 
     ovrSessionStatus sessionStatus;
     ovr_GetSessionStatus(Session, &sessionStatus);
@@ -416,7 +416,7 @@ void RiftManager::EndRendering()
     if (Session == NULL || eyeRenderTexture[0] == NULL) {
         return;
     }
-//    qDebug() << "RiftManager::EndRendering()";
+    //qDebug() << "RiftManager::EndRendering()";
 
     // Do distortion rendering, Present and flush/sync
     // Set up positional data.
@@ -508,7 +508,7 @@ void RiftManager::ReCentre()
 
 void RiftManager::TriggerHapticPulse(const int i, const int val)
 {
-//    ovr_SetControllerVibration(Session, (i == 0) ? ovrControllerType_LTouch : ovrControllerType_RTouch, 0.5f, float(val)/255.0f);
+    //ovr_SetControllerVibration(Session, (i == 0) ? ovrControllerType_LTouch : ovrControllerType_RTouch, 0.5f, float(val)/255.0f);
     ovrHapticsBuffer * buffer = new ovrHapticsBuffer;
     buffer->SamplesCount = 10;
     int * samples = new int[buffer->SamplesCount];
@@ -531,7 +531,7 @@ void RiftManager::Platform_ProcessMessages()
             if (!ovr_Message_IsError(message)) {
                 // User is entitled.
                 qDebug() << "OVRPlatform - Entitlement check succeeded";
-//                entitled = false; //uncomment to test entitlement check
+                //entitled = false; //uncomment to test entitlement check
             }
             else {
                 // User is NOT entitled.  Exit

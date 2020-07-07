@@ -44,8 +44,8 @@ CodeEditorWindow::CodeEditorWindow(Game *g) :
     v->addWidget(error_log,4,0,1,2);
 
     v->setAlignment(Qt::AlignTop);
-//    v->setSpacing(0);
-//    v->setMargin(1);
+    //v->setSpacing(0);
+    //v->setMargin(1);
 
     setLayout(v);
 }
@@ -153,7 +153,7 @@ void CodeEditorWindow::Update()
 
     //update error log
     if (game) {
-//        qDebug() << "errors" << MathUtil::GetErrorLogTemp().size() << AssetScript::GetErrors().size();
+        //qDebug() << "errors" << MathUtil::GetErrorLogTemp().size() << AssetScript::GetErrors().size();
         const QStringList accum_errs = MathUtil::GetErrorLogTemp();
         for (int i=0; i<accum_errs.size(); ++i) {
             AddError(accum_errs[i]);
@@ -209,7 +209,7 @@ void CodeEditorWindow::SlotSaveChanges()
 
                 const QString js_filename = QUrl(a->GetProperties()->GetSrcURL()).toLocalFile();
 
-    //            qDebug() << "a->GetFullURL();" << a->GetFullURL() << js_filename;
+                //qDebug() << "a->GetFullURL();" << a->GetFullURL() << js_filename;
                 QFile file(js_filename);
                 if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
                     qDebug() << "CodeEditorWindow::SlotSaveChanges(): JS File " << js_filename << " can't be saved";
@@ -252,7 +252,7 @@ void CodeEditorWindow::SlotGetRoomCode()
     game->GetEnvironment()->GetCurRoom()->SaveXML(ofs);
 
     if (!textedits.isEmpty()) {
-//        qDebug() << "CodeEditorWindow::SlotGetRoomCode()" << room_code;
+        //qDebug() << "CodeEditorWindow::SlotGetRoomCode()" << room_code;
        textedits[0]->setPlainText(room_code);
     }
 }

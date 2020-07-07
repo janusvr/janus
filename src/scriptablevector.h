@@ -49,7 +49,7 @@ public:
     void SetW(float new_w);
     inline float GetW() const { return vector_data.w(); }
 
-//    inline QVector3D * GetQVector3D() { return &vector_data; }
+    //inline QVector3D * GetQVector3D() { return &vector_data; }
     inline QVector3D toQVector3D() { return vector_data.toVector3D(); }
 
     inline QVector4D toQVector4D() { return vector_data; }

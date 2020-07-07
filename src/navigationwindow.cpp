@@ -22,7 +22,7 @@ NavigationWindow::NavigationWindow(Game * g) :
     connect(&tree_widget, SIGNAL(itemSelectionChanged()), this, SLOT(ItemSelectionChanged()));
     connect(game->GetEnvironment(), SIGNAL(RoomsChanged()), this, SLOT(DoUpdate()));
 
-//    QWidget * w = new QWidget(this);
+    //QWidget * w = new QWidget(this);
     QGridLayout * v = new QGridLayout();
     v->addWidget(&tree_widget,0,0,1,1);
     v->setSpacing(0);
@@ -33,7 +33,7 @@ NavigationWindow::NavigationWindow(Game * g) :
 
 void NavigationWindow::DoUpdate()
 {
-//    qDebug() << "NavigationWindow::DoUpdate()";
+    //qDebug() << "NavigationWindow::DoUpdate()";
     update = true;
 }
 
@@ -42,7 +42,7 @@ void NavigationWindow::Update()
     QPointer <Room> r = game->GetEnvironment()->GetCurRoom();
     if (r != cur_room) {
         cur_room = r;
-//        update = true;
+        //update = true;
     }
 
     QPointer <Room> root = game->GetEnvironment()->GetRootRoom();
@@ -98,7 +98,7 @@ void NavigationWindow::Update_Helper(QTreeWidgetItem * p, QPointer <Room> r)
 
 void NavigationWindow::ItemSelectionChanged()
 {
-//    qDebug() << "NavigationWindow::ItemSelectionChanged";
+    //qDebug() << "NavigationWindow::ItemSelectionChanged";
     QList <QTreeWidgetItem *> items = tree_widget.selectedItems();
     if (!items.isEmpty() && item_node_map.contains(items.first())) {
         QPointer <Room> r = item_node_map[items.first()];

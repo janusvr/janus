@@ -87,11 +87,11 @@ QScriptValue DOMNodeToScriptValue(QScriptEngine *engine, const QPointer <DOMNode
 
 void DOMNodeFromScriptValue(const QScriptValue &obj, QPointer <DOMNode> &node)
 {
-//    qDebug() << "DOMNodeFromScriptValue" << (qvariant_cast<ScriptableVector *>(obj.toVariant().toMap()["pos"]))->toQVector3D();    
+    //qDebug() << "DOMNodeFromScriptValue" << (qvariant_cast<ScriptableVector *>(obj.toVariant().toMap()["pos"]))->toQVector3D();    
     //special condition
     if (obj.property("js_id").isValid() && obj.property("js_id").toString()==QString("__room")) {
         node->SetType(TYPE_ROOM);
     }
     node->SetProperties(obj.toVariant().toMap());
-//    qDebug() << "DOMNodeFromScriptValue" << node->GetS("js_id");
+    //qDebug() << "DOMNodeFromScriptValue" << node->GetS("js_id");
 }

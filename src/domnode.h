@@ -194,12 +194,12 @@ class DOMNode : public QObject, protected QScriptable
     Q_PROPERTY(QString hmd_type READ GetHMDType)
     Q_PROPERTY(QString device_type READ GetDeviceType)
     Q_PROPERTY(ScriptableVector * emitter_pos READ GetEmitterPos WRITE SetEmitterPos)
-//    Q_PROPERTY(bool running READ GetRunning)
-//    Q_PROPERTY(bool flying READ GetFlying)
-//    Q_PROPERTY(bool walking READ GetWalking)
-//    Q_PROPERTY(bool speaking READ GetSpeaking)
+    //Q_PROPERTY(bool running READ GetRunning)
+    //Q_PROPERTY(bool flying READ GetFlying)
+    //Q_PROPERTY(bool walking READ GetWalking)
+    //Q_PROPERTY(bool speaking READ GetSpeaking)
 
-//    Q_PROPERTY(ScriptableVector * fwd READ GetFwd WRITE SetFwd)
+    //Q_PROPERTY(ScriptableVector * fwd READ GetFwd WRITE SetFwd)
 public:
 
     explicit DOMNode(QObject *parent = 0);

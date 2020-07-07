@@ -6,7 +6,7 @@ AssetRecording::AssetRecording() :
     packet_index(0),
     playing(false)
 {
-//    qDebug() << "AssetRecording::AssetRecording()";
+    //qDebug() << "AssetRecording::AssetRecording()";
     props->SetType(TYPE_ASSETRECORDING);
     props->SetSampleRate(44100);
     dt_time.start();
@@ -18,7 +18,7 @@ AssetRecording::~AssetRecording()
 
 void AssetRecording::Load()
 {
-//    qDebug() << "AssetRecording::Load()" << GetS("_src_url");
+    //qDebug() << "AssetRecording::Load()" << GetS("_src_url");
     WebAsset::Load(QUrl(props->GetSrcURL()));
 }
 
@@ -39,7 +39,7 @@ bool AssetRecording::GetProcessed() const
 
 void AssetRecording::Update()
 {
-//    qDebug() << "AssetRecording::Update()" << GetLoaded() << GetProcessing() << room_id;
+    //qDebug() << "AssetRecording::Update()" << GetLoaded() << GetProcessing() << room_id;
     if (GetLoaded() && !GetProcessing() && !room_id.isEmpty()) {
         SetProcessing(true);
         QtConcurrent::run(this, &AssetRecording::LoadDataThread);
@@ -60,7 +60,7 @@ void AssetRecording::Update()
 
 void AssetRecording::Play(const bool loop)
 {
-//    qDebug() << "AssetRecording::Play" << loop;
+    //qDebug() << "AssetRecording::Play" << loop;
     props->SetLoop(loop);
     packet_index = 0;
     playing = true;
@@ -76,7 +76,7 @@ void AssetRecording::Seek(const float pos)
         const double cur_time = start_time + play_time_elapsed;
         for (int i=0; i<recording_data.size(); ++i) {
             if (cur_time>recording_data[i].pTime) {
-    //            qDebug() << "cur time less than recording_data i" << i << recording_data.size() << QString::number(cur_time, 'g', 17) << QString::number(recording_data[i].pTime, 'g', 17);
+                //qDebug() << "cur time less than recording_data i" << i << recording_data.size() << QString::number(cur_time, 'g', 17) << QString::number(recording_data[i].pTime, 'g', 17);
                 packet_index = i;
             }
             else {
@@ -84,7 +84,7 @@ void AssetRecording::Seek(const float pos)
             }
         }
     }
-//    qDebug() << "AssetRecording::Seek seek" << play_time_elapsed << "packet_index" << packet_index;
+    //qDebug() << "AssetRecording::Seek seek" << play_time_elapsed << "packet_index" << packet_index;
 }
 
 void AssetRecording::Pause()
@@ -121,7 +121,7 @@ QList <AssetRecordingPacket> AssetRecording::GetPackets()
         }
     }
 
-//    qDebug() << "AssetRecording::GetPackets()" << packet_list.size();
+    //qDebug() << "AssetRecording::GetPackets()" << packet_list.size();
     return packet_list;
 }
 
@@ -164,17 +164,17 @@ void AssetRecording::LoadDataThread()
             QJsonObject obj = doc.object();
             QJsonObject dataObject = obj.value("data").toObject();
             QVariantMap m = dataObject.toVariantMap();
-//            qDebug() << s.toUtf8() << obj << dataObject << m;
+            //qDebug() << s.toUtf8() << obj << dataObject << m;
 
             original_room_id = m["roomId"].toString();
         }
 
-//        qDebug() << "replace" << original_room_id << room_id;
+        //qDebug() << "replace" << original_room_id << room_id;
         p.pPacket = s.replace(original_room_id, room_id);
-//        p.pPacket = s;
+        //p.pPacket = s;
 
         recording_data.push_back(p);
-//        qDebug() << "packet" << p.pTime << p.pPacket;
+        //qDebug() << "packet" << p.pTime << p.pPacket;
     }
 
     SetProcessed(true);

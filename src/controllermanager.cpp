@@ -262,7 +262,7 @@ void ControllerManager::UpdateControllers()
 
                 s[i].x1 = hmd_manager->GetControllerThumbpad(i).x();
                 s[i].y1 = hmd_manager->GetControllerThumbpad(i).y();
-//                qDebug() << "hey" << i << s[i].x1 << s[i].y1;
+                //qDebug() << "hey" << i << s[i].x1 << s[i].y1;
             }
 
             //update buttons (j == 0 is nav, j == 1 is interact)
@@ -314,7 +314,7 @@ void ControllerManager::UpdateControllers()
                     s[i].b[j].value = 0.0f;
                 }
 
-//                qDebug() << i << j << b_hover;
+                //qDebug() << i << j << b_hover;
                 s[i].b[j].hover = b_hover;
 
                 if (b_pressed && !s[i].b[j].pressed) {
@@ -351,7 +351,7 @@ void ControllerManager::UpdateControllers()
 void ControllerManager::UpdateGamepad(GAMEPAD_DEVICE dev)
 {    
     if (!GamepadIsConnected(dev)) {
-//        printf("%d) n/a\n", dev);
+        //printf("%d) n/a\n", dev);
         return;
     }
 
@@ -362,7 +362,7 @@ void ControllerManager::UpdateGamepad(GAMEPAD_DEVICE dev)
     s[0].y = qMax(-1.0f, qMin(1.0f, float(ly)/32767.0f));
     s[1].x = qMax(-1.0f, qMin(1.0f, float(rx)/32767.0f));
     s[1].y = qMax(-1.0f, qMin(1.0f, float(ry)/32767.0f));
-//    qDebug() << lx << ly << rx << ry;
+    //qDebug() << lx << ly << rx << ry;
     s[0].t[0].value = GamepadTriggerLength(dev, TRIGGER_LEFT);   
     s[1].t[0].value = GamepadTriggerLength(dev, TRIGGER_RIGHT);
 

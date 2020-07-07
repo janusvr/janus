@@ -291,7 +291,7 @@ public:
     {
         return parent_object;
     }
-//    void SetContainerRoom(QPointer<Room>);
+    //void SetContainerRoom(QPointer<Room>);
 
     void SetDirty(const bool);
     bool IsDirty() const;

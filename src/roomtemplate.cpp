@@ -73,7 +73,7 @@ void RoomTemplate::LoadData(const QString & filename)
     //read mount points
     eachline = ifs.readLine().split(" ");
     const int nMounts = eachline.last().toInt();
-//    qDebug() << "nMounts" << nMounts;
+    //qDebug() << "nMounts" << nMounts;
 
     for (int i=0; i<nMounts; ++i) {
         eachline = ifs.readLine().split(" ");

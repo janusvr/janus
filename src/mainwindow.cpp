@@ -188,7 +188,7 @@ void MainWindow::keyPressEvent(QKeyEvent* e)
 
 void MainWindow::keyReleaseEvent(QKeyEvent* e)
 {
-//    qDebug() << "MainWindow::keyReleaseEvent()";
+    //qDebug() << "MainWindow::keyReleaseEvent()";
     if (e->key()==Qt::Key_T && !game->GetPlayerEnteringText() && !urlbar->hasFocus()
             && !codeeditor_window->GetHasFocus() && !properties_window->GetHasFocus()) {
         if (e->modifiers().testFlag(Qt::ControlModifier)) {
@@ -315,7 +315,7 @@ void MainWindow::TimeOut()
     }
 
     //59.3 - makeCurrent call not needed/costly
-//    glwidget->makeCurrent();
+    //glwidget->makeCurrent();
 
     //Check for changes to antialiasing setting
     uint32_t sampleCount = (SettingsManager::GetAntialiasingEnabled()) ? 4 : 0;
@@ -330,7 +330,7 @@ void MainWindow::TimeOut()
 
 void MainWindow::Initialize()
 {    
-//    qDebug() << "MainWindow::Initialize()";
+    //qDebug() << "MainWindow::Initialize()";
     glwidget->makeCurrent();
 
     SetupWidgets();
@@ -445,7 +445,7 @@ void MainWindow::Initialize()
 
 void MainWindow::UpdateHands()
 {
-//    qDebug() << "MainWindow::UpdateHands()" << leap_controller.isConnected() << hmd_manager << hmd_manager->GetEnabled();
+    //qDebug() << "MainWindow::UpdateHands()" << leap_controller.isConnected() << hmd_manager << hmd_manager->GetEnabled();
     QPointer <Player> player = game->GetPlayer();
     player->GetHand(0).is_active = false;
     player->GetHand(1).is_active = false;
@@ -482,7 +482,7 @@ void MainWindow::Closed()
 void MainWindow::SetupWidgets()
 {
     const unsigned int btn_size = 32 * this->devicePixelRatio();
-//    qDebug() << "MainWindow::SetupWidgets()" << btn_size << this->devicePixelRatio();
+    //qDebug() << "MainWindow::SetupWidgets()" << btn_size << this->devicePixelRatio();
 
     button_back = new QPushButton();
     button_back->setIcon(QIcon(MathUtil::GetApplicationPath() + "assets/icons/back.png"));
@@ -665,7 +665,7 @@ void MainWindow::SetupMenuWidgets()
     connect(settingsAct, &QAction::triggered, this, &MainWindow::ActionSettings);
 
     virtualMenuAct = new QAction(tr("Virtual Menu"), this);
-//    virtualMenuAct->setShortcut(QKeySequence(Qt::Key_Tab)); //62.0 - enabling this causes TAB not to work in edit mode
+    //virtualMenuAct->setShortcut(QKeySequence(Qt::Key_Tab)); //62.0 - enabling this causes TAB not to work in edit mode
     virtualMenuAct->setStatusTip(tr("Show/hide virtual menu"));
     connect(virtualMenuAct, &QAction::triggered, this, &MainWindow::ActionVirtualMenu);
 
@@ -799,7 +799,7 @@ void MainWindow::ActionOpen()
     QString filename = QFileDialog::getOpenFileName(this, "Open...", MathUtil::GetWorkspacePath(), tr("HTML (*.html)"));
     if (!filename.isNull()) {
         QString local_file = QUrl::fromLocalFile(filename).toString();
-//        qDebug() << QUrl(filename).isLocalFile() << filename << local_file;
+        //qDebug() << QUrl(filename).isLocalFile() << filename << local_file;
         game->CreatePortal(local_file, false);
     }
 }
@@ -938,7 +938,7 @@ void MainWindow::DoOpenURL(const QString url)
         s = "http://" + s;
     }
 
-//    qDebug() << "MainWindow::DoOpenURL" << url << s;
+    //qDebug() << "MainWindow::DoOpenURL" << url << s;
     game->CreatePortal(s, !local_file);
     glwidget->SetGrab(true);
 }

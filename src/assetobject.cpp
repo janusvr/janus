@@ -2,7 +2,7 @@
 
 AssetObject::AssetObject()
 {    
-//    qDebug() << "AssetObject::AssetObject" << props;
+    //qDebug() << "AssetObject::AssetObject" << props;
     props->SetType(TYPE_ASSETOBJECT);
     geom = new Geom();
     tex_url_str = QVector <QString> (ASSETSHADER_NUM_TEXTURES, QString(""));    
@@ -12,7 +12,7 @@ AssetObject::AssetObject()
 
 AssetObject::~AssetObject()
 {
-//    qDebug() << "AssetObject::~AssetObject()";
+    //qDebug() << "AssetObject::~AssetObject()";
     if (geom) {
         delete geom;
     }
@@ -85,20 +85,20 @@ void AssetObject::SetTextureFile(const QString & tex, const unsigned int index)
 
 void AssetObject::SetMTLFile(const QString & mtl)
 {    
-//    qDebug() << "AssetObject::SetMTLFile" << mtl << QUrl(props->GetBaseURL()).resolved(mtl).toString();
+    //qDebug() << "AssetObject::SetMTLFile" << mtl << QUrl(props->GetBaseURL()).resolved(mtl).toString();
     props->SetMTL(mtl);
     geom->SetMTLFile(QUrl(props->GetBaseURL()).resolved(mtl).toString());
 }
 
 void AssetObject::Load()
 {   
-//    qDebug() << "AssetObject::Load()" << props->GetSrcURL() << this;
+    //qDebug() << "AssetObject::Load()" << props->GetSrcURL() << this;
     SetStarted(true);
 
     for (int i=0; i<tex_url_str.size(); ++i) {
         if (!tex_url_str[i].isEmpty()) {
             geom->SetMaterialTexture(tex_url_str[i], i);
-//            qDebug() << "setting" << base_url_str << tex_url_str[i] << i;
+            //qDebug() << "setting" << base_url_str << tex_url_str[i] << i;
         }
     }
 
@@ -107,7 +107,7 @@ void AssetObject::Load()
         QtConcurrent::run(geom.data(), &Geom::Load);
     }
     else {
-//        qDebug() << "AssetObject::Load() ERROR: Tried to load with an empty url" << props->GetID() << props->GetSrc();
+        //qDebug() << "AssetObject::Load() ERROR: Tried to load with an empty url" << props->GetID() << props->GetSrc();
         SetLoaded(true);
         SetProcessed(true);
         SetFinished(true);
@@ -127,7 +127,7 @@ bool AssetObject::UpdateGL()
 
 void AssetObject::Update()
 {
-//    qDebug() << "AssetObject::Update()" << props->GetSrcURL() << this;
+    //qDebug() << "AssetObject::Update()" << props->GetSrcURL() << this;
     if (geom) {
         geom->Update();
     }
@@ -135,12 +135,12 @@ void AssetObject::Update()
 
 void AssetObject::DrawGL(QPointer <AssetShader> shader, const QColor col)
 {
-//    qDebug() << "AssetObject::DrawGL" << shader << src_url;
+    //qDebug() << "AssetObject::DrawGL" << shader << src_url;
     if (shader == NULL || !shader->GetCompiled()) {
         return;
     }   
 
-//    qDebug() << "AssetObject::DrawGL" << GetS("src") << GetError();
+    //qDebug() << "AssetObject::DrawGL" << GetS("src") << GetError();
     if (GetError()) {
         if (img_error.isNull()) {
             img_error = new AssetImage();
@@ -280,7 +280,7 @@ int AssetObject::GetNumTris()
 
 float AssetObject::GetProgress()
 {        
-//    qDebug() << "AssetObject::GetProgress()" << this << this->GetS("src") << geom->GetProgress() << geom->GetTextureProgress();
+    //qDebug() << "AssetObject::GetProgress()" << this << this->GetS("src") << geom->GetProgress() << geom->GetTextureProgress();
     return GetError() ? 1.0f : ((geom->GetProgress() + geom->GetTextureProgress()) * 0.5f);
 }
 

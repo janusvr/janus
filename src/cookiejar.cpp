@@ -62,17 +62,17 @@ void CookieJar::ReadFromDisk()
 
         //const bool result = setCookiesFromUrl(cookiesForPath, domainStr);        
         setCookiesFromUrl(cookiesForPath, domainStr);
-//            qDebug() << "";
-//            qDebug() << "CookieJar::ReadFromDisk(): result" << result << domainStr << cookie.name() << cookie.value();
-//            qDebug() << "";
+        //qDebug() << "";
+        //qDebug() << "CookieJar::ReadFromDisk(): result" << result << domainStr << cookie.name() << cookie.value();
+        //qDebug() << "";
 
     }
-//    qDebug() << "CookieJar::ReadFromDisk(): Read" << allCookies().size() << "cookies.";
+    //qDebug() << "CookieJar::ReadFromDisk(): Read" << allCookies().size() << "cookies.";
 }
 
 void CookieJar::SaveToDisk()
 {
-//    qDebug() << "CookieJar::SaveToDisk(): Saving" << allCookies().size() << "cookies...";
+    //qDebug() << "CookieJar::SaveToDisk(): Saving" << allCookies().size() << "cookies...";
     QJsonObject saveData;
     QList <QNetworkCookie> cookies = allCookies();
     foreach (QNetworkCookie cookie, cookies) {

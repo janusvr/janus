@@ -6,12 +6,12 @@ AssetWindow::AssetWindow(Game* g) :
 {
     asset_browser_thumbs_processed = true;
 
-//    table_widget.setSelectionMode(QAbstractItemView::SingleSelection);
-//    table_widget.setSelectionMode(QAbstractItemView::ExtendedSelection);
-//    table_widget.setDragEnabled(true);
+    //table_widget.setSelectionMode(QAbstractItemView::SingleSelection);
+    //table_widget.setSelectionMode(QAbstractItemView::ExtendedSelection);
+    //table_widget.setDragEnabled(true);
     table_widget.viewport()->setAcceptDrops(true);
     table_widget.setDropIndicatorShown(true);
-//    table_widget.setDragDropMode(QAbstractItemView::InternalMove);
+    //table_widget.setDragDropMode(QAbstractItemView::InternalMove);
     table_widget.setSortingEnabled(true);
     table_widget.sortItems(0, Qt::AscendingOrder);
     table_widget.setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -41,7 +41,7 @@ AssetWindow::AssetWindow(Game* g) :
     asset_palette_slider.setValue(128);
     asset_palette_slider.setOrientation(Qt::Horizontal);
 
-//    QWidget * w = new QWidget(this);
+    //QWidget * w = new QWidget(this);
     QGridLayout * v = new QGridLayout();
     v->addWidget(&load_asset_palette,0,0);
     v->addWidget(&asset_palette_slider,0,1);
@@ -117,7 +117,7 @@ void AssetWindow::Update()
             }
             if (!asset_browser_thumbs[i]->GetLoaded() && !asset_browser_thumbs[i]->GetError()) {
                 loaded_all = false;
-//                qDebug() << "still waiting on" << asset_browser_thumbs[i]->GetURL();
+                //qDebug() << "still waiting on" << asset_browser_thumbs[i]->GetURL();
             }
         }
 
@@ -197,7 +197,7 @@ void AssetWindow::LoadAssetPalette()
             //set the texture
             for (QVariantMap::const_iterator iter = c.begin(); iter != c.end(); ++iter) {
                 if (iter.key().right(4) == ".png" && iter.key().right(13) != "thumbnail.png") {
-//                    qDebug() << "SETTING TEXTURE FILE!" << "https://content.decentraland.today/contents/" + iter.value().toString();
+                    //qDebug() << "SETTING TEXTURE FILE!" << "https://content.decentraland.today/contents/" + iter.value().toString();
                     ao->SetTextureFile("https://content.decentraland.today/contents/" + iter.value().toString(), 0);
                 }
             }
@@ -207,14 +207,14 @@ void AssetWindow::LoadAssetPalette()
 
             //set the geometry
             for (QVariantMap::const_iterator iter = c.begin(); iter != c.end(); ++iter) {
-//                qDebug() << iter.key() << iter.value();
+                //qDebug() << iter.key() << iter.value();
                 if (iter.key() == u) {
                     ao->SetSrc("https://content.decentraland.today/contents/" + iter.value().toString(),
                                "https://content.decentraland.today/contents/" + iter.value().toString());
                 }
             }
 
-//            ao->Load();
+            //ao->Load();
 
             //add this asset data to the room (the .glb, and the other texture)
             if (cur_room) {

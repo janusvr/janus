@@ -53,25 +53,25 @@ public:
 
     }
 
-   /* LightContainer(const LightContainer & p_move)
+    /*LightContainer(const LightContainer & p_move)
         : m_lights(p_move.m_lights)
     {
 
     }*/
 
     //59.5 - Compile bug on Linux declaring this
-//    LightContainer(LightContainer&& p_move)
-//        : m_lights(std::move(p_move.m_lights))
-//    {
+    //LightContainer(LightContainer&& p_move)
+    //  : m_lights(std::move(p_move.m_lights))
+    //{
 
-//    }
+    //}
 
     //59.5 - Compile bug on Linux declaring this
-//    LightContainer& operator=(LightContainer&& p_move)
-//    {
-//        m_lights = std::move(p_move.m_lights);
-//        return *this;
-//    }
+    //LightContainer& operator=(LightContainer&& p_move)
+    //{
+    //    m_lights = std::move(p_move.m_lights);
+    //    return *this;
+    //}
 
     QVector<Light> m_lights;
 };

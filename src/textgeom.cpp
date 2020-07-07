@@ -45,7 +45,7 @@ float TextGeom::GetMaxSizeY() const
 
 void TextGeom::AddText(const QString & s, const QColor col)
 {
-//    qDebug() << "TextGeom::AddText" << s << col;
+    //qDebug() << "TextGeom::AddText" << s << col;
     TextGeomLine l;
     l.text = s;
     l.col = col;
@@ -73,7 +73,7 @@ QColor TextGeom::GetColour() const
 
 void TextGeom::SetText(const QString & s, const QColor col)
 {
-//    qDebug() << "TextGeom::SetText" << s;
+    //qDebug() << "TextGeom::SetText" << s;
     if (!texts.empty() && QString::compare(texts.first().text, s) == 0) {
         return;
     }
@@ -164,7 +164,7 @@ QMatrix4x4 TextGeom::GetModelMatrix() const
 
 void TextGeom::CreateVBO()
 {
-//    qDebug() << "TextGeom::CreateVBO()" << this;
+    //qDebug() << "TextGeom::CreateVBO()" << this;
     const uint8_t indices_per_glyph = 6;
     const uint8_t vertices_per_glyph = 4;
     const uint8_t elements_per_position = 4;
@@ -391,13 +391,13 @@ void TextGeom::DrawGL(QPointer <AssetShader> shader)
         return;
     }   
 
-//    qDebug() << "TextGeom::DrawGL" << texts.size();
+    //qDebug() << "TextGeom::DrawGL" << texts.size();
     if (texts.isEmpty()) {
         return;
     }
 
     if (vbo_rebuild) {
-//        qDebug() << "TextGeom::DrawGL" << vbo_rebuild << texts.first().text;
+        //qDebug() << "TextGeom::DrawGL" << vbo_rebuild << texts.first().text;
         CreateVBO();
         vbo_rebuild = false;
     }
@@ -417,7 +417,7 @@ void TextGeom::DrawGL(QPointer <AssetShader> shader)
             continue;
         }
 
-//        qDebug() << "TextGeom::DrawGL" << texts[j].col << texts[j].text;
+        //qDebug() << "TextGeom::DrawGL" << texts[j].col << texts[j].text;
         shader->SetConstColour(QVector4D(texts[j].col.redF(), texts[j].col.greenF(), texts[j].col.blueF(), texts[j].col.alphaF()));
         shader->UpdateObjectUniforms();
 

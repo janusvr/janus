@@ -43,7 +43,7 @@ void HTMLPage::Request(const QString & )
 
     webasset.SetStarted(true);
 
-//    qDebug() << "HTMLPage::Request" << url << url.toString();
+    //qDebug() << "HTMLPage::Request" << url << url.toString();
     if (QString::compare(url.toString(), "bookmarks", Qt::CaseInsensitive) == 0) {
         //qDebug() << "HTMLPage::Request" << url.toString();
         webasset.SetURL(QUrl("bookmarks"));
@@ -67,7 +67,7 @@ void HTMLPage::Request(const QString & )
         LoadFile();
     }
     else {
-//                qDebug() << "HTMLPage::Request() - Loading local file" << url.toLocalFile();
+        //qDebug() << "HTMLPage::Request() - Loading local file" << url.toLocalFile();
         QFileInfo f(url.toLocalFile());
 
         if (f.exists() && f.isDir()) {
@@ -104,7 +104,7 @@ WebAsset & HTMLPage::GetWebAsset()
 void HTMLPage::Update()
 {    
     if (webasset.GetLoaded() && !webasset.GetProcessing()) {
-//        qDebug() << "HTMLPage::Update()" << webasset.GetStarted() << webasset.GetLoaded() << webasset.GetProcessing();
+        //qDebug() << "HTMLPage::Update()" << webasset.GetStarted() << webasset.GetLoaded() << webasset.GetProcessing();
         webasset.SetProcessing(true);
 
         const QUrl url = webasset.GetURL(); //59.3 - respect redirects
@@ -241,7 +241,7 @@ bool HTMLPage::HTMLExtract(const QString & start_tag, const QString & end_tag, c
 
 void HTMLPage::ConstructData()
 {
-//    qDebug() << "HTMLPage::ConstructData()";
+    //qDebug() << "HTMLPage::ConstructData()";
     assets.insert("assetobject", assetobjectlist);
     assets.insert("assetimage", assetimagelist);
     assets.insert("assetghost", assetghostlist);
@@ -357,7 +357,7 @@ void HTMLPage::ReadWorkspacesContent()
         link_data["pos"] = QString::number(-i*2 + (float(workspaces.size()) * 2.0f) * 0.5f - 1.0f) + " 0 5";
         link_data["fwd"] = "0 0 -1";
         link_data["scale"] = "1.8 2.5 1.0";
-//        link_data["thumb_id"] = img_data["id"];
+        //link_data["thumb_id"] = img_data["id"];
         QColor c;
         c.setHsl(30 * i, 128, 128);
         link_data["col"] = c.name();
@@ -531,7 +531,7 @@ void HTMLPage::ReadImgurContent(const QString & imgur_data)
     HTMLExtractAll(QString("<a href=\""), QString("\""), false, imgur_data, img_strings);
     HTMLExtractAll(QString("<img src=\""), QString("\""), false, imgur_data, img_strings);
 
-//    qDebug() << "img_strings" << img_strings;
+    //qDebug() << "img_strings" << img_strings;
     //change url from smallImg version to big version of image
     for (int i=0; i<img_strings.size(); ++i) {
         QString smallImg = img_strings[i].right(5).left(1);
@@ -614,7 +614,7 @@ void HTMLPage::ReadRedditCommentContent(const QString & reddit_data)
     HTMLExtractAll(QString("<span class=\"score unvoted"), QString("</span>"), true, reddit_data, score_strings);
     HTMLExtractAll(QString("<time title=\""), QString("</time>"), true, reddit_data, time_strings);
 
-//    qDebug () << "HTMLPage::ReadRedditCommentContent()" << user_comment_strings.size() << user_strings.size() << score_strings.size() << time_strings.size();
+    //qDebug () << "HTMLPage::ReadRedditCommentContent()" << user_comment_strings.size() << user_strings.size() << score_strings.size() << time_strings.size();
     score_strings.push_front("");
 
     for (int i=1; i<user_comment_strings.size(); ++i) {
@@ -725,7 +725,7 @@ void HTMLPage::TraverseXmlNode(const QDomNode & node, const int depth, QVariantM
         return;
     }   
 
-//    qDebug() << __FUNCTION__ << node.toElement().tagName() << "depth" << depth;
+    //qDebug() << __FUNCTION__ << node.toElement().tagName() << "depth" << depth;
     QDomElement e = node.toElement();
     QString tag_name = e.tagName().toLower();
 
@@ -773,7 +773,7 @@ void HTMLPage::ReadJSONContent(const QString & firebox_data)
     //check for JSON doc parsing error
     if (err.error != QJsonParseError::NoError) {
         const QString msg = "Error: HTMLPage::ReadJSONContent() - JSON Parse Error (" + QString::number(err.offset) + "): " + err.errorString();
-//        qDebug() << msg;
+        //qDebug() << msg;
         MathUtil::ErrorLog(msg);
         return;
     }
@@ -783,7 +783,7 @@ void HTMLPage::ReadJSONContent(const QString & firebox_data)
 
 void HTMLPage::ReadXMLContent(const QString & firebox_data)
 {
-//    qDebug() << "HTMLPage::ReadXMLContent()";
+    //qDebug() << "HTMLPage::ReadXMLContent()";
     QString error_msg;
     int error_line;
     int error_column;
@@ -803,7 +803,7 @@ void HTMLPage::ReadXMLContent(const QString & firebox_data)
     }
 
     data["FireBoxRoom"] = m;
-//    qDebug() << "HTMLPage::ReadXMLContent DATA!" << data;
+    //qDebug() << "HTMLPage::ReadXMLContent DATA!" << data;
 }
 
 float HTMLPage::GetProgress() const
@@ -825,7 +825,7 @@ void HTMLPage::LoadFile()
     QString reddit_data;
 
     //qDebug() << "HTMLPage::LoadFile() - ba_str len" << ba_str.size();
-//    qDebug() << "HTMLPage::LoadFile()" << ba_str;
+    //qDebug() << "HTMLPage::LoadFile()" << ba_str;
 
     //1.  set url info, other initializations
     const QString url_str = webasset.GetURL().toString();
@@ -869,7 +869,7 @@ void HTMLPage::LoadFile()
     else if (url_str.left(26).contains("old.reddit.com")) {
 
         QString string;
-//        qDebug() << "HTMLPage::ReadRedditContent:" << ba_str;
+        //qDebug() << "HTMLPage::ReadRedditContent:" << ba_str;
         if (HTMLExtract("<div id=\"siteTable\" class=\"sitetable linklisting\">", "<div class=\"footer-parent\">", true, ba_str, reddit_data)) {
 
             if (reddit_data.contains("permalink</a>")) {
@@ -919,8 +919,8 @@ void HTMLPage::LoadFile()
 
     webasset.ClearData();
     ba.clear();
-//    qDebug() << "DATA!" << data;
-//    qDebug() << "HTMLPage::LoadFile() Loaded page" << title << data_things.first().children.size();
+    //qDebug() << "DATA!" << data;
+    //qDebug() << "HTMLPage::LoadFile() Loaded page" << title << data_things.first().children.size();
 }
 
 QString HTMLPage::GetTitle() const
@@ -997,7 +997,7 @@ void HTMLPage::ClearData()
 
 void HTMLPage::Clear()
 {
-//    qDebug() << "HTMLPage::Clear()" << this;
+    //qDebug() << "HTMLPage::Clear()" << this;
     ClearData();
 
     webasset.SetStarted(false);
@@ -1112,7 +1112,7 @@ QString HTMLPage::GfyGenerateGfyViewingRoom(const QString title, const QString w
         "<FireBoxRoom>\n"
         "    <Assets>\n"
         "        <AssetImage id=\"black_img\" src=\"" + MathUtil::GetTranslatorPath() + "gfycat/black.png\" />\n"
-//        "        <AssetVideo id=\"gfy\" loop=\"true\" auto_play=\"true\" src=\"" + webmUrl + "\" />\n"
+        //"        <AssetVideo id=\"gfy\" loop=\"true\" auto_play=\"true\" src=\"" + webmUrl + "\" />\n"
         "        <AssetWebSurface id=\"gfy\" width=\"" + QString::number(width) + "\" height=\"" + QString::number(height) +"\" src=\"" + webmUrl + "\" />\n"
         "    </Assets>\n"
         "    <Room\n"
@@ -1130,7 +1130,7 @@ QString HTMLPage::GfyGenerateGfyViewingRoom(const QString title, const QString w
         "        skybox_up_id = \"black_img\"\n"
         "        skybox_down_id = \"black_img\"\n"        
         "    >\n"
-//        "        <Video id=\"gfy\" pos=\"0 1.8 -9\" scale=\"" + scale + "\" />\n"
+        //"        <Video id=\"gfy\" pos=\"0 1.8 -9\" scale=\"" + scale + "\" />\n"
         "        <Object id=\"plane\" websurface_id=\"gfy\" pos=\"0 1.8 -9\" scale=\"8 " + QString::number(8.0f*float(height)/float(width)) + " 1\" />\n"
         "    </Room>\n"
         "</FireBoxRoom>\n"

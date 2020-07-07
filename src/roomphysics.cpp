@@ -2,7 +2,7 @@
 
 RoomPhysics::RoomPhysics()
 {
-//    qDebug() << "RoomPhysics::RoomPhysics()" << this;
+    //qDebug() << "RoomPhysics::RoomPhysics()" << this;
     added_room_template = false;
     added_player = false;
     player_on_ground = true;
@@ -25,7 +25,7 @@ RoomPhysics::RoomPhysics()
 
 RoomPhysics::~RoomPhysics()
 {
-//    qDebug() << "RoomPhysics::~RoomPhysics()" << this;
+    //qDebug() << "RoomPhysics::~RoomPhysics()" << this;
     for (btRigidBody * body : rigidBodies) {
         if (body) {
             dynamicsWorld->removeRigidBody(body);
@@ -145,7 +145,7 @@ void RoomPhysics::SetJumpVelocity(const float f)
 
 void RoomPhysics::UpdateSimulation(const double dt)
 {
-//    qDebug() << "RoomPhysics::UpdateSimulation" << this << dt;
+    //qDebug() << "RoomPhysics::UpdateSimulation" << this << dt;
     //update the player
     if (added_player && rigidBodies["__player"]) {
         if (player_near_portal && rigidBodies["__player"]->getBroadphaseHandle()->m_collisionFilterMask & COL_WALL) {
@@ -165,7 +165,7 @@ void RoomPhysics::UpdateSimulation(const double dt)
     //update physics simulation if timestep is nonzero
     if (dt > 0.0) {
         dynamicsWorld->stepSimulation(dt, 10, dt * 0.1f);
-//        dynamicsWorld->stepSimulation(dt, 1); //56.0 - reports of slow physics with v-sync disabled when using this instead
+        //dynamicsWorld->stepSimulation(dt, 1); //56.0 - reports of slow physics with v-sync disabled when using this instead
 
         //update rigid body contacts/collisions
         rigidBodyCollisions.clear();
@@ -198,7 +198,7 @@ void RoomPhysics::UpdateSimulation(const double dt)
 
 void RoomPhysics::AddRoomTemplate(const QPointer <RoomObject> o)
 {
-//    qDebug() << "RoomPhysics::AddRoomTemplate" << this;
+    //qDebug() << "RoomPhysics::AddRoomTemplate" << this;
     if (!added_room_template
             && o
             && o->GetAssetObject()            
@@ -215,7 +215,7 @@ void RoomPhysics::AddRoomTemplate(const QPointer <RoomObject> o)
 
 void RoomPhysics::AddGroundPlane(const float y)
 {
-//    qDebug() << "RoomPhysics::AddGroundPlane" << this;
+    //qDebug() << "RoomPhysics::AddGroundPlane" << this;
     collisionShapes_staticPlane["__plane"] = new btStaticPlaneShape(btVector3(0, 1, 0), y);
 
     //basis vectors, point (this will be changed to be xdir, ydir, zdir, pos)
@@ -236,7 +236,7 @@ void RoomPhysics::AddGroundPlane(const float y)
 
 void RoomPhysics::AddRoomPlaneTemplate(const float y)
 {
-//    qDebug() << "RoomPhysics::AddRoomPlaneTemplate" << this;
+    //qDebug() << "RoomPhysics::AddRoomPlaneTemplate" << this;
     collisionShapes_staticPlane["__room_plane"] = new btStaticPlaneShape(btVector3(0, 1, 0), y);
 
     //basis vectors, point (this will be changed to be xdir, ydir, zdir, pos)
@@ -271,7 +271,7 @@ void RoomPhysics::RemoveGroundPlane()
 
 void RoomPhysics::AddRigidBody(const QPointer <RoomObject> o, short group, short mask)
 {
-//    qDebug() << "RoomPhysics::AddRigidBody" << this;
+    //qDebug() << "RoomPhysics::AddRigidBody" << this;
     const QString s = o->GetProperties()->GetCollisionID();
     if (s == "sphere") {
         AddSphere(o, group, mask);
@@ -353,7 +353,7 @@ QSet <QString> RoomPhysics::GetRigidBodyCollisions(const QPointer <RoomObject> o
 
 void RoomPhysics::UpdateToRigidBody(QPointer <Player> player)
 {
-//    qDebug() << "RoomPhysics::UpdateToRigidBody" << this;
+    //qDebug() << "RoomPhysics::UpdateToRigidBody" << this;
     if (!rigidBodies.contains("__player") || rigidBodies["__player"] == NULL) {
         AddPlayerShape(player);
     }
@@ -379,7 +379,7 @@ void RoomPhysics::UpdateToRigidBody(QPointer <Player> player)
 
 void RoomPhysics::UpdateFromRigidBody(QPointer <Player> player)
 {
-//    qDebug() << "RoomPhysics::UpdateFromRigidBody" << this;
+    //qDebug() << "RoomPhysics::UpdateFromRigidBody" << this;
     if (!rigidBodies.contains("__player") || rigidBodies["__player"] == NULL) {
         return;
     }
@@ -420,7 +420,7 @@ void RoomPhysics::UpdateFromRigidBody(QPointer <Player> player)
 
 void RoomPhysics::UpdateFromRigidBody(const QPointer <RoomObject> o)
 {
-//    qDebug() << "RoomPhysics::UpdateFromRigidBody2";
+    //qDebug() << "RoomPhysics::UpdateFromRigidBody2";
     if (o.isNull() || !rigidBodies.contains(o->GetProperties()->GetJSID()) || rigidBodies[o->GetProperties()->GetJSID()] == NULL) {
         return;
     }
@@ -445,7 +445,7 @@ void RoomPhysics::UpdateFromRigidBody(const QPointer <RoomObject> o)
 
 void RoomPhysics::UpdateToRigidBody(const QPointer <RoomObject> o)
 {
-//    qDebug() << "RoomPhysics::UpdateToRigidBody2";
+    //qDebug() << "RoomPhysics::UpdateToRigidBody2";
     const QString js_id = o->GetProperties()->GetJSID();
     if (o.isNull() || !rigidBodies.contains(js_id) || rigidBodies[js_id] == NULL) {
         return;
@@ -463,10 +463,10 @@ void RoomPhysics::UpdateToRigidBody(const QPointer <RoomObject> o)
 
 void RoomPhysics::RemoveRigidBody(const QPointer <RoomObject> o)
 {
-//    qDebug() << "RoomPhysics::RemoveRigidBody" << o->GetJSID() << o->GetID();
+    //qDebug() << "RoomPhysics::RemoveRigidBody" << o->GetJSID() << o->GetID();
     const QString jsid = o->GetProperties()->GetJSID();
     if (rigidBodies.contains(jsid) && rigidBodies[jsid] != NULL) {
-//        qDebug() << "Removing" << o->GetJSID() << o->GetID() << o->GetCollisionID();
+        //qDebug() << "Removing" << o->GetJSID() << o->GetID() << o->GetCollisionID();
         rigidBodyJSIDs.remove(rigidBodies[jsid]);
         dynamicsWorld->removeRigidBody(rigidBodies[jsid]);
         delete rigidBodies[jsid];
@@ -537,7 +537,7 @@ void RoomPhysics::RemoveRigidBody(const QPointer <RoomObject> o)
 
 void RoomPhysics::AddSphere(const QPointer <RoomObject> o, short group, short mask)
 {
-//    qDebug() << "RoomPhysics::AddSphere" << o->GetJSID() << o->GetID() << group << mask;
+    //qDebug() << "RoomPhysics::AddSphere" << o->GetJSID() << o->GetID() << group << mask;
     const QVector3D scale = o->GetProperties()->GetScale()->toQVector3D();
     const QVector3D cscale = o->GetProperties()->GetCollisionScale()->toQVector3D();
     float btMass = 0.0f;
@@ -639,16 +639,16 @@ void RoomPhysics::AddMesh(const QPointer <RoomObject> o, short group, short mask
             }
         }
     }
-//    qDebug() << "tris" << collisionShapes_triangleMesh[jsid]->getNumTriangles();
+    //qDebug() << "tris" << collisionShapes_triangleMesh[jsid]->getNumTriangles();
 
     if (collisionShapes_triangleMesh[jsid]->getNumTriangles() > 0) {
-//        qDebug() << "adding" << o->GetID() << o->GetCollisionID();
+        //qDebug() << "adding" << o->GetID() << o->GetCollisionID();
         btCollisionShape * shape = new btBvhTriangleMeshShape(collisionShapes_triangleMesh[jsid], true); //computes bounding volume hierarchy, is quantized - meant for *static meshes only*
         collisionShapes_BvhTriangleMesh[jsid] = (btBvhTriangleMeshShape*)shape;
         AddShape(o, shape, btMass, btVector3(0,0,0), group, mask);
     }
     else {
-//        qDebug() << "CUBE" << o->GetID() << o->GetCollisionID();
+        //qDebug() << "CUBE" << o->GetID() << o->GetCollisionID();
         AddCube(o, group, mask);
     }
 
@@ -720,7 +720,7 @@ void RoomPhysics::AddCapsule(const QPointer <RoomObject> o, short group, short m
 
 void RoomPhysics::DoPlayerGroundTest(const QPointer <Player> player)
 {
-//    qDebug() << "RoomPhysics::DoPlayerGroundTest" << this;
+    //qDebug() << "RoomPhysics::DoPlayerGroundTest" << this;
     const QVector3D p0 = player->GetProperties()->GetPos()->toQVector3D() + QVector3D(0,0.1f,0);
     const QVector3D p1 = player->GetProperties()->GetPos()->toQVector3D() - QVector3D(0,0.2f,0);
 
@@ -729,25 +729,25 @@ void RoomPhysics::DoPlayerGroundTest(const QPointer <Player> player)
     dynamicsWorld->rayTest(btVector3(p0.x(), p0.y(), p0.z()), btVector3(p1.x(), p1.y(), p1.z()), callback);
 
     player_on_ground = callback.hasHit();
-//    player_on_ground = (callback.m_hitPointWorld.size() > 0);
+    //player_on_ground = (callback.m_hitPointWorld.size() > 0);
 }
 
 bool RoomPhysics::GetPlayerOnGround() const
 {
-//    qDebug() << "RoomPhysics::GetPlayerOnGround" << this;
+    //qDebug() << "RoomPhysics::GetPlayerOnGround" << this;
     return player_on_ground;
 }
 
 void RoomPhysics::SetPlayerNearPortal(const bool b, const float portal_y)
 {
-//    qDebug() << "RoomPhysics::SetPlayerNearPortal" << this;
+    //qDebug() << "RoomPhysics::SetPlayerNearPortal" << this;
     player_near_portal = b;
     player_near_portal_height = portal_y;
 }
 
 void RoomPhysics::RemovePlayerShape()
 {
-//    qDebug() << "RoomPhysics::RemovePlayerShape()" << this;
+    //qDebug() << "RoomPhysics::RemovePlayerShape()" << this;
     added_player = false;
     rigidBodyJSIDs.remove(rigidBodies["__player"]);
     dynamicsWorld->removeRigidBody(rigidBodies["__player"]);
@@ -757,7 +757,7 @@ void RoomPhysics::RemovePlayerShape()
 void RoomPhysics::AddPlayerShape(const QPointer <Player> player)
 {    
     if (!added_player) {
-//        qDebug() << "RoomPhysics::AddPlayerShape()" << this;
+        //qDebug() << "RoomPhysics::AddPlayerShape()" << this;
         added_player = true;
 
         const QVector3D p = player->GetProperties()->GetPos()->toQVector3D();
@@ -812,9 +812,9 @@ void RoomPhysics::AddPlayerShape(const QPointer <Player> player)
 void RoomPhysics::SetLinearVelocity(const QPointer <RoomObject> o, QVector3D v)
 {
     const QString jsid = o->GetProperties()->GetJSID();
-//    qDebug() << "RoomPhysics::SetLinearVelocity" << jsid << rigidBodies.contains(jsid) << rigidBodies[jsid];
+    //qDebug() << "RoomPhysics::SetLinearVelocity" << jsid << rigidBodies.contains(jsid) << rigidBodies[jsid];
     if (rigidBodies.contains(jsid) && rigidBodies[jsid]) {
-//        qDebug() << "SETTING VEL to" << jsid << v;
+        //qDebug() << "SETTING VEL to" << jsid << v;
         rigidBodies[jsid]->setLinearVelocity(btVector3(v.x(), v.y(), v.z()));
     }
 }
@@ -838,7 +838,7 @@ void RoomPhysics::AddShape(const QPointer <RoomObject> o, btCollisionShape * sha
 
     //mass (note mass of 0 means infinte, immovable), motionstate, shape, inertia    
     btRigidBody::btRigidBodyConstructionInfo rigidBodyConstructInfo(btMass, motionStates[j], shape, btInertia);
-//    rigidBodyConstructInfo.m_additionalDamping = true; //56.0 - prevent jitter
+    //rigidBodyConstructInfo.m_additionalDamping = true; //56.0 - prevent jitter
     rigidBodyConstructInfo.m_friction = o->GetProperties()->GetCollisionFriction();
     rigidBodyConstructInfo.m_rollingFriction = o->GetProperties()->GetCollisionRollingFriction();
     rigidBodyConstructInfo.m_restitution = o->GetProperties()->GetCollisionRestitution();
@@ -860,7 +860,7 @@ void RoomPhysics::AddShape(const QPointer <RoomObject> o, btCollisionShape * sha
     rigidBodyScales[j] = o->GetProperties()->GetScale()->toQVector3D();
     rigidBodyMasses[j] = btMass;
 
-//    qDebug() << "Adding" << o->GetJSID() << o->GetID() << o->GetCollisionID() << group << mask;
+    //qDebug() << "Adding" << o->GetJSID() << o->GetID() << o->GetCollisionID() << group << mask;
     dynamicsWorld->addRigidBody(rigidBodies[j], group, mask);
     //dynamicsWorld->addRigidBody(rigidBodies[o->GetJSID()], COL_WALL, COL_PLAYER | COL_WALL);
 }
