@@ -1904,7 +1904,8 @@ QRectF MathUtil::GetStringAsRect(const QString & s)
 
 QString MathUtil::GetTranslatorPath()
 {
-    return QString("http://downloads.janusvr.com/translator/");
+    // Temporary, needs check for os type for pathing.
+    return QString("file://" + GetApplicationPath() + "assets/translators/");
 }
 
 QString MathUtil::GetPath_Util(const QString subdir)
