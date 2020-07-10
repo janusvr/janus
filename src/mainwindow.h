@@ -137,8 +137,10 @@ public slots:
     void ActionSettings();
     void ActionEllipsisMenu();
 
+    
 private:
 
+    void DoSFXDisplayType( QString dm );
     void DoOpenURL(const QString url);
     void SetupMenuWidgets();
     void SetupWidgets();

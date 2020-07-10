@@ -441,6 +441,22 @@ void MainWindow::Initialize()
 
     connect(&timer, SIGNAL(timeout()), this, SLOT(TimeOut()));
     timer.start( 0 );
+    DoSFXDisplayType( game->GetPlayer()->GetHMDType() );
+}
+
+void MainWindow::DoSFXDisplayType( QString dm ) {
+    qDebug() << "MainWindow::DoSFXDisplayType()";
+    if ( dm == "vive" ) {
+        qDebug() << "vive";
+        //SoundManager::Play(SOUND_RESET, false, game->GetPlayer()->GetProperties()->GetPos()->toQVector3D(), 10.0f);
+    }
+    else if ( dm == "rift" ) {
+        qDebug() << "rift";
+        SoundManager::Play(SOUND_RIFT, false, game->GetPlayer()->GetProperties()->GetPos()->toQVector3D(), 10.0f);
+    }
+    else {
+        SoundManager::Play(SOUND_DESKTOP, false, game->GetPlayer()->GetProperties()->GetPos()->toQVector3D(), 10.0f);
+    }
 }
 
 void MainWindow::UpdateHands()
