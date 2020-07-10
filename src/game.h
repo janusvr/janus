@@ -174,6 +174,7 @@ public:
 
     void SetUserID(const QString s);
     void ResetAvatar();
+    void ReloadAvatar();
 
     void SetRoomDeleteCode(const QString s);
 
