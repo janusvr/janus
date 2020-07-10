@@ -67,7 +67,7 @@ echo -e "\n[*] Create Library build folder"
 mkdir resources/build_dir/assimp-5.0.1/
 mkdir resources/build_dir/openvr-1.12.5/
 
-echo -e "\n[*] Building ASSIMP"
+echo -e "\n[*] Building ASSet IMPorter v5.0.1"
 cd resources/build_dir/assimp-5.0.1/
 cmake ../../assimp-5.0.1/ -B .
 make -j $(nproc --ignore=4)
@@ -79,11 +79,12 @@ ln -s libassimp.so.5.0.0 libassimp.so.5
 ln -s libassimp.so.5.0.0 libassimp.so
 cd ../../
 
-echo -e "\n[*] Building OpenVR to $BUILD_DIR"
+echo -e "\n[*] Building OpenVR v1.12.5"
 cd resources/build_dir/openvr-1.12.5/
 cmake -B$(pwd)/ ../../openvr-1.12.5/
 make
 cd ../../../
+echo -e "\n[*] Copying OpenVR to $BUILD_DIR"
 cp resources/openvr-1.12.5/bin/linux64/libopenvr_api.so $BUILD_DIR
 
 echo -e "\n[*] Done! Please run 'janusvr' from $BUILD_DIR"
