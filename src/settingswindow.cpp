@@ -91,11 +91,16 @@ QWidget * SettingsWindow::GetAvatarWidget()
     button_resetavatar->setText("Reset Avatar");
     connect(button_resetavatar, SIGNAL(clicked(bool)), this, SLOT(SlotResetAvatar()));
 
+    button_reloadavatar = new QPushButton();
+    button_reloadavatar->setText("Reload Avatar");
+    connect(button_reloadavatar, SIGNAL(clicked(bool)), this, SLOT(SlotReloadAvatar()));
+
     QFormLayout * avatar_layout = new QFormLayout();
     avatar_layout->addRow("userid", lineedit_userid);
     avatar_layout->addRow("Custom Portal Shader", lineedit_customportalshader);
     avatar_layout->addRow(checkbox_selfavatar);
     avatar_layout->addRow(button_resetavatar);
+    avatar_layout->addRow(button_reloadavatar);
 
     QWidget * w = new QWidget();
     w->setLayout(avatar_layout);
