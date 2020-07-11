@@ -60,6 +60,12 @@ QWidget * SettingsWindow::GetAudioWidget()
     checkbox_positionalvoip->setText("Positional Audio (Voice)");
     connect(checkbox_positionalvoip, SIGNAL(clicked(bool)), this, SLOT(SlotSetPositionalVoip()));
 
+    combobox_ui_voice_list = new QComboBox();
+
+    button_preview_ui_voice = new QPushButton();
+    button_preview_ui_voice->setText("Preview selected voice");
+    connect(button_preview_ui_voice, SIGNAL(clicked(bool)), this, SLOT(SlotResetAvatar()));
+
     QFormLayout * audio_layout = new QFormLayout();
     audio_layout->addRow(checkbox_micvoiceactivated);
     audio_layout->addRow(label_microphonesensitivity, slider_microphonesensitivity);
@@ -68,6 +74,8 @@ QWidget * SettingsWindow::GetAudioWidget()
     audio_layout->addRow(checkbox_positionalenv);
     audio_layout->addRow(new QLabel("Volume (Voice)"), slider_volumevoip);
     audio_layout->addRow(checkbox_positionalvoip);
+    audio_layout->addRow(combobox_ui_voice_list);
+    audio_layout->addRow(button_preview_ui_voice);
 
     QWidget * w = new QWidget();
     w->setLayout(audio_layout);
@@ -291,6 +299,21 @@ void SettingsWindow::Update()
     slider_volumevoip->setValue(SettingsManager::GetVolumeVOIP());
     lineedit_homeurl->setText(SettingsManager::GetHomeURL());
     lineedit_websurfaceurl->setText(SettingsManager::GetWebsurfaceURL());
+}
+
+void SettingsWindow::SlotPreviewUIVoice()
+{
+    
+}
+
+void SettingsWindow::SlotUIVoiceSelected()
+{
+
+}
+
+void SettingsWindow::PopulateUIVoiceList()
+{
+
 }
 
 void SettingsWindow::SlotSetUserID()
