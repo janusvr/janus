@@ -4786,6 +4786,18 @@ void Game::ResetAvatar()
     }
 }
 
+void Game::ReloadAvatar()
+{
+    if (multi_players) {
+        multi_players->LoadAvatarData(true);
+
+        if (multi_players->GetEnabled()) {
+            multi_players->SetEnabled(false);
+            multi_players->SetEnabled(true);
+        }
+    }
+}
+
 void Game::SendChatMessage(const QString s)
 {
     if (multi_players->SetChatMessage(player, s) && SoundManager::GetEnabled()) { //53.8 - spyduck doesn't like noise for commands
