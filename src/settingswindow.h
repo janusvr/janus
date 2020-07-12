@@ -5,6 +5,7 @@
 #include <QtWidgets>
 
 #include "game.h"
+#include "soundmanager.h"
 
 class SettingsWindow  : public QMainWindow
 {

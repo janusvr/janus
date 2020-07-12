@@ -60,7 +60,7 @@ void SettingsManager::LoadSettings()
     settings["websurfaceurl"] = QString("https://google.com");
     settings["renderportalrooms"] = true;
     settings["pathtovoicefiles"] = QString("assets/sounds/voices/");
-    settings["selectedvoice"] = QString("assets/sounds/voices/FEMALE/en-US/female/");
+    settings["selectedvoice"] = QString("assets/sounds/voices/Female/en-US/female/");
 
     const QString filename = MathUtil::GetAppDataPath() + "settings.json";
 
@@ -385,5 +385,5 @@ QString SettingsManager::GetSelectedVoice()
 
 void SettingsManager::SetSelectedVoice( const QString new_voice )
 {
-    // To be implemented with settings window
+    settings["selectedvoice"] = new_voice;
 }
