@@ -573,7 +573,7 @@ void DOMNode::SetProperties(const QVariantMap & d)
         SetFadeIn(d["fade_in"].toFloat());
     }
     if (d.contains("light_intensity")) {
-        SetLightIntensity(d["light_intensity"].toFloat());
+        SetLightIntensity(d["light_intensity"].toFloat()*light_intensity_multiplier);
     }
     if (d.contains("light_cone_angle")) {
         SetLightConeAngle(d["light_cone_angle"].toFloat());

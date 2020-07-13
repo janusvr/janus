@@ -1164,6 +1164,8 @@ private:
     QList <QPointer <DOMNode> > children_nodes;
     QPointer <DOMNode> left_sibling, right_sibling;
 
+    float light_intensity_multiplier = 100.0f;
+
     static int next_uuid;
 };
 
