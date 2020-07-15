@@ -29,3 +29,4 @@ moc_*.h
 dist/
 janusvr
 .qmake.stash
+resources/build_dir/*

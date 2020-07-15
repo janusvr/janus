@@ -64,6 +64,7 @@ cp /usr/lib/x86_64-linux-gnu/libBulletCollision.so.2.87	$BUILD_DIR
 cp /usr/lib/x86_64-linux-gnu/libLinearMath.so.2.87		$BUILD_DIR
 
 echo -e "\n[*] Create Library build folder"
+mkdir resources/build_dir/
 mkdir resources/build_dir/assimp-5.0.1/
 mkdir resources/build_dir/openvr-1.12.5/
 
