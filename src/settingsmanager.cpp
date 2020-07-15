@@ -59,7 +59,8 @@ void SettingsManager::LoadSettings()
     settings["homeurl"] = QString("https://vesta.janusxr.org/");
     settings["websurfaceurl"] = QString("https://google.com");
     settings["renderportalrooms"] = true;
-    settings["pathtovoicefiles"] = QString("assets/sounds/female/");
+    settings["pathtovoicefiles"] = QString("assets/sounds/voices/");
+    settings["selectedvoice"] = QString("assets/sounds/voices/Female/en-US/female/");
 
     const QString filename = MathUtil::GetAppDataPath() + "settings.json";
 
@@ -377,7 +378,12 @@ QString SettingsManager::GetVoicePath()
     return settings["pathtovoicefiles"].toString();
 }
 
-void SetVoicePath( const QString new_voice )
+QString SettingsManager::GetSelectedVoice()
 {
-    // To be implemented with settings window
+    return settings["selectedvoice"].toString();
+}
+
+void SettingsManager::SetSelectedVoice( const QString new_voice )
+{
+    settings["selectedvoice"] = new_voice;
 }

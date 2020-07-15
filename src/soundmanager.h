@@ -61,6 +61,7 @@ public:
 
     static void Load(QString device_id = NULL, QString capture_device_id_l = NULL);
     static void Unload();
+    static void Reload();
 
     static QVariantList GetDevices(ALenum specifier);
     static ALCdevice * GetDevice();

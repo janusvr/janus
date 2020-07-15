@@ -5,6 +5,7 @@
 #include <QtWidgets>
 
 #include "game.h"
+#include "soundmanager.h"
 
 class SettingsWindow  : public QMainWindow
 {
@@ -16,6 +17,7 @@ public:
 public slots:
 
     void Update();
+    void PopulateUIVoiceList();
 
     void SlotSetUserID();
     void SlotSetCustomPortalShader();
@@ -51,6 +53,8 @@ public slots:
     void SlotReloadAvatar();
     void SlotSetViveTrackpadMovement();
     void SlotSetRenderPortalRooms();
+    void SlotPreviewUIVoice();
+    void SlotUIVoiceSelected();
 
 private:
 
@@ -98,6 +102,8 @@ private:
     QLineEdit * lineedit_homeurl;
     QLineEdit * lineedit_websurfaceurl;
     QCheckBox * checkbox_renderportalrooms;
+    QPushButton * button_preview_ui_voice;
+    QComboBox * combobox_ui_voice_list;
 
     QTabWidget * tab_widget;
 };

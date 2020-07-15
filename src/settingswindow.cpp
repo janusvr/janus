@@ -14,10 +14,10 @@ SettingsWindow::SettingsWindow(Game * g) :
     tab_widget->addTab(GetDeveloperWidget(), "Developer");
     tab_widget->setUsesScrollButtons(false); //62.0 - no scrolling, window should be large enough to show all tabs directly
 
-    connect(tab_widget, SIGNAL(currentChanged(int)), this, SLOT(Update()));    
+    connect(tab_widget, SIGNAL(currentChanged(int)), this, SLOT(Update()));
 
-    setCentralWidget(tab_widget);    
-    Update();   
+    setCentralWidget(tab_widget);
+    Update();
 }
 
 QWidget * SettingsWindow::GetAudioWidget()
@@ -60,6 +60,14 @@ QWidget * SettingsWindow::GetAudioWidget()
     checkbox_positionalvoip->setText("Positional Audio (Voice)");
     connect(checkbox_positionalvoip, SIGNAL(clicked(bool)), this, SLOT(SlotSetPositionalVoip()));
 
+    combobox_ui_voice_list = new QComboBox();
+    PopulateUIVoiceList();
+    connect(combobox_ui_voice_list, SIGNAL( currentTextChanged(QString)), this, SLOT(SlotUIVoiceSelected()));
+
+    button_preview_ui_voice = new QPushButton();
+    button_preview_ui_voice->setText("Preview selected voice");
+    connect(button_preview_ui_voice, SIGNAL(clicked(bool)), this, SLOT(SlotPreviewUIVoice()));
+
     QFormLayout * audio_layout = new QFormLayout();
     audio_layout->addRow(checkbox_micvoiceactivated);
     audio_layout->addRow(label_microphonesensitivity, slider_microphonesensitivity);
@@ -68,6 +76,8 @@ QWidget * SettingsWindow::GetAudioWidget()
     audio_layout->addRow(checkbox_positionalenv);
     audio_layout->addRow(new QLabel("Volume (Voice)"), slider_volumevoip);
     audio_layout->addRow(checkbox_positionalvoip);
+    audio_layout->addRow(combobox_ui_voice_list);
+    audio_layout->addRow(button_preview_ui_voice);
 
     QWidget * w = new QWidget();
     w->setLayout(audio_layout);
@@ -296,6 +306,41 @@ void SettingsWindow::Update()
     slider_volumevoip->setValue(SettingsManager::GetVolumeVOIP());
     lineedit_homeurl->setText(SettingsManager::GetHomeURL());
     lineedit_websurfaceurl->setText(SettingsManager::GetWebsurfaceURL());
+}
+
+void SettingsWindow::SlotPreviewUIVoice()
+{
+    SoundManager::Play( SOUND_EFFECT(1), false, game->GetPlayer()->GetProperties()->GetPos()->toQVector3D()-QVector3D(0,0,1), 10.0f );
+}
+
+void SettingsWindow::SlotUIVoiceSelected()
+{
+    // There has to be a better way to do this...
+    if ( tab_widget->currentIndex() == 3 ) {
+        if ( combobox_ui_voice_list->currentData().toString().size() > 0) {
+            SettingsManager::SetSelectedVoice( combobox_ui_voice_list->currentData().toString() );
+            SoundManager::Reload();
+        }
+    }
+}
+
+void SettingsWindow::PopulateUIVoiceList()
+{
+    //qDebug() << "SettingsWindow::PopulateUIVoiceList()";
+    combobox_ui_voice_list->clear();
+    QDirIterator voice_path_list( SettingsManager::GetVoicePath(), QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot, QDirIterator::Subdirectories );
+    while ( voice_path_list.hasNext() ) {
+        QString clean_path = voice_path_list.next();
+        QString tmp_path = clean_path + "/";
+        QStringList tmp = tmp_path.split("/");
+        tmp.removeAll(QString(""));
+        if (tmp.size() >= 6) {
+            QString tmp_text = "(" + tmp[4] + ") " + tmp[3].toLower() + ": " + tmp[5];
+            QVariant tmp_vpath = tmp_path;
+            combobox_ui_voice_list->addItem( tmp_text, tmp_vpath );
+        }
+    }
+    combobox_ui_voice_list->setCurrentIndex( combobox_ui_voice_list->findData( SettingsManager::GetSelectedVoice() ) );
 }
 
 void SettingsWindow::SlotSetUserID()
