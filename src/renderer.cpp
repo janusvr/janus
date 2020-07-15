@@ -4,8 +4,7 @@ QPointer <Renderer> Renderer::m_pimpl(nullptr);
 const char * Renderer::g_gamma_correction_GLSL = "out_color = pow(out_color, vec4(0.45454545454, 0.45454545454, 0.45454545454, 1.0));";
 
 Renderer::Renderer()
-    : m_current_scope(RENDERER::RENDER_SCOPE::NONE),            
-      m_window_width(1280),
+    : m_window_width(1280),
       m_window_height(720),
       m_msaa_count(4),
       m_framebuffer_requires_initialization(true),
@@ -33,6 +32,7 @@ Renderer::Renderer()
       m_mesh_UUID(1),
       m_buffer_UUID(1),
       m_shader_UUID(1),
+      m_current_scope(RENDERER::RENDER_SCOPE::NONE),
       m_max_anisotropy(0.0f),
       m_face_cull_mode(FaceCullMode::BACK),
       m_current_face_cull_mode(FaceCullMode::BACK),
