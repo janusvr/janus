@@ -173,28 +173,18 @@ private:
     bool spin_left;
     bool spin_right;
     bool follow_mode;
-    QString follow_mode_userid;
     bool comfort_spinleft;
     bool comfort_spinright;
-    QTime comfort_timer;      
-    QTime time;
     bool flytransition;    
     float flyduration;
     bool hmd_calibrated;
-
-    QVector3D hand0_pos_old;
-    QVector3D hand1_pos_old;
     float hand_update_time;
-
     float cursor0_scale;
     float cursor1_scale;
-
     float scale_velx;
     float scale_vely;
-
     bool jump;
     bool speaking_no_mic;
-
     float delta_time;
     bool speaking;
     bool typing;
@@ -204,8 +194,14 @@ private:
     bool flying;
     bool walking;
     bool hmd_enabled;
-    QVector3D impulse_vel;
     float player_collision_radius;
+
+    QString follow_mode_userid;
+    QTime comfort_timer;
+    QTime time;
+    QVector3D hand0_pos_old;
+    QVector3D hand1_pos_old;
+    QVector3D impulse_vel;
 
     QPair <LeapHand, LeapHand> hands;  
 };

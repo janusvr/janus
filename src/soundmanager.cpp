@@ -231,7 +231,7 @@ QVariantList SoundManager::GetDevices(ALenum specifier)
 
     if (alcIsExtensionPresent(NULL, "ALC_ENUMERATION_EXT") == AL_TRUE)
     {
-        while(devices && *devices !=NULL)
+        while(devices && *devices !=0)//NULL)
         {
             device_list.push_back(devices);
             devices += strlen(devices) + 1;
