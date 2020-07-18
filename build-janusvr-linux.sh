@@ -33,8 +33,8 @@ pkglist=(
 	)
 
 # TODO: Enable automatic package installation via CLI flag
-#echo -e "\n[*] Installing prerequisite OS packages for Ubuntu 18.04"
-#sudo apt install ${pkglist[@]}
+echo -e "\n[*] Installing prerequisite OS packages for Ubuntu 18.04"
+sudo apt install ${pkglist[@]}
 
 echo "########################################################"
 echo " Welcome to the magical Linux Auto Compiler for JanusVR "
