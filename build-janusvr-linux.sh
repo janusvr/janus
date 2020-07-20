@@ -74,7 +74,7 @@ pkglist=(
 
 install_dependencies () {
 	echo -e "\n[*] Installing prerequisite OS packages for Ubuntu 18.04"
-	echo -e "( this can be skipped by using the -d or --nodepinst flag )"
+	echo -e "    ( this can be skipped by using the -d or --nodepinst flag )"
 	sudo apt install ${pkglist[@]}
 }
 
@@ -86,7 +86,7 @@ header_text () {
 
 footer_text () {
 	echo "\n[*] Done! Please run 'janusvr' from $BUILD_DIR"
-	echo "( Use -h or --help for build options )"
+	echo "    ( Use -h or --help for build options )"
 }
 
 build_janus () {
@@ -133,9 +133,9 @@ create_library_build_folders () {
 
 build_assimp () {
 	echo -e "\n[*] Building ASSet IMPorter v5.0.1"
-	echo -e "( this can be skipped by using the -a or --nobuildai flag )"
+	echo -e "    ( this can be skipped by using the -a or --nobuildai flag )"
 	cd resources/build_dir/assimp-5.0.1/
-	cmake ../../assimp-5.0.1/ -B .
+	cmake "../../assimp-5.0.1/" -B .
 	make -j $NPROC
 	cd ../../../
 }
@@ -151,7 +151,7 @@ copy_assimp () {
 
 build_openvr () {
 	echo -e "\n[*] Building OpenVR v1.12.5"
-	echo -e "( this can be skipped by using the -o or --nobuildovr flag )"
+	echo -e "    ( this can be skipped by using the -o or --nobuildovr flag )"
 	cd resources/build_dir/openvr-1.12.5/
 	cmake -B$(pwd)/ ../../openvr-1.12.5/
 	make -j $NPROC
