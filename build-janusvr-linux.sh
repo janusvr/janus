@@ -135,7 +135,7 @@ build_assimp () {
 	echo -e "\n[*] Building ASSet IMPorter v5.0.1"
 	echo -e "    ( this can be skipped by using the -a or --nobuildai flag )"
 	cd resources/build_dir/assimp-5.0.1/
-	cmake "../../assimp-5.0.1/" -B .
+	cmake ../../assimp-5.0.1/ -B .
 	make -j $NPROC
 	cd ../../../
 }
