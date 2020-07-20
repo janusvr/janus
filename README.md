@@ -59,7 +59,12 @@ Building for Linux (Ubuntu 18.04 LTS)
 1) Clone the repository using Git:
 	`git clone https://github.com/janusvr/janus`
 
-2) Change to the source directory (`cd janus`) and run the automated build script:
+2) Change directory into source directory and fetch submodules needed:
+  `cd janus`
+  `git submodule init`
+  `git submodule update`
+
+2) Run the automated build script:
 	`./build-janusvr-linux.sh`
 
 3) Once completed, your new JanusVR build can be found inside `dist/linux/` in the root of your source repo.
