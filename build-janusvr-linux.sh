@@ -136,7 +136,7 @@ build_assimp () {
 	echo -e "( this can be skipped by using the -a or --nobuildai flag )"
 	cd resources/build_dir/assimp-5.0.1/
 	cmake ../../assimp-5.0.1/ -B .
-	make -j $(nproc --ignore=4)
+	make -j $NPROC
 	cd ../../../
 }
 
@@ -154,7 +154,7 @@ build_openvr () {
 	echo -e "( this can be skipped by using the -o or --nobuildovr flag )"
 	cd resources/build_dir/openvr-1.12.5/
 	cmake -B$(pwd)/ ../../openvr-1.12.5/
-	make
+	make -j $NPROC
 	cd ../../../
 }
 
