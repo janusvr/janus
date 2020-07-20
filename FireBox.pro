@@ -242,12 +242,12 @@ win32:LIBS += -llibOVR
 
 # openVR (note that we only include it if OCULUS_SUBMISSION_BUILD is not defined)
 !contains(DEFINES, OCULUS_SUBMISSION_BUILD) {
-win32:INCLUDEPATH += "./resources/openvr/headers"
-win32:LIBS += -L"$$PWD/resources/openvr/lib/win64"
+win32:INCLUDEPATH += "./resources/openvr-1.12.5/headers"
+win32:LIBS += -L"$$PWD/resources/openvr-1.12.5/lib/win64"
 win32:LIBS += -lopenvr_api
 }
-unix:INCLUDEPATH += "./resources/openvr/headers"
-unix:LIBS += -L"$$PWD/resources/openvr/lib/linux64"
+unix:INCLUDEPATH += "./resources/openvr-1.12.5/headers"
+unix:LIBS += -L"$$PWD/resources/openvr-1.12.5/lib/linux64"
 unix:LIBS += -lopenvr_api
 
 # OpenAL
