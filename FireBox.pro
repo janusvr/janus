@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 # Define version
-__VERSION=66.4
+__VERSION=66.4.1
 
 #JamesMcCrae: define this when doing Oculus-submitted builds
 #DEFINES += OCULUS_SUBMISSION_BUILD
@@ -20,21 +20,21 @@ DEFINES += RIFT_ID=\\\"$$system(cat riftid.txt)\\\"
 }
 
 # ensure one "debug_and_release" in CONFIG, for clarity...
-debug_and_release {
-    CONFIG -= debug_and_release
-    CONFIG += debug_and_release
-}
-    # ensure one "debug" or "release" in CONFIG so they can be used as
-    #   conditionals instead of writing "CONFIG(debug, debug|release)"...
-CONFIG(debug, debug|release) {
-    CONFIG -= debug release
-    CONFIG += debug
-}
-CONFIG(release, debug|release) {
-    CONFIG -= debug release
-    CONFIG += release force_debug_info
+#debug_and_release {
+#    CONFIG -= debug_and_release
+#    CONFIG += debug_and_release
+#}
+# ensure one "debug" or "release" in CONFIG so they can be used as
+#   conditionals instead of writing "CONFIG(debug, debug|release)"...
+#CONFIG(debug, debug|release) {
+#    CONFIG -= debug release
+#    CONFIG += debug
+#}
+#CONFIG(release, debug|release) {
+#    CONFIG -= debug release
+#    CONFIG += release force_debug_info
 # force_debug_info
-}
+#}
 
 QT       += core opengl gui network xml script scripttools webengine webenginewidgets websockets
 
