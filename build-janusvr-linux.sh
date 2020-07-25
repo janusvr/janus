@@ -10,6 +10,9 @@ NPROC=
 TIMEBUILD=false
 HELP=false
 BUILD_DIR="dist/linux/"
+WITHDEBUG=
+QDB="CONFIG-=force_debug_info CONFIG-=debug_and_release CONFIG-=debug CONFIG+=release"
+MDB=
 
 BUILDFAIL=false
 
@@ -22,9 +25,11 @@ do
 			;;
 		-a | --nobuildai ) BUILDAI=false
 			;;
+		-b | --debug ) WITHDEBUG=true; QDB="CONFIG+=force_debug_info"
+			;;
 		-v | --verbose ) VERBOSE=true
 			;;
-		-tb | --timebuild ) TIME=false
+		-t | --timebuild ) TIME=false
 			;;
 		-t | --threads ) NPROC="$2"
 			;;
@@ -93,10 +98,10 @@ build_janus () {
 	echo -e "\n[*] Building JanusVR Native binary distribution using $NPROC threads. Please wait..."
 	if [ "$TIMEBUILD" = true ]
 	then
-		qmake FireBox.pro -spec linux-g++ CONFIG+=release CONFIG+=force_debug_info
+		qmake FireBox.pro -spec linux-g++ CONFIG+=release $QDB
 		time { make -j$NPROC $QUIET; }
 	else
-		qmake FireBox.pro -spec linux-g++ CONFIG+=release CONFIG+=force_debug_info
+		qmake FireBox.pro -spec linux-g++ CONFIG+=release $QDB
 		make -j$NPROC $QUIET;
 	fi
 }
@@ -168,6 +173,7 @@ display_help_text () {
 	echo " -d   --nodepinst     Skip dependency installation"
 	echo " -o   --nobuildovr    Skip build and install of OpenVR"
 	echo " -a   --nobuildai     Skip build and install of AssImp"
+	echo " -b   --debug         Include debug symbols"
 	echo " -v   --verbose       Verbose display of build process"
 	echo " -t   --threads N     Number of threads to use in build process"
 	echo " -h   --help          Display this help page"
