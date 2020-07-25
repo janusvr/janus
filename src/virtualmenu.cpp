@@ -33,14 +33,14 @@ VirtualMenu::VirtualMenu() :
     assetobjs["plane"]->GetProperties()->SetSaveToMarkup(false);
     assetobjs["plane"]->Load();
 
-    connect(&partymode_request_timer, SIGNAL(timeout()), this, SLOT(UpdatePartyModeList()));
-    partymode_request_timer.start(5000);
+    //connect(&partymode_request_timer, SIGNAL(timeout()), this, SLOT(UpdatePartyModeList()));
+    //partymode_request_timer.start(5000);
 }
 
 VirtualMenu::~VirtualMenu()
 {
     Clear();
-    disconnect(&partymode_request_timer, 0, 0, 0);
+    //disconnect(&partymode_request_timer, 0, 0, 0);
 }
 
 void VirtualMenu::SetBookmarkManager(QPointer <BookmarkManager> b)
@@ -187,13 +187,13 @@ void VirtualMenu::Update()
         }
     }   
 
-    if (partymode_data_request.GetLoaded() && !partymode_data_request.GetProcessed()) {
+    /*if (partymode_data_request.GetLoaded() && !partymode_data_request.GetProcessed()) {
         const QByteArray & ba = partymode_data_request.GetData();
         MathUtil::GetPartyModeData() = QJsonDocument::fromJson(ba).toVariant().toMap()["data"].toList();
         partymode_data_request.SetProcessed(true);
         ConstructSubmenus();        
         //qDebug() << MathUtil::GetPartyModeData();
-    }
+    }*/
 
     if (search_data_request.GetLoaded() && !search_data_request.GetProcessed()) {
         const QByteArray & ba = search_data_request.GetData();

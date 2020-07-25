@@ -26,7 +26,7 @@ SocialWindow::SocialWindow(Game * g) :
     table_partymode->setSortingEnabled(true);
     table_partymode->sortItems(0, Qt::AscendingOrder);
     table_partymode->setSelectionBehavior(QAbstractItemView::SelectItems);
-    connect(table_partymode, SIGNAL(clicked(QModelIndex)), this, SLOT(PartyModeListSelection()));
+    //connect(table_partymode, SIGNAL(clicked(QModelIndex)), this, SLOT(PartyModeListSelection()));
 
     QStringList s2;
     s2.push_back("userid");
@@ -65,8 +65,8 @@ SocialWindow::SocialWindow(Game * g) :
     w->setLayout(layout);
     setCentralWidget(w);
 
-    connect(&partymode_request_timer, SIGNAL(timeout()), this, SLOT(UpdatePartyModeList()));
-    partymode_request_timer.start(5000);
+    //connect(&partymode_request_timer, SIGNAL(timeout()), this, SLOT(UpdatePartyModeList()));
+    //partymode_request_timer.start(5000);
 }
 
 void SocialWindow::Update()
@@ -98,14 +98,14 @@ void SocialWindow::Update()
     }
 
     //update party mode
-    if (partymode_data_request.GetLoaded() && !partymode_data_request.GetProcessed()) {
+    /*if (partymode_data_request.GetLoaded() && !partymode_data_request.GetProcessed()) {
         const QByteArray & ba = partymode_data_request.GetData();
         MathUtil::GetPartyModeData() = QJsonDocument::fromJson(ba).toVariant().toMap()["data"].toList();
         partymode_data_request.SetProcessed(true);
 
         //repopulate the party mode stuff
         UpdatePartyModeTable();
-    }
+    }*/
 
     //update text chat messages
     QList <QPair <QString, QColor> > msgs = game->GetMultiPlayerManager()->GetNewChatMessages();
@@ -120,7 +120,7 @@ void SocialWindow::Update()
 
 void SocialWindow::Shutdown()
 {
-    disconnect(&partymode_request_timer, 0, 0, 0);
+    //disconnect(&partymode_request_timer, 0, 0, 0);
 }
 
 void SocialWindow::UpdatePartyModeList()
