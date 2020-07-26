@@ -90,8 +90,8 @@ header_text () {
 }
 
 footer_text () {
-	echo "\n[*] Done! Please run 'janusvr' from $BUILD_DIR"
-	echo "    ( Use -h or --help for build options )"
+	echo -e "\n[*] Done! Please run 'janusvr' from $BUILD_DIR"
+	echo -e "    ( Use -h or --help for build options )"
 }
 
 build_janus () {
@@ -139,15 +139,15 @@ create_library_build_folders () {
 build_assimp () {
 	echo -e "\n[*] Building ASSet IMPorter v5.0.1"
 	echo -e "    ( this can be skipped by using the -a or --nobuildai flag )"
-	cd resources/build_dir/assimp-5.0.1/
-	cmake ../../assimp-5.0.1/
+	cd resources/assimp-5.0.1/
+	cmake .
 	make -j $NPROC
-	cd ../../../
+	cd ../../
 }
 
 copy_assimp () {
 	echo -e "\n[*] Copying assimp to $BUILD_DIR"
-	cp resources/build_dir/assimp-5.0.1/code/libassimp.so.5.0.0 $BUILD_DIR
+	cp resources/assimp-5.0.1/lib/libassimp.so.5.0.0 $BUILD_DIR
 	cd $BUILD_DIR
 	ln -s libassimp.so.5.0.0 libassimp.so.5
 	ln -s libassimp.so.5.0.0 libassimp.so
@@ -157,14 +157,14 @@ copy_assimp () {
 build_openvr () {
 	echo -e "\n[*] Building OpenVR v1.12.5"
 	echo -e "    ( this can be skipped by using the -o or --nobuildovr flag )"
-	cd resources/build_dir/openvr-1.12.5/
-	cmake -B$(pwd)/ ../../openvr-1.12.5/
+	cd resources/openvr-1.12.5/
+	cmake .
 	make -j $NPROC
-	cd ../../../
+	cd ../../
 }
 
 copy_openvr () {
-	echo -e "\n[*] Copying OpenVR to $BUILD_DIR"
+	echo -e "[*] Copying OpenVR to $BUILD_DIR"
 	cp resources/openvr-1.12.5/bin/linux64/libopenvr_api.so $BUILD_DIR
 }
 
@@ -223,7 +223,7 @@ main () {
 		
 
 		bullet_patch
-		create_library_build_folders
+		#create_library_build_folders
 
 		if [ "$BUILDAI" = true ]
 		then
