@@ -287,7 +287,7 @@ unix:INCLUDEPATH += "/usr/include/bullet"
 unix:LIBS += -lBulletDynamics -lBulletCollision -lLinearMath
 
 # Assimp
-INCLUDEPATH += "./resources/assimp/include"
+INCLUDEPATH += "./resources/assimp/include/assimp"
 
 CONFIG(debug) {
     LIBS += -L"$$PWD/resources/assimp/lib/Debug"
