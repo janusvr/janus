@@ -67,7 +67,7 @@ pkglist=(
 	qtscript5-dev
 	mesa-common-dev
 	libilmbase-dev
-	libassimp-dev
+	#libassimp-dev
 	qtbase5-private-dev
 	libqt5webengine5
 	libqt5webenginecore5
