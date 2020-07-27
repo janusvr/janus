@@ -17,4 +17,3 @@
 [submodule "resources/assimp"]
 	path = resources/assimp
 	url = https://github.com/assimp/assimp.git
-	ignore = dirty
