@@ -130,7 +130,7 @@ bullet_patch () {
 }
 
 build_assimp () {
-	echo -e "\n[*] Building ASSet IMPorter v5"
+	echo -e "\n[*] Building ASSet IMPorter v5.0.1"
 	echo -e "    ( this can be skipped by using the -a or --nobuildai flag )"
 	cd resources/assimp/
 	cmake .
@@ -140,7 +140,11 @@ build_assimp () {
 
 copy_assimp () {
 	echo -e "\n[*] Copying assimp to $BUILD_DIR"
-	cp resources/assimp/bin/libassimp.so.5 $BUILD_DIR/
+	cp resources/assimp/lib/libassimp.so.5.0.1 $BUILD_DIR
+	cd $BUILD_DIR
+	ln -s libassimp.so.5.0.1 libassimp.so.5
+	ln -s libassimp.so.5.0.1 libassimp.so
+	cd ../../
 }
 
 build_openvr () {
