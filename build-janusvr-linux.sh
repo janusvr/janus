@@ -129,17 +129,10 @@ bullet_patch () {
 	cp /usr/lib/x86_64-linux-gnu/libLinearMath.so.2.87		$BUILD_DIR
 }
 
-create_library_build_folders () {
-	echo -e "\n[*] Create Library build folder"
-	mkdir -p resources/build_dir/
-	mkdir -p resources/build_dir/assimp-5.0.1/
-	mkdir -p resources/build_dir/openvr-1.12.5/
-}
-
 build_assimp () {
-	echo -e "\n[*] Building ASSet IMPorter v5.0.1"
+	echo -e "\n[*] Building ASSet IMPorter v5"
 	echo -e "    ( this can be skipped by using the -a or --nobuildai flag )"
-	cd resources/assimp-5.0.1/
+	cd resources/assimp/
 	cmake .
 	make -j $NPROC
 	cd ../../
@@ -147,11 +140,7 @@ build_assimp () {
 
 copy_assimp () {
 	echo -e "\n[*] Copying assimp to $BUILD_DIR"
-	cp resources/assimp-5.0.1/bin/libassimp.so.5.0.1 $BUILD_DIR
-	cd $BUILD_DIR
-	ln -s libassimp.so.5.0.1 libassimp.so.5
-	ln -s libassimp.so.5.0.1 libassimp.so
-	cd ../../
+	cp resources/assimp/bin/libassimp.so.5 $BUILD_DIR/
 }
 
 build_openvr () {

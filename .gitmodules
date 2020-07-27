@@ -14,3 +14,6 @@
 	path = resources/openvr-1.12.5
 	url = https://github.com/ValveSoftware/openvr.git
 	ignore = dirty
+[submodule "resources/assimp"]
+	path = resources/assimp
+	url = https://github.com/assimp/assimp.git

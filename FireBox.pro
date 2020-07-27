@@ -287,17 +287,17 @@ unix:INCLUDEPATH += "/usr/include/bullet"
 unix:LIBS += -lBulletDynamics -lBulletCollision -lLinearMath
 
 # Assimp
-INCLUDEPATH += "./resources/assimp-5.0.1/include"
+INCLUDEPATH += "./resources/assimp/include"
 
 CONFIG(debug) {
-    LIBS += -L"$$PWD/resources/assimp-5.0.1/lib/Debug"
+    LIBS += -L"$$PWD/resources/assimp/lib/Debug"
     win32:LIBS += -lassimp-vc140-mt -lIrrXML
 }
 CONFIG(release) {
-    LIBS += -L"$$PWD/resources/assimp-5.0.1/lib/Release"
+    LIBS += -L"$$PWD/resources/assimp/lib/Release"
     win32:LIBS += -lassimp-vc140-mt -lIrrXML
 }
-LIBS += -L"$$PWD/resources/assimp-5.0.1/lib"
+LIBS += -L"$$PWD/resources/assimp/lib"
 unix:LIBS += -lassimp
 
 # Generic Windows libs
