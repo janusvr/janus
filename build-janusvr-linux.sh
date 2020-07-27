@@ -140,10 +140,10 @@ build_assimp () {
 
 copy_assimp () {
 	echo -e "\n[*] Copying assimp to $BUILD_DIR"
-	cp resources/assimp/lib/libassimp.so.5.0.1 $BUILD_DIR
+	cp resources/assimp/lib/libassimp.so.5.0.0 $BUILD_DIR
 	cd $BUILD_DIR
-	ln -s libassimp.so.5.0.1 libassimp.so.5
-	ln -s libassimp.so.5.0.1 libassimp.so
+	ln -s libassimp.so.5.0.0 libassimp.so.5
+	ln -s libassimp.so.5.0.0 libassimp.so
 	cd ../../
 }
 
