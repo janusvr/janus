@@ -13,8 +13,9 @@ BUILD_DIR="dist/linux/"
 WITHDEBUG=
 QDB="CONFIG-=force_debug_info CONFIG-=debug_and_release CONFIG-=debug CONFIG+=release"
 MDB=
-
+UV=$(lsb_release -r -s)
 BUILDFAIL=false
+pkglist=
 
 while test $# -gt 0
 do
@@ -43,42 +44,81 @@ do
 	shift
 done
 
-pkglist=(
-	cmake
-	qtcreator
-	qt5-default
-	build-essential
-	mesa-common-dev
-	git
-	git-lfs
-	build-essential
-	libqt5websockets5-dev
-	libbullet-dev
-	libopenal-dev
-	libopus-dev
-	libvorbis-dev
-	libudev-dev
-	libvlc-dev
-	libopenexr-dev
-	libudev-dev
-	vlc
-	zlib1g-dev
-	qt5-default
-	qtscript5-dev
-	mesa-common-dev
-	libilmbase-dev
-	#libassimp-dev
-	qtbase5-private-dev
-	libqt5webengine5
-	libqt5webenginecore5
-	libqt5webenginewidgets5
-	qtwebengine5-dev
-	libqt5scripttools5
-	qtscript-tools
-	)
+
+
+if [[ $UV == "18.04" ]];
+then
+	pkglist=(
+		cmake
+		qtcreator
+		qt5-default
+		build-essential
+		mesa-common-dev
+		git
+		git-lfs
+		build-essential
+		libqt5websockets5-dev
+		libbullet-dev
+		libopenal-dev
+		libopus-dev
+		libvorbis-dev
+		libudev-dev
+		libvlc-dev
+		libopenexr-dev
+		libudev-dev
+		vlc
+		zlib1g-dev
+		qt5-default
+		qtscript5-dev
+		mesa-common-dev
+		libilmbase-dev
+		qtbase5-private-dev
+		libqt5webengine5
+		libqt5webenginecore5
+		libqt5webenginewidgets5
+		qtwebengine5-dev
+		libqt5scripttools5
+		qtscript-tools
+		)
+elif [[ $UV == "20.04" ]];
+then
+	pkglist=(
+		cmake
+		qtcreator
+		qt5-default
+		build-essential
+		mesa-common-dev
+		git
+		git-lfs
+		build-essential
+		libqt5websockets5-dev
+		libbullet-dev
+		libopenal-dev
+		libopus-dev
+		libvorbis-dev
+		libudev-dev
+		libvlc-dev
+		libopenexr-dev
+		libudev-dev
+		vlc
+		zlib1g-dev
+		qt5-default
+		qtscript5-dev
+		mesa-common-dev
+		libilmbase-dev
+		qtbase5-private-dev
+		libqt5webengine5
+		libqt5webenginecore5
+		libqt5webenginewidgets5
+		qtwebengine5-dev
+		libqt5scripttools5
+		)
+else
+	echo "not ubuntu"
+fi
 
 install_dependencies () {
-	echo -e "\n[*] Installing prerequisite OS packages for Ubuntu 18.04"
+	echo -e "\n[*] Installing prerequisite OS packages for Ubuntu $UV"
 	echo -e "    ( this can be skipped by using the -d or --nodepinst flag )"
 	sudo apt install ${pkglist[@]}
 }
