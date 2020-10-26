@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 # Define version
-__VERSION=66.4
+__VERSION=66.4.1
 
 #JamesMcCrae: define this when doing Oculus-submitted builds
 #DEFINES += OCULUS_SUBMISSION_BUILD
@@ -20,21 +20,21 @@ DEFINES += RIFT_ID=\\\"$$system(cat riftid.txt)\\\"
 }
 
 # ensure one "debug_and_release" in CONFIG, for clarity...
-debug_and_release {
-    CONFIG -= debug_and_release
-    CONFIG += debug_and_release
-}
-    # ensure one "debug" or "release" in CONFIG so they can be used as
-    #   conditionals instead of writing "CONFIG(debug, debug|release)"...
-CONFIG(debug, debug|release) {
-    CONFIG -= debug release
-    CONFIG += debug
-}
-CONFIG(release, debug|release) {
-    CONFIG -= debug release
-    CONFIG += release force_debug_info
+#debug_and_release {
+#    CONFIG -= debug_and_release
+#    CONFIG += debug_and_release
+#}
+# ensure one "debug" or "release" in CONFIG so they can be used as
+#   conditionals instead of writing "CONFIG(debug, debug|release)"...
+#CONFIG(debug, debug|release) {
+#    CONFIG -= debug release
+#    CONFIG += debug
+#}
+#CONFIG(release, debug|release) {
+#    CONFIG -= debug release
+#    CONFIG += release force_debug_info
 # force_debug_info
-}
+#}
 
 QT       += core opengl gui network xml script scripttools webengine webenginewidgets websockets
 
@@ -242,12 +242,12 @@ win32:LIBS += -llibOVR
 
 # openVR (note that we only include it if OCULUS_SUBMISSION_BUILD is not defined)
 !contains(DEFINES, OCULUS_SUBMISSION_BUILD) {
-win32:INCLUDEPATH += "./resources/openvr/headers"
-win32:LIBS += -L"$$PWD/resources/openvr/lib/win64"
+win32:INCLUDEPATH += "./resources/openvr-1.12.5/headers"
+win32:LIBS += -L"$$PWD/resources/openvr-1.12.5/lib/win64"
 win32:LIBS += -lopenvr_api
 }
-unix:INCLUDEPATH += "./resources/openvr/headers"
-unix:LIBS += -L"$$PWD/resources/openvr/lib/linux64"
+unix:INCLUDEPATH += "./resources/openvr-1.12.5/headers"
+unix:LIBS += -L"$$PWD/resources/openvr-1.12.5/lib/linux64"
 unix:LIBS += -lopenvr_api
 
 # OpenAL
@@ -287,17 +287,17 @@ unix:INCLUDEPATH += "/usr/include/bullet"
 unix:LIBS += -lBulletDynamics -lBulletCollision -lLinearMath
 
 # Assimp
-INCLUDEPATH += "./resources/assimp-5.0.1/include"
+INCLUDEPATH += "./resources/assimp/include"
 
 CONFIG(debug) {
-    LIBS += -L"$$PWD/resources/assimp-5.0.1/lib/Debug"
+    LIBS += -L"$$PWD/resources/assimp/lib/Debug"
     win32:LIBS += -lassimp-vc140-mt -lIrrXML
 }
 CONFIG(release) {
-    LIBS += -L"$$PWD/resources/assimp-5.0.1/lib/Release"
+    LIBS += -L"$$PWD/resources/assimp/lib/Release"
     win32:LIBS += -lassimp-vc140-mt -lIrrXML
 }
-LIBS += -L"$$PWD/resources/assimp-5.0.1/lib"
+LIBS += -L"$$PWD/resources/assimp/lib"
 unix:LIBS += -lassimp
 
 # Generic Windows libs
