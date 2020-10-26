@@ -171,8 +171,16 @@ void SocialWindow::PartyModeListSelection()
 void SocialWindow::SendChatMessage()
 {
     if (!lineedit_chatentry->text().isEmpty()) {
-        game->SendChatMessage(lineedit_chatentry->text());
-        lineedit_chatentry->clear();
+        if (lineedit_chatentry->text().left(1) == "#") {
+            if (lineedit_chatentry->text() == "#clearchat") {
+                textbrowser_chatlog->clear();
+                lineedit_chatentry->clear();
+            }
+        }
+        else {
+            game->SendChatMessage(lineedit_chatentry->text());
+            lineedit_chatentry->clear();
+        }
     }
 }
 
