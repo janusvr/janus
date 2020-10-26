@@ -292,7 +292,7 @@ void Game::Update()
     UpdateOverlays();
 
     //update follow mode
-    UpdateFollowMode();
+    //UpdateFollowMode();
 
     WebAsset::SetUseCache(SettingsManager::GetCacheEnabled());
 

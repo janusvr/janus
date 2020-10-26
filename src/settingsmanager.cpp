@@ -46,7 +46,7 @@ void SettingsManager::LoadSettings()
     settings["rotationspeed"] = 50.0f;
     settings["ipd"] = 0.064f;
     settings["haptics"] = true;
-    settings["partymode"] = true;
+    settings["partymode"] = false;
     settings["perflog"] = true;
     settings["playbackdevice"] = QString("Default device");
     settings["capturedevice"] = QString("Default device");
