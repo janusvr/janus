@@ -233,24 +233,7 @@ main () {
 		QUIET=" -s "
 		CQUIET=""
 	fi
-
-	if [ ! -z "$NPROC" ]
-	then
-		if [ "$HELP" = false ]
-		then
-			build_janus
-			copy_janus_binary_and_assets
-					
-		fi
-	else
-		if [ "$HELP" = false ]
-		then
-			NPROC=$(nproc)
-			build_janus
-			copy_janus_binary_and_assets
-					
-		fi
-	fi
+	
 	if [ "$HELP" = false ]
 	then
 		
@@ -268,6 +251,24 @@ main () {
 			build_openvr
 		fi
 		copy_openvr
+	fi
+
+	if [ ! -z "$NPROC" ]
+	then
+		if [ "$HELP" = false ]
+		then
+			build_janus
+			copy_janus_binary_and_assets
+					
+		fi
+	else
+		if [ "$HELP" = false ]
+		then
+			NPROC=$(nproc)
+			build_janus
+			copy_janus_binary_and_assets
+					
+		fi
 	fi
 }
 
