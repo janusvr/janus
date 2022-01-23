@@ -233,25 +233,6 @@ main () {
 		QUIET=" -s "
 		CQUIET=""
 	fi
-	
-	if [ "$HELP" = false ]
-	then
-		
-
-		bullet_patch
-		#create_library_build_folders
-
-		if [ "$BUILDAI" = true ]
-		then
-			build_assimp
-		fi
-		copy_assimp
-		if [ "$BUILDOVR" = true ]
-		then
-			build_openvr
-		fi
-		copy_openvr
-	fi
 
 	if [ ! -z "$NPROC" ]
 	then
@@ -269,6 +250,24 @@ main () {
 			copy_janus_binary_and_assets
 					
 		fi
+	fi
+	if [ "$HELP" = false ]
+	then
+		
+
+		bullet_patch
+		#create_library_build_folders
+
+		if [ "$BUILDAI" = true ]
+		then
+			build_assimp
+		fi
+		copy_assimp
+		if [ "$BUILDOVR" = true ]
+		then
+			build_openvr
+		fi
+		copy_openvr
 	fi
 }
 
